@@ -1,20 +1,24 @@
+import 'package:circleapp/controller/utils/color/custom_color.dart';
+import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/custom_widget/custom-button.dart';
+import 'package:circleapp/custom_widget/custom_text_field.dart';
 import 'package:circleapp/view/screens/athentications/forget_password.dart';
-import 'package:circleapp/view/screens/athentications/sign_up_screen.dart';
+import 'package:circleapp/view/screens/athentications/login_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import '../../../controller/utils/color/custom_color.dart';
-import '../../../controller/utils/style/customTextStyle.dart';
-import '../../../custom_widget/custom-button.dart';
-import '../../../custom_widget/custom_text_field.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
 
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(backgroundColor: CustomColor.mainColorBackground,
@@ -49,32 +53,45 @@ class LoginScreen extends StatelessWidget {
               ),
               Align(alignment: Alignment.centerLeft,
                 child: Text(
-                  "Email",
-                  style:TextStyle(color: Colors.white.withOpacity(0.6),fontFamily: "medium",fontSize: 10.px)),
+                    "Name",
+                    style:TextStyle(color: Colors.white.withOpacity(0.6),fontFamily: "medium",fontSize: 10.px)),
+              ),
+              SizedBox(height: 0.4.h,),
+              CustomTextField(hintText: "Lita han",prefixIcon: SvgPicture.asset("assets/svg/profile.svg"),),
+              SizedBox(height:2.5.h),
+              Align(alignment: Alignment.centerLeft,
+                child: Text(
+                    "Email",
+                    style:TextStyle(color: Colors.white.withOpacity(0.6),fontFamily: "medium",fontSize: 10.px)),
               ),
               SizedBox(height: 0.4.h,),
               CustomTextField(hintText: "Litahan12@gmail.com",prefixIcon: SvgPicture.asset("assets/svg/email.svg"),),
               SizedBox(
-                height: 1.5.h,
+                height: 2.5.h,
               ),
               Align(alignment: Alignment.centerLeft,
                 child: Text(
-                  "Password",
+                    "Password",
                     style:TextStyle(color: Colors.white.withOpacity(0.6),fontSize: 10.px,fontFamily: "medium")),
               ),
               SizedBox(height: 0.4.h,),
               CustomTextField(hintText: "**********", prefixIcon: SvgPicture.asset("assets/svg/lock.svg"),
                 suffixIcon: SvgPicture.asset("assets/svg/closeEye.svg"),),
-              SizedBox(height: 0.5.h,),
-              Align(alignment: Alignment.centerRight,
-                  child: GestureDetector(onTap: () {
-                    Get.to(()=>ForgetScreen());
-                  },
-                      child: Text("Forgot Password?",style: CustomTextStyle.mediumTextS,))),
-              SizedBox(height:2.h ,),
-              CustomMainButton(buttonText: "Log In",buttonColor: CustomColor.mainColorYellow,
+              SizedBox(
+                height: 2.5.h,
+              ),
+              Align(alignment: Alignment.centerLeft,
+                child: Text(
+                    "Confirm Password",
+                    style:TextStyle(color: Colors.white.withOpacity(0.6),fontSize: 10.px,fontFamily: "medium")),
+              ),
+              SizedBox(height: 0.4.h,),
+              CustomTextField(hintText: "**********", prefixIcon: SvgPicture.asset("assets/svg/lock.svg"),
+                suffixIcon: SvgPicture.asset("assets/svg/closeEye.svg"),),
+              SizedBox(height:4.h ,),
+              CustomMainButton(buttonText: "Sign Up",buttonColor: CustomColor.mainColorYellow,
                   onPressed: (){}),
-              SizedBox(height: 1.4.h,),
+              SizedBox(height: 4.h,),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -86,13 +103,14 @@ class LoginScreen extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.to(()=>SignUpScreen());
+                      Get.to(()=>LoginScreen());
                     },
-                    child: Text("Create Account",
+                    child: Text("Log In",
                         style: CustomTextStyle.mediumTextS),
                   ),
                 ],
               ),
+              SizedBox(height: 1.h,width: 1.h,)
             ],
           ),
         ),
@@ -100,5 +118,3 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-
-
