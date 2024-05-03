@@ -38,6 +38,8 @@ dependencies:
   responsive_sizer: ^3.3.1
   get: ^4.6.6
   flutter_svg: ^2.0.10+1
+  pin_code_fields: ^8.0.1
+  smooth_page_indicator: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -63,7 +65,6 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/
     - assets/png/
     - assets/svg/
 
@@ -80,18 +81,18 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-     - family: bold
+     - family: Gilroy
        fonts:
          - asset: assets/fonts/Gilroy-Bold.ttf
-     - family: light
+     - family: Gilroy
        fonts:
          - asset: assets/fonts/Gilroy-Light.ttf
-     - family: medium
+     - family: Gilroy
        fonts:
          - asset: assets/fonts/Gilroy-Medium.ttf
-#     - family: Gilroy
-#       fonts:
-#         - asset: assets/fonts/Gilroy-Medium.ttf
+     - family: Gilroy
+       fonts:
+         - asset: assets/fonts/Gilroy-Medium.ttf
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

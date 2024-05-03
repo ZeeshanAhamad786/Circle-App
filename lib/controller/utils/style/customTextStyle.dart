@@ -14,6 +14,11 @@ class CustomTextStyle{
       fontWeight: FontWeight.w400,
       fontFamily: 'medium',
       color: Colors.white);
+  static TextStyle mediumTextM = TextStyle(
+      fontSize: 12.px,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'medium',
+      color: Colors.white);
   static TextStyle headingStyle = TextStyle(
       fontSize: 16.px,
       fontWeight: FontWeight.w400,
@@ -35,4 +40,19 @@ class CustomTextStyle{
       fontFamily: 'medium',
       color:CustomColor.hintTextColor);
 
+  static TextStyle mediumTextM14 = TextStyle(
+      fontSize: 14.px,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'medium',
+      color: Colors.white);
+  static TextStyle mediumTextS1 = TextStyle(
+      fontSize: 10.px,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'medium',
+      color: CustomColor.mainColorOffWhite);
+  static TextStyle mediumTextBS = TextStyle(
+      fontSize: 10.px,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'medium',
+      color: CustomColor.mainColorLightBlack);
 }

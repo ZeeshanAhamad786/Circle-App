@@ -22,7 +22,7 @@ class CreateCircle extends StatelessWidget {
     final TextEditingController descriptionController = TextEditingController();
     return Scaffold(
       backgroundColor: CustomColor.primaryColor,
-      appBar: AppBar(
+      appBar: AppBar(automaticallyImplyLeading:false,
         backgroundColor: CustomColor.primaryColor,
         title: Text(
           'Create Circle',
@@ -97,6 +97,7 @@ class CreateCircle extends StatelessWidget {
                         backButton.value=false;
                         nextButton.value=true;
                       }
+                      Get.back();
                     },
                       backgroundColor:backButton.value==true?CustomColor.secondaryColor: CustomColor.primaryColor,
                       borderColor: backButton.value==true?CustomColor.primaryColor:CustomColor.secondaryColor,
