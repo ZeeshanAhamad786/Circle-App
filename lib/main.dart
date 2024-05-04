@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import 'view/screens/createCircleScreen.dart';
+import 'view/screens/createNewCircleScreens/createCircleScreen.dart';
 
 void main() {
   runApp(const MyApp());

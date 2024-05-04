@@ -126,3 +126,30 @@ Widget customButton(
     ),
   );
 }
+Widget customTextButton1(
+
+    ){
+  return   Container(padding: EdgeInsets.symmetric(horizontal: .7.h,vertical: .1.h),
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20.px),
+        color: CustomColor.mainColor,
+        border: Border.all(color: CustomColor.secondaryColor)
+    ),
+    child: Row(children: [
+      Icon(Icons.add,color: CustomColor.secondaryColor,size: 2.h,),
+      getHorizentalSpace(.2.h),
+      Text('Add',style: CustomTextStyle.smallText.copyWith(color: CustomColor.secondaryColor,fontSize: 12.px),)
+    ],),);
+}
+Widget customTextButton2({String? title, Color? bgColor,Color? btnTextColor}){
+  return   Container(padding: EdgeInsets.symmetric(horizontal: .8.h,vertical: .1.h),
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20.px),
+        color:bgColor?? CustomColor.mainColor,
+        border: Border.all(color: CustomColor.secondaryColor)
+    ),
+    child: Row(children: [
+      getHorizentalSpace(.2.h),
+      Text(title??"View Detail",style: CustomTextStyle.smallText.copyWith(color:btnTextColor?? CustomColor.secondaryColor,fontSize: 10.px),)
+    ],),);
+}

@@ -1,14 +1,13 @@
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
-import 'package:circleapp/view/screens/createCircleScreen.dart';
+import 'package:circleapp/view/screens/createNewCircleScreens/createCircleScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../../controller/utils/color/custom_color.dart';
-import '../../custom_widget/customwidgets.dart';
-import 'circleInterestScreen.dart';
+import '../../../../controller/utils/color/custom_color.dart';
+import '../../../custom_widget/customwidgets.dart';
 class ShowImage extends StatelessWidget {
-  const ShowImage({Key? key}) : super(key: key);
+  const ShowImage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,12 +1,11 @@
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
-import 'package:circleapp/view/screens/athentications/verIfymobilescreen.dart';
-import 'package:circleapp/view/screens/showImageScreen.dart';
+import 'package:circleapp/view/screens/createNewCircleScreens/showImageScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../../controller/utils/color/custom_color.dart';
-import '../../../custom_widget/custom-button.dart';
+import '../../../../controller/utils/color/custom_color.dart';
+import '../../../../custom_widget/custom-button.dart';
 class ChooseImage extends StatelessWidget {
   const ChooseImage({Key? key}) : super(key: key);
 

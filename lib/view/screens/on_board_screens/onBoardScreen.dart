@@ -6,7 +6,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../controller/utils/color/custom_color.dart';
 import '../../../custom_widget/custom-button.dart';
-import '../choose_image.dart';
+import '../createNewCircleScreens/choose_image.dart';
 class OnBoadingScreen1 extends StatefulWidget {
 
   const OnBoadingScreen1({Key? key}) : super(key: key);

@@ -7,7 +7,7 @@ import '../../../controller/utils/color/custom_color.dart';
 import '../../../controller/utils/style/customTextStyle.dart';
 import '../../../custom_widget/custom-button.dart';
 import '../../../custom_widget/custom_text_field.dart';
-import '../choose_image.dart';
+import '../createNewCircleScreens/choose_image.dart';
 import 'forget_password.dart';
 
 class LoginScreen extends StatelessWidget {
