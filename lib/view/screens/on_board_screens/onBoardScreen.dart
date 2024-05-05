@@ -6,17 +6,16 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../controller/utils/color/custom_color.dart';
 import '../../../custom_widget/custom-button.dart';
-import '../createNewCircleScreens/choose_image.dart';
-class OnBoadingScreen1 extends StatefulWidget {
+class OnBoardingScreen1 extends StatefulWidget {
 
-  const OnBoadingScreen1({Key? key}) : super(key: key);
+  const OnBoardingScreen1({super.key});
 
   @override
-  State<OnBoadingScreen1> createState() => _OnBoadingScreen1State();
+  State<OnBoardingScreen1> createState() => _OnBoardingScreen1State();
 }
 
-class _OnBoadingScreen1State extends State<OnBoadingScreen1> {
-  int pageIndex = 0;
+class _OnBoardingScreen1State extends State<OnBoardingScreen1> {
+  RxInt pageIndex = 0.obs;
   late PageController _controller;
 
   @override
@@ -28,58 +27,94 @@ class _OnBoadingScreen1State extends State<OnBoadingScreen1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(backgroundColor: CustomColor.mainColorBackground,
-      body: Stack(
-        children: [
-          PageView(
-            controller: _controller,
-            onPageChanged: (int page) {
-              setState(() {
-                pageIndex = page;
-              });
-            },
-            children: [
-              OnboardingPage(
-                image: "assets/png/splash1.png",
-                title: 'Create a circle for all your group\n chats and invite your friends',
-                controller: _controller,
-              ),
-              OnboardingPage(
-                image: "assets/png/splash2.png",
-                title: 'Pick interests that your Circles are\n all about',
-                controller: _controller,
-              ),
-              OnboardingPage(
-                image: "assets/png/splash3.png",
-                title: 'Plan and Experience events with\n your circle',
-                controller: _controller,
-              ),
-              OnboardingPage(
-                image: "assets/png/splash4.png",
-                title: 'Get exclusive deals that your circle\n cares about',
-                controller: _controller,
-              ),
-              // Add more pages as needed
-            ],
-          ),
-          if (pageIndex == 0)
-            Positioned(
-              top: 9.1.h,
-              right: 3.h,
-              child: GestureDetector(
-                onTap: () {
-                  Get.to(()=>ChooseImage());
-                },
-                child: Text(
-                  "SKIP",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14.px,
-                    fontFamily: "medium",
+      body: Obx(()=>
+        Stack(
+          children: [
+            PageView(
+              controller: _controller,
+              onPageChanged: (int page) {
+                pageIndex.value=page;
+              },
+              children: [
+                OnboardingPage(
+                  image: "assets/png/splash1.png",
+                  title: 'Create a circle for all your group\n chats and invite your friends',
+                  controller: _controller,
+                ),
+                OnboardingPage(
+                  image: "assets/png/splash2.png",
+                  title: 'Pick interests that your Circles are\n all about',
+                  controller: _controller,
+                ),
+                OnboardingPage(
+                  image: "assets/png/splash3.png",
+                  title: 'Plan and Experience events with\n your circle',
+                  controller: _controller,
+                ),
+                OnboardingPage(
+                  image: "assets/png/splash4.png",
+                  title: 'Get exclusive deals that your circle\n cares about',
+                  controller: _controller,
+                ),
+                // Add more pages as needed
+              ],
+            ),
+            if (pageIndex.value == 0)
+              Positioned(
+                top: 9.1.h,
+                right: 3.h,
+                child: GestureDetector(
+                  onTap: () {
+                    Get.to(()=>const LoginScreen());
+                  },
+                  child: Text(
+                    "SKIP",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14.px,
+                      fontFamily: "medium",
+                    ),
                   ),
                 ),
               ),
-            ),
-        ],
+            if(pageIndex.value==1)
+              Positioned(
+                top: 9.1.h,
+                right: 3.h,
+                child: GestureDetector(
+                  onTap: () {
+                    Get.to(()=>const LoginScreen());
+                  },
+                  child: Text(
+                    "SKIP",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14.px,
+                      fontFamily: "medium",
+                    ),
+                  ),
+                ),
+              ),
+            if(pageIndex.value==2)
+              Positioned(
+                top: 9.1.h,
+                right: 3.h,
+                child: GestureDetector(
+                  onTap: () {
+                    Get.to(()=>const LoginScreen());
+                  },
+                  child: Text(
+                    "SKIP",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14.px,
+                      fontFamily: "medium",
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }
@@ -89,7 +124,7 @@ class OnboardingPage extends StatelessWidget {
   final String image;
   final String title;
   final PageController controller;
-  const OnboardingPage({
+  const OnboardingPage({super.key,
     required this.image,
     required this.title,
     required this.controller,
@@ -139,12 +174,13 @@ class OnboardingPage extends StatelessWidget {
                       child:   CustomMainButton(buttonText: "Get Started",buttonColor: CustomColor.mainColorYellow,
                           onPressed: (){
                             if(controller.page==3){
-                              Get.to(() => LoginScreen());
-                            }else
+                              Get.to(() => const LoginScreen());
+                            }else {
                               controller.nextPage(
-                                duration: Duration(milliseconds: 500),
+                                duration: const Duration(milliseconds: 500),
                                 curve: Curves.ease,
                               );
+                            }
                           }),
                     ),
                     SizedBox(height: 1.h,width: 1.h,),

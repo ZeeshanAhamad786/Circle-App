@@ -7,7 +7,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../../controller/utils/color/custom_color.dart';
 import '../../../../custom_widget/custom-button.dart';
 class ChooseImage extends StatelessWidget {
-  const ChooseImage({Key? key}) : super(key: key);
+  const ChooseImage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class ChooseImage extends StatelessWidget {
           SizedBox(height:6.h ,),
           CustomMainButton(buttonText: "Choose Image",buttonColor: CustomColor.mainColorYellow,
               onPressed: (){
-                Get.to(()=>ShowImage());
+                Get.to(()=>const ShowImage());
               }),
         ],),
       ),

@@ -7,7 +7,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../controller/utils/color/custom_color.dart';
 import '../../../controller/utils/style/customTextStyle.dart';
 import '../../../custom_widget/customwidgets.dart';
-import '../../loopTabBar.dart';
+import 'loopTabBar.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});

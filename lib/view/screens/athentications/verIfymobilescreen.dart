@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:circleapp/view/screens/athentications/login_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -54,7 +55,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
               otpController.text = v;
             },
             length: 4,
-            keyboardType: TextInputType.numberWithOptions(decimal: true),
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
             cursorColor: Colors.white,
             pinTheme: PinTheme(
 
@@ -74,7 +75,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
               inactiveBorderWidth: 0,
               selectedBorderWidth: 0,
             ),
-            animationDuration: Duration(milliseconds: 200),
+            animationDuration: const Duration(milliseconds: 200),
             onChanged: (value) {
               log(value.toString());
             },
@@ -83,7 +84,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
               return true;
             },
             appContext: context, // Provide the context here
-            textStyle: TextStyle(color: Colors.white), // Text color for both selected and inactive digits
+            textStyle: const TextStyle(color: Colors.white), // Text color for both selected and inactive digits
           ),
 
           InkWell(
@@ -99,7 +100,9 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
             height: 5.h,
           ),
           CustomMainButton(buttonText: "Done",buttonColor: CustomColor.mainColorYellow,
-              onPressed: (){}),
+              onPressed: (){
+            Get.to(()=>const LoginScreen());
+              }),
           SizedBox(
             height: 1.3.h,
           ),

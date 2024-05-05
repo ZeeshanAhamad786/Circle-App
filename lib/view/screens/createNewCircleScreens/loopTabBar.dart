@@ -1,6 +1,7 @@
 import 'package:circleapp/controller/utils/color/custom_color.dart';
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
 import 'package:circleapp/custom_widget/customwidgets.dart';
+import 'package:circleapp/view/screens/createNew_To_DosScreen/create_New_To_Dos_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -40,7 +41,10 @@ class LoopTabBar extends StatelessWidget {
                       'Loop',
                       style: CustomTextStyle.headingStyle,
                     ),const Expanded(child: SizedBox()),
-                    customTextButton1()
+                    GestureDetector(onTap: () {
+                      Get.to(()=>const CreateNewToDo());
+                    },
+                        child: customTextButton1())
                   ],
                 ),
               ),
@@ -347,7 +351,7 @@ class LoopTabBar extends StatelessWidget {
                                          );
                                        },),
                                    ),
-                                   Expanded(child: SizedBox()),
+                                   const Expanded(child: SizedBox()),
                                    customTextButton2()
 
                                  ],

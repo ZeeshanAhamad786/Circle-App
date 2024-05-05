@@ -2,9 +2,7 @@ import 'package:circleapp/controller/utils/color/custom_color.dart';
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
 import 'package:circleapp/custom_widget/custom-button.dart';
 import 'package:circleapp/custom_widget/custom_text_field.dart';
-import 'package:circleapp/view/screens/athentications/forget_password.dart';
 import 'package:circleapp/view/screens/athentications/login_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -90,7 +88,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 suffixIcon: SvgPicture.asset("assets/svg/closeEye.svg"),),
               SizedBox(height:4.h ,),
               CustomMainButton(buttonText: "Sign Up",buttonColor: CustomColor.mainColorYellow,
-                  onPressed: (){}),
+                  onPressed: (){
+                Get.to(()=>const LoginScreen());
+                  }),
               SizedBox(height: 4.h,),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -103,7 +103,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.to(()=>LoginScreen());
+                      Get.to(()=>const LoginScreen());
                     },
                     child: Text("Log In",
                         style: CustomTextStyle.mediumTextS1),
