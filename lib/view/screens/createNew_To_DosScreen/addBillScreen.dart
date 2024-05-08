@@ -1,7 +1,9 @@
+import 'dart:io';
+
+import 'package:circleapp/controller/paymentController.dart';
 import 'package:circleapp/controller/utils/color/custom_color.dart';
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
 import 'package:circleapp/custom_widget/customwidgets.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -11,86 +13,107 @@ class AddBills extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final PaymentController paymentController=Get.put(PaymentController());
     final TextEditingController titleTextController = TextEditingController();
     return Scaffold(
         backgroundColor: CustomColor.primaryColor,
-        body: Column(
-          children: [
-            getVerticalSpace(6.h),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 1.5.h),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Icon(
-                      Icons.arrow_back_ios_new,
-                      color: Colors.white,
-                      size: 2.h,
+        body: Obx(()=>
+           Column(
+            children: [
+              getVerticalSpace(6.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 1.5.h),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: Icon(
+                        Icons.arrow_back_ios_new,
+                        color: Colors.white,
+                        size: 2.h,
+                      ),
                     ),
-                  ),
-                  getHorizentalSpace(1.5.h),
-                  Text(
-                    'Add Bill',
-                    style: CustomTextStyle.headingStyle,
-                  ),
-                ],
+                    getHorizentalSpace(1.5.h),
+                    Text(
+                      'Add Bill',
+                      style: CustomTextStyle.headingStyle,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 2.3.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  getVerticalSpace(3.h),
-                  Text(
-                    'Title',
-                    style:
-                    CustomTextStyle.smallText.copyWith(color: Colors.white),
-                  ),
-                  getVerticalSpace(.4.h),
-                  customTextFormField(titleTextController, 'Winter trip Plan',
-                      isObsecure: false),
-                  getVerticalSpace(3.h),
-                  Text(
-                    'Total Bill',
-                    style:
-                    CustomTextStyle.smallText.copyWith(color: Colors.white),
-                  ),
-                  getVerticalSpace(.4.h),
-                  customTextFormField(titleTextController,
-                      '2500\$',
-                      isObsecure: false,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 2.3.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    getVerticalSpace(3.h),
+                    Text(
+                      'Title',
+                      style:
+                      CustomTextStyle.smallText.copyWith(color: Colors.white),
+                    ),
+                    getVerticalSpace(.4.h),
+                    customTextFormField(titleTextController, 'Winter trip Plan',
+                        isObsecure: false),
+                    getVerticalSpace(3.h),
+                    Text(
+                      'Total Bill',
+                      style:
+                      CustomTextStyle.smallText.copyWith(color: Colors.white),
+                    ),
+                    getVerticalSpace(.4.h),
+                    customTextFormField(titleTextController,
+                        '2500\$',
+                        isObsecure: false,
 
-                     ),
-                  getVerticalSpace(3.h),
-                  Text('Upload bill receipt', style: CustomTextStyle.headingStyle),
-                  getVerticalSpace(.6.h),
-                  Text('you can add multiple bill receipt.',
-                      style: CustomTextStyle.hintText),
-                  getVerticalSpace(1.h),
-                  Image.asset("assets/png/chooseImage.png"),
-                  getVerticalSpace(8.h),
+                       ),
+                    getVerticalSpace(3.h),
+                    Text('Upload bill receipt', style: CustomTextStyle.headingStyle),
+                    getVerticalSpace(.6.h),
+                    Text('you can add multiple bill receipt.',
+                        style: CustomTextStyle.hintText),
+                    getVerticalSpace(1.h),
+                    GestureDetector(onTap: (){paymentController.pickImage();},
+                        child:paymentController.pickedImage.value !=null?  Container(
+                          height: 26.6.h,
+                          decoration: BoxDecoration(
+                            color: CustomColor.textFieldColor,
+                            borderRadius: BorderRadius.circular(
+                              20.px,
 
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 4.5.h),
-                    child: customButton(
-                        onTap: () {
-                          showCustomDialog(context);
-                        },
-                        backgroundColor: CustomColor.secondaryColor,
-                        borderColor: CustomColor.primaryColor,
-                        title: 'Done',
-                        titleColor: Colors.black,
-                        height: 4.5.h),
-                  ),
-                ],
-              ),
-            )
-          ],
+                            ),
+
+                          ),   child: paymentController.pickedImage.value == null
+                            ? const Center(child: Text('No image selected'))
+                            : ClipRRect(  borderRadius: BorderRadius.circular(20.px),
+                          child: Image.file(
+                            File(paymentController.pickedImage.value!.path),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        ): Image.asset("assets/png/chooseImage.png")),
+                    getVerticalSpace(8.h),
+
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 4.5.h),
+                      child: customButton(
+                          onTap: () {
+                            showCustomDialog(context);
+                          },
+                          backgroundColor: CustomColor.secondaryColor,
+                          borderColor: CustomColor.primaryColor,
+                          title: 'Done',
+                          titleColor: Colors.black,
+                          height: 4.5.h),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ));
   }
 }

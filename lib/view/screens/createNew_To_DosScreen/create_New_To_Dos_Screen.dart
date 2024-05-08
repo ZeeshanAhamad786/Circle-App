@@ -1,7 +1,9 @@
+import 'dart:io';
+
+import 'package:circleapp/controller/paymentController.dart';
 import 'package:circleapp/controller/utils/color/custom_color.dart';
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
 import 'package:circleapp/custom_widget/customwidgets.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -14,132 +16,158 @@ class CreateNewToDo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final PaymentController paymentController=Get.put(PaymentController());
     final TextEditingController titleTextController = TextEditingController();
     final TextEditingController descriptionController = TextEditingController();
     return Scaffold(
         backgroundColor: CustomColor.primaryColor,
-        body: Column(
-          children: [
-            getVerticalSpace(6.h),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 1.5.h),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Icon(
-                      Icons.arrow_back_ios_new,
-                      color: Colors.white,
-                      size: 2.h,
-                    ),
-                  ),
-                  getHorizentalSpace(1.5.h),
-                  Text(
-                    'Create new To-Dos',
-                    style: CustomTextStyle.headingStyle,
-                  ),
-                  const Expanded(child: SizedBox()),
-                  GestureDetector(
-                      onTap: () {
-                        Get.to(() => const CreateNewToDo());
-                      },
-                      child: GestureDetector(onTap: (){
-                        Get.to(()=>const AddBills());
-                      },
-                          child: customTextButton1(title: 'Add Bill')))
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 2.3.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  getVerticalSpace(3.h),
-                  Text(
-                    'Title',
-                    style:
-                        CustomTextStyle.smallText.copyWith(color: Colors.white),
-                  ),
-                  getVerticalSpace(.4.h),
-                  customTextFormField(titleTextController, 'Winter trip Plan',
-                      isObsecure: false),
-                  getVerticalSpace(3.h),
-                  Text(
-                    'Description',
-                    style:
-                        CustomTextStyle.smallText.copyWith(color: Colors.white),
-                  ),
-                  getVerticalSpace(.4.h),
-                  customTextFormField(descriptionController,
-                      '''Lorem ipsum dolor sit amet consectetur. Eget aliquam suspendisse ultrices a mattis vitae. Adipiscing id vestibulum ultrices lorem. Nibh dignissim bibendum aAdipi.''',
-                      isObsecure: false,
-                      maxLine: 4,
-                      borderRadius: BorderRadius.circular(15.px)),
-                  getVerticalSpace(3.h),
-                  Text('Upload Images', style: CustomTextStyle.headingStyle),
-                  getVerticalSpace(.6.h),
-                  Text('you can add multiple images.',
-                      style: CustomTextStyle.hintText),
-                  getVerticalSpace(1.h),
-                  Image.asset("assets/png/chooseImage.png"),
-                  getVerticalSpace(3.h),
-                  Text('Add person in group to split bill',
-                      style: CustomTextStyle.headingStyle),
-                  getVerticalSpace(1.h),
-                  Row(
+        body: SingleChildScrollView(
+          child: Obx(()=>
+             Column(
+              children: [
+                getVerticalSpace(6.h),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 1.5.h),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        height: 4.h,
-                        child: ListView.builder(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 4,
-                          itemExtent: 5.h,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: EdgeInsets.symmetric(horizontal: .3.h),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: CustomColor.secondaryColor),
-                                    shape: BoxShape.circle),
-                                child: CircleAvatar(
-                                  radius: 10.h,
-                                  backgroundColor: CustomColor.mainColor,
-                                  backgroundImage:
-                                      const AssetImage('assets/png/story.png'),
-                                ),
-                              ),
-                            );
-                          },
+                      GestureDetector(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: Icon(
+                          Icons.arrow_back_ios_new,
+                          color: Colors.white,
+                          size: 2.h,
                         ),
                       ),
+                      getHorizentalSpace(1.5.h),
+                      Text(
+                        'Create new To-Dos',
+                        style: CustomTextStyle.headingStyle,
+                      ),
                       const Expanded(child: SizedBox()),
-                      customTextButton1(title: 'Add Member')
+                      GestureDetector(
+                          onTap: () {
+                            Get.to(() => const CreateNewToDo());
+                          },
+                          child: GestureDetector(onTap: (){
+                            Get.to(()=>const AddBills());
+                          },
+                              child: customTextButton1(title: 'Add Bill')))
                     ],
                   ),
-                  getVerticalSpace(3.h),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 4.5.h),
-                    child: customButton(
-                        onTap: () {
-                          showCustomDialog(context,title: titleTextController.text,description: descriptionController.text);
-                        },
-                        backgroundColor: CustomColor.secondaryColor,
-                        borderColor: CustomColor.primaryColor,
-                        title: 'Done',
-                        titleColor: Colors.black,
-                        height: 4.5.h),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 2.3.h),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      getVerticalSpace(3.h),
+                      Text(
+                        'Title',
+                        style:
+                            CustomTextStyle.smallText.copyWith(color: Colors.white),
+                      ),
+                      getVerticalSpace(.4.h),
+                      customTextFormField(titleTextController, 'Winter trip Plan',
+                          isObsecure: false),
+                      getVerticalSpace(3.h),
+                      Text(
+                        'Description',
+                        style:
+                            CustomTextStyle.smallText.copyWith(color: Colors.white),
+                      ),
+                      getVerticalSpace(.4.h),
+                      customTextFormField(descriptionController,
+                          '''Lorem ipsum dolor sit amet consectetur. Eget aliquam suspendisse ultrices a mattis vitae. Adipiscing id vestibulum ultrices lorem. Nibh dignissim bibendum aAdipi.''',
+                          isObsecure: false,
+                          maxLine: 4,
+                          borderRadius: BorderRadius.circular(15.px)),
+                      getVerticalSpace(3.h),
+                      Text('Upload Images', style: CustomTextStyle.headingStyle),
+                      getVerticalSpace(.6.h),
+                      Text('you can add multiple images.',
+                          style: CustomTextStyle.hintText),
+                      getVerticalSpace(1.h),
+                      GestureDetector(onTap: (){
+                        paymentController.pickImage();
+                      },
+                          child:paymentController.pickedImage.value !=null?
+                          Container(
+                            height: 26.6.h,
+                            decoration: BoxDecoration(
+                              color: CustomColor.textFieldColor,
+                              borderRadius: BorderRadius.circular(
+                                20.px,
+
+                              ),
+
+                            ),   child: paymentController.pickedImage.value == null
+                              ? const Center(child: Text('No image selected'))
+                              : ClipRRect(  borderRadius: BorderRadius.circular(20.px),
+                            child: Image.file(
+                              File(paymentController.pickedImage.value!.path),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          ):Image.asset("assets/png/chooseImage.png")),
+                      getVerticalSpace(3.h),
+                      Text('Add person in group to split bill',
+                          style: CustomTextStyle.headingStyle),
+                      getVerticalSpace(1.h),
+                      Row(
+                        children: [
+                          SizedBox(
+                            height: 4.h,
+                            child: ListView.builder(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 4,
+                              itemExtent: 5.h,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: .3.h),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: CustomColor.secondaryColor),
+                                        shape: BoxShape.circle),
+                                    child: CircleAvatar(
+                                      radius: 10.h,
+                                      backgroundColor: CustomColor.mainColor,
+                                      backgroundImage:
+                                          const AssetImage('assets/png/story.png'),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          const Expanded(child: SizedBox()),
+                          customTextButton1(title: 'Add Member')
+                        ],
+                      ),
+                      getVerticalSpace(3.h),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 4.5.h),
+                        child: customButton(
+                            onTap: () {
+                              showCustomDialog(context,title: titleTextController.text,description: descriptionController.text);
+                            },
+                            backgroundColor: CustomColor.secondaryColor,
+                            borderColor: CustomColor.primaryColor,
+                            title: 'Done',
+                            titleColor: Colors.black,
+                            height: 4.5.h),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            )
-          ],
+                )
+              ],
+            ),
+          ),
         ));
   }
 }
