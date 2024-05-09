@@ -17,7 +17,6 @@ class BottomNavigationScreenState extends State<BottomNavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     return Obx(() =>  Scaffold(
       bottomNavigationBar: Container(
