@@ -55,4 +55,25 @@ class CustomTextStyle{
       fontWeight: FontWeight.w400,
       fontFamily: 'medium',
       color: CustomColor.mainColorLightBlack);
+  static TextStyle mediumTextBN = TextStyle(
+      fontSize: 10.px,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'medium',
+      color: Colors.white);
+  static TextStyle mediumTextTab = TextStyle(
+      fontSize: 14.px,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'medium',
+      color: CustomColor.mainColorYellow);
+  static TextStyle mediumTextGrey = TextStyle(
+      fontSize: 12.px,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'medium',
+      color: CustomColor.mainColorGrey);
+  static TextStyle mediumTextBold = TextStyle(
+      fontSize: 10.px,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'medium',
+      color: CustomColor.mainColorLogin
+  );
 }

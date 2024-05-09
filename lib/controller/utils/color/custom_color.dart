@@ -11,5 +11,7 @@ class CustomColor{
   static const Color mainColorOffWhite=Color(0XFFF8F8F8);
   static const Color mainColorYellow=Color(0XFFFFC491);
   static const Color mainColorLightBlack=Color(0XFF7A7A7A);
+  static const Color mainColorLowBlack=Color(0XFF707070);
+  static const Color mainColorGrey=Color(0XFFA4A4A4);
 
 }

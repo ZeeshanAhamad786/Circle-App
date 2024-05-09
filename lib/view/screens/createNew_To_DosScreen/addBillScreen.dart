@@ -4,6 +4,7 @@ import 'package:circleapp/controller/paymentController.dart';
 import 'package:circleapp/controller/utils/color/custom_color.dart';
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
 import 'package:circleapp/custom_widget/customwidgets.dart';
+import 'package:circleapp/view/screens/createNew_To_DosScreen/create_New_To_Dos_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -17,8 +18,8 @@ class AddBills extends StatelessWidget {
     final TextEditingController titleTextController = TextEditingController();
     return Scaffold(
         backgroundColor: CustomColor.primaryColor,
-        body: Obx(()=>
-           Column(
+        body:  SingleChildScrollView(
+          child: Column(
             children: [
               getVerticalSpace(6.h),
               Padding(
@@ -66,37 +67,58 @@ class AddBills extends StatelessWidget {
                     ),
                     getVerticalSpace(.4.h),
                     customTextFormField(titleTextController,
-                        '2500\$',
-                        isObsecure: false,
-
-                       ),
+                      '2500\$',
+                      isObsecure: false,
+          
+                    ),
                     getVerticalSpace(3.h),
                     Text('Upload bill receipt', style: CustomTextStyle.headingStyle),
                     getVerticalSpace(.6.h),
                     Text('you can add multiple bill receipt.',
                         style: CustomTextStyle.hintText),
                     getVerticalSpace(1.h),
-                    GestureDetector(onTap: (){paymentController.pickImage();},
-                        child:paymentController.pickedImage.value !=null?  Container(
-                          height: 26.6.h,
-                          decoration: BoxDecoration(
-                            color: CustomColor.textFieldColor,
-                            borderRadius: BorderRadius.circular(
-                              20.px,
-
-                            ),
-
-                          ),   child: paymentController.pickedImage.value == null
-                            ? const Center(child: Text('No image selected'))
-                            : ClipRRect(  borderRadius: BorderRadius.circular(20.px),
-                          child: Image.file(
-                            File(paymentController.pickedImage.value!.path),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        ): Image.asset("assets/png/chooseImage.png")),
-                    getVerticalSpace(8.h),
-
+                    GestureDetector(
+                        onTap: () {
+                          paymentController.pickImage();
+                        },
+                        child:  Image.asset("assets/png/chooseImage.png")),
+                    getVerticalSpace(1.5.h),
+                    SizedBox(
+                      height: 8.2.h,
+                      child: ListView.builder(
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 2,
+                        itemExtent: 11.h,
+                        itemBuilder: (context, index) {
+                          return Obx(()=>
+                             Padding(
+                                padding: EdgeInsets.symmetric(horizontal: .3.h),
+                                child: Container(height: 8.2.h,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                        BorderRadius.circular(15.px),
+                                        color: CustomColor.textFieldColor),
+                                    child: paymentController
+                                        .pickedImage.value ==
+                                        null
+                                        ? const Center(
+                                        child: Text('No image selected'))
+                                        : ClipRRect(
+                                        borderRadius:
+                                        BorderRadius.circular(15.px),
+                                        child: Image.file(
+                                          File(paymentController
+                                              .pickedImage.value!.path),
+                                          fit: BoxFit.cover,
+                                        )))),
+                          );
+                        },
+                      ),
+                    ),
+                    getVerticalSpace(6.3.h),
+          
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 4.5.h),
                       child: customButton(
@@ -114,7 +136,7 @@ class AddBills extends StatelessWidget {
               )
             ],
           ),
-        ));
+        ),);
   }
 }
 
@@ -240,6 +262,7 @@ void showCustomDialog(BuildContext context) {
                           backButton.value=true;
 
                         }
+                        Get.to(()=>const CreateNewToDo());
                       },
                           backgroundColor:nextButton.value==true?CustomColor.secondaryColor: CustomColor.primaryColor,
                           borderColor: nextButton.value==true? CustomColor.primaryColor:CustomColor.secondaryColor,

@@ -1,6 +1,7 @@
 import 'package:circleapp/controller/utils/color/custom_color.dart';
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
 import 'package:circleapp/custom_widget/customwidgets.dart';
+import 'package:circleapp/view/addNewPlanScreen.dart';
 import 'package:circleapp/view/screens/createNew_To_DosScreen/create_New_To_Dos_Screen.dart';
 import 'package:circleapp/view/screens/dinnerPlanScreens/dinnerPlan_Details.dart';
 import 'package:circleapp/view/screens/tripPlanScreens/winterTripPlanDetails.dart';
@@ -9,8 +10,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import 'chatScreen.dart';
+
 class LoopTabBar extends StatelessWidget {
-  const LoopTabBar({super.key});
+   LoopTabBar({super.key,required this.selectedIndex});
+  int selectedIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +48,14 @@ class LoopTabBar extends StatelessWidget {
                       style: CustomTextStyle.headingStyle,
                     ),const Expanded(child: SizedBox()),
                     GestureDetector(onTap: () {
-                      Get.to(()=> CreateNewToDo());
+                      if(selectedIndex.value==0){
+                        Get.to(()=> const ChatScreen());
+                      }else if(selectedIndex.value==1){
+                        Get.to(()=> const CreateNewToDo());
+                      }else{
+                        Get.to(()=> const AddNewPlan(title: 'loop'));
+
+                      }
                     },
                         child: customTextButton1())
                   ],
@@ -302,7 +313,12 @@ class LoopTabBar extends StatelessWidget {
                    itemBuilder: (context, index) {
                      return
                        GestureDetector(onTap: () {
-                         Get.to(()=>const DinnerPlanDetails());
+                         if(index==0||index==1){
+                           Get.to(()=>const DinnerPlanDetails());
+
+                         }else{
+                           Get.to(()=>const WinterTripPlanDetails());
+                         }
                        },
                          child: Container(
 
@@ -402,7 +418,7 @@ class LoopTabBar extends StatelessWidget {
                          key: Key(index.toString()),
                          child: GestureDetector(
                            onTap: (){
-                             Get.to(()=>const WinterTripPlanDetails());
+
                            },
                            child: Container(
                              margin: EdgeInsets.symmetric(vertical: 1.h,horizontal: 1.9.h),

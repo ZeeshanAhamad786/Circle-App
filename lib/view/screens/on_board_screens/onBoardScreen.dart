@@ -6,6 +6,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../controller/utils/color/custom_color.dart';
 import '../../../custom_widget/custom-button.dart';
+import '../home_screen/home_screen.dart';
 class OnBoardingScreen1 extends StatefulWidget {
 
   const OnBoardingScreen1({super.key});
@@ -65,7 +66,7 @@ class _OnBoardingScreen1State extends State<OnBoardingScreen1> {
                 right: 3.h,
                 child: GestureDetector(
                   onTap: () {
-                    Get.to(()=>const LoginScreen());
+                    Get.to(()=> HomeScreen());
                   },
                   child: Text(
                     "SKIP",

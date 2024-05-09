@@ -76,7 +76,7 @@ class ChatScreen extends StatelessWidget {
                         getHorizentalSpace(1.h),
                         pinList.isNotEmpty?const SizedBox.shrink():  GestureDetector(
                           onTap: (){
-                            Get.to(()=>const LoopTabBar());
+                            Get.to(()=> LoopTabBar(selectedIndex: 0,));
                           },
                             child: SvgPicture.asset('assets/svg/loopicon.svg')),
                       ],
