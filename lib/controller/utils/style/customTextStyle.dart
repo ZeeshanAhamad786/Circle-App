@@ -76,4 +76,48 @@ class CustomTextStyle{
       fontFamily: 'medium',
       color: CustomColor.mainColorLogin
   );
+  static TextStyle mediumTextExplore = TextStyle(
+      fontSize: 16.px,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'medium',
+      color: CustomColor.mainColorOffWhite
+  );
+  static TextStyle mediumTextLight = TextStyle(
+      fontSize: 14.px,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'medium',
+      color: CustomColor.mainColorLightWhite
+  );
+  static TextStyle mediumMixLightWhite = TextStyle(
+      fontSize: 12.px,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'medium',
+      color: CustomColor.mainColorLightWhite
+  );
+  static TextStyle mediumTextYellow = TextStyle(
+      fontSize: 10.px,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'medium',
+      color: CustomColor.mainColorYellow);
+  static TextStyle mediumTextImageConcert = TextStyle(
+      fontSize: 12.px,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'medium',
+      color: CustomColor.mainColorMixLightWhite);
+  static TextStyle mediumTextDone = TextStyle(
+      fontSize: 16.px,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'medium',
+      color: CustomColor.mainColorYellow);
+  static TextStyle mediumTextSubtitle = TextStyle(
+      fontSize: 13.px,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'medium',
+      color: CustomColor.mainColorSubtitle);
+  static TextStyle mediumTextTitle= TextStyle(
+      fontSize: 16.px,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'medium',
+      color: Colors.white
+  );
 }

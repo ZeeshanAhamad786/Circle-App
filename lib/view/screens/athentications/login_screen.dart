@@ -11,7 +11,7 @@ import '../createNewCircleScreens/choose_image.dart';
 import 'forget_password.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +66,7 @@ class LoginScreen extends StatelessWidget {
               SizedBox(height: 0.5.h,),
               Align(alignment: Alignment.centerRight,
                   child: GestureDetector(onTap: () {
-                    Get.to(()=>ForgetScreen());
+                    Get.to(()=>const ForgetScreen());
                   },
                       child: Text("Forgot Password?",style: CustomTextStyle.mediumTextS1,))),
               SizedBox(height:2.h ,),

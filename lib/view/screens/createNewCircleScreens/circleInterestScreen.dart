@@ -1,12 +1,14 @@
 import 'package:circleapp/controller/utils/color/custom_color.dart';
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
 import 'package:circleapp/custom_widget/customwidgets.dart';
+import 'package:circleapp/view/screens/bottom_navigation_screen/bottom_navigation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'addMembersScreen.dart';
+import 'loopTabBar.dart';
 
 class CircleInterest extends StatelessWidget {
   const CircleInterest({super.key});
@@ -104,7 +106,7 @@ class CircleInterest extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 2.2.h),
                   child: customButton(
                       onTap: () {
-                        Get.to(()=>const AddMembers());
+                        Get.to(()=> AddMembers(title: 'interestscreen',));
                       },
                       backgroundColor: CustomColor.secondaryColor,
                       borderColor: CustomColor.primaryColor,

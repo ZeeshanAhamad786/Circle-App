@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -5,6 +7,7 @@ import '../../../controller/utils/color/custom_color.dart';
 import '../../../controller/utils/style/customTextStyle.dart';
 import '../athentications/login_screen.dart';
 import '../home_screen/plan_event_screen.dart';
+import 'itinerary_event_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -17,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:CustomColor.mainColorBackground,
+      backgroundColor:Color(0xff343434),
       body: DefaultTabController(
         length: 2,
         child: Column(
@@ -48,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   PlanEventScreen(),
 
                   // Content for Tab 2
-                  LoginScreen(),
+                  ItineraryEventScreen(),
                 ],
               ),
             ),

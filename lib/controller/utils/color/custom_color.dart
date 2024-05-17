@@ -13,5 +13,8 @@ class CustomColor{
   static const Color mainColorLightBlack=Color(0XFF7A7A7A);
   static const Color mainColorLowBlack=Color(0XFF707070);
   static const Color mainColorGrey=Color(0XFFA4A4A4);
+  static const Color mainColorLightWhite=Color(0XFFDDDDDD);
+  static const Color mainColorMixLightWhite=Color(0XFFDADADA);
+  static const Color mainColorSubtitle=Color(0XFF9D9D9D);
 
 }

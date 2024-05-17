@@ -9,18 +9,20 @@ Widget customTextFormField(
   TextEditingController? controller,
   String? hintText, {
   TextInputType? keyboardType,
-  IconData? prefixIcon,
+  Widget? prefixIcon,
   final ValueChanged<String>? onChanged,
   Icon? icon,
-  IconButton? sufixIcon,
+  Widget? sufixIcon,
   Color? iconColor,
   String? lableText,
   int? maxLine,
   BorderRadius? borderRadius,
   TextStyle? lableStyle,
   required bool isObsecure,
-  EdgeInsetsDirectional? contentPading,
+  EdgeInsets? contentPading,
   Color? hintTextColor,
+  bool readOnly=false,
+  Callback? isTap
 }) {
   return TextFormField(
     maxLines: maxLine,
@@ -29,9 +31,10 @@ Widget customTextFormField(
     obscureText: isObsecure,
     controller: controller,
     style: CustomTextStyle.hintText,
-    cursorColor: CustomColor.textFieldColor,
-    textAlign: TextAlign.left,
+    cursorColor: Colors.white,
     keyboardType: keyboardType,
+    readOnly:readOnly ,
+    onTap:isTap ,
     decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
             borderRadius: borderRadius ?? BorderRadius.circular(30.px),
@@ -45,11 +48,7 @@ Widget customTextFormField(
             borderRadius: borderRadius ?? BorderRadius.circular(30.px),
             borderSide: const BorderSide(color: CustomColor.textFieldColor)),
         fillColor: CustomColor.textFieldColor,
-        // prefixIcon: Icon(
-        //   prefixIcon,
-        //   color:iconColor?? Colors.white,
-        //   size: 2.4.h,
-        // ),
+        prefixIcon: prefixIcon,
         suffixIcon: sufixIcon,
         hintText: hintText,
         hintStyle: CustomTextStyle.hintText,
@@ -63,7 +62,6 @@ Widget getVerticalSpace(double height) {
     height: height,
   );
 }
-
 Widget getHorizentalSpace(double width) {
   return SizedBox(
     width: width,
@@ -130,11 +128,12 @@ Widget customTextButton1(
 {String? title,
   double? horizentalPadding,
   double? verticalPadding,
+  Color?bgColor
 }){
   return   Container(padding: EdgeInsets.symmetric(horizontal:horizentalPadding?? .7.h,vertical:verticalPadding?? .1.h),
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.px),
-        color: CustomColor.mainColor,
+        color:bgColor?? CustomColor.mainColor,
         border: Border.all(color: CustomColor.secondaryColor)
     ),
     child: Row(children: [
@@ -143,8 +142,10 @@ Widget customTextButton1(
       Text(title??'Add',style: CustomTextStyle.smallText.copyWith(color: CustomColor.secondaryColor,fontSize: 12.px),)
     ],),);
 }
-Widget customTextButton2({String? title, Color? bgColor,Color? btnTextColor}){
-  return   Container(padding: EdgeInsets.symmetric(horizontal: .8.h,vertical: .1.h),
+Widget customTextButton2({String? title, Color? bgColor,Color? btnTextColor
+,double? horizentalPadding,
+verticalPadding}){
+  return   Container(padding: EdgeInsets.symmetric(horizontal:horizentalPadding?? .8.h,vertical:verticalPadding?? .1.h),
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.px),
         color:bgColor?? CustomColor.mainColor,

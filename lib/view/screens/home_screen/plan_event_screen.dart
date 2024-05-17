@@ -1,4 +1,10 @@
+import 'package:circleapp/custom_widget/customwidgets.dart';
+import 'package:circleapp/view/screens/planDetailScreen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
@@ -64,125 +70,117 @@ body: SingleChildScrollView(
       //     appointmentDisplayMode:
       //     MonthAppointmentDisplayMode.appointment),
     ),
-    GestureDetector(
-      onTap: () {
-        showModalBottomSheet(
-          context: context,
-          builder: (BuildContext context) {
-            return Container(
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Color(0xff343434),
-                ),
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20)),
-                color: CustomColor.mainColorBackground,
-              ),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                        left: 5.h, right: 5.h, top: 4.h),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Events",
-                          style: CustomTextStyle.mediumTextM14,
-                        ),
-                        Text(
-                          "See Details",
-                          style: CustomTextStyle.mediumTextTab,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 4.h,),
-                  Expanded(
-                    child: ListView.builder(
-                        physics: ScrollPhysics(),
-                        itemCount: data.length,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Dismissible(
-                              key: Key("$index"),
-                              onDismissed: (DismissDirection){
-                                setState(() {data.removeAt(index);});
-                              },
-                              background: Container(
-                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Colors.red),// Background color when swiping
-                                child: Icon(Icons.delete, color: Colors.white),
-                                alignment: Alignment.centerRight,
-                                padding: EdgeInsets.only(right: 5.h),
-                              ),
-                              child: Container(
-                                  margin:
-                                  EdgeInsets.symmetric(horizontal: 3.h),
-                                  padding: EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                      borderRadius:
-                                      BorderRadius.circular(10),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: CustomColor
-                                                .mainColorBackground
-                                                .withOpacity(0.01),
-                                            blurRadius: 30,
-                                            offset: Offset(0, 3))
-                                      ],
-                                      color: CustomColor.mainColorLowBlack),
-                                  child: Column(
-                                    children: [
-                                      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            data[index]["name"]!,
-                                            style:
-                                            CustomTextStyle.mediumTextM,
-                                          ),
-                                          Text(data[index]["date"]!,style:CustomTextStyle.mediumTextBold,),
-                                        ],
-                                      ),
-                                      Row(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Expanded(
-                                              child: Text(
-                                                data[index]["subtitle"]!,
-                                                style: CustomTextStyle.mediumTextGrey,
-                                              )),
-                                          ElevatedButton(
-                                              onPressed: () {},
-                                              style:ElevatedButton.styleFrom(backgroundColor: CustomColor.mainColorYellow,
-                                                  minimumSize: Size(60, 30)
-                                              ),
-                                              child: Text("Booked",style:CustomTextStyle.mediumTextBold,
-                                              )),
-                                        ],
-                                      )
-                                    ],
-                                  )),
-                            ),
-                          );
-                        }),
-                  )
-                ],
-              ),
-            );
-          },
-        );
-      },
-      child: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        color: CustomColor.mainColorBackground,
+  getVerticalSpace(1.5.h),
+  Container(
+    width: MediaQuery.of(context).size.width,
+    decoration: BoxDecoration(
+      border: Border.all(
+        color: Color(0xff343434),
       ),
-    )
+      borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(30),
+          topRight: Radius.circular(30)),
+      color: CustomColor.mainColorBackground,
+    ),
+    child: Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.only(
+              left: 5.h, right: 5.h, top: 4.h),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Events",
+                style: CustomTextStyle.mediumTextM14,
+              ),
+              GestureDetector(onTap: () {
+                Get.to(()=>PlansDetails());
+              },
+                child: Text(
+                  "See Details",
+                  style: CustomTextStyle.mediumTextTab,
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 4.h,),
+        ListView.builder(
+            physics: ScrollPhysics(),
+            itemCount: data.length,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Dismissible(
+                  key: Key("$index"),
+                  onDismissed: (DismissDirection){
+                    setState(() {data.removeAt(index);});
+                  },
+                  background: Container(
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Colors.red),// Background color when swiping
+                    child: Icon(Icons.delete, color: Colors.white),
+                    alignment: Alignment.centerRight,
+                    padding: EdgeInsets.only(right: 5.h),
+                  ),
+                  child: Container(
+                      margin:
+                      EdgeInsets.symmetric(horizontal: 3.h),
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          borderRadius:
+                          BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                                color: CustomColor
+                                    .mainColorBackground
+                                    .withOpacity(0.01),
+                                blurRadius: 30,
+                                offset: Offset(0, 3))
+                          ],
+                          color: CustomColor.mainColorLowBlack),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              CircleAvatar(radius: .5.h,backgroundColor: Colors.green,),
+                              SizedBox(width: 2.w,),
+                              Text(
+                                data[index]["name"]!,
+                                style:
+                                CustomTextStyle.mediumTextM,
+                              ),
+                              Expanded(child:SizedBox()),
+                              Text(data[index]["date"]!,style:CustomTextStyle.mediumTextBold,),
+                            ],
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                  child: Text(
+                                    data[index]["subtitle"]!,
+                                    style: CustomTextStyle.mediumTextGrey,
+                                  )),
+                              ElevatedButton(
+                                  onPressed: () {},
+                                  style:ElevatedButton.styleFrom(backgroundColor: CustomColor.mainColorYellow,
+                                      minimumSize: Size(60, 30)
+                                  ),
+                                  child: Text("Booked",style:CustomTextStyle.mediumTextBold,
+                                  )),
+                            ],
+                          )
+                        ],
+                      )),
+                ),
+              );
+            })
+      ],
+    ),
+  )
   ],),
 ),
     );

@@ -1,14 +1,21 @@
 import 'package:circleapp/controller/utils/color/custom_color.dart';
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
 import 'package:circleapp/custom_widget/customwidgets.dart';
+import 'package:circleapp/view/addNewPlanScreen.dart';
+import 'package:circleapp/view/screens/bottom_navigation_screen/bottom_navigation_screen.dart';
 import 'package:circleapp/view/screens/createNew_To_DosScreen/create_New_To_Dos_Screen.dart';
+import 'package:circleapp/view/screens/dinnerPlanScreens/dinnerPlan_Details.dart';
+import 'package:circleapp/view/screens/tripPlanScreens/winterTripPlanDetails.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import 'chatScreen.dart';
+
 class LoopTabBar extends StatelessWidget {
-  const LoopTabBar({super.key});
+   LoopTabBar({super.key,required this.selectedIndex});
+  int selectedIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -42,16 +49,25 @@ class LoopTabBar extends StatelessWidget {
                       style: CustomTextStyle.headingStyle,
                     ),const Expanded(child: SizedBox()),
                     GestureDetector(onTap: () {
-                      Get.to(()=>const CreateNewToDo());
+                      if(selectedIndex.value==0){
+                        Get.to(()=> const ChatScreen(title: 'loop',));
+                      }else if(selectedIndex.value==1){
+                        Get.to(()=> const CreateNewToDo());
+                      }else{
+                        Get.to(()=> const AddNewPlan(title: 'loop'));
+
+                      }
                     },
                         child: customTextButton1())
                   ],
                 ),
               ),
               getVerticalSpace(1.5.h),
-              Container(alignment: Alignment.center,
+              Container(
+                alignment: Alignment.center,
                 height: 4.h,width: MediaQuery.of(context).size.width-1.5.h,
                 child: ListView.builder(padding: EdgeInsets.zero,
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,scrollDirection: Axis.horizontal,
                   itemCount: name.length,
                   itemBuilder: (context, index) {
@@ -61,9 +77,9 @@ class LoopTabBar extends StatelessWidget {
                         selectedIndex.value=index;
                       },
                       child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 2.5.h),
+                        padding: EdgeInsets.symmetric(horizontal: 1.5.h),
                         alignment: Alignment.center,
-                        margin: EdgeInsets.symmetric(horizontal: 1.h),
+                        margin: EdgeInsets.symmetric(horizontal: 1.5.h),
 
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
@@ -81,9 +97,8 @@ class LoopTabBar extends StatelessWidget {
               ),
               getVerticalSpace(1.3.h),
            selectedIndex.value==0?
-           Padding(
-             padding:  EdgeInsets.symmetric(horizontal: 2.3.h),
-             child: Column(children: [
+           Column(
+             children: [
                SizedBox(
                  height: 7.h,
                  child: ListView.builder(padding: EdgeInsets.zero,
@@ -104,195 +119,210 @@ class LoopTabBar extends StatelessWidget {
                      );
                    },),
                ),
-               getVerticalSpace(3.8.h),
-               Container(
-                 alignment: Alignment.center,
-                 height: 3.2.h,
-                 width: 6.3.h,
-                 decoration: BoxDecoration(
-                     color: CustomColor.textFieldColor,
-                     borderRadius: BorderRadius.circular(5.px)),
-                 child: Text(
-                   'Today',
-                   style: CustomTextStyle.smallText.copyWith(fontSize: 9.px),
-                 ),
-               ),
-               getVerticalSpace(2.h),
-               ListView.builder(shrinkWrap: true,itemCount: 3,
-                 physics: const NeverScrollableScrollPhysics(),
-                 itemBuilder: (context, index) {
-                   return  Padding(
+               Padding(
+                 padding:  EdgeInsets.symmetric(horizontal: 2.3.h),
+                 child: Column(children: [
+
+                   getVerticalSpace(3.8.h),
+                   Container(
+                     alignment: Alignment.center,
+                     height: 3.2.h,
+                     width: 6.3.h,
+                     decoration: BoxDecoration(
+                         color: CustomColor.textFieldColor,
+                         borderRadius: BorderRadius.circular(5.px)),
+                     child: Text(
+                       'Today',
+                       style: CustomTextStyle.smallText.copyWith(fontSize: 9.px),
+                     ),
+                   ),
+                   getVerticalSpace(2.h),
+                   ListView.builder(shrinkWrap: true,itemCount: 3,
+                     physics: const NeverScrollableScrollPhysics(),
+                     itemBuilder: (context, index) {
+                       return  Padding(
+                         padding:  EdgeInsets.symmetric(horizontal: 1.h),
+                         child: Column(crossAxisAlignment: CrossAxisAlignment.end,
+                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                           children: [
+                             Row(
+                               children: [
+                                 CircleAvatar(radius: 2.5.h,backgroundImage: const AssetImage('assets/png/members.png'),),
+                                 getHorizentalSpace(1.5.h),
+                                 Expanded(
+                                   child: Container(
+                                     margin: EdgeInsets.symmetric(vertical: 1.h),
+                                     alignment: Alignment.center,
+
+                                     padding: EdgeInsets.all(1.h),
+                                     decoration: BoxDecoration(color: CustomColor.mainColor,
+                                         borderRadius: BorderRadius.only(
+                                           bottomLeft: Radius.circular(10.px),
+                                           bottomRight: Radius.circular(10.px),
+                                           topRight: Radius.circular(10.px),
+                                         )
+                                     ),
+                                     child: Text("Hello ! Nazrul How are you? what's new?@davidbackem",
+                                       style: CustomTextStyle.buttonText,),),
+                                 ),
+                               ],
+                             ),
+                             Text('Lita mention you',style: CustomTextStyle.hintText.copyWith(color: Color(0xff797C7B)),)
+                           ],
+                         ),
+                       );
+                     },),
+                   getVerticalSpace(1.6.h),
+                   Padding(
                      padding:  EdgeInsets.symmetric(horizontal: 1.h),
-                     child: Column(crossAxisAlignment: CrossAxisAlignment.end,
-                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                     child: Column( mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                       crossAxisAlignment: CrossAxisAlignment.end,
                        children: [
                          Row(
                            children: [
-                             CircleAvatar(radius: 2.5.h,backgroundImage: const AssetImage('assets/png/members.png'),),
+                             Column(mainAxisAlignment: MainAxisAlignment.start,
+                               children: [
+                                 CircleAvatar(radius: 2.5.h,backgroundImage: const AssetImage('assets/png/members.png'),),
+                                 getVerticalSpace(4.h)
+                               ],
+                             ),
                              getHorizentalSpace(1.5.h),
                              Expanded(
                                child: Container(
-                                 margin: EdgeInsets.symmetric(vertical: 1.h),
-                                 alignment: Alignment.center,
-
-                                 padding: EdgeInsets.all(1.h),
-                                 decoration: BoxDecoration(color: CustomColor.mainColor,
-                                     borderRadius: BorderRadius.only(
-                                       bottomLeft: Radius.circular(10.px),
-                                       bottomRight: Radius.circular(10.px),
-                                       topRight: Radius.circular(10.px),
-                                     )
-                                 ),
-                                 child: Text("Hello ! Nazrul How are you? what's new?@davidbackem",
-                                   style: CustomTextStyle.buttonText,),),
-                             ),
-                           ],
-                         ),
-                         Text('Lita mention you',style: CustomTextStyle.hintText.copyWith(color: Color(0xff797C7B)),)
-                       ],
-                     ),
-                   );
-                 },),
-               getVerticalSpace(1.6.h),
-               Padding(
-                 padding:  EdgeInsets.symmetric(horizontal: 1.h),
-                 child: Column( mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                   crossAxisAlignment: CrossAxisAlignment.end,
-                   children: [
-                     Row(
-                       children: [
-                         Column(mainAxisAlignment: MainAxisAlignment.start,
-                           children: [
-                             CircleAvatar(radius: 2.5.h,backgroundImage: const AssetImage('assets/png/members.png'),),
-                             getVerticalSpace(4.h)
-                           ],
-                         ),
-                         getHorizentalSpace(1.5.h),
-                         Expanded(
-                           child: Container(
-                               margin: EdgeInsets.symmetric(vertical: 1.h),
-                               alignment: Alignment.center,
-
-                               padding: EdgeInsets.all(1.h),
-                               decoration: BoxDecoration(color: CustomColor.mainColor,
-                                   borderRadius: BorderRadius.only(
-                                     bottomLeft: Radius.circular(10.px),
-                                     bottomRight: Radius.circular(10.px),
-                                     topRight: Radius.circular(10.px),
-                                   )
-                               ),
-                               child: Container(alignment: Alignment.centerLeft,
-                                 height: 7.h,
-                                 child: ListView.builder(padding: EdgeInsets.zero,
-                                   itemCount: 5,shrinkWrap: true,
-                                   scrollDirection: Axis.horizontal,
-                                   itemBuilder: (context, index) {
-                                     return  Container(
-                                         margin: EdgeInsets.symmetric(horizontal: 1.h,vertical: .2.h),
-                                         height: 7.h,width: 7.h,
-                                         decoration: BoxDecoration(color: CustomColor.mainColorBackground,
-                                             borderRadius: BorderRadius.circular(5.px),
-                                             image: const DecorationImage(image: AssetImage('assets/png/postimage.jpeg'),fit: BoxFit.cover)
-
-                                         ));
-                                   },),
-                               )
-                           ),)
-                       ],
-                     ),
-                     Text('Lita mention you',style: CustomTextStyle.hintText.copyWith(color: Color(0xff797C7B)),)
-                     , getVerticalSpace(1.4.h),
-                     ListView.builder(
-                       shrinkWrap: true,
-                       itemCount: 2,
-
-                       physics: const NeverScrollableScrollPhysics(),
-
-                       itemBuilder: (context, index) {
-                         return
-                           Row(
-                             children: [
-                               Column(mainAxisAlignment: MainAxisAlignment.start,
-                                 children: [
-                                   CircleAvatar(radius: 2.5.h,backgroundImage: const AssetImage('assets/png/members.png'),),
-                                   SizedBox(height: 10.h,)
-
-                                 ],
-                               ),
-                               getHorizentalSpace(1.5.h),
-                               Expanded(
-                                 child: Container(
                                    margin: EdgeInsets.symmetric(vertical: 1.h),
                                    alignment: Alignment.center,
 
                                    padding: EdgeInsets.all(1.h),
                                    decoration: BoxDecoration(color: CustomColor.mainColor,
-                                     borderRadius:   BorderRadius.circular(20.px),
-
+                                       borderRadius: BorderRadius.only(
+                                         bottomLeft: Radius.circular(10.px),
+                                         bottomRight: Radius.circular(10.px),
+                                         topRight: Radius.circular(10.px),
+                                       )
                                    ),
-                                   child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                                     mainAxisAlignment: MainAxisAlignment.start,
+                                   child: Container(alignment: Alignment.centerLeft,
+                                     height: 7.h,
+                                     child: ListView.builder(padding: EdgeInsets.zero,
+                                       itemCount: 5,shrinkWrap: true,
+                                       scrollDirection: Axis.horizontal,
+                                       itemBuilder: (context, index) {
+                                         return  Container(
+                                             margin: EdgeInsets.symmetric(horizontal: 1.h,vertical: .2.h),
+                                             height: 7.h,width: 7.h,
+                                             decoration: BoxDecoration(color: CustomColor.mainColorBackground,
+                                                 borderRadius: BorderRadius.circular(5.px),
+                                                 image: const DecorationImage(image: AssetImage('assets/png/postimage.jpeg'),fit: BoxFit.cover)
+
+                                             ));
+                                       },),
+                                   )
+                               ),)
+                           ],
+                         ),
+                         Text('Lita mention you',style: CustomTextStyle.hintText.copyWith(color: Color(0xff797C7B)),)
+                         , getVerticalSpace(1.4.h),
+                         ListView.builder(
+                           shrinkWrap: true,
+                           itemCount: 2,
+                           physics: const NeverScrollableScrollPhysics(),
+                           itemBuilder: (context, index) {
+                             return
+                               Row(
+                                 children: [
+                                   Column(mainAxisAlignment: MainAxisAlignment.start,
                                      children: [
-                                       Text('Winter trip Plan',style: CustomTextStyle.headingStyle,),
-                                       Text('''Lorem ipsum dolor sit amet consectetur. Eget aliquam suspendisse ultrices a mattis vitae. Adipiscing id vestibulum ultrices lorem.''',style: CustomTextStyle.hintText,),
-                                       getVerticalSpace(.4.h),
+                                       CircleAvatar(radius: 2.5.h,backgroundImage: const AssetImage('assets/png/members.png'),),
+                                       SizedBox(height: 10.h,)
 
-                                       Row(
-                                         children: [
-                                           SizedBox(
-                                             height: 3.1.h,
-                                             child: ListView.builder(padding: EdgeInsets.zero,
-                                               shrinkWrap: true,scrollDirection: Axis.horizontal,
-                                               itemCount: 4,
-                                               itemExtent: 4.h,
-                                               itemBuilder: (context, index) {
-                                                 return  Padding(
-                                                   padding:  EdgeInsets.symmetric(horizontal: .3.h),
-                                                   child: Container(decoration: BoxDecoration(
-                                                       border: Border.all(color: CustomColor.secondaryColor),
-                                                       shape: BoxShape.circle
-                                                   ),
-                                                     child: CircleAvatar(radius: 5.6.h,
-                                                       backgroundColor: CustomColor.mainColor,
-                                                       backgroundImage: const AssetImage('assets/png/story.png'),),
-                                                   ),
-                                                 );
-                                               },),
-                                           ),
-                                           const Expanded(child: SizedBox()),
-                                           customTextButton2()
+                                     ],
+                                   ),
+                                   getHorizentalSpace(1.5.h),
+                                   Expanded(
+                                     child: Container(
+                                       margin: EdgeInsets.symmetric(vertical: 1.h),
+                                       alignment: Alignment.center,
 
-                                         ],
+                                       padding: EdgeInsets.all(1.h),
+                                       decoration: BoxDecoration(color: CustomColor.mainColor,
+                                         borderRadius:   BorderRadius.circular(20.px),
+
                                        ),
-                                     ],),
-                                 ),
-                               )
+                                       child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                         mainAxisAlignment: MainAxisAlignment.start,
+                                         children: [
+                                           Text('Winter trip Plan',style: CustomTextStyle.headingStyle,),
+                                           Text('''Lorem ipsum dolor sit amet consectetur. Eget aliquam suspendisse ultrices a mattis vitae. Adipiscing id vestibulum ultrices lorem.''',style: CustomTextStyle.hintText,),
+                                           getVerticalSpace(.4.h),
 
-                             ],
-                           );
-                       },),
+                                           Row(
+                                             children: [
+                                               SizedBox(
+                                                 height: 3.1.h,
+                                                 child: ListView.builder(padding: EdgeInsets.zero,
+                                                   shrinkWrap: true,scrollDirection: Axis.horizontal,
+                                                   itemCount: 4,
+                                                   itemExtent: 4.h,
+                                                   itemBuilder: (context, index) {
+                                                     return  Padding(
+                                                       padding:  EdgeInsets.symmetric(horizontal: .3.h),
+                                                       child: Container(decoration: BoxDecoration(
+                                                           border: Border.all(color: CustomColor.secondaryColor),
+                                                           shape: BoxShape.circle
+                                                       ),
+                                                         child: CircleAvatar(radius: 5.6.h,
+                                                           backgroundColor: CustomColor.mainColor,
+                                                           backgroundImage: const AssetImage('assets/png/story.png'),),
+                                                       ),
+                                                     );
+                                                   },),
+                                               ),
+                                               const Expanded(child: SizedBox()),
+                                               GestureDetector(onTap: () {
+                                                 Get.to(()=>WinterTripPlanDetails());
+                                               },
+                                                   child: customTextButton2())
 
-                   ],
-                 ),
+                                             ],
+                                           ),
+                                         ],),
+                                     ),
+                                   )
+
+                                 ],
+                               );
+                           },),
+
+                       ],
+                     ),
+                   ),
+                 ],),
                ),
-             ],),
+             ],
            ) :
            selectedIndex.value==1?
            Padding(
              padding:  EdgeInsets.symmetric(horizontal: 2.3.h),
-             child: Column(children: [
-               Column( mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                 crossAxisAlignment: CrossAxisAlignment.end,
-                 children: [
-                   ListView.builder(
-                     shrinkWrap: true,
-                     itemCount: 6,
+             child: Column( mainAxisAlignment: MainAxisAlignment.spaceBetween,
+               crossAxisAlignment: CrossAxisAlignment.end,
+               children: [
+                 ListView.builder(
+                   padding: EdgeInsets.zero,
+                   shrinkWrap: true,
+                   itemCount: 3,
 
-                     physics: const NeverScrollableScrollPhysics(),
+                   physics: const NeverScrollableScrollPhysics(),
 
-                     itemBuilder: (context, index) {
-                       return
-                         Container(
+                   itemBuilder: (context, index) {
+                     return
+                       GestureDetector(onTap: () {
+                         if(index==0||index==1){
+                           Get.to(()=>const DinnerPlanDetails());
+
+                         }else{
+                           Get.to(()=>const WinterTripPlanDetails());
+                         }
+                       },
+                         child: Container(
 
                            margin: EdgeInsets.symmetric(vertical: 1.h,horizontal: 1.h),
                            alignment: Alignment.center,
@@ -357,12 +387,12 @@ class LoopTabBar extends StatelessWidget {
                                  ],
                                ),
                              ],),
-                         );
-                     },),
+                         ),
+                       );
+                   },),
 
-                 ],
-               ),
-             ],),
+               ],
+             ),
            ):
            Padding(
              padding:  EdgeInsets.symmetric(horizontal: 2.3.h),
@@ -371,116 +401,132 @@ class LoopTabBar extends StatelessWidget {
                children: [
                  getVerticalSpace(2.h),
                  Text('Upcoming Plans',style: CustomTextStyle.buttonText.copyWith(color: Colors.white),),
-                 ListView.builder(
-                   padding: EdgeInsets.zero,
-                   shrinkWrap: true,
-                   itemCount: 2,
-
-                   physics: const NeverScrollableScrollPhysics(),
-
-                   itemBuilder: (context, index) {
-                     return
-                       Dismissible(
-                         background: Container(padding: EdgeInsets.only(right: 4.h),
-                           alignment: Alignment.centerRight,
-                           decoration: BoxDecoration(color: CustomColor.secondaryColor,
-                             borderRadius:   BorderRadius.circular(10.px),
-                           ),child: SvgPicture.asset('assets/svg/deleteicon.svg'),
-                         ),
-                         key: Key(index.toString()),
-                         child: Container(
-                           margin: EdgeInsets.symmetric(vertical: 1.h,horizontal: 1.9.h),
-                           alignment: Alignment.center,
-
-                           padding: EdgeInsets.all(1.h),
-                           decoration: BoxDecoration(color: CustomColor.mainColor,
-                             borderRadius:   BorderRadius.circular(10.px),
-
+                 GestureDetector(
+                   onTap: () {
+                     Get.to(()=>WinterTripPlanDetails());
+                   },
+                   child: ListView.builder(
+                     padding: EdgeInsets.zero,
+                     shrinkWrap: true,
+                     itemCount: 2,
+                     physics: const NeverScrollableScrollPhysics(),
+                     itemBuilder: (context, index) {
+                       return
+                         Dismissible(
+                           background: Container(padding: EdgeInsets.only(right: 4.h),
+                             alignment: Alignment.centerRight,
+                             decoration: BoxDecoration(color: CustomColor.secondaryColor,
+                               borderRadius:   BorderRadius.circular(10.px),
+                             ),child: SvgPicture.asset('assets/svg/deleteicon.svg'),
                            ),
-                           child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                             mainAxisAlignment: MainAxisAlignment.start,
-                             children: [
-                               Row(crossAxisAlignment: CrossAxisAlignment.center,
-                                 children: [
-                                   CircleAvatar(radius: .5.h,backgroundColor: Colors.green,),
-                                   getHorizentalSpace(.8.h),
-                                   Text('Winter trip Plan',style: CustomTextStyle.headingStyle,),
-                                   const Expanded(child: SizedBox()),
-                                   Text('10:00-13:00',style: CustomTextStyle.hintText,),
-                                   getVerticalSpace(1.h),
-                                 ],
+                           key: Key(index.toString()),
+                           child: GestureDetector(
+                             onTap: (){
+                               Get.to(()=>WinterTripPlanDetails());
+                             },
+                             child: Container(
+                               margin: EdgeInsets.symmetric(vertical: 1.h,horizontal: 1.9.h),
+                               alignment: Alignment.center,
+
+                               padding: EdgeInsets.all(1.h),
+                               decoration: BoxDecoration(color: CustomColor.mainColor,
+                                 borderRadius:   BorderRadius.circular(10.px),
+
                                ),
-                               Row(
+                               child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                 mainAxisAlignment: MainAxisAlignment.start,
                                  children: [
-                                   getHorizentalSpace(2.h),
-                                   Expanded(child: Text(''' will be a sunny day''',style: CustomTextStyle.hintText,)),
-                                   customTextButton2(
-                                       title: 'Booked',
-                                       bgColor: CustomColor.secondaryColor,
-                                       btnTextColor: Colors.black
-                                   )
-                                 ],
-                               ),
+                                   Row(crossAxisAlignment: CrossAxisAlignment.center,
+                                     children: [
+                                       CircleAvatar(radius: .5.h,backgroundColor: Colors.green,),
+                                       getHorizentalSpace(.8.h),
+                                       Text('Winter trip Plan',style: CustomTextStyle.headingStyle,),
+                                       const Expanded(child: SizedBox()),
+                                       Text('10:00-13:00',style: CustomTextStyle.hintText,),
+                                       getVerticalSpace(1.h),
+                                     ],
+                                   ),
+                                   Row(
+                                     children: [
+                                       getHorizentalSpace(2.h),
+                                       Expanded(child: Text(''' will be a sunny day''',style: CustomTextStyle.hintText,)),
+                                       GestureDetector(onTap:() {
+                                         Get.to(()=>WinterTripPlanDetails());
+                                       },
+                                         child: customTextButton2(
+                                             title: 'Booked',
+                                             bgColor: CustomColor.secondaryColor,
+                                             btnTextColor: Colors.black
+                                         ),
+                                       )
+                                     ],
+                                   ),
 
 
-                             ],),
-                         ),
-                       );
-                   },),
+                                 ],),
+                             ),
+                           ),
+                         );
+                     },),
+                 ),
                  getVerticalSpace(1.5.h),
                  Text('Saved',style: CustomTextStyle.buttonText.copyWith(color: Colors.white),),
-                 ListView.builder(
-                   padding: EdgeInsets.zero,
-                   shrinkWrap: true,
-                   itemCount: 2,
+                 GestureDetector(onTap: () {
+                   Get.to(()=>WinterTripPlanDetails());
+                 },
+                   child: ListView.builder(
+                     padding: EdgeInsets.zero,
+                     shrinkWrap: true,
+                     itemCount: 2,
 
-                   physics: const NeverScrollableScrollPhysics(),
+                     physics: const NeverScrollableScrollPhysics(),
 
-                   itemBuilder: (context, index) {
-                     return
-                       Dismissible(
-                         background: Container(padding: EdgeInsets.only(right: 4.h),
-                           alignment: Alignment.centerRight,
-                           decoration: BoxDecoration(color: CustomColor.secondaryColor,
-                             borderRadius:   BorderRadius.circular(10.px),
-                           ),child: SvgPicture.asset('assets/svg/saveicon.svg'),
-                         ),
-                         key: Key(index.toString()),
-                         child: Container(
-                           margin: EdgeInsets.symmetric(vertical: 1.h,horizontal: 1.9.h),
-                           alignment: Alignment.center,
-                         
-                           padding: EdgeInsets.all(1.h),
-                           decoration: BoxDecoration(color: CustomColor.mainColor,
-                             borderRadius:   BorderRadius.circular(10.px),
-                         
+                     itemBuilder: (context, index) {
+                       return
+                         Dismissible(
+                           background: Container(padding: EdgeInsets.only(right: 4.h),
+                             alignment: Alignment.centerRight,
+                             decoration: BoxDecoration(color: CustomColor.secondaryColor,
+                               borderRadius:   BorderRadius.circular(10.px),
+                             ),child: SvgPicture.asset('assets/svg/saveicon.svg'),
                            ),
-                           child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                             mainAxisAlignment: MainAxisAlignment.start,
-                             children: [
-                               Row(crossAxisAlignment: CrossAxisAlignment.center,
-                                 children: [
-                                   CircleAvatar(radius: .5.h,backgroundColor: Colors.green,),
-                                   getHorizentalSpace(.8.h),
-                                   Text('Winter trip Plan',style: CustomTextStyle.headingStyle,),
-                                   const Expanded(child: SizedBox()),
-                                   Text('10:00-13:00',style: CustomTextStyle.hintText,),
-                                   getVerticalSpace(1.h),
-                                 ],
-                               ),
-                               Row(
-                                 children: [
-                                   getHorizentalSpace(2.h),
-                                   Expanded(child: Text(''' will be a sunny day''',style: CustomTextStyle.hintText,)),
-                                  
-                                 ],
-                               ),
-                         
-                         
-                             ],),
-                         ),
-                       );
-                   },),
+                           key: Key(index.toString()),
+                           child: Container(
+                             margin: EdgeInsets.symmetric(vertical: 1.h,horizontal: 1.9.h),
+                             alignment: Alignment.center,
+
+                             padding: EdgeInsets.all(1.h),
+                             decoration: BoxDecoration(color: CustomColor.mainColor,
+                               borderRadius:   BorderRadius.circular(10.px),
+
+                             ),
+                             child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                               mainAxisAlignment: MainAxisAlignment.start,
+                               children: [
+                                 Row(crossAxisAlignment: CrossAxisAlignment.center,
+                                   children: [
+                                     CircleAvatar(radius: .5.h,backgroundColor: Colors.green,),
+                                     getHorizentalSpace(.8.h),
+                                     Text('Winter trip Plan',style: CustomTextStyle.headingStyle,),
+                                     const Expanded(child: SizedBox()),
+                                     Text('10:00-13:00',style: CustomTextStyle.hintText,),
+                                     getVerticalSpace(1.h),
+                                   ],
+                                 ),
+                                 Row(
+                                   children: [
+                                     getHorizentalSpace(2.h),
+                                     Expanded(child: Text(''' will be a sunny day''',style: CustomTextStyle.hintText,)),
+
+                                   ],
+                                 ),
+
+
+                               ],),
+                           ),
+                         );
+                     },),
+                 ),
 
                ],
              ),

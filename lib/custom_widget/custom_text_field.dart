@@ -1,3 +1,4 @@
+import 'package:circleapp/controller/utils/style/customTextStyle.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -29,6 +30,7 @@ class CustomTextField extends StatelessWidget {
           color: CustomColor.mainColor,
         ),
         child: TextFormField(
+          style: CustomTextStyle.hintText.copyWith(color: Colors.white),
           // controller: controller,
           obscureText: obscureText,
           cursorColor: Colors.white, // Replace with your CustomColor.mainColor

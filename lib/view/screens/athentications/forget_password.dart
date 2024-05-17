@@ -1,11 +1,7 @@
-import 'package:circleapp/view/screens/athentications/sign_up_screen.dart';
 import 'package:circleapp/view/screens/athentications/verIfymobilescreen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../controller/utils/color/custom_color.dart';
@@ -13,7 +9,7 @@ import '../../../controller/utils/style/customTextStyle.dart';
 import '../../../custom_widget/custom-button.dart';
 import '../../../custom_widget/custom_text_field.dart';
 class ForgetScreen extends StatelessWidget {
-  const ForgetScreen({Key? key}) : super(key: key);
+  const ForgetScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +53,7 @@ class ForgetScreen extends StatelessWidget {
               SizedBox(height:4.h ,),
               CustomMainButton(buttonText: "Done",buttonColor: CustomColor.mainColorYellow,
                   onPressed: (){
-                Get.to(()=>VerifyMobileScreen());
+                Get.to(()=>const VerifyMobileScreen());
                   }),
             ],
           ),

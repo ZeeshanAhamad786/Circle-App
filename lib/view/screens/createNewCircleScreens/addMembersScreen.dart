@@ -1,6 +1,10 @@
 import 'package:circleapp/controller/utils/color/custom_color.dart';
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
 import 'package:circleapp/custom_widget/customwidgets.dart';
+import 'package:circleapp/view/addNewPlanScreen.dart';
+import 'package:circleapp/view/screens/bottom_navigation_screen/bottom_navigation_screen.dart';
+import 'package:circleapp/view/screens/createNewCircleScreens/circleInterestScreen.dart';
+import 'package:circleapp/view/screens/createNew_To_DosScreen/create_New_To_Dos_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -9,8 +13,8 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'chatScreen.dart';
 
 class AddMembers extends StatelessWidget {
-  const AddMembers({super.key});
-
+  const AddMembers({super.key, required this.title});
+final String title;
   @override
   Widget build(BuildContext context) {
     RxList<String> membersName = <String>[
@@ -100,7 +104,7 @@ class AddMembers extends StatelessWidget {
                                         radius: 2.5.h,
                                         backgroundColor:
                                             CustomColor.textFieldColor,
-                                        backgroundImage: AssetImage('assets/png/members.png'),
+                                        backgroundImage: const AssetImage('assets/png/members.png'),
                                       ),
                                       getHorizentalSpace(1.h),
                                       Column(
@@ -146,7 +150,13 @@ class AddMembers extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 4.5.h),
                     child: customButton(
                         onTap: () {
-                          Get.to(()=>const ChatScreen());
+                          if(title=="addnewplan"){ Get.to(()=>const AddNewPlan(title: "addmember"));}
+                          else if(title=="newtodo"){
+                            Get.to(()=>const CreateNewToDo());
+                          }else{
+                            Get.to(()=>const BottomNavigationScreen());
+                          }
+
                         },
                         backgroundColor: CustomColor.secondaryColor,
                         borderColor: CustomColor.primaryColor,

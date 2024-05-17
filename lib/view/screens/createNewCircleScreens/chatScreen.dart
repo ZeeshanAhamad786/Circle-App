@@ -1,4 +1,7 @@
 
+
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -9,9 +12,15 @@ import '../../../controller/utils/style/customTextStyle.dart';
 import '../../../custom_widget/customwidgets.dart';
 import 'loopTabBar.dart';
 
-class ChatScreen extends StatelessWidget {
-  const ChatScreen({super.key});
+class ChatScreen extends StatefulWidget {
+  const ChatScreen({super.key, this.title});
+  final String? title;
 
+  @override
+  State<ChatScreen> createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     RxList<String>chatList=<String>[].obs;
@@ -74,9 +83,8 @@ class ChatScreen extends StatelessWidget {
                         getHorizentalSpace(1.h),
                         pinList.isNotEmpty?Text('Pin',style: CustomTextStyle.headingStyle,):SvgPicture.asset('assets/svg/videocallicon.svg'),
                         getHorizentalSpace(1.h),
-                        pinList.isNotEmpty?const SizedBox.shrink():  GestureDetector(
+                        pinList.isNotEmpty?const SizedBox.shrink():widget.title=='loop'?const SizedBox.shrink(): GestureDetector(
                           onTap: (){
-                            Get.to(()=>const LoopTabBar());
                           },
                             child: SvgPicture.asset('assets/svg/loopicon.svg')),
                       ],
