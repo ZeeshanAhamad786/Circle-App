@@ -141,7 +141,7 @@ getVerticalSpace(1.h),
                  fontWeight: FontWeight.w400,
                  fontFamily: "medium"),)
            ],),
-
+SizedBox(height: 2.h,width: 2.h,)
          ],),)
         ),
       ),

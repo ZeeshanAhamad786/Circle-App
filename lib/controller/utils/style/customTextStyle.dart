@@ -120,4 +120,16 @@ class CustomTextStyle{
       fontFamily: 'medium',
       color: Colors.white
   );
+  static TextStyle mediumTextTime= TextStyle(
+      fontSize: 12.px,
+      fontWeight: FontWeight.w600,
+      fontFamily: 'medium',
+      color: Colors.white
+  );
+  static TextStyle mediumTextNumber= TextStyle(
+      fontSize: 9.px,
+      fontWeight: FontWeight.w700,
+      fontFamily: 'medium',
+      color: CustomColor.primaryColor
+  );
 }
