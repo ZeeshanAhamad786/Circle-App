@@ -16,5 +16,6 @@ class CustomColor{
   static const Color mainColorLightWhite=Color(0XFFDDDDDD);
   static const Color mainColorMixLightWhite=Color(0XFFDADADA);
   static const Color mainColorSubtitle=Color(0XFF9D9D9D);
+  static const Color mainColorGroupMember=Color(0XFF797C7B);
 
 }

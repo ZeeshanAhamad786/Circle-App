@@ -132,4 +132,10 @@ class CustomTextStyle{
       fontFamily: 'medium',
       color: CustomColor.primaryColor
   );
+  static TextStyle mediumTextGroup= TextStyle(
+      fontSize: 12.px,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'medium',
+      color: CustomColor.mainColorGroupMember
+  );
 }
