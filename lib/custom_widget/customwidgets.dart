@@ -5,25 +5,22 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-Widget customTextFormField(
-  TextEditingController? controller,
-  String? hintText, {
-  TextInputType? keyboardType,
-  Widget? prefixIcon,
-  final ValueChanged<String>? onChanged,
-  Icon? icon,
-  Widget? sufixIcon,
-  Color? iconColor,
-  String? lableText,
-  int? maxLine,
-  BorderRadius? borderRadius,
-  TextStyle? lableStyle,
-  required bool isObsecure,
-  EdgeInsets? contentPading,
-  Color? hintTextColor,
-  bool readOnly=false,
-  Callback? isTap
-}) {
+Widget customTextFormField(TextEditingController? controller, String? hintText,
+    {TextInputType? keyboardType,
+    Widget? prefixIcon,
+    final ValueChanged<String>? onChanged,
+    Icon? icon,
+    Widget? sufixIcon,
+    Color? iconColor,
+    String? lableText,
+    int? maxLine,
+    BorderRadius? borderRadius,
+    TextStyle? lableStyle,
+    required bool isObsecure,
+    EdgeInsets? contentPading,
+    Color? hintTextColor,
+    bool readOnly = false,
+    Callback? isTap}) {
   return TextFormField(
     maxLines: maxLine,
     onChanged: onChanged,
@@ -33,8 +30,8 @@ Widget customTextFormField(
     style: CustomTextStyle.hintText,
     cursorColor: Colors.white,
     keyboardType: keyboardType,
-    readOnly:readOnly ,
-    onTap:isTap ,
+    readOnly: readOnly,
+    onTap: isTap,
     decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
             borderRadius: borderRadius ?? BorderRadius.circular(30.px),
@@ -62,6 +59,7 @@ Widget getVerticalSpace(double height) {
     height: height,
   );
 }
+
 Widget getHorizentalSpace(double width) {
   return SizedBox(
     width: width,
@@ -124,35 +122,81 @@ Widget customButton(
     ),
   );
 }
+
 Widget customTextButton1(
-{String? title,
-  double? horizentalPadding,
-  double? verticalPadding,
-  Color?bgColor
-}){
-  return   Container(padding: EdgeInsets.symmetric(horizontal:horizentalPadding?? .7.h,vertical:verticalPadding?? .1.h),
+    {String? title,
+    double? horizentalPadding,
+    double? verticalPadding,
+    Color? bgColor}) {
+  return Container(
+    padding: EdgeInsets.symmetric(
+        horizontal: horizentalPadding ?? .7.h,
+        vertical: verticalPadding ?? .1.h),
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.px),
-        color:bgColor?? CustomColor.mainColor,
-        border: Border.all(color: CustomColor.secondaryColor)
+        color: bgColor ?? CustomColor.mainColor,
+        border: Border.all(color: CustomColor.secondaryColor)),
+    child: Row(
+      children: [
+        Icon(
+          Icons.add,
+          color: CustomColor.secondaryColor,
+          size: 2.h,
+        ),
+        getHorizentalSpace(.2.h),
+        Text(
+          title ?? 'Add',
+          style: CustomTextStyle.smallText
+              .copyWith(color: CustomColor.secondaryColor, fontSize: 12.px),
+        )
+      ],
     ),
-    child: Row(children: [
-      Icon(Icons.add,color: CustomColor.secondaryColor,size: 2.h,),
-      getHorizentalSpace(.2.h),
-      Text(title??'Add',style: CustomTextStyle.smallText.copyWith(color: CustomColor.secondaryColor,fontSize: 12.px),)
-    ],),);
+  );
 }
-Widget customTextButton2({String? title, Color? bgColor,Color? btnTextColor
-,double? horizentalPadding,
-verticalPadding}){
-  return   Container(padding: EdgeInsets.symmetric(horizontal:horizentalPadding?? .8.h,vertical:verticalPadding?? .1.h),
+
+Widget customTextButton2(
+    {String? title,
+    Color? bgColor,
+    Color? btnTextColor,
+    double? horizentalPadding,
+    verticalPadding}) {
+  return Container(
+    padding: EdgeInsets.symmetric(
+        horizontal: horizentalPadding ?? .8.h,
+        vertical: verticalPadding ?? .1.h),
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.px),
-        color:bgColor?? CustomColor.mainColor,
-        border: Border.all(color: CustomColor.secondaryColor)
+        color: bgColor ?? CustomColor.mainColor,
+        border: Border.all(color: CustomColor.secondaryColor)),
+    child: Row(
+      children: [
+        getHorizentalSpace(.2.h),
+        Text(
+          title ?? "View Detail",
+          style: CustomTextStyle.smallText.copyWith(
+              color: btnTextColor ?? CustomColor.secondaryColor,
+              fontSize: 10.px),
+        )
+      ],
     ),
-    child: Row(children: [
-      getHorizentalSpace(.2.h),
-      Text(title??"View Detail",style: CustomTextStyle.smallText.copyWith(color:btnTextColor?? CustomColor.secondaryColor,fontSize: 10.px),)
-    ],),);
+  );
+}
+
+customScaffoldMessenger(
+  BuildContext context,
+  String text,
+) {
+  return ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(
+        text,
+        style: TextStyle(
+          fontFamily: 'Gilroy',
+          fontSize: 14.sp,
+        ),
+      ),
+      backgroundColor: CustomColor.primaryColor,
+      duration: const Duration(seconds: 2),
+    ),
+  );
 }

@@ -2,9 +2,11 @@ import 'package:circleapp/view/screens/on_board_screens/onBoardScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
 void main() {
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
     return ResponsiveSizer(
       builder: (BuildContext, orientation, ScreenType) {
         return GetMaterialApp(
-          debugShowCheckedModeBanner: false,     
+          debugShowCheckedModeBanner: false,
           theme: ThemeData(useMaterial3: true),
           home: const OnBoardingScreen1(),
         );

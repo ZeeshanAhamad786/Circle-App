@@ -1,5 +1,3 @@
-
-
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -23,16 +21,16 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
-    RxList<String>chatList=<String>[].obs;
-    RxList<int>pinList=<int>[].obs;
-    RxInt selectedIndex=0.obs;
+    RxList<String> chatList = <String>[].obs;
+    RxList<int> pinList = <int>[].obs;
+    RxInt selectedIndex = 0.obs;
 
-    RxString messageLength=''.obs;
-    final TextEditingController chatController=TextEditingController();
+    RxString messageLength = ''.obs;
+    final TextEditingController chatController = TextEditingController();
     return Scaffold(
       backgroundColor: CustomColor.primaryColor,
-      body: Obx(()=>
-       Column(
+      body: Obx(
+        () => Column(
           children: [
             getVerticalSpace(6.h),
             Padding(
@@ -53,47 +51,68 @@ class _ChatScreenState extends State<ChatScreen> {
                           ),
                         ),
                         getHorizentalSpace(2.h),
-                       pinList.isNotEmpty?Text("${pinList.length}",style: CustomTextStyle.buttonText.copyWith(color: Colors.white),): CircleAvatar(
-                          radius: 2.4.h,
-                          backgroundColor: CustomColor.textFieldColor,
-                          backgroundImage:
-                              const AssetImage('assets/png/members.png'),
-                        ),
+                        pinList.isNotEmpty
+                            ? Text(
+                                "${pinList.length}",
+                                style: CustomTextStyle.buttonText
+                                    .copyWith(color: Colors.white),
+                              )
+                            : CircleAvatar(
+                                radius: 2.4.h,
+                                backgroundColor: CustomColor.textFieldColor,
+                                backgroundImage:
+                                    const AssetImage('assets/png/members.png'),
+                              ),
                         getHorizentalSpace(1.5.h),
-                        pinList.isNotEmpty?const SizedBox.shrink(): Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Hiking',
-                              style: CustomTextStyle.headingStyle
-                                  .copyWith(fontSize: 12.px),
-                            ),
-                            Text('Adil Adnan, Jhon, Liya',
-                                style: CustomTextStyle.smallText.copyWith(
-                                    color: const Color(0xff797C7B),
-                                    fontSize: 10.px))
-                          ],
-                        ),
+                        pinList.isNotEmpty
+                            ? const SizedBox.shrink()
+                            : Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Hiking',
+                                    style: CustomTextStyle.headingStyle
+                                        .copyWith(fontSize: 12.px),
+                                  ),
+                                  Text('Adil Adnan, Jhon, Liya',
+                                      style: CustomTextStyle.smallText.copyWith(
+                                          color: const Color(0xff797C7B),
+                                          fontSize: 10.px))
+                                ],
+                              ),
                       ],
                     ),
                     Row(
                       children: [
-                       pinList.isNotEmpty? SvgPicture.asset('assets/svg/pinicon.svg'):SvgPicture.asset('assets/svg/audiocallicon.svg'),
+                        pinList.isNotEmpty
+                            ? SvgPicture.asset('assets/svg/pinicon.svg')
+                            : SvgPicture.asset('assets/svg/audiocallicon.svg'),
                         getHorizentalSpace(1.h),
-                        pinList.isNotEmpty?Text('Pin',style: CustomTextStyle.headingStyle,):SvgPicture.asset('assets/svg/videocallicon.svg'),
+                        pinList.isNotEmpty
+                            ? Text(
+                                'Pin',
+                                style: CustomTextStyle.headingStyle,
+                              )
+                            : SvgPicture.asset('assets/svg/videocallicon.svg'),
                         getHorizentalSpace(1.h),
-                        pinList.isNotEmpty?const SizedBox.shrink():widget.title=='loop'?const SizedBox.shrink(): GestureDetector(
-                          onTap: (){
-                          },
-                            child: SvgPicture.asset('assets/svg/loopicon.svg')),
+                        pinList.isNotEmpty
+                            ? const SizedBox.shrink()
+                            : widget.title == 'loop'
+                                ? const SizedBox.shrink()
+                                : GestureDetector(
+                                    onTap: () {},
+                                    child: SvgPicture.asset(
+                                        'assets/svg/loopicon.svg')),
                       ],
                     )
                   ],
                 )),
             Expanded(
               child: Padding(
-                padding: pinList.isNotEmpty?EdgeInsets.zero: EdgeInsets.symmetric(horizontal: 2.3.h),
+                padding: pinList.isNotEmpty
+                    ? EdgeInsets.zero
+                    : EdgeInsets.symmetric(horizontal: 2.3.h),
                 child: Column(
                   children: [
                     getVerticalSpace(3.8.h),
@@ -106,50 +125,72 @@ class _ChatScreenState extends State<ChatScreen> {
                           borderRadius: BorderRadius.circular(5.px)),
                       child: Text(
                         'Today',
-                        style: CustomTextStyle.smallText.copyWith(fontSize: 9.px),
+                        style:
+                            CustomTextStyle.smallText.copyWith(fontSize: 9.px),
                       ),
                     ),
-                    Obx(()=> ListView.builder(itemCount: chatList.length,shrinkWrap: true,
+                    Obx(
+                      () => ListView.builder(
+                        itemCount: chatList.length,
+                        shrinkWrap: true,
                         itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: (){
-                            pinList.remove(selectedIndex.value);
-                          },
-                          onLongPress: () {
-                            selectedIndex.value=index;
-                            pinList.add(selectedIndex.value);
-                          },
-                          child:Stack(children: [
-                            pinList.contains(index)?Container(
-                              padding: EdgeInsets.only(right: 4.h),
-                              margin: EdgeInsets.only(bottom: 1.h),
-                              alignment: Alignment.centerRight,
-                              height:7.7.h ,width:MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              color: CustomColor.secondaryColor.withOpacity(0.1)
-                            ),child: SvgPicture.asset('assets/svg/selected.svg'),
-                            ):const SizedBox.shrink(),
-                            Row(
+                          return GestureDetector(
+                            onTap: () {
+                              pinList.remove(selectedIndex.value);
+                            },
+                            onLongPress: () {
+                              selectedIndex.value = index;
+                              pinList.add(selectedIndex.value);
+                            },
+                            child: Stack(
                               children: [
-                                CircleAvatar(radius: 2.5.h,backgroundImage: const AssetImage('assets/png/members.png'),),
-                                getHorizentalSpace(1.5.h),
-                                Container(margin: EdgeInsets.symmetric(vertical: 1.h),
-                                  alignment: Alignment.center,
-
-                                  padding: EdgeInsets.all(1.h),
-                                  decoration: BoxDecoration(color: CustomColor.mainColor,
-                                      borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(10.px),
-                                        bottomRight: Radius.circular(10.px),
-                                        topRight: Radius.circular(10.px),
+                                pinList.contains(index)
+                                    ? Container(
+                                        padding: EdgeInsets.only(right: 4.h),
+                                        margin: EdgeInsets.only(bottom: 1.h),
+                                        alignment: Alignment.centerRight,
+                                        height: 7.7.h,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(
+                                            color: CustomColor.secondaryColor
+                                                .withOpacity(0.1)),
+                                        child: SvgPicture.asset(
+                                            'assets/svg/selected.svg'),
                                       )
-                                  ),
-                                  child: Text(chatList[index],style: CustomTextStyle.buttonText,),),
+                                    : const SizedBox.shrink(),
+                                Row(
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 2.5.h,
+                                      backgroundImage: const AssetImage(
+                                          'assets/png/members.png'),
+                                    ),
+                                    getHorizentalSpace(1.5.h),
+                                    Container(
+                                      margin:
+                                          EdgeInsets.symmetric(vertical: 1.h),
+                                      alignment: Alignment.center,
+                                      padding: EdgeInsets.all(1.h),
+                                      decoration: BoxDecoration(
+                                          color: CustomColor.mainColor,
+                                          borderRadius: BorderRadius.only(
+                                            bottomLeft: Radius.circular(10.px),
+                                            bottomRight: Radius.circular(10.px),
+                                            topRight: Radius.circular(10.px),
+                                          )),
+                                      child: Text(
+                                        chatList[index],
+                                        style: CustomTextStyle.buttonText,
+                                      ),
+                                    ),
+                                  ],
+                                )
                               ],
-                            )
-                          ],),
-                        );
-                      },),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                     getVerticalSpace(3.8.h),
                     Spacer(),
@@ -169,7 +210,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                   child: TextFormField(
                                     controller: chatController,
                                     onChanged: (value) {
-                                      messageLength.value=value;
+                                      messageLength.value = value;
                                     },
                                     autocorrect: false,
                                     enableSuggestions: false,
@@ -187,12 +228,14 @@ class _ChatScreenState extends State<ChatScreen> {
                                       ),
                                       focusedBorder: const OutlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: CustomColor.textFieldColor)),
+                                              color:
+                                                  CustomColor.textFieldColor)),
                                       border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(10.px),
                                           borderSide: const BorderSide(
-                                              color: CustomColor.textFieldColor)),
+                                              color:
+                                                  CustomColor.textFieldColor)),
                                       isCollapsed: true,
                                       contentPadding:
                                           EdgeInsets.symmetric(vertical: 1.6.h),
@@ -209,17 +252,25 @@ class _ChatScreenState extends State<ChatScreen> {
                           ),
                         ),
                         getHorizentalSpace(1.h),
-                      Obx(() =>   messageLength.value.isEmpty?SvgPicture.asset('assets/svg/voicerecorder.svg'):
-                      GestureDetector(onTap: (){
-                        chatList.add(chatController.text);
-                        chatController.clear();
-                      },
-                        child: Container(height: 4.5.h,width: 4.h,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: CustomColor.secondaryColor
-                          ),child: Icon(Icons.send,size: 2.h,),),
-                      ))
+                        Obx(() => messageLength.value.isEmpty
+                            ? SvgPicture.asset('assets/svg/voicerecorder.svg')
+                            : GestureDetector(
+                                onTap: () {
+                                  chatList.add(chatController.text);
+                                  chatController.clear();
+                                },
+                                child: Container(
+                                  height: 4.5.h,
+                                  width: 4.h,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: CustomColor.secondaryColor),
+                                  child: Icon(
+                                    Icons.send,
+                                    size: 2.h,
+                                  ),
+                                ),
+                              ))
                       ],
                     ),
                     getVerticalSpace(2.2.h)

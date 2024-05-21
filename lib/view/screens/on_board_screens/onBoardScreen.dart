@@ -10,8 +10,8 @@ import '../../../controller/utils/color/custom_color.dart';
 import '../../../custom_widget/custom-button.dart';
 import '../explore_section/explore_screen.dart';
 import '../home_screen/home_screen.dart';
-class OnBoardingScreen1 extends StatefulWidget {
 
+class OnBoardingScreen1 extends StatefulWidget {
   const OnBoardingScreen1({super.key});
 
   @override
@@ -30,19 +30,21 @@ class _OnBoardingScreen1State extends State<OnBoardingScreen1> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: CustomColor.mainColorBackground,
-      body: Obx(()=>
-        Stack(
+    return Scaffold(
+      backgroundColor: CustomColor.mainColorBackground,
+      body: Obx(
+        () => Stack(
           children: [
             PageView(
               controller: _controller,
               onPageChanged: (int page) {
-                pageIndex.value=page;
+                pageIndex.value = page;
               },
               children: [
                 OnboardingPage(
                   image: "assets/png/splash1.png",
-                  title: 'Create a circle for all your group\n chats and invite your friends',
+                  title:
+                      'Create a circle for all your group\n chats and invite your friends',
                   controller: _controller,
                 ),
                 OnboardingPage(
@@ -69,7 +71,9 @@ class _OnBoardingScreen1State extends State<OnBoardingScreen1> {
                 right: 3.h,
                 child: GestureDetector(
                   onTap: () {
-                    Get.to(()=> GroupEditScreen());
+                    Get.to(() => GroupEditScreen());
+
+                    Get.to(() => ExploreScreen());
                   },
                   child: Text(
                     "SKIP",
@@ -81,13 +85,13 @@ class _OnBoardingScreen1State extends State<OnBoardingScreen1> {
                   ),
                 ),
               ),
-            if(pageIndex.value==1)
+            if (pageIndex.value == 1)
               Positioned(
                 top: 9.1.h,
                 right: 3.h,
                 child: GestureDetector(
                   onTap: () {
-                    Get.to(()=>const LoginScreen());
+                    Get.to(() => LoginScreen());
                   },
                   child: Text(
                     "SKIP",
@@ -99,13 +103,13 @@ class _OnBoardingScreen1State extends State<OnBoardingScreen1> {
                   ),
                 ),
               ),
-            if(pageIndex.value==2)
+            if (pageIndex.value == 2)
               Positioned(
                 top: 9.1.h,
                 right: 3.h,
                 child: GestureDetector(
                   onTap: () {
-                    Get.to(()=>const LoginScreen());
+                    Get.to(() => LoginScreen());
                   },
                   child: Text(
                     "SKIP",
@@ -128,11 +132,11 @@ class OnboardingPage extends StatelessWidget {
   final String image;
   final String title;
   final PageController controller;
-  const OnboardingPage({super.key,
+  const OnboardingPage({
+    super.key,
     required this.image,
     required this.title,
     required this.controller,
-
   });
 
   @override
@@ -142,15 +146,31 @@ class OnboardingPage extends StatelessWidget {
         children: [
           Column(
             children: [
-              SizedBox(height: 11.h,),
-              Image.asset(image,height: 340.px,width: 340.px,),
+              SizedBox(
+                height: 11.h,
+              ),
+              Image.asset(
+                image,
+                height: 340.px,
+                width: 340.px,
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 3.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [SizedBox(height: 18.h,),
-                    Center(child: Text(title,style: CustomTextStyle.mediumTextM14,textAlign: TextAlign.center,)),
-                    SizedBox(height: 4.h,),
+                  children: [
+                    SizedBox(
+                      height: 18.h,
+                    ),
+                    Center(
+                        child: Text(
+                      title,
+                      style: CustomTextStyle.mediumTextM14,
+                      textAlign: TextAlign.center,
+                    )),
+                    SizedBox(
+                      height: 4.h,
+                    ),
                     Center(
                       child: SmoothPageIndicator(
                         controller: controller,
@@ -171,15 +191,16 @@ class OnboardingPage extends StatelessWidget {
                         ),
                       ),
                     ),
-
                     SizedBox(height: 3.h),
                     Align(
                       alignment: Alignment.centerRight,
-                      child:   CustomMainButton(buttonText: "Get Started",buttonColor: CustomColor.mainColorYellow,
-                          onPressed: (){
-                            if(controller.page==3){
-                              Get.to(() => const LoginScreen());
-                            }else {
+                      child: CustomMainButton(
+                          buttonText: "Get Started",
+                          buttonColor: CustomColor.mainColorYellow,
+                          onPressed: () {
+                            if (controller.page == 3) {
+                              Get.to(() => LoginScreen());
+                            } else {
                               controller.nextPage(
                                 duration: const Duration(milliseconds: 500),
                                 curve: Curves.ease,
@@ -187,7 +208,10 @@ class OnboardingPage extends StatelessWidget {
                             }
                           }),
                     ),
-                    SizedBox(height: 1.h,width: 1.h,),
+                    SizedBox(
+                      height: 1.h,
+                      width: 1.h,
+                    ),
                   ],
                 ),
               ),
