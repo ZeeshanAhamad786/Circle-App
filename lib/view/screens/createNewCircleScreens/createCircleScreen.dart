@@ -6,10 +6,26 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../../controller/api/circle_apis.dart';
+import '../../../controller/createcircle_controller/createcircle_controller.dart';
 import 'circleInterestScreen.dart';
 
-class CreateCircle extends StatelessWidget {
+class CreateCircle extends StatefulWidget {
   const CreateCircle({super.key});
+
+  @override
+  State<CreateCircle> createState() => _CreateCircleState();
+}
+
+class _CreateCircleState extends State<CreateCircle> {
+  late CreateCircleController createCircleController;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    createCircleController = Get.put(CreateCircleController(context));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +34,10 @@ class CreateCircle extends StatelessWidget {
     RxBool nextButton = true.obs;
     RxList<String> circleName =
         <String>['Friend', 'Family', 'Organization', 'Mix'].obs;
-    final TextEditingController circleNameController = TextEditingController();
-    final TextEditingController descriptionController = TextEditingController();
     return Scaffold(
       backgroundColor: CustomColor.primaryColor,
-      appBar: AppBar(automaticallyImplyLeading:false,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: CustomColor.primaryColor,
         title: Text(
           'Create Circle',
@@ -40,7 +55,7 @@ class CreateCircle extends StatelessWidget {
             ),
             getVerticalSpace(.8.h),
             customTextFormField(
-              circleNameController,
+              createCircleController.circleNameTextController,
               'Hiking Plan',
               isObsecure: false,
             ),
@@ -50,7 +65,8 @@ class CreateCircle extends StatelessWidget {
               style: CustomTextStyle.smallText,
             ),
             getVerticalSpace(.8.h),
-            customTextFormField(descriptionController,
+            customTextFormField(
+                createCircleController.circleDescriptionTextController,
                 'Lorem ipsum dolor sit amet consectetur. Eget aliquam suspendisse ultrices a mattis vitae. Adipiscing id vestibulum ultrices lorem. Nibh dignissim bibendum aAdipiscing id vestibulum ultrices lorem. Nibh dignissim bibendum a..',
                 isObsecure: false,
                 maxLine: 5,
@@ -71,61 +87,95 @@ class CreateCircle extends StatelessWidget {
                   childAspectRatio: 4),
               itemBuilder: (context, index) {
                 return Obx(
-                  () =>GestureDetector(onTap: (){
-                    selectedIndex.value=index;
-                  },
+                  () => GestureDetector(
+                    onTap: () {
+                      selectedIndex.value = index;
+                    },
                     child: customRadioButton(
-                      title: circleName[index],
-                      borderColor: selectedIndex.value==index?CustomColor.textFieldColor:CustomColor.secondaryColor,
-                      assetsImage:selectedIndex.value==index?
-                      SvgPicture.asset('assets/svg/selected.svg'):SvgPicture.asset('assets/svg/unselected.svg')
-                    ),
+                        title: circleName[index],
+                        borderColor: selectedIndex.value == index
+                            ? CustomColor.textFieldColor
+                            : CustomColor.secondaryColor,
+                        assetsImage: selectedIndex.value == index
+                            ? SvgPicture.asset('assets/svg/selected.svg')
+                            : SvgPicture.asset('assets/svg/unselected.svg')),
                   ),
                 );
               },
             ),
             getVerticalSpace(6.h),
-        Obx(()=>
-             Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [getHorizentalSpace(3.h),
+            Obx(
+              () => Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  getHorizentalSpace(3.h),
                   Expanded(
-                    child: customButton(onTap: (){
-                      if(backButton.value==false){
-                        backButton.value=true;
-                        nextButton.value=false;
-                      }else{
-                        backButton.value=false;
-                        nextButton.value=true;
-                      }
-                      Get.back();
-                    },
-                      backgroundColor:backButton.value==true?CustomColor.secondaryColor: CustomColor.primaryColor,
-                      borderColor: backButton.value==true?CustomColor.primaryColor:CustomColor.secondaryColor,
-                      title: 'Back',
-                        titleColor :backButton.value==true? Colors.black:Colors.white,
+                    child: customButton(
+                        onTap: () {
+                          if (backButton.value == false) {
+                            backButton.value = true;
+                            nextButton.value = false;
+                          } else {
+                            backButton.value = false;
+                            nextButton.value = true;
+                          }
+                          Get.back();
+                        },
+                        backgroundColor: backButton.value == true
+                            ? CustomColor.secondaryColor
+                            : CustomColor.primaryColor,
+                        borderColor: backButton.value == true
+                            ? CustomColor.primaryColor
+                            : CustomColor.secondaryColor,
+                        title: 'Back',
+                        titleColor: backButton.value == true
+                            ? Colors.black
+                            : Colors.white,
                         width: 16.2.h,
-                      height: 4.5.h),
-                  ),getHorizentalSpace(1.h),
-
-                     Expanded(
-                      child: customButton(onTap: (){
-                        if(nextButton.value==false){
-                          nextButton.value=true;
-                          backButton.value=false;
-                        }else{
-                          nextButton.value=false;
-                          backButton.value=true;
-
-                        }
-                        Get.to(const CircleInterest());
-                      },
-                          backgroundColor:nextButton.value==true?CustomColor.secondaryColor: CustomColor.primaryColor,
-                          borderColor: nextButton.value==true? CustomColor.primaryColor:CustomColor.secondaryColor,
-                          title: 'Next',
-                          titleColor:nextButton.value==true? Colors.black:Colors.white,
-                          width: 16.2.h,
-                          height: 4.5.h),
-                    ),
+                        height: 4.5.h),
+                  ),
+                  getHorizentalSpace(1.h),
+                  Expanded(
+                    child: customButton(
+                        onTap: () {
+                          if (nextButton.value == false) {
+                            nextButton.value = true;
+                            backButton.value = false;
+                          } else {
+                            nextButton.value = false;
+                            backButton.value = true;
+                          }
+                          if (createCircleController
+                              .circleNameTextController.text.isEmpty) {
+                            customScaffoldMessenger(
+                                context, 'please enter the circle name ');
+                          } else if (createCircleController
+                              .circleDescriptionTextController.text.isEmpty) {
+                            customScaffoldMessenger(
+                                context, 'please enter the circle description');
+                          } else {
+                            Get.to(const CircleInterest(), arguments: {
+                              'text': createCircleController
+                                  .circleNameTextController.text,
+                              'description': createCircleController
+                                  .circleDescriptionTextController.text,
+                              'type': circleName[selectedIndex.value],
+                            });
+                          }
+                        },
+                        backgroundColor: nextButton.value == true
+                            ? CustomColor.secondaryColor
+                            : CustomColor.primaryColor,
+                        borderColor: nextButton.value == true
+                            ? CustomColor.primaryColor
+                            : CustomColor.secondaryColor,
+                        title: 'Next',
+                        titleColor: nextButton.value == true
+                            ? Colors.black
+                            : Colors.white,
+                        width: 16.2.h,
+                        height: 4.5.h),
+                  ),
                   getHorizentalSpace(3.h)
                 ],
               ),

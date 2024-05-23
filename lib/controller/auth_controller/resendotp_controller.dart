@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'api/auth_apis.dart';
+import '../api/auth_apis.dart';
 
 class ResendController extends GetxController {
   late final BuildContext context;
@@ -12,7 +12,7 @@ class ResendController extends GetxController {
   Future<void> resendOtpApis(String phoneNumber) async {
     loginLoading.value = true;
     try {
-      await AuthApis(context).resendOtp(phoneNumber);
+      await AuthApis(context).resendOtpApi(phoneNumber);
     } catch (e) {
       print('Error during signup: $e');
       if (context.mounted) {

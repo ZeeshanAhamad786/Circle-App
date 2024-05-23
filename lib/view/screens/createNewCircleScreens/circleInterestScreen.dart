@@ -27,7 +27,7 @@ class CircleInterest extends StatelessWidget {
       'Night Out',
       'Art'
     ].obs;
-    RxList<int>selectionList=<int>[0].obs;
+    RxInt selectedIndex = 0.obs;
     return Scaffold(
       backgroundColor: CustomColor.primaryColor,
       body: Column(
@@ -80,23 +80,17 @@ class CircleInterest extends StatelessWidget {
                     return Obx(
                       () => GestureDetector(
                         onTap: () {
-                          if(selectionList.contains(index)){
-                            selectionList.remove(index);
-                          }else{
-                            selectionList.add(index);
-                          }
-
+                          selectedIndex.value = index;
                         },
                         child: customRadioButton(
-
-                            title: circleName[index],
-                            borderColor: selectionList.contains(index)
-                                ? CustomColor.textFieldColor
-                                : CustomColor.secondaryColor,
-                            assetsImage: selectionList.contains(index)
-                                ? SvgPicture.asset('assets/svg/selected.svg')
-                                : SvgPicture.asset(
-                                    'assets/svg/unselected.svg')),
+                          title: circleName[index],
+                          borderColor: selectedIndex.value == index
+                              ? CustomColor.textFieldColor
+                              : CustomColor.secondaryColor,
+                          assetsImage: selectedIndex.value == index
+                              ? SvgPicture.asset('assets/svg/selected.svg')
+                              : SvgPicture.asset('assets/svg/unselected.svg'),
+                        ),
                       ),
                     );
                   },
@@ -106,10 +100,13 @@ class CircleInterest extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 2.2.h),
                   child: customButton(
                       onTap: () {
-                        Get.to(()=> AddMembers(title: 'interestscreen',));
+                        Get.to(() => AddMembers(
+                              title: 'interestscreen',
+                            ));
                       },
                       backgroundColor: CustomColor.secondaryColor,
                       borderColor: CustomColor.primaryColor,
+                      // title: '${circleName[selectedIndex.value]}',
                       title: 'Continue',
                       titleColor: Colors.black,
                       height: 4.5.h),

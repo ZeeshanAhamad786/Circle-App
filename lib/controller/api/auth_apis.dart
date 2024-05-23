@@ -1,9 +1,17 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:circleapp/custom_widget/customwidgets.dart';
+import 'package:circleapp/view/screens/athentications/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
-const baseURL = "https://cricle-app.azurewebsites.net";
+import '../../view/screens/athentications/resetpassword_screen.dart';
+import '../../view/screens/createNewCircleScreens/choose_image.dart';
+import '../../view/screens/createNewCircleScreens/createCircleScreen.dart';
+import '../utils/const.dart';
 
 class AuthApis {
   final BuildContext context;
@@ -64,7 +72,17 @@ class AuthApis {
 
       if (response.statusCode == 200) {
         print("API Success: Login");
-        // Handle successful login, if needed
+        final responseBody = jsonDecode(response.body);
+        final token = responseBody['token'];
+
+        // Save token in shared preferences
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('token', token);
+
+        // Handle successful login
+        customScaffoldMessenger(context, responseBody['message']);
+        print('token: ${prefs.getString('token')}');
+        Get.offAll(() => ChooseImage());
       } else {
         print("API Failed: Login");
         print(response.body);
@@ -87,46 +105,7 @@ class AuthApis {
     }
   }
 
-  // Future<void> resendOtpApi(String phoneNumber) async {
-  //   final url = Uri.parse("$baseURL/api/auth/login");
-  //
-  //   try {
-  //     final response = await http.post(
-  //       url,
-  //       body: jsonEncode({
-  //         'phoneNumber': phoneNumber,
-  //       }),
-  //     );
-  //
-  //     print('Resend API request details:, $phoneNumber');
-  //
-  //     if (response.statusCode == 200) {
-  //       print("API Success: Resend");
-  //       // Handle successful login, if needed
-  //     } else {
-  //       print("API Failed: Resend");
-  //       print(response.body);
-  //       if (context.mounted) {
-  //         String errorMessage;
-  //         try {
-  //           errorMessage =
-  //               jsonDecode(response.body)['error'] ?? 'Resend Otp failed';
-  //         } catch (e) {
-  //           errorMessage = 'Resend Otp failed';
-  //         }
-  //         customScaffoldMessenger(context, errorMessage);
-  //       }
-  //     }
-  //   } catch (error) {
-  //     print("Exception occurred: $error");
-  //     if (context.mounted) {
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //         SnackBar(content: Text('An error occurred. Please try again.')),
-  //       );
-  //     }
-  //   }
-  // }
-  Future<void> resendOtp(String phoneNumber) async {
+  Future<void> resendOtpApi(String phoneNumber) async {
     final url = Uri.parse("$baseURL/api/auth/resend-code");
 
     try {
@@ -165,6 +144,207 @@ class AuthApis {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('An error occurred. Please try again.')),
         );
+      }
+    }
+  }
+
+  Future<void> verifyOtpApi(String phoneNumber, String code) async {
+    final url = Uri.parse("$baseURL/api/auth/verify");
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'phoneNumber': phoneNumber,
+          'code': code,
+        }),
+      );
+
+      print('API request details: $phoneNumber, $code');
+
+      if (response.statusCode == 200) {
+        final responseBody = jsonDecode(response.body);
+        if (responseBody['success']) {
+          print("API Success: OTP Verified");
+          Get.offAll(() => LoginScreen());
+          customScaffoldMessenger(context, responseBody['message']);
+        } else {
+          print("API Failed: OTP Verification");
+          customScaffoldMessenger(context, responseBody['message']);
+        }
+      } else {
+        print("API Failed: OTP Verification");
+        print(response.body);
+        if (context.mounted) {
+          String errorMessage;
+          try {
+            errorMessage = jsonDecode(response.body)['message'] ??
+                'OTP verification failed';
+          } catch (e) {
+            errorMessage = 'OTP verification failed';
+          }
+          customScaffoldMessenger(context, errorMessage);
+        }
+      }
+    } catch (error) {
+      print("Exception occurred: $error");
+      if (context.mounted) {
+        customScaffoldMessenger(
+            context, 'An error occurred. Please try again.');
+      }
+    }
+  }
+
+  Future<void> forgotPasswordApi(String phoneNumber) async {
+    final url = Uri.parse("$baseURL/api/auth/forgot-password");
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'phoneNumber': phoneNumber,
+        }),
+      );
+
+      print('API request details: $phoneNumber');
+
+      if (response.statusCode == 200) {
+        print("API Success: Resend OTP");
+        customScaffoldMessenger(context, 'Verification code sent successfully');
+        Get.off(() => const ResetPasswordScreen(),
+            arguments: {'phoneNumber': phoneNumber});
+      } else {
+        print("API Failed: Resend OTP");
+        print(response.body);
+        if (context.mounted) {
+          String errorMessage;
+          try {
+            errorMessage =
+                jsonDecode(response.body)['error'] ?? 'Failed to resend OTP';
+          } catch (e) {
+            errorMessage = 'Failed to resend OTP';
+          }
+          customScaffoldMessenger(context, errorMessage);
+        }
+      }
+    } catch (error) {
+      print("Exception occurred: $error");
+      if (context.mounted) {
+        customScaffoldMessenger(
+            context, 'An error occurred. Please try again.');
+      }
+    }
+  }
+
+  Future<void> resetPasswordApi(
+      String phoneNumber, String otpCode, String password) async {
+    final url = Uri.parse("$baseURL/api/auth/forgot-password");
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'email': phoneNumber,
+          'code': otpCode,
+          'password': password,
+        }),
+      );
+
+      print('API request details: $phoneNumber');
+
+      if (response.statusCode == 200) {
+        print("API Success: Resend OTP");
+        customScaffoldMessenger(context, 'Verification code sent successfully');
+        Get.off(() => const ResetPasswordScreen(), arguments: {
+          'phoneNumber': phoneNumber,
+        });
+      } else {
+        print("API Failed: Resend OTP");
+        print(response.body);
+        if (context.mounted) {
+          String errorMessage;
+          try {
+            errorMessage =
+                jsonDecode(response.body)['error'] ?? 'Failed to resend OTP';
+          } catch (e) {
+            errorMessage = 'Failed to resend OTP';
+          }
+          customScaffoldMessenger(context, errorMessage);
+        }
+      }
+    } catch (error) {
+      print("Exception occurred: $error");
+      if (context.mounted) {
+        customScaffoldMessenger(
+            context, 'An error occurred. Please try again.');
+      }
+    }
+  }
+
+  Future<void> updateProfilePicture(File imageFile) async {
+    final url = Uri.parse("$baseURL/api/auth/update-profile-picture");
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+
+    if (token == null) {
+      customScaffoldMessenger(context, 'No token found. Please log in.');
+      return;
+    }
+
+    try {
+      final request = http.MultipartRequest('POST', url)
+        ..headers.addAll({
+          'Content-Type': 'multipart/form-data',
+          'Authorization': 'Bearer $token',
+        })
+        ..files.add(await http.MultipartFile.fromPath(
+            'profilePicture', imageFile.path));
+
+      print('token: $token');
+      final response = await request.send();
+      final responseBody = await response.stream.bytesToString();
+
+      if (response.statusCode == 200) {
+        final decodedResponse = jsonDecode(responseBody);
+        if (decodedResponse['success']) {
+          print("API Success: Profile picture updated");
+          customScaffoldMessenger(context, decodedResponse['message']);
+          String profileImageUrl = decodedResponse['data']['url'];
+          Get.to(const CreateCircle(),
+              arguments: {'imageUrl': profileImageUrl});
+          print('Image URL: $profileImageUrl');
+        } else {
+          print("API Failed: Update profile picture");
+          customScaffoldMessenger(context, decodedResponse['message']);
+        }
+      } else {
+        print("API Failed: Update profile picture");
+        print(responseBody);
+        if (context.mounted) {
+          String errorMessage;
+          try {
+            errorMessage = jsonDecode(responseBody)['error'] ?? 'Update failed';
+          } catch (e) {
+            errorMessage = 'Update failed';
+          }
+          customScaffoldMessenger(context, errorMessage);
+        }
+      }
+    } catch (error) {
+      print("Exception occurred: $error");
+      if (context.mounted) {
+        customScaffoldMessenger(
+            context, 'An error occurred. Please try again.');
       }
     }
   }

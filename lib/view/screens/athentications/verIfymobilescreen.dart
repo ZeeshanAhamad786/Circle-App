@@ -1,13 +1,14 @@
 import 'dart:developer';
-import 'package:circleapp/controller/signup_controller.dart';
+import 'package:circleapp/controller/auth_controller/signup_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import '../../../controller/resendotp_controller.dart';
+import '../../../controller/auth_controller/resendotp_controller.dart';
 import '../../../controller/utils/color/custom_color.dart';
 import '../../../controller/utils/style/customTextStyle.dart';
+import '../../../controller/auth_controller/verifyotp_controller.dart';
 import '../../../custom_widget/custom-button.dart';
 import 'login_screen.dart';
 
@@ -19,24 +20,22 @@ class VerifyMobileScreen extends StatefulWidget {
 }
 
 class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
-  final TextEditingController otpController = TextEditingController();
   late SignupController signupController;
   late ResendController resendController;
+  late VerifyOTPController verifyOtpController;
 
   @override
   void initState() {
     super.initState();
     signupController = Get.put(SignupController(context));
     resendController = Get.put(ResendController(context));
+    verifyOtpController = Get.put(VerifyOTPController(context));
   }
 
   @override
   Widget build(BuildContext context) {
     Map<String, dynamic> arguments = Get.arguments;
-    String userName = arguments['userName'];
-    String email = arguments['email'];
     String phoneNumber = arguments['phoneNumber'];
-    String password = arguments['password'];
     print('check pn: $phoneNumber');
     return Scaffold(
       backgroundColor: CustomColor.mainColorBackground,
@@ -65,9 +64,9 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
               SizedBox(height: 5.h),
               PinCodeTextField(
                 onCompleted: (v) {
-                  otpController.text = v;
+                  verifyOtpController.otpCodeTextController.text = v;
                 },
-                length: 4,
+                length: 6,
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
                 cursorColor: Colors.white,
@@ -107,18 +106,20 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
                 ),
               ),
               SizedBox(height: 5.h),
-              CustomMainButton(
-                buttonText: "Done",
-                buttonColor: CustomColor.mainColorYellow,
-                onPressed: () {
-                  signupController.signupApis(
-                    userName,
-                    email,
-                    phoneNumber,
-                    password,
-                  );
-                },
-              ),
+              Obx(() {
+                return verifyOtpController.isLoading.value
+                    ? CircularProgressIndicator(
+                        color: CustomColor.mainColorYellow,
+                      )
+                    : CustomMainButton(
+                        buttonText: "Done",
+                        buttonColor: CustomColor.mainColorYellow,
+                        onPressed: () {
+                          verifyOtpController.verifyOtpApi(phoneNumber,
+                              verifyOtpController.otpCodeTextController.text);
+                        },
+                      );
+              }),
               SizedBox(height: 1.3.h),
               GestureDetector(
                   onTap: () {
