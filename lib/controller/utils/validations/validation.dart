@@ -134,22 +134,27 @@ class Validations {
     newPasswordTextController,
     confirmPasswordTextController,
   }) {
-    if (currentPasswordTextController.text.isEmpty) {
-      return "Current Password not be empty.".tr;
-    } else if (newPasswordTextController.text.isEmpty) {
+    // if (currentPasswordTextController.text.isEmpty) {
+    //   return "Current Password not be empty.".tr;
+    // }
+    if (newPasswordTextController.text.isEmpty) {
       return "New Password not be empty.".tr;
     } else if (confirmPasswordTextController.text.isEmpty) {
       return "Confirm Password not be empty.".tr;
-    } else if (currentPasswordTextController.text.length < 8) {
-      return "Current Password must be at least 8 characters in length.".tr;
-    } else if (newPasswordTextController.text.length < 8) {
+    }
+    // else if (currentPasswordTextController.text.length < 8) {
+    //   return "Current Password must be at least 8 characters in length.".tr;
+    // }
+    else if (newPasswordTextController.text.length < 8) {
       return "New Password must be at least 8 characters in length.".tr;
     } else if (confirmPasswordTextController.text.length < 8) {
       return "Confirm password must be at least 8 characters in length.".tr;
-    } else if (!isValidPassword.hasMatch(currentPasswordTextController.text)) {
-      return "Current Password should contain at least one upper case, lower case, one digit, Special character."
-          .tr;
-    } else if (!isValidPassword.hasMatch(newPasswordTextController.text)) {
+    }
+    // else if (!isValidPassword.hasMatch(currentPasswordTextController.text)) {
+    //   return "Current Password should contain at least one upper case, lower case, one digit, Special character."
+    //       .tr;
+    // }
+    else if (!isValidPassword.hasMatch(newPasswordTextController.text)) {
       return "New Password should contain at least one upper case, lower case, one digit, Special character."
           .tr;
     } else if (!isValidPassword.hasMatch(confirmPasswordTextController.text)) {
@@ -178,6 +183,26 @@ class Validations {
       return "Initials not be empty.".tr;
     } else if (initialsTextController.text.length < 3) {
       return "Please enter 3 character initials.".tr;
+    } else {
+      return '';
+    }
+  }
+
+  static String handleResetPasswordScreenError({
+    password,
+    confirmPassword,
+  }) {
+    if (password.text.isEmpty) {
+      return "password not be empty".tr;
+    } else if (confirmPassword.text.isEmpty) {
+      return "confirm password is not be empty".tr;
+    } else if (password.text.length < 8) {
+      return "password is not be less then 8".tr;
+    } else if (confirmPassword.text.length < 8) {
+      return "password is not be less then 8".tr;
+    } else if (password.text != confirmPassword.text ||
+        confirmPassword.text != password.text) {
+      return "password do not match please try again".tr;
     } else {
       return '';
     }

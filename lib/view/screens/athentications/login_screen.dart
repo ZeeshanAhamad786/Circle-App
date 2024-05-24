@@ -6,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../controller/api/auth_apis.dart';
-import '../../../controller/login_controller.dart';
+import '../../../controller/auth_controller/login_controller.dart';
 import '../../../controller/utils/color/custom_color.dart';
 import '../../../controller/utils/style/customTextStyle.dart';
 import '../../../custom_widget/custom-button.dart';

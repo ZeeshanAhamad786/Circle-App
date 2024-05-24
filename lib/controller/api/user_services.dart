@@ -65,4 +65,41 @@ class ApisServices {
       return null;
     }
   }
+
+
+
+
+
+
+
+  Future<http.Response?> postApisDataWithToken(Map<String, dynamic> body, String endPoint, String token, File? file) async {
+    final url = Uri.parse(BaseUrl.url + endPoint);
+
+    try {
+      var request = http.MultipartRequest('POST', url)
+        ..headers['Authorization'] = 'Bearer $token'
+        ..headers['Content-Type'] = 'multipart/form-data';
+
+      if (file != null) {
+        request.files.add(await http.MultipartFile.fromPath('profilePicture', file.path));
+      }
+
+      request.fields.addAll(body.map((key, value) => MapEntry(key, value.toString())));
+
+      final streamedResponse = await request.send().timeout(const Duration(seconds: 30), onTimeout: () {
+        throw TimeoutException("Something went wrong, please try again");
+      });
+
+      final response = await http.Response.fromStream(streamedResponse);
+      log("Response: ${response.body}");
+      log("Status Code: ${response.statusCode}");
+      return response;
+    } on TimeoutException catch (e) {
+      log("A timeout exception occurred: $e");
+      return null;
+    } on SocketException catch (e) {
+      log("A socket exception occurred: $e");
+      return null;
+    }
+  }
 }

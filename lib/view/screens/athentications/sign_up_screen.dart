@@ -1,4 +1,4 @@
-import 'package:circleapp/controller/signup_controller.dart';
+import 'package:circleapp/controller/auth_controller/signup_controller.dart';
 import 'package:circleapp/controller/utils/color/custom_color.dart';
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
 import 'package:circleapp/custom_widget/custom_text_field.dart';
@@ -130,7 +130,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
               SizedBox(height: 4.h),
               Obx(() {
                 return _signupController.isLoading.value
-                    ? CircularProgressIndicator()
+                    ? CircularProgressIndicator(
+                        color: CustomColor.mainColorYellow,
+                      )
                     : CustomMainButton(
                         buttonText: "Sign Up",
                         buttonColor: CustomColor.mainColorYellow,
@@ -159,16 +161,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ),
                             );
                           } else {
-                            Get.to(() => VerifyMobileScreen(), arguments: {
-                              'userName':
-                                  _signupController.userNameTextController.text,
-                              'email':
-                                  _signupController.emailTextController.text,
-                              'phoneNumber':
-                                  _signupController.phoneNumberController.text,
-                              'password':
-                                  _signupController.passwordTextController.text,
-                            });
+                            _signupController.signupApis(
+                              _signupController.userNameTextController.text,
+                              _signupController.emailTextController.text,
+                              _signupController.phoneNumberController.text,
+                              _signupController.passwordTextController.text,
+                            );
                           }
                         },
                       );

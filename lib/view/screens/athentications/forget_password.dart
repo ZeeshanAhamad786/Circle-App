@@ -1,3 +1,5 @@
+import 'package:circleapp/controller/api/auth_apis.dart';
+import 'package:circleapp/controller/auth_controller/forgotpassword_controller.dart';
 import 'package:circleapp/view/screens/athentications/verIfymobilescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -9,8 +11,24 @@ import '../../../controller/utils/style/customTextStyle.dart';
 import '../../../custom_widget/custom-button.dart';
 import '../../../custom_widget/custom_text_field.dart';
 
-class ForgetScreen extends StatelessWidget {
+class ForgetScreen extends StatefulWidget {
   const ForgetScreen({super.key});
+
+  @override
+  State<ForgetScreen> createState() => _ForgetScreenState();
+}
+
+class _ForgetScreenState extends State<ForgetScreen> {
+  late ForgotPasswordController forgotPasswordController;
+  late AuthApis authApis;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    forgotPasswordController = Get.put(ForgotPasswordController(context));
+    authApis = AuthApis(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +68,7 @@ class ForgetScreen extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.centerLeft,
-                child: Text("Email",
+                child: Text("Mobile Number",
                     style: TextStyle(
                         color: Colors.white.withOpacity(0.6),
                         fontFamily: "medium",
@@ -60,18 +78,30 @@ class ForgetScreen extends StatelessWidget {
                 height: 0.4.h,
               ),
               CustomTextField(
-                hintText: "Litahan12@gmail.com",
-                prefixIcon: SvgPicture.asset("assets/svg/email.svg"),
+                phoneKeyboard: true,
+                controller:
+                    forgotPasswordController.forgotPasswordTextController,
+                hintText: "+00 123321 456",
+                prefixIcon: SvgPicture.asset("assets/svg/Mobile.svg"),
               ),
               SizedBox(
                 height: 4.h,
               ),
-              CustomMainButton(
-                  buttonText: "Done",
-                  buttonColor: CustomColor.mainColorYellow,
-                  onPressed: () {
-                    Get.to(() => VerifyMobileScreen());
-                  }),
+              Obx(() {
+                return forgotPasswordController.isLoading.value
+                    ? CircularProgressIndicator(
+                        color: CustomColor.mainColorYellow,
+                      )
+                    : CustomMainButton(
+                        buttonText: "Done",
+                        buttonColor: CustomColor.mainColorYellow,
+                        onPressed: () {
+                          forgotPasswordController.forgotPasswordApi(
+                              forgotPasswordController
+                                  .forgotPasswordTextController.text);
+                          // Get.to(() => VerifyMobileScreen());
+                        });
+              })
             ],
           ),
         ),
