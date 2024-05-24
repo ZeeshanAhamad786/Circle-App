@@ -1,7 +1,6 @@
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
 import 'package:circleapp/view/screens/athentications/login_screen.dart';
 import 'package:circleapp/view/screens/createNewCircleScreens/group_edit_screen.dart';
-import 'package:circleapp/view/screens/createNewCircleScreens/main_chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -9,8 +8,6 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../controller/utils/color/custom_color.dart';
 import '../../../custom_widget/custom-button.dart';
 import '../explore_section/explore_screen.dart';
-import '../home_screen/home_screen.dart';
-
 class OnBoardingScreen1 extends StatefulWidget {
   const OnBoardingScreen1({super.key});
 
