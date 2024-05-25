@@ -10,17 +10,17 @@ class ProfileUploadImageController extends GetxController {
 
   ProfileUploadImageController(this.context);
 
-  // Future<void> uploadProfilePicture(File imageFile) async {
-  //   loginLoading.value = true;
-  //   try {
-  //     await AuthApis(context).updateProfilePicture(imageFile);
-  //   } catch (e) {
-  //     print('Error during signup: $e');
-  //     if (context.mounted) {
-  //       customScaffoldMessenger(context, 'Upload failed. Please try again.');
-  //     }
-  //   } finally {
-  //     loginLoading.value = false;
-  //   }
-  // }
+  Future<void> uploadProfilePicture(File imageFile) async {
+    loginLoading.value = true;
+    try {
+      await AuthApis(context).updateProfilePicture(imageFile);
+    } catch (e) {
+      print('Error during signup: $e');
+      if (context.mounted) {
+        customScaffoldMessenger(context, 'Upload failed. Please try again.');
+      }
+    } finally {
+      loginLoading.value = false;
+    }
+  }
 }

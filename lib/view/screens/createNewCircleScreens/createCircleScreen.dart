@@ -34,6 +34,8 @@ class _CreateCircleState extends State<CreateCircle> {
     RxBool nextButton = true.obs;
     RxList<String> circleName =
         <String>['Friend', 'Family', 'Organization', 'Mix'].obs;
+    Map<String, dynamic> arguments = Get.arguments;
+    String imageUrl = arguments['imageUrl'] ?? '';
     return Scaffold(
       backgroundColor: CustomColor.primaryColor,
       appBar: AppBar(
@@ -160,6 +162,7 @@ class _CreateCircleState extends State<CreateCircle> {
                               'description': createCircleController
                                   .circleDescriptionTextController.text,
                               'type': circleName[selectedIndex.value],
+                              'imageUrl': imageUrl
                             });
                           }
                         },

@@ -1,4 +1,3 @@
-
 import 'dart:io';
 import 'package:circleapp/controller/paymentController.dart';
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
@@ -20,7 +19,8 @@ class ChooseImage extends StatefulWidget {
 }
 
 class _ChooseImageState extends State<ChooseImage> {
-  ProfileImageUploadNewController profileImageUploadNewController=Get.put(ProfileImageUploadNewController());
+  ProfileImageUploadNewController profileImageUploadNewController =
+      Get.put(ProfileImageUploadNewController());
   late ProfileUploadImageController profileUploadImageController;
   late AuthApis authApis;
 
@@ -36,12 +36,10 @@ class _ChooseImageState extends State<ChooseImage> {
 
   @override
   Widget build(BuildContext context) {
-
     final PaymentController paymentController = Get.put(PaymentController());
     RxBool backButton = false.obs;
     RxBool nextButton = true.obs;
-    return
-      Scaffold(
+    return Scaffold(
       backgroundColor: CustomColor.mainColorBackground,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 3.h),
@@ -114,55 +112,59 @@ class _ChooseImageState extends State<ChooseImage> {
                                 height: 4.5.h),
                           ),
                           getHorizentalSpace(1.h),
-
                           Expanded(
-                            child:
-                            profileImageUploadNewController.loading.value?Center(child: CircularProgressIndicator(),):
-                            Center(
-                              child: customButton(
-                                  onTap: () async {
+                            child: profileImageUploadNewController.loading.value
+                                ? Center(
+                                    child: CircularProgressIndicator(),
+                                  )
+                                : Center(
+                                    child: customButton(
+                                        onTap: () async {
+                                          if (nextButton.value == false) {
+                                            nextButton.value = true;
+                                            backButton.value = false;
+                                          } else {
+                                            nextButton.value = false;
+                                            backButton.value = true;
+                                          }
+                                          if (paymentController
+                                                  .pickedImage.value !=
+                                              null) {
+                                            File imageFile = File(
+                                                paymentController
+                                                    .pickedImage.value!.path);
+                                            profileUploadImageController
+                                                .uploadProfilePicture(
+                                                    imageFile);
 
+                                            // profileImageUploadNewController
+                                            //     .uploadProfilePic(
+                                            //         imageFile,
+                                            //         profileImageUploadNewController
+                                            //             .token);
 
-                                    if (nextButton.value == false) {
-                                      nextButton.value = true;
-                                      backButton.value = false;
-                                    } else {
-                                      nextButton.value = false;
-                                      backButton.value = true;
-                                    }
-                                    if (paymentController.pickedImage.value !=
-                                        null) {
-                                      File imageFile = File(paymentController
-                                          .pickedImage.value!.path);
-                                      // profileUploadImageController
-                                      //     .uploadProfilePicture(imageFile);
-
-
-                                        profileImageUploadNewController.uploadProfilePic(imageFile,profileImageUploadNewController. token);
-
-
-
-                                      // AuthApis(context).getTokenFromSharedPreference().then((value) {
-                                      //   profileImageUploadNewController.uploadProfilePic(imageFile,AuthApis(context). token);
-                                      // });
-                                    } else {
-                                      customScaffoldMessenger(context,
-                                          'No image selected. Please pick an image.');
-                                    }
-                                  },
-                                  backgroundColor: nextButton.value == true
-                                      ? CustomColor.secondaryColor
-                                      : CustomColor.primaryColor,
-                                  borderColor: nextButton.value == true
-                                      ? CustomColor.primaryColor
-                                      : CustomColor.secondaryColor,
-                                  title: 'Next',
-                                  titleColor: nextButton.value == true
-                                      ? Colors.black
-                                      : Colors.white,
-                                  width: 16.2.h,
-                                  height: 4.5.h),
-                            ),
+                                            // AuthApis(context).getTokenFromSharedPreference().then((value) {
+                                            //   profileImageUploadNewController.uploadProfilePic(imageFile,AuthApis(context). token);
+                                            // });
+                                          } else {
+                                            customScaffoldMessenger(context,
+                                                'No image selected. Please pick an image.');
+                                          }
+                                        },
+                                        backgroundColor:
+                                            nextButton.value == true
+                                                ? CustomColor.secondaryColor
+                                                : CustomColor.primaryColor,
+                                        borderColor: nextButton.value == true
+                                            ? CustomColor.primaryColor
+                                            : CustomColor.secondaryColor,
+                                        title: 'Next',
+                                        titleColor: nextButton.value == true
+                                            ? Colors.black
+                                            : Colors.white,
+                                        width: 16.2.h,
+                                        height: 4.5.h),
+                                  ),
                           ),
                           getHorizentalSpace(3.h),
                         ],
@@ -172,8 +174,6 @@ class _ChooseImageState extends State<ChooseImage> {
                       buttonColor: CustomColor.mainColorYellow,
                       onPressed: () async {
                         paymentController.pickImage();
-
-
                       }),
             ],
           ),

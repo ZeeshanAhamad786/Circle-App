@@ -28,6 +28,13 @@ class CircleInterest extends StatelessWidget {
       'Art'
     ].obs;
     RxInt selectedIndex = 0.obs;
+    Map<String, dynamic> arguments = Get.arguments;
+    String name = arguments['text'] ?? '';
+    String description = arguments['description'] ?? '';
+    String type = arguments['type'] ?? '';
+    String imageUrl = arguments['imageUrl'] ?? '';
+
+    print("circle description : $name, $description, $type, $imageUrl");
     return Scaffold(
       backgroundColor: CustomColor.primaryColor,
       body: Column(
@@ -100,9 +107,18 @@ class CircleInterest extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 2.2.h),
                   child: customButton(
                       onTap: () {
-                        Get.to(() => AddMembers(
-                              title: 'interestscreen',
-                            ));
+                        Get.to(
+                          () => AddMembers(
+                            title: 'interestscreen',
+                          ),
+                          arguments: {
+                            'name': name,
+                            'description': description,
+                            'type': type,
+                            'imageUrl': imageUrl,
+                            'interest': circleName[selectedIndex.value],
+                          },
+                        );
                       },
                       backgroundColor: CustomColor.secondaryColor,
                       borderColor: CustomColor.primaryColor,

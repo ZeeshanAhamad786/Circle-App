@@ -1,10 +1,9 @@
-import 'package:circleapp/view/screens/createNewCircleScreens/choose_image.dart';
 import 'package:circleapp/view/screens/on_board_screens/onBoardScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(useMaterial3: true),
-          home:  OnBoardingScreen1(),
+          home: OnBoardingScreen1(),
         );
       },
     );
