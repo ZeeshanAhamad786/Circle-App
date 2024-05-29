@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+
+import 'api/auth_apis.dart';
 
 class PaymentController extends GetxController {
   //Date picker
@@ -38,10 +42,11 @@ class PaymentController extends GetxController {
   Rx<XFile?> pickedImage = Rx<XFile?>(null);
 
   Future<void> pickImage() async {
-    final XFile? selectedImage =
-        await picker.pickImage(source: ImageSource.gallery);
+    final XFile? selectedImage = await picker.pickImage(source: ImageSource.gallery);
     if (selectedImage != null) {
       pickedImage.value = selectedImage;
+      File imageFile = File(pickedImage.value!.path);
+      // Pass `imageFile` to the upload function
     }
   }
 }
