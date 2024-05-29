@@ -1,11 +1,8 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
 import '../../../controller/utils/color/custom_color.dart';
 import '../../../controller/utils/style/customTextStyle.dart';
-import '../athentications/login_screen.dart';
 import '../home_screen/plan_event_screen.dart';
 import 'itinerary_event_screen.dart';
 
@@ -20,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:Color(0xff343434),
+      backgroundColor: Color(0xff343434),
       body: DefaultTabController(
         length: 2,
         child: Column(
@@ -28,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: 5.h),
             // Tab bar
             TabBar(
-              indicator: UnderlineTabIndicator(
+              indicator: const UnderlineTabIndicator(
                 borderSide: BorderSide(
                   width: 2.0,
                   color: CustomColor.mainColorYellow,

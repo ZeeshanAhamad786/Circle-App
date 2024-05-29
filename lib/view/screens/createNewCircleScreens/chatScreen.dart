@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -7,8 +5,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../controller/utils/color/custom_color.dart';
 import '../../../controller/utils/style/customTextStyle.dart';
-import '../../../custom_widget/customwidgets.dart';
-import 'loopTabBar.dart';
+import '../../custom_widget/customwidgets.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key, this.title});
@@ -54,14 +51,12 @@ class _ChatScreenState extends State<ChatScreen> {
                         pinList.isNotEmpty
                             ? Text(
                                 "${pinList.length}",
-                                style: CustomTextStyle.buttonText
-                                    .copyWith(color: Colors.white),
+                                style: CustomTextStyle.buttonText.copyWith(color: Colors.white),
                               )
                             : CircleAvatar(
                                 radius: 2.4.h,
                                 backgroundColor: CustomColor.textFieldColor,
-                                backgroundImage:
-                                    const AssetImage('assets/png/members.png'),
+                                backgroundImage: const AssetImage('assets/png/members.png'),
                               ),
                         getHorizentalSpace(1.5.h),
                         pinList.isNotEmpty
@@ -72,22 +67,17 @@ class _ChatScreenState extends State<ChatScreen> {
                                 children: [
                                   Text(
                                     'Hiking',
-                                    style: CustomTextStyle.headingStyle
-                                        .copyWith(fontSize: 12.px),
+                                    style: CustomTextStyle.headingStyle.copyWith(fontSize: 12.px),
                                   ),
                                   Text('Adil Adnan, Jhon, Liya',
-                                      style: CustomTextStyle.smallText.copyWith(
-                                          color: const Color(0xff797C7B),
-                                          fontSize: 10.px))
+                                      style: CustomTextStyle.smallText.copyWith(color: const Color(0xff797C7B), fontSize: 10.px))
                                 ],
                               ),
                       ],
                     ),
                     Row(
                       children: [
-                        pinList.isNotEmpty
-                            ? SvgPicture.asset('assets/svg/pinicon.svg')
-                            : SvgPicture.asset('assets/svg/audiocallicon.svg'),
+                        pinList.isNotEmpty ? SvgPicture.asset('assets/svg/pinicon.svg') : SvgPicture.asset('assets/svg/audiocallicon.svg'),
                         getHorizentalSpace(1.h),
                         pinList.isNotEmpty
                             ? Text(
@@ -100,19 +90,14 @@ class _ChatScreenState extends State<ChatScreen> {
                             ? const SizedBox.shrink()
                             : widget.title == 'loop'
                                 ? const SizedBox.shrink()
-                                : GestureDetector(
-                                    onTap: () {},
-                                    child: SvgPicture.asset(
-                                        'assets/svg/loopicon.svg')),
+                                : GestureDetector(onTap: () {}, child: SvgPicture.asset('assets/svg/loopicon.svg')),
                       ],
                     )
                   ],
                 )),
             Expanded(
               child: Padding(
-                padding: pinList.isNotEmpty
-                    ? EdgeInsets.zero
-                    : EdgeInsets.symmetric(horizontal: 2.3.h),
+                padding: pinList.isNotEmpty ? EdgeInsets.zero : EdgeInsets.symmetric(horizontal: 2.3.h),
                 child: Column(
                   children: [
                     getVerticalSpace(3.8.h),
@@ -120,13 +105,10 @@ class _ChatScreenState extends State<ChatScreen> {
                       alignment: Alignment.center,
                       height: 3.2.h,
                       width: 6.3.h,
-                      decoration: BoxDecoration(
-                          color: CustomColor.textFieldColor,
-                          borderRadius: BorderRadius.circular(5.px)),
+                      decoration: BoxDecoration(color: CustomColor.textFieldColor, borderRadius: BorderRadius.circular(5.px)),
                       child: Text(
                         'Today',
-                        style:
-                            CustomTextStyle.smallText.copyWith(fontSize: 9.px),
+                        style: CustomTextStyle.smallText.copyWith(fontSize: 9.px),
                       ),
                     ),
                     Obx(
@@ -150,26 +132,20 @@ class _ChatScreenState extends State<ChatScreen> {
                                         margin: EdgeInsets.only(bottom: 1.h),
                                         alignment: Alignment.centerRight,
                                         height: 7.7.h,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        decoration: BoxDecoration(
-                                            color: CustomColor.secondaryColor
-                                                .withOpacity(0.1)),
-                                        child: SvgPicture.asset(
-                                            'assets/svg/selected.svg'),
+                                        width: MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(color: CustomColor.secondaryColor.withOpacity(0.1)),
+                                        child: SvgPicture.asset('assets/svg/selected.svg'),
                                       )
                                     : const SizedBox.shrink(),
                                 Row(
                                   children: [
                                     CircleAvatar(
                                       radius: 2.5.h,
-                                      backgroundImage: const AssetImage(
-                                          'assets/png/members.png'),
+                                      backgroundImage: const AssetImage('assets/png/members.png'),
                                     ),
                                     getHorizentalSpace(1.5.h),
                                     Container(
-                                      margin:
-                                          EdgeInsets.symmetric(vertical: 1.h),
+                                      margin: EdgeInsets.symmetric(vertical: 1.h),
                                       alignment: Alignment.center,
                                       padding: EdgeInsets.all(1.h),
                                       decoration: BoxDecoration(
@@ -199,9 +175,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         Expanded(
                           child: Container(
                             padding: EdgeInsets.symmetric(horizontal: .8.h),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.px),
-                                color: CustomColor.mainColor),
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.px), color: CustomColor.mainColor),
                             child: Row(
                               children: [
                                 SvgPicture.asset('assets/svg/icons.svg'),
@@ -220,25 +194,17 @@ class _ChatScreenState extends State<ChatScreen> {
                                     keyboardType: TextInputType.text,
                                     decoration: InputDecoration(
                                       enabledBorder: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10.px),
+                                        borderRadius: BorderRadius.circular(10.px),
                                         borderSide: const BorderSide(
                                           color: CustomColor.textFieldColor,
                                         ),
                                       ),
-                                      focusedBorder: const OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color:
-                                                  CustomColor.textFieldColor)),
+                                      focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: CustomColor.textFieldColor)),
                                       border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.px),
-                                          borderSide: const BorderSide(
-                                              color:
-                                                  CustomColor.textFieldColor)),
+                                          borderRadius: BorderRadius.circular(10.px),
+                                          borderSide: const BorderSide(color: CustomColor.textFieldColor)),
                                       isCollapsed: true,
-                                      contentPadding:
-                                          EdgeInsets.symmetric(vertical: 1.6.h),
+                                      contentPadding: EdgeInsets.symmetric(vertical: 1.6.h),
                                       fillColor: CustomColor.textFieldColor,
                                       hintText: 'Write your message',
                                       hintStyle: CustomTextStyle.hintText,
@@ -262,9 +228,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                 child: Container(
                                   height: 4.5.h,
                                   width: 4.h,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: CustomColor.secondaryColor),
+                                  decoration: BoxDecoration(shape: BoxShape.circle, color: CustomColor.secondaryColor),
                                   child: Icon(
                                     Icons.send,
                                     size: 2.h,

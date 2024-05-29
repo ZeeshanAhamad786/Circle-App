@@ -1,24 +1,25 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:circleapp/custom_widget/customwidgets.dart';
-import 'package:circleapp/view/screens/athentications/login_screen.dart';
+
+import 'package:circleapp/controller/utils/shared_preferences.dart';
+import 'package:circleapp/view/screens/bottom_navigation_screen/bottom_navigation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../view/custom_widget/customwidgets.dart';
 import '../../view/screens/athentications/resetpassword_screen.dart';
 import '../../view/screens/createNewCircleScreens/choose_image.dart';
 import '../../view/screens/createNewCircleScreens/createCircleScreen.dart';
-import '../utils/const.dart';
+import '../utils/constants/api_constants.dart';
+import '../utils/constants/global_variables.dart';
+import '../utils/constants/storage_keys.dart';
 
 class AuthApis {
   final BuildContext context;
   AuthApis(this.context);
 
-  Future<void> signupApi(String userName, String email, String password,
-      String phoneNumber) async {
+  Future<void> signupApi(String userName, String email, String password, String phoneNumber) async {
     final url = Uri.parse("$baseURL/api/auth/signup");
 
     final response = await http.post(
@@ -38,6 +39,7 @@ class AuthApis {
 
     if (response.statusCode == 200) {
       print("API Success: Signup");
+      MySharedPreferences.setBool(isSignedUp, true);
     } else {
       print("API Failed: signup");
       print(response.body);
@@ -75,14 +77,11 @@ class AuthApis {
         final responseBody = jsonDecode(response.body);
         final token = responseBody['token'];
 
-        // Save token in shared preferences
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setString('token', token);
-
         // Handle successful login
         customScaffoldMessenger(context, responseBody['message']);
-        print('token: ${prefs.getString('token')}');
-        Get.offAll(() => ChooseImage());
+        Get.offAll(() => const BottomNavigationScreen());
+        MySharedPreferences.setBool(isLoggedIn, true);
+        MySharedPreferences.setString(userTokenKey, token);
       } else {
         print("API Failed: Login");
         print(response.body);
@@ -99,8 +98,7 @@ class AuthApis {
     } catch (error) {
       print("Exception occurred: $error");
       if (context.mounted) {
-        customScaffoldMessenger(
-            context, 'An error occurred. Please try again.');
+        customScaffoldMessenger(context, 'An error occurred. Please try again.');
       }
     }
   }
@@ -130,8 +128,7 @@ class AuthApis {
         if (context.mounted) {
           String errorMessage;
           try {
-            errorMessage =
-                jsonDecode(response.body)['error'] ?? 'Failed to resend OTP';
+            errorMessage = jsonDecode(response.body)['error'] ?? 'Failed to resend OTP';
           } catch (e) {
             errorMessage = 'Failed to resend OTP';
           }
@@ -169,7 +166,9 @@ class AuthApis {
         final responseBody = jsonDecode(response.body);
         if (responseBody['success']) {
           print("API Success: OTP Verified");
-          Get.offAll(() => LoginScreen());
+          MySharedPreferences.setBool(isSignedUp, true);
+          MySharedPreferences.setString(userTokenKey, responseBody['token']);
+          Get.offAll(() => const ChooseImage());
           customScaffoldMessenger(context, responseBody['message']);
         } else {
           print("API Failed: OTP Verification");
@@ -181,8 +180,7 @@ class AuthApis {
         if (context.mounted) {
           String errorMessage;
           try {
-            errorMessage = jsonDecode(response.body)['message'] ??
-                'OTP verification failed';
+            errorMessage = jsonDecode(response.body)['message'] ?? 'OTP verification failed';
           } catch (e) {
             errorMessage = 'OTP verification failed';
           }
@@ -192,8 +190,7 @@ class AuthApis {
     } catch (error) {
       print("Exception occurred: $error");
       if (context.mounted) {
-        customScaffoldMessenger(
-            context, 'An error occurred. Please try again.');
+        customScaffoldMessenger(context, 'An error occurred. Please try again.');
       }
     }
   }
@@ -217,16 +214,14 @@ class AuthApis {
       if (response.statusCode == 200) {
         print("API Success: Resend OTP");
         customScaffoldMessenger(context, 'Verification code sent successfully');
-        Get.off(() => const ResetPasswordScreen(),
-            arguments: {'phoneNumber': phoneNumber});
+        Get.off(() => const ResetPasswordScreen(), arguments: {'phoneNumber': phoneNumber});
       } else {
         print("API Failed: Resend OTP");
         print(response.body);
         if (context.mounted) {
           String errorMessage;
           try {
-            errorMessage =
-                jsonDecode(response.body)['error'] ?? 'Failed to resend OTP';
+            errorMessage = jsonDecode(response.body)['error'] ?? 'Failed to resend OTP';
           } catch (e) {
             errorMessage = 'Failed to resend OTP';
           }
@@ -236,14 +231,12 @@ class AuthApis {
     } catch (error) {
       print("Exception occurred: $error");
       if (context.mounted) {
-        customScaffoldMessenger(
-            context, 'An error occurred. Please try again.');
+        customScaffoldMessenger(context, 'An error occurred. Please try again.');
       }
     }
   }
 
-  Future<void> resetPasswordApi(
-      String phoneNumber, String otpCode, String password) async {
+  Future<void> resetPasswordApi(String phoneNumber, String otpCode, String password) async {
     final url = Uri.parse("$baseURL/api/auth/forgot-password");
 
     try {
@@ -273,8 +266,7 @@ class AuthApis {
         if (context.mounted) {
           String errorMessage;
           try {
-            errorMessage =
-                jsonDecode(response.body)['error'] ?? 'Failed to resend OTP';
+            errorMessage = jsonDecode(response.body)['error'] ?? 'Failed to resend OTP';
           } catch (e) {
             errorMessage = 'Failed to resend OTP';
           }
@@ -284,8 +276,7 @@ class AuthApis {
     } catch (error) {
       print("Exception occurred: $error");
       if (context.mounted) {
-        customScaffoldMessenger(
-            context, 'An error occurred. Please try again.');
+        customScaffoldMessenger(context, 'An error occurred. Please try again.');
       }
     }
   }
@@ -293,24 +284,15 @@ class AuthApis {
   Future<void> updateProfilePicture(File imageFile) async {
     final url = Uri.parse("$baseURL/api/auth/update-profile-picture");
 
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString('token');
-
-    if (token == null) {
-      customScaffoldMessenger(context, 'No token found. Please log in.');
-      return;
-    }
-
     try {
       final request = http.MultipartRequest('POST', url)
         ..headers.addAll({
           'Content-Type': 'multipart/form-data',
-          'Authorization': 'Bearer $token',
+          'Authorization': 'Bearer $userToken',
         })
-        ..files.add(await http.MultipartFile.fromPath(
-            'profilePicture', imageFile.path));
+        ..files.add(await http.MultipartFile.fromPath('profilePicture', imageFile.path));
 
-      print('token: $token');
+      print('token: $userToken');
       final response = await request.send();
       final responseBody = await response.stream.bytesToString();
 
@@ -320,8 +302,7 @@ class AuthApis {
           print("API Success: Profile picture updated");
           customScaffoldMessenger(context, decodedResponse['message']);
           String profileImageUrl = decodedResponse['data']['url'];
-          Get.to(const CreateCircle(),
-              arguments: {'imageUrl': profileImageUrl});
+          Get.to(const CreateCircle(), arguments: {'imageUrl': profileImageUrl});
           print('Image URL: $profileImageUrl');
         } else {
           print("API Failed: Update profile picture");
@@ -343,8 +324,7 @@ class AuthApis {
     } catch (error) {
       print("Exception occurred: $error");
       if (context.mounted) {
-        customScaffoldMessenger(
-            context, 'An error occurred. Please try again.');
+        customScaffoldMessenger(context, 'An error occurred. Please try again.');
       }
     }
   }

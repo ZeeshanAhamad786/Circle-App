@@ -3,15 +3,13 @@ import 'dart:io';
 import 'package:circleapp/controller/paymentController.dart';
 import 'package:circleapp/controller/utils/color/custom_color.dart';
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
-import 'package:circleapp/custom_widget/customwidgets.dart';
 import 'package:circleapp/view/screens/bottom_navigation_screen/bottom_navigation_screen.dart';
 import 'package:circleapp/view/screens/createNewCircleScreens/addMembersScreen.dart';
-import 'package:circleapp/view/screens/createNewCircleScreens/loopTabBar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../custom_widget/customwidgets.dart';
 import 'addBillScreen.dart';
 
 class CreateNewToDo extends StatelessWidget {
@@ -25,184 +23,160 @@ class CreateNewToDo extends StatelessWidget {
     return Scaffold(
         backgroundColor: CustomColor.primaryColor,
         body: SingleChildScrollView(
-          child:Column(
-            children: [
-              getVerticalSpace(6.h),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 1.5.h),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    GestureDetector(
+            child: Column(
+          children: [
+            getVerticalSpace(6.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 1.5.h),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: Icon(
+                      Icons.arrow_back_ios_new,
+                      color: Colors.white,
+                      size: 2.h,
+                    ),
+                  ),
+                  getHorizentalSpace(1.5.h),
+                  Text(
+                    'Create new To-Dos',
+                    style: CustomTextStyle.headingStyle,
+                  ),
+                  const Expanded(child: SizedBox()),
+                  GestureDetector(
                       onTap: () {
-                        Get.back();
+                        Get.to(() => const CreateNewToDo());
                       },
-                      child: Icon(
-                        Icons.arrow_back_ios_new,
-                        color: Colors.white,
-                        size: 2.h,
-                      ),
-                    ),
-                    getHorizentalSpace(1.5.h),
-                    Text(
-                      'Create new To-Dos',
-                      style: CustomTextStyle.headingStyle,
-                    ),
-                    const Expanded(child: SizedBox()),
-                    GestureDetector(
-                        onTap: () {
-                          Get.to(() => const CreateNewToDo());
-                        },
-                        child: GestureDetector(
-                            onTap: () {
-                              Get.to(() => const AddBills());
-                            },
-                            child: customTextButton1(title: 'Add Bill')))
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 2.3.h),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    getVerticalSpace(3.h),
-                    Text(
-                      'Title',
-                      style: CustomTextStyle.smallText
-                          .copyWith(color: Colors.white),
-                    ),
-                    getVerticalSpace(.4.h),
-                    customTextFormField(
-                        titleTextController, 'Winter trip Plan',
-                        isObsecure: false),
-                    getVerticalSpace(3.h),
-                    Text(
-                      'Description',
-                      style: CustomTextStyle.smallText
-                          .copyWith(color: Colors.white),
-                    ),
-                    getVerticalSpace(.4.h),
-                    customTextFormField(descriptionController,
-                        '''Lorem ipsum dolor sit amet consectetur. Eget aliquam suspendisse ultrices a mattis vitae. Adipiscing id vestibulum ultrices lorem. Nibh dignissim bibendum aAdipi.''',
-                        isObsecure: false,
-                        maxLine: 4,
-                        borderRadius: BorderRadius.circular(15.px)),
-                    getVerticalSpace(3.h),
-                    Text('Upload Images',
-                        style: CustomTextStyle.headingStyle),
-                    getVerticalSpace(.6.h),
-                    Text('you can add multiple images.',
-                        style: CustomTextStyle.hintText),
-                    getVerticalSpace(1.h),
-                    GestureDetector(
-                        onTap: () {
-                          paymentController.pickImage();
-                        },
-                        child:  Image.asset("assets/png/chooseImage.png")),
-                    getVerticalSpace(1.5.h),
-                    SizedBox(
-                      height: 8.2.h,
-                      child: ListView.builder(
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 4,
-                        itemExtent: 11.h,
-                        itemBuilder: (context, index) {
-                          return Obx(()=>
-                             Padding(
-                                padding: EdgeInsets.symmetric(horizontal: .3.h),
-                                child: Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                        BorderRadius.circular(15.px),
-                                        color: CustomColor.textFieldColor),
-                                    child: paymentController
-                                        .pickedImage.value ==
-                                        null
-                                        ? const Center(
-                                        child: Text('No image selected'))
-                                        : ClipRRect(
-                                        borderRadius:
-                                        BorderRadius.circular(15.px),
-                                        child: Image.file(
-                                          File(paymentController
-                                              .pickedImage.value!.path),
-                                          fit: BoxFit.cover,
-                                        )))),
-                          );
-                        },
-                      ),
-                    ),
-                    getVerticalSpace(4.h),
-                    Text('Add person in group to split bill',
-                        style: CustomTextStyle.headingStyle),
-                    getVerticalSpace(1.h),
-                    Row(
-                      children: [
-                        SizedBox(
-                          height: 4.h,
-                          child: ListView.builder(
-                            padding: EdgeInsets.zero,
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 4,
-                            itemExtent: 5.h,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding:
-                                EdgeInsets.symmetric(horizontal: .3.h),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: CustomColor.secondaryColor),
-                                      shape: BoxShape.circle),
-                                  child: CircleAvatar(
-                                    radius: 10.h,
-                                    backgroundColor: CustomColor.mainColor,
-                                    backgroundImage: const AssetImage(
-                                        'assets/png/story.png'),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                        const Expanded(child: SizedBox()),
-                        GestureDetector(
-                            onTap: () {
-                              Get.to(() => const AddMembers(title: 'newtodo',));
-                            },
-                            child: customTextButton1(title: 'Add Member'))
-                      ],
-                    ),
-                    getVerticalSpace(3.h),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 4.5.h),
-                      child: customButton(
+                      child: GestureDetector(
                           onTap: () {
-                            showCustomDialog(context,
-                                title: titleTextController.text,
-                                description: descriptionController.text);
+                            Get.to(() => const AddBills());
                           },
-                          backgroundColor: CustomColor.secondaryColor,
-                          borderColor: CustomColor.primaryColor,
-                          title: 'Done',
-                          titleColor: Colors.black,
-                          height: 4.5.h),
+                          child: customTextButton1(title: 'Add Bill')))
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 2.3.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  getVerticalSpace(3.h),
+                  Text(
+                    'Title',
+                    style: CustomTextStyle.smallText.copyWith(color: Colors.white),
+                  ),
+                  getVerticalSpace(.4.h),
+                  customTextFormField(titleTextController, 'Winter trip Plan', isObsecure: false),
+                  getVerticalSpace(3.h),
+                  Text(
+                    'Description',
+                    style: CustomTextStyle.smallText.copyWith(color: Colors.white),
+                  ),
+                  getVerticalSpace(.4.h),
+                  customTextFormField(descriptionController,
+                      '''Lorem ipsum dolor sit amet consectetur. Eget aliquam suspendisse ultrices a mattis vitae. Adipiscing id vestibulum ultrices lorem. Nibh dignissim bibendum aAdipi.''',
+                      isObsecure: false, maxLine: 4, borderRadius: BorderRadius.circular(15.px)),
+                  getVerticalSpace(3.h),
+                  Text('Upload Images', style: CustomTextStyle.headingStyle),
+                  getVerticalSpace(.6.h),
+                  Text('you can add multiple images.', style: CustomTextStyle.hintText),
+                  getVerticalSpace(1.h),
+                  GestureDetector(
+                      onTap: () {
+                        paymentController.pickImage();
+                      },
+                      child: Image.asset("assets/png/chooseImage.png")),
+                  getVerticalSpace(1.5.h),
+                  SizedBox(
+                    height: 8.2.h,
+                    child: ListView.builder(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 4,
+                      itemExtent: 11.h,
+                      itemBuilder: (context, index) {
+                        return Obx(
+                          () => Padding(
+                              padding: EdgeInsets.symmetric(horizontal: .3.h),
+                              child: Container(
+                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.px), color: CustomColor.textFieldColor),
+                                  child: paymentController.pickedImage.value == null
+                                      ? const Center(child: Text('No image selected'))
+                                      : ClipRRect(
+                                          borderRadius: BorderRadius.circular(15.px),
+                                          child: Image.file(
+                                            File(paymentController.pickedImage.value!.path),
+                                            fit: BoxFit.cover,
+                                          )))),
+                        );
+                      },
                     ),
-                  ],
-                ),
-              )
-            ],
-          )
-        ));
+                  ),
+                  getVerticalSpace(4.h),
+                  Text('Add person in group to split bill', style: CustomTextStyle.headingStyle),
+                  getVerticalSpace(1.h),
+                  Row(
+                    children: [
+                      SizedBox(
+                        height: 4.h,
+                        child: ListView.builder(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 4,
+                          itemExtent: 5.h,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.symmetric(horizontal: .3.h),
+                              child: Container(
+                                decoration: BoxDecoration(border: Border.all(color: CustomColor.secondaryColor), shape: BoxShape.circle),
+                                child: CircleAvatar(
+                                  radius: 10.h,
+                                  backgroundColor: CustomColor.mainColor,
+                                  backgroundImage: const AssetImage('assets/png/story.png'),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      const Expanded(child: SizedBox()),
+                      GestureDetector(
+                          onTap: () {
+                            Get.to(() => const AddMembers(
+                                  title: 'newtodo',
+                                ));
+                          },
+                          child: customTextButton1(title: 'Add Member'))
+                    ],
+                  ),
+                  getVerticalSpace(3.h),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 4.5.h),
+                    child: customButton(
+                        onTap: () {
+                          showCustomDialog(context, title: titleTextController.text, description: descriptionController.text);
+                        },
+                        backgroundColor: CustomColor.secondaryColor,
+                        borderColor: CustomColor.primaryColor,
+                        title: 'Done',
+                        titleColor: Colors.black,
+                        height: 4.5.h),
+                  ),
+                ],
+              ),
+            )
+          ],
+        )));
   }
 }
 
-void showCustomDialog(BuildContext context,
-    {String? title, String? description}) {
+void showCustomDialog(BuildContext context, {String? title, String? description}) {
   final RxBool backButton = false.obs;
   final RxBool nextButton = true.obs;
   showGeneralDialog(
@@ -219,9 +193,7 @@ void showCustomDialog(BuildContext context,
             margin: EdgeInsets.symmetric(horizontal: 2.3.h),
             padding: EdgeInsets.symmetric(horizontal: 1.9.h, vertical: 1.3.h),
             height: 40.h,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.px),
-                color: CustomColor.textFieldColor),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.px), color: CustomColor.textFieldColor),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -250,27 +222,16 @@ void showCustomDialog(BuildContext context,
                     const Expanded(child: SizedBox()),
                     RichText(
                         text: TextSpan(children: [
-                      TextSpan(
-                          text: 'Total Bill: ',
-                          style: CustomTextStyle.smallText.copyWith(
-                              color:
-                                  const Color(0xffFFFFFF).withOpacity(0.48))),
-                      TextSpan(
-                          text: '\$2500', style: CustomTextStyle.smallText),
+                      TextSpan(text: 'Total Bill: ', style: CustomTextStyle.smallText.copyWith(color: const Color(0xffFFFFFF).withOpacity(0.48))),
+                      TextSpan(text: '\$2500', style: CustomTextStyle.smallText),
                     ])),
                   ],
                 ),
                 getVerticalSpace(1.3.h),
                 RichText(
                     text: TextSpan(children: [
-                  TextSpan(
-                      text: 'Title: ',
-                      style: CustomTextStyle.smallText
-                          .copyWith(color: const Color(0xffDADADA))),
-                  TextSpan(
-                      text: title ?? "Winter Trip Plan",
-                      style: CustomTextStyle.smallText
-                          .copyWith(color: const Color(0xffDADADA))),
+                  TextSpan(text: 'Title: ', style: CustomTextStyle.smallText.copyWith(color: const Color(0xffDADADA))),
+                  TextSpan(text: title ?? "Winter Trip Plan", style: CustomTextStyle.smallText.copyWith(color: const Color(0xffDADADA))),
                 ])),
                 getVerticalSpace(1.3.h),
                 Text(
@@ -283,8 +244,7 @@ void showCustomDialog(BuildContext context,
                   children: [
                     Text(
                       'Splitting Bill',
-                      style: CustomTextStyle.hintText.copyWith(
-                          color: const Color(0xffFFFFFF).withOpacity(0.69)),
+                      style: CustomTextStyle.hintText.copyWith(color: const Color(0xffFFFFFF).withOpacity(0.69)),
                     ),
                     const Expanded(child: SizedBox()),
                     Text('Bill receipts',
@@ -308,15 +268,11 @@ void showCustomDialog(BuildContext context,
                           return Padding(
                             padding: EdgeInsets.symmetric(horizontal: .3.h),
                             child: Container(
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: CustomColor.secondaryColor),
-                                  shape: BoxShape.circle),
+                              decoration: BoxDecoration(border: Border.all(color: CustomColor.secondaryColor), shape: BoxShape.circle),
                               child: CircleAvatar(
                                 radius: 10.h,
                                 backgroundColor: CustomColor.mainColor,
-                                backgroundImage:
-                                    const AssetImage('assets/png/story.png'),
+                                backgroundImage: const AssetImage('assets/png/story.png'),
                               ),
                             ),
                           );
@@ -337,10 +293,7 @@ void showCustomDialog(BuildContext context,
                             padding: EdgeInsets.symmetric(horizontal: .3.h),
                             child: Container(
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5.px),
-                                  image: const DecorationImage(
-                                      image:
-                                          AssetImage('assets/png/image.png'))),
+                                  borderRadius: BorderRadius.circular(5.px), image: const DecorationImage(image: AssetImage('assets/png/image.png'))),
                             ),
                           );
                         },
@@ -366,16 +319,10 @@ void showCustomDialog(BuildContext context,
                               }
                               Get.back();
                             },
-                            backgroundColor: backButton.value == true
-                                ? CustomColor.secondaryColor
-                                : CustomColor.primaryColor,
-                            borderColor: backButton.value == true
-                                ? CustomColor.primaryColor
-                                : CustomColor.secondaryColor,
+                            backgroundColor: backButton.value == true ? CustomColor.secondaryColor : CustomColor.primaryColor,
+                            borderColor: backButton.value == true ? CustomColor.primaryColor : CustomColor.secondaryColor,
                             title: 'Back',
-                            titleColor: backButton.value == true
-                                ? Colors.black
-                                : Colors.white,
+                            titleColor: backButton.value == true ? Colors.black : Colors.white,
                             width: 12.h,
                             height: 4.5.h),
                       ),
@@ -390,18 +337,12 @@ void showCustomDialog(BuildContext context,
                                 nextButton.value = false;
                                 backButton.value = true;
                               }
-                              Get.to(()=>const BottomNavigationScreen());
+                              Get.to(() => const BottomNavigationScreen());
                             },
-                            backgroundColor: nextButton.value == true
-                                ? CustomColor.secondaryColor
-                                : CustomColor.primaryColor,
-                            borderColor: nextButton.value == true
-                                ? CustomColor.primaryColor
-                                : CustomColor.secondaryColor,
+                            backgroundColor: nextButton.value == true ? CustomColor.secondaryColor : CustomColor.primaryColor,
+                            borderColor: nextButton.value == true ? CustomColor.primaryColor : CustomColor.secondaryColor,
                             title: 'Done',
-                            titleColor: nextButton.value == true
-                                ? Colors.black
-                                : Colors.white,
+                            titleColor: nextButton.value == true ? Colors.black : Colors.white,
                             width: 12.h,
                             height: 4.5.h),
                       ),

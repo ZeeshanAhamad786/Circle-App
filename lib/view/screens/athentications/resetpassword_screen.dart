@@ -1,17 +1,19 @@
 import 'dart:developer';
+
 import 'package:circleapp/controller/api/auth_apis.dart';
 import 'package:circleapp/controller/utils/validations/validation.dart';
-import 'package:circleapp/custom_widget/customwidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
 import '../../../controller/auth_controller/resetpassword_controller.dart';
 import '../../../controller/utils/color/custom_color.dart';
 import '../../../controller/utils/style/customTextStyle.dart';
-import '../../../custom_widget/custom-button.dart';
-import '../../../custom_widget/custom_text_field.dart';
+import '../../custom_widget/custom-button.dart';
+import '../../custom_widget/custom_text_field.dart';
+import '../../custom_widget/customwidgets.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({super.key});
@@ -73,11 +75,7 @@ class _ForgetScreenState extends State<ResetPasswordScreen> {
               ),
               Align(
                 alignment: Alignment.centerLeft,
-                child: Text("Otp",
-                    style: TextStyle(
-                        color: Colors.white.withOpacity(0.6),
-                        fontFamily: "medium",
-                        fontSize: 10.px)),
+                child: Text("Otp", style: TextStyle(color: Colors.white.withOpacity(0.6), fontFamily: "medium", fontSize: 10.px)),
               ),
               SizedBox(
                 height: 0.4.h,
@@ -87,8 +85,7 @@ class _ForgetScreenState extends State<ResetPasswordScreen> {
                   resetPasswordController.otpTextController.text = v;
                 },
                 length: 6,
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
+                keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 cursorColor: Colors.white,
                 pinTheme: PinTheme(
                   shape: PinCodeFieldShape.box,
@@ -114,19 +111,14 @@ class _ForgetScreenState extends State<ResetPasswordScreen> {
                 },
                 appContext: context,
                 textStyle: const TextStyle(color: Colors.white),
-                mainAxisAlignment:
-                    MainAxisAlignment.spaceEvenly, // Add this line
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Add this line
               ),
               SizedBox(
                 height: 2.h,
               ),
               Align(
                 alignment: Alignment.centerLeft,
-                child: Text("New Password",
-                    style: TextStyle(
-                        color: Colors.white.withOpacity(0.6),
-                        fontFamily: "medium",
-                        fontSize: 10.px)),
+                child: Text("New Password", style: TextStyle(color: Colors.white.withOpacity(0.6), fontFamily: "medium", fontSize: 10.px)),
               ),
               SizedBox(
                 height: 0.4.h,
@@ -141,18 +133,13 @@ class _ForgetScreenState extends State<ResetPasswordScreen> {
               ),
               Align(
                 alignment: Alignment.centerLeft,
-                child: Text("Confirm Password",
-                    style: TextStyle(
-                        color: Colors.white.withOpacity(0.6),
-                        fontFamily: "medium",
-                        fontSize: 10.px)),
+                child: Text("Confirm Password", style: TextStyle(color: Colors.white.withOpacity(0.6), fontFamily: "medium", fontSize: 10.px)),
               ),
               SizedBox(
                 height: 0.4.h,
               ),
               CustomTextField(
-                controller:
-                    resetPasswordController.confirmPasswordTextController,
+                controller: resetPasswordController.confirmPasswordTextController,
                 hintText: "Litahan12@gmail.com",
                 prefixIcon: SvgPicture.asset("assets/svg/lock.svg"),
               ),
@@ -164,30 +151,25 @@ class _ForgetScreenState extends State<ResetPasswordScreen> {
                     ? CircularProgressIndicator(
                         color: CustomColor.mainColorYellow,
                       )
-                    : CustomMainButton(
+                    : CustomButton(
                         buttonText: "Done",
                         buttonColor: CustomColor.mainColorYellow,
                         onPressed: () {
                           if (Validations.handleResetPasswordScreenError(
-                            password: resetPasswordController
-                                .newPasswordTextController,
-                            confirmPassword: resetPasswordController
-                                .confirmPasswordTextController,
+                            password: resetPasswordController.newPasswordTextController,
+                            confirmPassword: resetPasswordController.confirmPasswordTextController,
                           ).isNotEmpty) {
                             customScaffoldMessenger(
                                 context,
                                 Validations.handleResetPasswordScreenError(
-                                  password: resetPasswordController
-                                      .newPasswordTextController,
-                                  confirmPassword: resetPasswordController
-                                      .confirmPasswordTextController,
+                                  password: resetPasswordController.newPasswordTextController,
+                                  confirmPassword: resetPasswordController.confirmPasswordTextController,
                                 ));
                           } else {
                             resetPasswordController.resetPasswordApis(
                               phoneNumber,
                               resetPasswordController.otpTextController.text,
-                              resetPasswordController
-                                  .confirmPasswordTextController.text,
+                              resetPasswordController.confirmPasswordTextController.text,
                             );
                           }
                           // Get.to(() => VerifyMobileScreen());

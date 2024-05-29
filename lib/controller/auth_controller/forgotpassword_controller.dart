@@ -1,13 +1,13 @@
-import 'package:circleapp/custom_widget/customwidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../view/custom_widget/customwidgets.dart';
 import '../api/auth_apis.dart';
 
 class ForgotPasswordController extends GetxController {
   late final BuildContext context;
 
-  final TextEditingController forgotPasswordTextController =
-      TextEditingController();
+  final TextEditingController forgotPasswordTextController = TextEditingController();
   RxBool isLoading = false.obs;
 
   ForgotPasswordController(this.context);

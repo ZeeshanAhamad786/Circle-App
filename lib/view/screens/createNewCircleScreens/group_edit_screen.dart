@@ -1,14 +1,13 @@
 import 'package:circleapp/controller/group_member_model.dart';
 import 'package:circleapp/controller/utils/color/custom_color.dart';
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
-import 'package:circleapp/custom_widget/customwidgets.dart';
 import 'package:circleapp/view/screens/createNewCircleScreens/change_circle_name.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
+import '../../custom_widget/customwidgets.dart';
 
 class GroupEditScreen extends StatefulWidget {
   const GroupEditScreen({Key? key}) : super(key: key);
@@ -58,8 +57,7 @@ class _GroupEditScreenState extends State<GroupEditScreen> {
                     right: 0,
                     top: 0,
                     child: PopupMenuButton<String>(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                       icon: Icon(
                         Icons.more_vert,
                         color: Colors.white,
@@ -134,11 +132,7 @@ class _GroupEditScreenState extends State<GroupEditScreen> {
                   ),
                   Text(
                     "Lorem ipsum dolor sit amet consectetur. Eget aliquam suspendisse ultrices a mattis vitae. Adipiscing id vestibulum ultrices lorem.",
-                    style: TextStyle(
-                        fontSize: 10.px,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: "medium",
-                        color: Colors.white.withOpacity(0.6)),
+                    style: TextStyle(fontSize: 10.px, fontWeight: FontWeight.w400, fontFamily: "medium", color: Colors.white.withOpacity(0.6)),
                   ),
                   Divider(
                     color: Colors.white.withOpacity(0.2),
@@ -180,8 +174,7 @@ class _GroupEditScreenState extends State<GroupEditScreen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               CircleAvatar(
-                                backgroundImage:
-                                    AssetImage(group[index].imagePath),
+                                backgroundImage: AssetImage(group[index].imagePath),
                               ),
                               getHorizentalSpace(2.w),
                               Text(

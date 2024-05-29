@@ -1,20 +1,18 @@
 import 'package:circleapp/controller/paymentController.dart';
 import 'package:circleapp/controller/utils/color/custom_color.dart';
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
-import 'package:circleapp/custom_widget/customwidgets.dart';
-import 'package:circleapp/view/addNewPlanScreen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../custom_widget/customwidgets.dart';
 
 class CreateItinerary extends StatelessWidget {
   const CreateItinerary({super.key});
 
   @override
   Widget build(BuildContext context) {
-    RxInt selectedColor=0.obs;
+    RxInt selectedColor = 0.obs;
     final PaymentController paymentController = Get.put(PaymentController());
 
     final TextEditingController itineraryNameController = TextEditingController();
@@ -76,7 +74,7 @@ class CreateItinerary extends StatelessWidget {
               ),
               getVerticalSpace(2.h),
               Obx(
-                    () => TextField(
+                () => TextField(
                   onTap: () {
                     paymentController.pickedDate(context);
                   },
@@ -93,8 +91,7 @@ class CreateItinerary extends StatelessWidget {
                         color: CustomColor.secondaryColor,
                       ),
                     ),
-                    contentPadding: EdgeInsets.only(
-                        left: 1.h, top: 2.h), // Adjust this value as needed
+                    contentPadding: EdgeInsets.only(left: 1.h, top: 2.h), // Adjust this value as needed
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.px),
                     ),
@@ -108,7 +105,7 @@ class CreateItinerary extends StatelessWidget {
               ),
               getVerticalSpace(2.h),
               Obx(
-                    () => TextField(
+                () => TextField(
                   onTap: () {
                     paymentController.pickedTime(context);
                   },
@@ -125,8 +122,7 @@ class CreateItinerary extends StatelessWidget {
                         color: CustomColor.secondaryColor,
                       ),
                     ),
-                    contentPadding: EdgeInsets.only(
-                        left: 1.h, top: 2.h), // Adjust this value as needed
+                    contentPadding: EdgeInsets.only(left: 1.h, top: 2.h), // Adjust this value as needed
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.px),
                     ),
@@ -139,88 +135,101 @@ class CreateItinerary extends StatelessWidget {
                 ),
               ),
               getVerticalSpace(2.h),
-              Text('Add people',style: CustomTextStyle.headingStyle.copyWith(fontSize: 14.px),),
-
+              Text(
+                'Add people',
+                style: CustomTextStyle.headingStyle.copyWith(fontSize: 14.px),
+              ),
               getVerticalSpace(1.h),
-
               Row(
                 children: [
                   SizedBox(
                     height: 3.5.h,
-                    child: ListView.builder(padding: EdgeInsets.zero,
-                      shrinkWrap: true,scrollDirection: Axis.horizontal,
+                    child: ListView.builder(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
                       itemCount: 4,
                       itemExtent: 4.h,
                       itemBuilder: (context, index) {
-                        return  Container(padding: EdgeInsets.symmetric(horizontal: .3.h),
-                          decoration: BoxDecoration(
-                              border: Border.all(color: CustomColor.secondaryColor),
-                              shape: BoxShape.circle
-                          ),
-                          child: CircleAvatar(radius: 5.6.h,
+                        return Container(
+                          padding: EdgeInsets.symmetric(horizontal: .3.h),
+                          decoration: BoxDecoration(border: Border.all(color: CustomColor.secondaryColor), shape: BoxShape.circle),
+                          child: CircleAvatar(
+                            radius: 5.6.h,
                             backgroundColor: CustomColor.mainColor,
-                            backgroundImage: const AssetImage('assets/png/story.png'),),
+                            backgroundImage: const AssetImage('assets/png/story.png'),
+                          ),
                         );
-                      },),
-                  ),
-                  const Expanded(child: SizedBox()),
-                  GestureDetector(onTap: (){
-
-                  },
-                    child: customTextButton1(
-                        title: 'Add Member',horizentalPadding: 1.h,
-                        verticalPadding: .5.h,
-                        bgColor: Colors.transparent
+                      },
                     ),
                   ),
-
+                  const Expanded(child: SizedBox()),
+                  GestureDetector(
+                    onTap: () {},
+                    child: customTextButton1(title: 'Add Member', horizentalPadding: 1.h, verticalPadding: .5.h, bgColor: Colors.transparent),
+                  ),
                 ],
               ),
               getVerticalSpace(2.4.h),
-
-
-
               getVerticalSpace(5.h),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 2.3.h),
                 child: customButton(
-                    onTap: () {
-
-
-                    },
+                    onTap: () {},
                     backgroundColor: CustomColor.secondaryColor,
                     borderColor: CustomColor.primaryColor,
                     title: 'Create Itinerary',
                     titleColor: Colors.black,
                     height: 4.5.h),
               ),
-              ListView.builder(padding: EdgeInsets.zero,shrinkWrap: true,
+              ListView.builder(
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: 5,
                 itemBuilder: (context, index) {
-                return Padding(
-                  padding:  EdgeInsets.symmetric(vertical: 1.h),
-                  child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                    Row(children: [
-                      CircleAvatar(radius: .6.h,backgroundColor: Colors.white,),
-                      getHorizentalSpace(.5.h),
-                      Text('Start the day with a visit to the',style: CustomTextStyle.buttonText.copyWith(color: Colors.white),),
-                      const Expanded(child: SizedBox()),
-                      Text('09:00 AM',style: CustomTextStyle.buttonText.copyWith(color: Colors.white),)
-
-                    ],),
-                    Row(crossAxisAlignment: CrossAxisAlignment.start,
+                  return Padding(
+                    padding: EdgeInsets.symmetric(vertical: 1.h),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        getHorizentalSpace(2.h),
-                        Text('British Museum.',style: CustomTextStyle.headingStyle.copyWith(color: CustomColor.secondaryColor),),
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: .6.h,
+                              backgroundColor: Colors.white,
+                            ),
+                            getHorizentalSpace(.5.h),
+                            Text(
+                              'Start the day with a visit to the',
+                              style: CustomTextStyle.buttonText.copyWith(color: Colors.white),
+                            ),
+                            const Expanded(child: SizedBox()),
+                            Text(
+                              '09:00 AM',
+                              style: CustomTextStyle.buttonText.copyWith(color: Colors.white),
+                            )
+                          ],
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            getHorizentalSpace(2.h),
+                            Text(
+                              'British Museum.',
+                              style: CustomTextStyle.headingStyle.copyWith(color: CustomColor.secondaryColor),
+                            ),
+                          ],
+                        ),
+                        getVerticalSpace(.6.h),
+                        Divider(
+                          color: CustomColor.secondaryColor,
+                        )
                       ],
                     ),
-                      getVerticalSpace(.6.h),
-                      Divider(color: CustomColor.secondaryColor,)
-                  ],),
-                );
-              },)
+                  );
+                },
+              )
             ],
           ),
         ),

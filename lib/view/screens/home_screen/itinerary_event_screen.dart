@@ -1,12 +1,11 @@
-import 'package:circleapp/view/screens/home_screen/plan_event_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../../../controller/utils/color/custom_color.dart';
 import '../../../controller/utils/style/customTextStyle.dart';
-import '../../../custom_widget/customwidgets.dart';
+import '../../custom_widget/customwidgets.dart';
+
 class ItineraryEventScreen extends StatefulWidget {
   const ItineraryEventScreen({Key? key}) : super(key: key);
 
@@ -20,69 +19,90 @@ class _ItineraryEventScreenState extends State<ItineraryEventScreen> {
     return Scaffold(
       backgroundColor: CustomColor.mainColorBackground,
       body: SingleChildScrollView(
-        child: Column(children: [
-          SfCalendar(
-            backgroundColor: Colors.white,
-            viewHeaderStyle: ViewHeaderStyle(backgroundColor: Colors.green),
-            todayHighlightColor: CustomColor.mainColorYellow,
-            todayTextStyle: TextStyle(
-              fontWeight: FontWeight.bold,
+        child: Column(
+          children: [
+            SfCalendar(
+              backgroundColor: Colors.white,
+              viewHeaderStyle: ViewHeaderStyle(backgroundColor: Colors.green),
+              todayHighlightColor: CustomColor.mainColorYellow,
+              todayTextStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+
+              view: CalendarView.month,
+              dataSource: MeetingDataSource(_getDataSource()),
+
+              // by default the month appointment display mode set as Indicator, we can
+              // change the display mode as appointment using the appointment display
+              // mode property
+              // monthViewSettings: const MonthViewSettings(
+              //     showAgenda: true,
+              //     appointmentDisplayMode:
+              //     MonthAppointmentDisplayMode.appointment),
             ),
-
-            view: CalendarView.month,
-            dataSource: MeetingDataSource(_getDataSource()),
-
-            // by default the month appointment display mode set as Indicator, we can
-            // change the display mode as appointment using the appointment display
-            // mode property
-            // monthViewSettings: const MonthViewSettings(
-            //     showAgenda: true,
-            //     appointmentDisplayMode:
-            //     MonthAppointmentDisplayMode.appointment),
-          ),
-          ListView.builder(padding: EdgeInsets.symmetric(horizontal: 2.h,vertical: 3.h),
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: 5,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding:  EdgeInsets.symmetric(vertical: 1.h),
-                child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(children: [
-                      CircleAvatar(radius: .6.h,backgroundColor: Colors.white,),
-                      getHorizentalSpace(.5.h),
-                      Text('Start the day with a visit to the',style: CustomTextStyle.buttonText.copyWith(color: Colors.white),),
-                      const Expanded(child: SizedBox()),
-                      Text('09:00 AM',style: CustomTextStyle.buttonText.copyWith(color: Colors.white),)
-
-                    ],),
-                    Row(crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        getHorizentalSpace(2.h),
-                        Text('British Museum.',style: CustomTextStyle.headingStyle.copyWith(color: CustomColor.secondaryColor),),
-                      ],
-                    ),
-                    getVerticalSpace(.6.h),
-                    Divider(color: CustomColor.secondaryColor,)
-                  ],),
-              );
-            },)
-        ],),
+            ListView.builder(
+              padding: EdgeInsets.symmetric(horizontal: 2.h, vertical: 3.h),
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: 5,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: EdgeInsets.symmetric(vertical: 1.h),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          CircleAvatar(
+                            radius: .6.h,
+                            backgroundColor: Colors.white,
+                          ),
+                          getHorizentalSpace(.5.h),
+                          Text(
+                            'Start the day with a visit to the',
+                            style: CustomTextStyle.buttonText.copyWith(color: Colors.white),
+                          ),
+                          const Expanded(child: SizedBox()),
+                          Text(
+                            '09:00 AM',
+                            style: CustomTextStyle.buttonText.copyWith(color: Colors.white),
+                          )
+                        ],
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          getHorizentalSpace(2.h),
+                          Text(
+                            'British Museum.',
+                            style: CustomTextStyle.headingStyle.copyWith(color: CustomColor.secondaryColor),
+                          ),
+                        ],
+                      ),
+                      getVerticalSpace(.6.h),
+                      Divider(
+                        color: CustomColor.secondaryColor,
+                      )
+                    ],
+                  ),
+                );
+              },
+            )
+          ],
+        ),
       ),
     );
   }
+
   List<Meeting> _getDataSource() {
     final List<Meeting> meetings = <Meeting>[];
     final DateTime today = DateTime.now();
     final DateTime startTime = DateTime(today.year, today.month, today.day, 9);
     final DateTime endTime = startTime.add(const Duration(hours: 2));
-    meetings.add(Meeting(
-        'Conference', startTime, endTime, const Color(0xFF0F8644), false));
+    meetings.add(Meeting('Conference', startTime, endTime, const Color(0xFF0F8644), false));
     return meetings;
   }
 }
-
 
 /// An object to set the appointment collection data source to calendar, which
 /// used to map the custom appointment data to the calendar appointment, and

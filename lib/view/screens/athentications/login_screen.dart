@@ -1,17 +1,17 @@
 import 'package:circleapp/controller/utils/validations/validation.dart';
-import 'package:circleapp/custom_widget/customwidgets.dart';
 import 'package:circleapp/view/screens/athentications/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
 import '../../../controller/api/auth_apis.dart';
 import '../../../controller/auth_controller/login_controller.dart';
 import '../../../controller/utils/color/custom_color.dart';
 import '../../../controller/utils/style/customTextStyle.dart';
-import '../../../custom_widget/custom-button.dart';
-import '../../../custom_widget/custom_text_field.dart';
-import '../createNewCircleScreens/choose_image.dart';
+import '../../custom_widget/custom-button.dart';
+import '../../custom_widget/custom_text_field.dart';
+import '../../custom_widget/customwidgets.dart';
 import 'forget_password.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -27,7 +27,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     loginController = Get.put(
       LoginController(context),
@@ -73,11 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Align(
                 alignment: Alignment.centerLeft,
-                child: Text("Email",
-                    style: TextStyle(
-                        color: Colors.white.withOpacity(0.6),
-                        fontFamily: "medium",
-                        fontSize: 10.px)),
+                child: Text("Email", style: TextStyle(color: Colors.white.withOpacity(0.6), fontFamily: "medium", fontSize: 10.px)),
               ),
               SizedBox(
                 height: 0.4.h,
@@ -92,11 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Align(
                 alignment: Alignment.centerLeft,
-                child: Text("Password",
-                    style: TextStyle(
-                        color: Colors.white.withOpacity(0.6),
-                        fontSize: 10.px,
-                        fontFamily: "medium")),
+                child: Text("Password", style: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 10.px, fontFamily: "medium")),
               ),
               SizedBox(
                 height: 0.4.h,
@@ -129,23 +120,19 @@ class _LoginScreenState extends State<LoginScreen> {
                       ? CircularProgressIndicator(
                           color: CustomColor.mainColorYellow,
                         )
-                      : CustomMainButton(
+                      : CustomButton(
                           buttonText: "Log In",
                           buttonColor: CustomColor.mainColorYellow,
                           onPressed: () {
                             if (Validations.handleLoginScreenError(
-                                    emailTextController:
-                                        loginController.emailTextController,
-                                    passwordTextController:
-                                        loginController.passwordTextController)
+                                    emailTextController: loginController.emailTextController,
+                                    passwordTextController: loginController.passwordTextController)
                                 .isNotEmpty) {
                               customScaffoldMessenger(
                                 context,
                                 Validations.handleLoginScreenError(
-                                    emailTextController:
-                                        loginController.emailTextController,
-                                    passwordTextController:
-                                        loginController.passwordTextController),
+                                    emailTextController: loginController.emailTextController,
+                                    passwordTextController: loginController.passwordTextController),
                               );
                             } else {
                               loginController.loginApis(
@@ -165,8 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Don't have an account?",
-                      style: CustomTextStyle.mediumTextBS),
+                  Text("Don't have an account?", style: CustomTextStyle.mediumTextBS),
                   SizedBox(
                     width: 0.5.h,
                   ),
@@ -174,8 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     onTap: () {
                       Get.to(() => SignUpScreen());
                     },
-                    child: Text("Create Account",
-                        style: CustomTextStyle.mediumTextS1),
+                    child: Text("Create Account", style: CustomTextStyle.mediumTextS1),
                   ),
                 ],
               ),

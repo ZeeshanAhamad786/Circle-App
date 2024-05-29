@@ -1,16 +1,16 @@
 import 'dart:developer';
+
 import 'package:circleapp/controller/auth_controller/signup_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
 import '../../../controller/auth_controller/resendotp_controller.dart';
+import '../../../controller/auth_controller/verifyotp_controller.dart';
 import '../../../controller/utils/color/custom_color.dart';
 import '../../../controller/utils/style/customTextStyle.dart';
-import '../../../controller/auth_controller/verifyotp_controller.dart';
-import '../../../custom_widget/custom-button.dart';
-import 'login_screen.dart';
+import '../../custom_widget/custom-button.dart';
 
 class VerifyMobileScreen extends StatefulWidget {
   VerifyMobileScreen({Key? key}) : super(key: key);
@@ -53,8 +53,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
                 ),
               ),
               SizedBox(height: 5.h),
-              Text("Verify your mobile number",
-                  style: CustomTextStyle.mediumTextL),
+              Text("Verify your mobile number", style: CustomTextStyle.mediumTextL),
               SizedBox(height: 0.8.h),
               Text(
                 "Please enter the code we sent you on $phoneNumber as a text message",
@@ -67,8 +66,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
                   verifyOtpController.otpCodeTextController.text = v;
                 },
                 length: 6,
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
+                keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 cursorColor: Colors.white,
                 pinTheme: PinTheme(
                   shape: PinCodeFieldShape.box,
@@ -101,8 +99,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
                 },
                 child: Align(
                   alignment: Alignment.centerRight,
-                  child: Text("Expires in 02:10",
-                      style: CustomTextStyle.mediumTextS1),
+                  child: Text("Expires in 02:10", style: CustomTextStyle.mediumTextS1),
                 ),
               ),
               SizedBox(height: 5.h),
@@ -111,12 +108,11 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
                     ? CircularProgressIndicator(
                         color: CustomColor.mainColorYellow,
                       )
-                    : CustomMainButton(
+                    : CustomButton(
                         buttonText: "Done",
                         buttonColor: CustomColor.mainColorYellow,
                         onPressed: () {
-                          verifyOtpController.verifyOtpApi(phoneNumber,
-                              verifyOtpController.otpCodeTextController.text);
+                          verifyOtpController.verifyOtpApi(phoneNumber, verifyOtpController.otpCodeTextController.text);
                         },
                       );
               }),

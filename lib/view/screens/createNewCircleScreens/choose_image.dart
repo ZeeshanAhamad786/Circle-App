@@ -1,17 +1,19 @@
 import 'dart:io';
 
 import 'package:circleapp/controller/paymentController.dart';
+import 'package:circleapp/controller/utils/shared_preferences.dart';
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
-import 'package:circleapp/custom_widget/customwidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../../../controller/utils/color/custom_color.dart';
-import '../../../../custom_widget/custom-button.dart';
 import '../../../controller/api/auth_apis.dart';
 import '../../../controller/auth_controller/profileimageupload_controller.dart';
-import 'createCircleScreen.dart';
+import '../../../controller/utils/color/custom_color.dart';
+import '../../../controller/utils/constants/global_variables.dart';
+import '../../../controller/utils/constants/storage_keys.dart';
+import '../../custom_widget/custom-button.dart';
+import '../../custom_widget/customwidgets.dart';
 
 class ChooseImage extends StatefulWidget {
   const ChooseImage({super.key});
@@ -26,10 +28,9 @@ class _ChooseImageState extends State<ChooseImage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    profileUploadImageController =
-        Get.put(ProfileUploadImageController(context));
+    userToken = MySharedPreferences.getString(userTokenKey);
+    profileUploadImageController = Get.put(ProfileUploadImageController(context));
     authApis = AuthApis(context);
   }
 
@@ -54,8 +55,7 @@ class _ChooseImageState extends State<ChooseImage> {
                 style: CustomTextStyle.mediumTextL,
               )),
               SizedBox(
-                height:
-                    paymentController.pickedImage.value != null ? 4.h : 14.h,
+                height: paymentController.pickedImage.value != null ? 4.h : 14.h,
               ),
               paymentController.pickedImage.value != null
                   ? Container(
@@ -88,67 +88,38 @@ class _ChooseImageState extends State<ChooseImage> {
                           Expanded(
                             child: customButton(
                                 onTap: () {
-                                  if (backButton.value == false) {
-                                    backButton.value = true;
-                                    nextButton.value = false;
-                                  } else {
-                                    backButton.value = false;
-                                    nextButton.value = true;
+                                  if (!profileUploadImageController.uploadImageLoading.value) {
+                                    paymentController.pickedImage.value = null;
                                   }
-                                  Get.back();
                                 },
-                                backgroundColor: backButton.value == true
-                                    ? CustomColor.secondaryColor
-                                    : CustomColor.primaryColor,
-                                borderColor: backButton.value == true
-                                    ? CustomColor.primaryColor
-                                    : CustomColor.secondaryColor,
+                                backgroundColor: backButton.value == true ? CustomColor.secondaryColor : CustomColor.primaryColor,
+                                borderColor: backButton.value == true ? CustomColor.primaryColor : CustomColor.secondaryColor,
                                 title: 'Back',
-                                titleColor: backButton.value == true
-                                    ? Colors.black
-                                    : Colors.white,
+                                titleColor: backButton.value == true ? Colors.black : Colors.white,
                                 width: 16.2.h,
                                 height: 4.5.h),
                           ),
                           getHorizentalSpace(1.h),
                           Expanded(
-                            child: customButton(
+                            child: customLoadingButton(
                                 onTap: () {
-                                  if (nextButton.value == false) {
-                                    nextButton.value = true;
-                                    backButton.value = false;
-                                  } else {
-                                    nextButton.value = false;
-                                    backButton.value = true;
-                                  }
-                                  if (paymentController.pickedImage.value !=
-                                      null) {
-                                    File imageFile = File(paymentController
-                                        .pickedImage.value!.path);
-                                    profileUploadImageController
-                                        .uploadProfilePicture(imageFile);
-                                  } else {
-                                    customScaffoldMessenger(context,
-                                        'No image selected. Please pick an image.');
+                                  if (!profileUploadImageController.uploadImageLoading.value) {
+                                    customScaffoldMessenger(context, 'Uploading Image...');
+                                    profileUploadImageController.uploadProfilePicture(File(paymentController.pickedImage.value!.path));
                                   }
                                 },
-                                backgroundColor: nextButton.value == true
-                                    ? CustomColor.secondaryColor
-                                    : CustomColor.primaryColor,
-                                borderColor: nextButton.value == true
-                                    ? CustomColor.primaryColor
-                                    : CustomColor.secondaryColor,
+                                backgroundColor: nextButton.value == true ? CustomColor.secondaryColor : CustomColor.primaryColor,
+                                borderColor: nextButton.value == true ? CustomColor.primaryColor : CustomColor.secondaryColor,
                                 title: 'Next',
-                                titleColor: nextButton.value == true
-                                    ? Colors.black
-                                    : Colors.white,
+                                titleColor: nextButton.value == true ? Colors.black : Colors.white,
                                 width: 16.2.h,
-                                height: 4.5.h),
+                                height: 4.5.h,
+                                loading: profileUploadImageController.uploadImageLoading),
                           ),
                           getHorizentalSpace(3.h),
                         ],
                       ))
-                  : CustomMainButton(
+                  : CustomButton(
                       buttonText: "Choose Image",
                       buttonColor: CustomColor.mainColorYellow,
                       onPressed: () {
