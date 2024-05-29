@@ -1,9 +1,8 @@
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../controller/utils/color/custom_color.dart';
+import '../../controller/utils/color/custom_color.dart';
 
 class CustomTextField extends StatelessWidget {
   final String hintText;
@@ -39,8 +38,7 @@ class CustomTextField extends StatelessWidget {
         cursorColor: Colors.white, // Replace with your CustomColor.mainColor
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: TextStyle(
-              fontSize: 10.px, fontFamily: "medium", color: Colors.white),
+          hintStyle: TextStyle(fontSize: 10.px, fontFamily: "medium", color: Colors.white),
           contentPadding: EdgeInsets.all(10),
           prefixIcon: Transform.scale(
             scale: 0.4,

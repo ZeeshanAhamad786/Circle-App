@@ -1,16 +1,15 @@
 import 'package:circleapp/controller/auth_controller/signup_controller.dart';
 import 'package:circleapp/controller/utils/color/custom_color.dart';
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
-import 'package:circleapp/custom_widget/custom_text_field.dart';
-import 'package:circleapp/view/screens/athentications/verIfymobilescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
 import '../../../controller/utils/validations/validation.dart';
-import '../../../custom_widget/custom-button.dart';
-import '../../../custom_widget/customwidgets.dart';
-import 'login_screen.dart';
+import '../../custom_widget/custom-button.dart';
+import '../../custom_widget/custom_text_field.dart';
+import '../../custom_widget/customwidgets.dart';
 
 class SignUpScreen extends StatefulWidget {
   SignUpScreen({Key? key}) : super(key: key);
@@ -133,31 +132,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ? CircularProgressIndicator(
                         color: CustomColor.mainColorYellow,
                       )
-                    : CustomMainButton(
+                    : CustomButton(
                         buttonText: "Sign Up",
                         buttonColor: CustomColor.mainColorYellow,
                         onPressed: () {
                           if (Validations.handleSingUpScreenError(
-                            userNameTextController:
-                                _signupController.userNameTextController,
-                            emailTextController:
-                                _signupController.emailTextController,
-                            passwordTextController:
-                                _signupController.passwordTextController,
-                            mobileNumberTextController:
-                                _signupController.phoneNumberController,
+                            userNameTextController: _signupController.userNameTextController,
+                            emailTextController: _signupController.emailTextController,
+                            passwordTextController: _signupController.passwordTextController,
+                            mobileNumberTextController: _signupController.phoneNumberController,
                           ).isNotEmpty) {
                             customScaffoldMessenger(
                               context,
                               Validations.handleSingUpScreenError(
-                                userNameTextController:
-                                    _signupController.userNameTextController,
-                                emailTextController:
-                                    _signupController.emailTextController,
-                                passwordTextController:
-                                    _signupController.passwordTextController,
-                                mobileNumberTextController:
-                                    _signupController.phoneNumberController,
+                                userNameTextController: _signupController.userNameTextController,
+                                emailTextController: _signupController.emailTextController,
+                                passwordTextController: _signupController.passwordTextController,
+                                mobileNumberTextController: _signupController.phoneNumberController,
                               ),
                             );
                           } else {
@@ -176,12 +167,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Don't have an account?",
-                      style: CustomTextStyle.mediumTextBS),
+                  Text("Don't have an account?", style: CustomTextStyle.mediumTextBS),
                   SizedBox(width: 0.5.h),
                   InkWell(
                     onTap: () {
-                      Get.to(() => LoginScreen());
+                      Get.back();
                     },
                     child: Text("Log In", style: CustomTextStyle.mediumTextS1),
                   ),

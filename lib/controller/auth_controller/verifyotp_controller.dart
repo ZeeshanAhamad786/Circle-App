@@ -1,7 +1,7 @@
-import 'package:circleapp/custom_widget/customwidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../view/screens/athentications/verIfymobilescreen.dart';
+
+import '../../view/custom_widget/customwidgets.dart';
 import '../api/auth_apis.dart';
 
 class VerifyOTPController extends GetxController {

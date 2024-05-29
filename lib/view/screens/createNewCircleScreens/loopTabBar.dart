@@ -1,8 +1,6 @@
 import 'package:circleapp/controller/utils/color/custom_color.dart';
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
-import 'package:circleapp/custom_widget/customwidgets.dart';
 import 'package:circleapp/view/addNewPlanScreen.dart';
-import 'package:circleapp/view/screens/bottom_navigation_screen/bottom_navigation_screen.dart';
 import 'package:circleapp/view/screens/createNew_To_DosScreen/create_New_To_Dos_Screen.dart';
 import 'package:circleapp/view/screens/dinnerPlanScreens/dinnerPlan_Details.dart';
 import 'package:circleapp/view/screens/tripPlanScreens/winterTripPlanDetails.dart';
@@ -11,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../custom_widget/customwidgets.dart';
 import '../story_screen.dart';
 import 'chatScreen.dart';
 
@@ -20,8 +19,7 @@ class LoopTabBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    RxList<String> name =
-        <String>['     Canvas    ', '     To-Dos    ', 'Experiences'].obs;
+    RxList<String> name = <String>['     Canvas    ', '     To-Dos    ', 'Experiences'].obs;
     RxInt selectedIndex = 0.obs;
     return Scaffold(
       backgroundColor: CustomColor.primaryColor,
@@ -100,22 +98,13 @@ class LoopTabBar extends StatelessWidget {
                                       : index == 2
                                           ? Radius.circular(0.px)
                                           : Radius.circular(20.px),
-                                  topRight: index == 2
-                                      ? Radius.circular(20.px)
-                                      : Radius.circular(0.px),
-                                  bottomRight: index == 2
-                                      ? Radius.circular(20.px)
-                                      : Radius.circular(0.px)),
-                              color: selectedIndex.value == index
-                                  ? CustomColor.secondaryColor
-                                  : CustomColor.textFieldColor),
+                                  topRight: index == 2 ? Radius.circular(20.px) : Radius.circular(0.px),
+                                  bottomRight: index == 2 ? Radius.circular(20.px) : Radius.circular(0.px)),
+                              color: selectedIndex.value == index ? CustomColor.secondaryColor : CustomColor.textFieldColor),
                           child: Text(
                             name[index],
-                            style: CustomTextStyle.smallText.copyWith(
-                                fontSize: 12.px,
-                                color: selectedIndex.value == index
-                                    ? Colors.black
-                                    : Colors.white),
+                            style: CustomTextStyle.smallText
+                                .copyWith(fontSize: 12.px, color: selectedIndex.value == index ? Colors.black : Colors.white),
                           ),
                         ),
                       ),
@@ -143,10 +132,7 @@ class LoopTabBar extends StatelessWidget {
                                     Get.to(() => StoryScreen());
                                   },
                                   child: Container(
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: CustomColor.secondaryColor),
-                                        shape: BoxShape.circle),
+                                    decoration: BoxDecoration(border: Border.all(color: CustomColor.secondaryColor), shape: BoxShape.circle),
                                     child: CircleAvatar(
                                       radius: 5.6.h,
                                       backgroundColor: CustomColor.mainColor,
@@ -169,13 +155,10 @@ class LoopTabBar extends StatelessWidget {
                                 alignment: Alignment.center,
                                 height: 3.2.h,
                                 width: 6.3.h,
-                                decoration: BoxDecoration(
-                                    color: CustomColor.textFieldColor,
-                                    borderRadius: BorderRadius.circular(5.px)),
+                                decoration: BoxDecoration(color: CustomColor.textFieldColor, borderRadius: BorderRadius.circular(5.px)),
                                 child: Text(
                                   'Today',
-                                  style: CustomTextStyle.smallText
-                                      .copyWith(fontSize: 9.px),
+                                  style: CustomTextStyle.smallText.copyWith(fontSize: 9.px),
                                 ),
                               ),
                               getVerticalSpace(2.h),
@@ -185,46 +168,33 @@ class LoopTabBar extends StatelessWidget {
                                 physics: const NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, index) {
                                   return Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 1.h),
+                                    padding: EdgeInsets.symmetric(horizontal: 1.h),
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Row(
                                           children: [
                                             CircleAvatar(
                                               radius: 2.5.h,
-                                              backgroundImage: const AssetImage(
-                                                  'assets/png/members.png'),
+                                              backgroundImage: const AssetImage('assets/png/members.png'),
                                             ),
                                             getHorizentalSpace(1.5.h),
                                             Expanded(
                                               child: Container(
-                                                margin: EdgeInsets.symmetric(
-                                                    vertical: 1.h),
+                                                margin: EdgeInsets.symmetric(vertical: 1.h),
                                                 alignment: Alignment.center,
                                                 padding: EdgeInsets.all(1.h),
                                                 decoration: BoxDecoration(
-                                                    color:
-                                                        CustomColor.mainColor,
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      bottomLeft:
-                                                          Radius.circular(
-                                                              10.px),
-                                                      bottomRight:
-                                                          Radius.circular(
-                                                              10.px),
-                                                      topRight: Radius.circular(
-                                                          10.px),
+                                                    color: CustomColor.mainColor,
+                                                    borderRadius: BorderRadius.only(
+                                                      bottomLeft: Radius.circular(10.px),
+                                                      bottomRight: Radius.circular(10.px),
+                                                      topRight: Radius.circular(10.px),
                                                     )),
                                                 child: Text(
                                                   "Hello ! Nazrul How are you? what's new?@davidbackem",
-                                                  style: CustomTextStyle
-                                                      .buttonText,
+                                                  style: CustomTextStyle.buttonText,
                                                 ),
                                               ),
                                             ),
@@ -232,9 +202,7 @@ class LoopTabBar extends StatelessWidget {
                                         ),
                                         Text(
                                           'Lita mention you',
-                                          style: CustomTextStyle.hintText
-                                              .copyWith(
-                                                  color: Color(0xff797C7B)),
+                                          style: CustomTextStyle.hintText.copyWith(color: Color(0xff797C7B)),
                                         )
                                       ],
                                     ),
@@ -245,20 +213,17 @@ class LoopTabBar extends StatelessWidget {
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 1.h),
                                 child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Row(
                                       children: [
                                         Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.start,
                                           children: [
                                             CircleAvatar(
                                               radius: 2.5.h,
-                                              backgroundImage: const AssetImage(
-                                                  'assets/png/members.png'),
+                                              backgroundImage: const AssetImage('assets/png/members.png'),
                                             ),
                                             getVerticalSpace(4.h)
                                           ],
@@ -266,20 +231,15 @@ class LoopTabBar extends StatelessWidget {
                                         getHorizentalSpace(1.5.h),
                                         Expanded(
                                           child: Container(
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: 1.h),
+                                              margin: EdgeInsets.symmetric(vertical: 1.h),
                                               alignment: Alignment.center,
                                               padding: EdgeInsets.all(1.h),
                                               decoration: BoxDecoration(
                                                   color: CustomColor.mainColor,
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                    bottomLeft:
-                                                        Radius.circular(10.px),
-                                                    bottomRight:
-                                                        Radius.circular(10.px),
-                                                    topRight:
-                                                        Radius.circular(10.px),
+                                                  borderRadius: BorderRadius.only(
+                                                    bottomLeft: Radius.circular(10.px),
+                                                    bottomRight: Radius.circular(10.px),
+                                                    topRight: Radius.circular(10.px),
                                                   )),
                                               child: Container(
                                                 alignment: Alignment.centerLeft,
@@ -288,29 +248,17 @@ class LoopTabBar extends StatelessWidget {
                                                   padding: EdgeInsets.zero,
                                                   itemCount: 5,
                                                   shrinkWrap: true,
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  itemBuilder:
-                                                      (context, index) {
+                                                  scrollDirection: Axis.horizontal,
+                                                  itemBuilder: (context, index) {
                                                     return Container(
-                                                        margin: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal: 1.h,
-                                                                vertical: .2.h),
+                                                        margin: EdgeInsets.symmetric(horizontal: 1.h, vertical: .2.h),
                                                         height: 7.h,
                                                         width: 7.h,
                                                         decoration: BoxDecoration(
-                                                            color: CustomColor
-                                                                .mainColorBackground,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5.px),
+                                                            color: CustomColor.mainColorBackground,
+                                                            borderRadius: BorderRadius.circular(5.px),
                                                             image: const DecorationImage(
-                                                                image: AssetImage(
-                                                                    'assets/png/postimage.jpeg'),
-                                                                fit: BoxFit
-                                                                    .cover)));
+                                                                image: AssetImage('assets/png/postimage.jpeg'), fit: BoxFit.cover)));
                                                   },
                                                 ),
                                               )),
@@ -319,26 +267,22 @@ class LoopTabBar extends StatelessWidget {
                                     ),
                                     Text(
                                       'Lita mention you',
-                                      style: CustomTextStyle.hintText
-                                          .copyWith(color: Color(0xff797C7B)),
+                                      style: CustomTextStyle.hintText.copyWith(color: Color(0xff797C7B)),
                                     ),
                                     getVerticalSpace(1.4.h),
                                     ListView.builder(
                                       shrinkWrap: true,
                                       itemCount: 2,
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
+                                      physics: const NeverScrollableScrollPhysics(),
                                       itemBuilder: (context, index) {
                                         return Row(
                                           children: [
                                             Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.start,
                                               children: [
                                                 CircleAvatar(
                                                   radius: 2.5.h,
-                                                  backgroundImage: const AssetImage(
-                                                      'assets/png/members.png'),
+                                                  backgroundImage: const AssetImage('assets/png/members.png'),
                                                 ),
                                                 SizedBox(
                                                   height: 10.h,
@@ -348,87 +292,58 @@ class LoopTabBar extends StatelessWidget {
                                             getHorizentalSpace(1.5.h),
                                             Expanded(
                                               child: Container(
-                                                margin: EdgeInsets.symmetric(
-                                                    vertical: 1.h),
+                                                margin: EdgeInsets.symmetric(vertical: 1.h),
                                                 alignment: Alignment.center,
                                                 padding: EdgeInsets.all(1.h),
                                                 decoration: BoxDecoration(
                                                   color: CustomColor.mainColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.px),
+                                                  borderRadius: BorderRadius.circular(20.px),
                                                 ),
                                                 child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  mainAxisAlignment: MainAxisAlignment.start,
                                                   children: [
                                                     Text(
                                                       'Winter trip Plan',
-                                                      style: CustomTextStyle
-                                                          .headingStyle,
+                                                      style: CustomTextStyle.headingStyle,
                                                     ),
                                                     Text(
                                                       '''Lorem ipsum dolor sit amet consectetur. Eget aliquam suspendisse ultrices a mattis vitae. Adipiscing id vestibulum ultrices lorem.''',
-                                                      style: CustomTextStyle
-                                                          .hintText,
+                                                      style: CustomTextStyle.hintText,
                                                     ),
                                                     getVerticalSpace(.4.h),
                                                     Row(
                                                       children: [
                                                         SizedBox(
                                                           height: 3.1.h,
-                                                          child:
-                                                              ListView.builder(
-                                                            padding:
-                                                                EdgeInsets.zero,
+                                                          child: ListView.builder(
+                                                            padding: EdgeInsets.zero,
                                                             shrinkWrap: true,
-                                                            scrollDirection:
-                                                                Axis.horizontal,
+                                                            scrollDirection: Axis.horizontal,
                                                             itemCount: 4,
                                                             itemExtent: 4.h,
-                                                            itemBuilder:
-                                                                (context,
-                                                                    index) {
+                                                            itemBuilder: (context, index) {
                                                               return Padding(
-                                                                padding: EdgeInsets
-                                                                    .symmetric(
-                                                                        horizontal:
-                                                                            .3.h),
-                                                                child:
-                                                                    Container(
+                                                                padding: EdgeInsets.symmetric(horizontal: .3.h),
+                                                                child: Container(
                                                                   decoration: BoxDecoration(
-                                                                      border: Border.all(
-                                                                          color: CustomColor
-                                                                              .secondaryColor),
-                                                                      shape: BoxShape
-                                                                          .circle),
-                                                                  child:
-                                                                      CircleAvatar(
-                                                                    radius:
-                                                                        5.6.h,
-                                                                    backgroundColor:
-                                                                        CustomColor
-                                                                            .mainColor,
-                                                                    backgroundImage:
-                                                                        const AssetImage(
-                                                                            'assets/png/story.png'),
+                                                                      border: Border.all(color: CustomColor.secondaryColor), shape: BoxShape.circle),
+                                                                  child: CircleAvatar(
+                                                                    radius: 5.6.h,
+                                                                    backgroundColor: CustomColor.mainColor,
+                                                                    backgroundImage: const AssetImage('assets/png/story.png'),
                                                                   ),
                                                                 ),
                                                               );
                                                             },
                                                           ),
                                                         ),
-                                                        const Expanded(
-                                                            child: SizedBox()),
+                                                        const Expanded(child: SizedBox()),
                                                         GestureDetector(
                                                             onTap: () {
-                                                              Get.to(() =>
-                                                                  WinterTripPlanDetails());
+                                                              Get.to(() => WinterTripPlanDetails());
                                                             },
-                                                            child:
-                                                                customTextButton2())
+                                                            child: customTextButton2())
                                                       ],
                                                     ),
                                                   ],
@@ -465,50 +380,34 @@ class LoopTabBar extends StatelessWidget {
                                       if (index == 0 || index == 1) {
                                         Get.to(() => const DinnerPlanDetails());
                                       } else {
-                                        Get.to(() =>
-                                            const WinterTripPlanDetails());
+                                        Get.to(() => const WinterTripPlanDetails());
                                       }
                                     },
                                     child: Container(
-                                      margin: EdgeInsets.symmetric(
-                                          vertical: 1.h, horizontal: 1.h),
+                                      margin: EdgeInsets.symmetric(vertical: 1.h, horizontal: 1.h),
                                       alignment: Alignment.center,
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 1.9.h, vertical: 1.4.h),
+                                      padding: EdgeInsets.symmetric(horizontal: 1.9.h, vertical: 1.4.h),
                                       decoration: BoxDecoration(
                                         color: CustomColor.mainColor,
-                                        borderRadius:
-                                            BorderRadius.circular(20.px),
+                                        borderRadius: BorderRadius.circular(20.px),
                                       ),
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                         children: [
                                           Row(
                                             children: [
                                               Text(
                                                 'Hiking',
-                                                style: CustomTextStyle
-                                                    .headingStyle,
+                                                style: CustomTextStyle.headingStyle,
                                               ),
                                               const Expanded(child: SizedBox()),
                                               RichText(
                                                   text: TextSpan(children: [
                                                 TextSpan(
                                                     text: 'Total Bill: ',
-                                                    style: CustomTextStyle
-                                                        .smallText
-                                                        .copyWith(
-                                                            color: const Color(
-                                                                    0xffFFFFFF)
-                                                                .withOpacity(
-                                                                    0.48))),
-                                                TextSpan(
-                                                    text: '\$2500',
-                                                    style: CustomTextStyle
-                                                        .smallText),
+                                                    style: CustomTextStyle.smallText.copyWith(color: const Color(0xffFFFFFF).withOpacity(0.48))),
+                                                TextSpan(text: '\$2500', style: CustomTextStyle.smallText),
                                               ])),
                                             ],
                                           ),
@@ -517,18 +416,8 @@ class LoopTabBar extends StatelessWidget {
                                               text: TextSpan(children: [
                                             TextSpan(
                                                 text: 'Status: ',
-                                                style: CustomTextStyle.smallText
-                                                    .copyWith(
-                                                        color: const Color(
-                                                                0xffFFFFFF)
-                                                            .withOpacity(
-                                                                0.48))),
-                                            TextSpan(
-                                                text: 'Pending',
-                                                style: CustomTextStyle.smallText
-                                                    .copyWith(
-                                                        color: CustomColor
-                                                            .secondaryColor)),
+                                                style: CustomTextStyle.smallText.copyWith(color: const Color(0xffFFFFFF).withOpacity(0.48))),
+                                            TextSpan(text: 'Pending', style: CustomTextStyle.smallText.copyWith(color: CustomColor.secondaryColor)),
                                           ])),
                                           getVerticalSpace(.6.h),
                                           Text(
@@ -543,31 +432,19 @@ class LoopTabBar extends StatelessWidget {
                                                 child: ListView.builder(
                                                   padding: EdgeInsets.zero,
                                                   shrinkWrap: true,
-                                                  scrollDirection:
-                                                      Axis.horizontal,
+                                                  scrollDirection: Axis.horizontal,
                                                   itemCount: 4,
                                                   itemExtent: 4.h,
-                                                  itemBuilder:
-                                                      (context, index) {
+                                                  itemBuilder: (context, index) {
                                                     return Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: .3.h),
+                                                      padding: EdgeInsets.symmetric(horizontal: .3.h),
                                                       child: Container(
                                                         decoration: BoxDecoration(
-                                                            border: Border.all(
-                                                                color: CustomColor
-                                                                    .secondaryColor),
-                                                            shape: BoxShape
-                                                                .circle),
+                                                            border: Border.all(color: CustomColor.secondaryColor), shape: BoxShape.circle),
                                                         child: CircleAvatar(
                                                           radius: 5.6.h,
-                                                          backgroundColor:
-                                                              CustomColor
-                                                                  .mainColor,
-                                                          backgroundImage:
-                                                              const AssetImage(
-                                                                  'assets/png/story.png'),
+                                                          backgroundColor: CustomColor.mainColor,
+                                                          backgroundImage: const AssetImage('assets/png/story.png'),
                                                         ),
                                                       ),
                                                     );
@@ -596,8 +473,7 @@ class LoopTabBar extends StatelessWidget {
                               getVerticalSpace(2.h),
                               Text(
                                 'Upcoming Plans',
-                                style: CustomTextStyle.buttonText
-                                    .copyWith(color: Colors.white),
+                                style: CustomTextStyle.buttonText.copyWith(color: Colors.white),
                               ),
                               GestureDetector(
                                 onTap: () {
@@ -615,11 +491,9 @@ class LoopTabBar extends StatelessWidget {
                                         alignment: Alignment.centerRight,
                                         decoration: BoxDecoration(
                                           color: CustomColor.secondaryColor,
-                                          borderRadius:
-                                              BorderRadius.circular(10.px),
+                                          borderRadius: BorderRadius.circular(10.px),
                                         ),
-                                        child: SvgPicture.asset(
-                                            'assets/svg/deleteicon.svg'),
+                                        child: SvgPicture.asset('assets/svg/deleteicon.svg'),
                                       ),
                                       key: Key(index.toString()),
                                       child: GestureDetector(
@@ -627,42 +501,33 @@ class LoopTabBar extends StatelessWidget {
                                           Get.to(() => WinterTripPlanDetails());
                                         },
                                         child: Container(
-                                          margin: EdgeInsets.symmetric(
-                                              vertical: 1.h, horizontal: 1.9.h),
+                                          margin: EdgeInsets.symmetric(vertical: 1.h, horizontal: 1.9.h),
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.all(1.h),
                                           decoration: BoxDecoration(
                                             color: CustomColor.mainColor,
-                                            borderRadius:
-                                                BorderRadius.circular(10.px),
+                                            borderRadius: BorderRadius.circular(10.px),
                                           ),
                                           child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
                                               Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
+                                                crossAxisAlignment: CrossAxisAlignment.center,
                                                 children: [
                                                   CircleAvatar(
                                                     radius: .5.h,
-                                                    backgroundColor:
-                                                        Colors.green,
+                                                    backgroundColor: Colors.green,
                                                   ),
                                                   getHorizentalSpace(.8.h),
                                                   Text(
                                                     'Winter trip Plan',
-                                                    style: CustomTextStyle
-                                                        .headingStyle,
+                                                    style: CustomTextStyle.headingStyle,
                                                   ),
-                                                  const Expanded(
-                                                      child: SizedBox()),
+                                                  const Expanded(child: SizedBox()),
                                                   Text(
                                                     '10:00-13:00',
-                                                    style: CustomTextStyle
-                                                        .hintText,
+                                                    style: CustomTextStyle.hintText,
                                                   ),
                                                   getVerticalSpace(1.h),
                                                 ],
@@ -673,20 +538,14 @@ class LoopTabBar extends StatelessWidget {
                                                   Expanded(
                                                       child: Text(
                                                     ''' will be a sunny day''',
-                                                    style: CustomTextStyle
-                                                        .hintText,
+                                                    style: CustomTextStyle.hintText,
                                                   )),
                                                   GestureDetector(
                                                     onTap: () {
-                                                      Get.to(() =>
-                                                          WinterTripPlanDetails());
+                                                      Get.to(() => WinterTripPlanDetails());
                                                     },
                                                     child: customTextButton2(
-                                                        title: 'Booked',
-                                                        bgColor: CustomColor
-                                                            .secondaryColor,
-                                                        btnTextColor:
-                                                            Colors.black),
+                                                        title: 'Booked', bgColor: CustomColor.secondaryColor, btnTextColor: Colors.black),
                                                   )
                                                 ],
                                               ),
@@ -701,8 +560,7 @@ class LoopTabBar extends StatelessWidget {
                               getVerticalSpace(1.5.h),
                               Text(
                                 'Saved',
-                                style: CustomTextStyle.buttonText
-                                    .copyWith(color: Colors.white),
+                                style: CustomTextStyle.buttonText.copyWith(color: Colors.white),
                               ),
                               GestureDetector(
                                 onTap: () {
@@ -720,32 +578,25 @@ class LoopTabBar extends StatelessWidget {
                                         alignment: Alignment.centerRight,
                                         decoration: BoxDecoration(
                                           color: CustomColor.secondaryColor,
-                                          borderRadius:
-                                              BorderRadius.circular(10.px),
+                                          borderRadius: BorderRadius.circular(10.px),
                                         ),
-                                        child: SvgPicture.asset(
-                                            'assets/svg/saveicon.svg'),
+                                        child: SvgPicture.asset('assets/svg/saveicon.svg'),
                                       ),
                                       key: Key(index.toString()),
                                       child: Container(
-                                        margin: EdgeInsets.symmetric(
-                                            vertical: 1.h, horizontal: 1.9.h),
+                                        margin: EdgeInsets.symmetric(vertical: 1.h, horizontal: 1.9.h),
                                         alignment: Alignment.center,
                                         padding: EdgeInsets.all(1.h),
                                         decoration: BoxDecoration(
                                           color: CustomColor.mainColor,
-                                          borderRadius:
-                                              BorderRadius.circular(10.px),
+                                          borderRadius: BorderRadius.circular(10.px),
                                         ),
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.start,
                                           children: [
                                             Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
                                               children: [
                                                 CircleAvatar(
                                                   radius: .5.h,
@@ -754,15 +605,12 @@ class LoopTabBar extends StatelessWidget {
                                                 getHorizentalSpace(.8.h),
                                                 Text(
                                                   'Winter trip Plan',
-                                                  style: CustomTextStyle
-                                                      .headingStyle,
+                                                  style: CustomTextStyle.headingStyle,
                                                 ),
-                                                const Expanded(
-                                                    child: SizedBox()),
+                                                const Expanded(child: SizedBox()),
                                                 Text(
                                                   '10:00-13:00',
-                                                  style:
-                                                      CustomTextStyle.hintText,
+                                                  style: CustomTextStyle.hintText,
                                                 ),
                                                 getVerticalSpace(1.h),
                                               ],
@@ -773,8 +621,7 @@ class LoopTabBar extends StatelessWidget {
                                                 Expanded(
                                                     child: Text(
                                                   ''' will be a sunny day''',
-                                                  style:
-                                                      CustomTextStyle.hintText,
+                                                  style: CustomTextStyle.hintText,
                                                 )),
                                               ],
                                             ),

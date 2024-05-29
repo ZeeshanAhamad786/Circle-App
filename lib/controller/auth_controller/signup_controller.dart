@@ -1,6 +1,7 @@
-import 'package:circleapp/custom_widget/customwidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../view/custom_widget/customwidgets.dart';
 import '../../view/screens/athentications/verIfymobilescreen.dart';
 import '../api/auth_apis.dart';
 
@@ -14,13 +15,10 @@ class SignupController extends GetxController {
 
   SignupController(this.context);
 
-  Future<void> signupApis(String userName, String email, String phoneNumber,
-      String password) async {
+  Future<void> signupApis(String userName, String email, String phoneNumber, String password) async {
     isLoading.value = true;
     try {
-      await AuthApis(context)
-          .signupApi(userName, email, password, phoneNumber)
-          .then((value) {
+      await AuthApis(context).signupApi(userName, email, password, phoneNumber).then((value) {
         Get.to(() => VerifyMobileScreen(), arguments: {
           'phoneNumber': phoneNumberController.text,
         });

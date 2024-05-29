@@ -1,16 +1,13 @@
-import 'package:circleapp/custom_widget/customwidgets.dart';
 import 'package:circleapp/view/screens/planDetailScreen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../../../controller/utils/color/custom_color.dart';
 import '../../../controller/utils/style/customTextStyle.dart';
-import 'home_screen.dart';
+import '../../custom_widget/customwidgets.dart';
+
 class PlanEventScreen extends StatefulWidget {
   const PlanEventScreen({Key? key}) : super(key: key);
 
@@ -20,178 +17,162 @@ class PlanEventScreen extends StatefulWidget {
 
 class _PlanEventScreenState extends State<PlanEventScreen> {
   List<Map<String, String>> data = [
-    {
-      "name": "Imagine Dragon’s Concert",
-      "date": "12/3/23",
-      "subtitle": "will be a sunny day"
-    },
-    {
-      "name": "Art Gallery",
-      "date": "12/7/23",
-      "subtitle": "hello world"
-    },
-    {
-      "name": "Aroura Lights",
-      "date": "12/1/23",
-      "subtitle": "best time to visit Norway"
-    },
-    {
-      "name": "Imagine Dragon’s Concert",
-      "date": "12/3/23",
-      "subtitle": "hello world"
-    }, {
-      "name": "Imagine Dragon’s Concert",
-      "date": "12/3/23",
-      "subtitle": "hello world"
-    }
+    {"name": "Imagine Dragon’s Concert", "date": "12/3/23", "subtitle": "will be a sunny day"},
+    {"name": "Art Gallery", "date": "12/7/23", "subtitle": "hello world"},
+    {"name": "Aroura Lights", "date": "12/1/23", "subtitle": "best time to visit Norway"},
+    {"name": "Imagine Dragon’s Concert", "date": "12/3/23", "subtitle": "hello world"},
+    {"name": "Imagine Dragon’s Concert", "date": "12/3/23", "subtitle": "hello world"}
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SfCalendar(
+              backgroundColor: Colors.white,
+              viewHeaderStyle: ViewHeaderStyle(backgroundColor: Colors.green),
+              todayHighlightColor: CustomColor.mainColorYellow,
+              todayTextStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
 
-body: SingleChildScrollView(
-  child: Column(children: [
-    SfCalendar(
-      backgroundColor: Colors.white,
-      viewHeaderStyle: ViewHeaderStyle(backgroundColor: Colors.green),
-      todayHighlightColor: CustomColor.mainColorYellow,
-      todayTextStyle: TextStyle(
-        fontWeight: FontWeight.bold,
-      ),
-  
-      view: CalendarView.month,
-      dataSource: MeetingDataSource(_getDataSource()),
-  
-      // by default the month appointment display mode set as Indicator, we can
-      // change the display mode as appointment using the appointment display
-      // mode property
-      // monthViewSettings: const MonthViewSettings(
-      //     showAgenda: true,
-      //     appointmentDisplayMode:
-      //     MonthAppointmentDisplayMode.appointment),
-    ),
-  getVerticalSpace(1.5.h),
-  Container(
-    width: MediaQuery.of(context).size.width,
-    decoration: BoxDecoration(
-      border: Border.all(
-        color: Color(0xff343434),
-      ),
-      borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30),
-          topRight: Radius.circular(30)),
-      color: CustomColor.mainColorBackground,
-    ),
-    child: Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.only(
-              left: 5.h, right: 5.h, top: 4.h),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Events",
-                style: CustomTextStyle.mediumTextM14,
-              ),
-              GestureDetector(onTap: () {
-                Get.to(()=>PlansDetails());
-              },
-                child: Text(
-                  "See Details",
-                  style: CustomTextStyle.mediumTextTab,
+              view: CalendarView.month,
+              dataSource: MeetingDataSource(_getDataSource()),
+
+              // by default the month appointment display mode set as Indicator, we can
+              // change the display mode as appointment using the appointment display
+              // mode property
+              // monthViewSettings: const MonthViewSettings(
+              //     showAgenda: true,
+              //     appointmentDisplayMode:
+              //     MonthAppointmentDisplayMode.appointment),
+            ),
+            getVerticalSpace(1.5.h),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Color(0xff343434),
                 ),
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+                color: CustomColor.mainColorBackground,
               ),
-            ],
-          ),
-        ),
-        SizedBox(height: 4.h,),
-        ListView.builder(
-            physics: ScrollPhysics(),
-            itemCount: data.length,
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Dismissible(
-                  key: Key("$index"),
-                  onDismissed: (DismissDirection){
-                    setState(() {data.removeAt(index);});
-                  },
-                  background: Container(
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Colors.red),// Background color when swiping
-                    child: Icon(Icons.delete, color: Colors.white),
-                    alignment: Alignment.centerRight,
-                    padding: EdgeInsets.only(right: 5.h),
-                  ),
-                  child: Container(
-                      margin:
-                      EdgeInsets.symmetric(horizontal: 3.h),
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          borderRadius:
-                          BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                                color: CustomColor
-                                    .mainColorBackground
-                                    .withOpacity(0.01),
-                                blurRadius: 30,
-                                offset: Offset(0, 3))
-                          ],
-                          color: CustomColor.mainColorLowBlack),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              CircleAvatar(radius: .5.h,backgroundColor: Colors.green,),
-                              SizedBox(width: 2.w,),
-                              Text(
-                                data[index]["name"]!,
-                                style:
-                                CustomTextStyle.mediumTextM,
-                              ),
-                              Expanded(child:SizedBox()),
-                              Text(data[index]["date"]!,style:CustomTextStyle.mediumTextBold,),
-                            ],
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 5.h, right: 5.h, top: 4.h),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Events",
+                          style: CustomTextStyle.mediumTextM14,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Get.to(() => PlansDetails());
+                          },
+                          child: Text(
+                            "See Details",
+                            style: CustomTextStyle.mediumTextTab,
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                  child: Text(
-                                    data[index]["subtitle"]!,
-                                    style: CustomTextStyle.mediumTextGrey,
-                                  )),
-                              ElevatedButton(
-                                  onPressed: () {},
-                                  style:ElevatedButton.styleFrom(backgroundColor: CustomColor.mainColorYellow,
-                                      minimumSize: Size(60, 30)
-                                  ),
-                                  child: Text("Booked",style:CustomTextStyle.mediumTextBold,
-                                  )),
-                            ],
-                          )
-                        ],
-                      )),
-                ),
-              );
-            })
-      ],
-    ),
-  )
-  ],),
-),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 4.h,
+                  ),
+                  ListView.builder(
+                      physics: ScrollPhysics(),
+                      itemCount: data.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Dismissible(
+                            key: Key("$index"),
+                            onDismissed: (DismissDirection) {
+                              setState(() {
+                                data.removeAt(index);
+                              });
+                            },
+                            background: Container(
+                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Colors.red), // Background color when swiping
+                              child: Icon(Icons.delete, color: Colors.white),
+                              alignment: Alignment.centerRight,
+                              padding: EdgeInsets.only(right: 5.h),
+                            ),
+                            child: Container(
+                                margin: EdgeInsets.symmetric(horizontal: 3.h),
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: [
+                                      BoxShadow(color: CustomColor.mainColorBackground.withOpacity(0.01), blurRadius: 30, offset: Offset(0, 3))
+                                    ],
+                                    color: CustomColor.mainColorLowBlack),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        CircleAvatar(
+                                          radius: .5.h,
+                                          backgroundColor: Colors.green,
+                                        ),
+                                        SizedBox(
+                                          width: 2.w,
+                                        ),
+                                        Text(
+                                          data[index]["name"]!,
+                                          style: CustomTextStyle.mediumTextM,
+                                        ),
+                                        Expanded(child: SizedBox()),
+                                        Text(
+                                          data[index]["date"]!,
+                                          style: CustomTextStyle.mediumTextBold,
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                            child: Text(
+                                          data[index]["subtitle"]!,
+                                          style: CustomTextStyle.mediumTextGrey,
+                                        )),
+                                        ElevatedButton(
+                                            onPressed: () {},
+                                            style: ElevatedButton.styleFrom(backgroundColor: CustomColor.mainColorYellow, minimumSize: Size(60, 30)),
+                                            child: Text(
+                                              "Booked",
+                                              style: CustomTextStyle.mediumTextBold,
+                                            )),
+                                      ],
+                                    )
+                                  ],
+                                )),
+                          ),
+                        );
+                      })
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
+
   List<Meeting> _getDataSource() {
     final List<Meeting> meetings = <Meeting>[];
     final DateTime today = DateTime.now();
     final DateTime startTime = DateTime(today.year, today.month, today.day, 9);
     final DateTime endTime = startTime.add(const Duration(hours: 2));
-    meetings.add(Meeting(
-        'Conference', startTime, endTime, const Color(0xFF0F8644), false));
+    meetings.add(Meeting('Conference', startTime, endTime, const Color(0xFF0F8644), false));
     return meetings;
   }
 }

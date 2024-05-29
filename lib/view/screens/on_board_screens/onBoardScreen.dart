@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
 import '../../../controller/utils/color/custom_color.dart';
-import '../../../custom_widget/custom-button.dart';
+import '../../custom_widget/custom-button.dart';
 import '../explore_section/explore_screen.dart';
+
 class OnBoardingScreen1 extends StatefulWidget {
   const OnBoardingScreen1({super.key});
 
@@ -40,8 +42,7 @@ class _OnBoardingScreen1State extends State<OnBoardingScreen1> {
               children: [
                 OnboardingPage(
                   image: "assets/png/splash1.png",
-                  title:
-                      'Create a circle for all your group\n chats and invite your friends',
+                  title: 'Create a circle for all your group\n chats and invite your friends',
                   controller: _controller,
                 ),
                 OnboardingPage(
@@ -179,11 +180,7 @@ class OnboardingPage extends StatelessWidget {
                             color: CustomColor.mainColorYellow,
                             borderRadius: BorderRadius.circular(32.px),
                           ),
-                          dotDecoration: DotDecoration(
-                              height: 0.8.h,
-                              width: 0.8.h,
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(32.px)),
+                          dotDecoration: DotDecoration(height: 0.8.h, width: 0.8.h, color: Colors.white, borderRadius: BorderRadius.circular(32.px)),
                           spacing: 1.2.h,
                         ),
                       ),
@@ -191,7 +188,7 @@ class OnboardingPage extends StatelessWidget {
                     SizedBox(height: 3.h),
                     Align(
                       alignment: Alignment.centerRight,
-                      child: CustomMainButton(
+                      child: CustomButton(
                           buttonText: "Get Started",
                           buttonColor: CustomColor.mainColorYellow,
                           onPressed: () {

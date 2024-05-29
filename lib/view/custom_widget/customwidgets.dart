@@ -2,7 +2,9 @@ import 'package:circleapp/controller/utils/color/custom_color.dart';
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 Widget customTextFormField(TextEditingController? controller, String? hintText,
@@ -34,16 +36,12 @@ Widget customTextFormField(TextEditingController? controller, String? hintText,
     onTap: isTap,
     decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
-            borderRadius: borderRadius ?? BorderRadius.circular(30.px),
-            borderSide: const BorderSide(color: CustomColor.textFieldColor)),
+            borderRadius: borderRadius ?? BorderRadius.circular(30.px), borderSide: const BorderSide(color: CustomColor.textFieldColor)),
         filled: true,
-        contentPadding: contentPading ??
-            EdgeInsets.symmetric(
-                horizontal: 2.h, vertical: 1.5.h), // Adjust vertical padding
+        contentPadding: contentPading ?? EdgeInsets.symmetric(horizontal: 2.h, vertical: 1.5.h), // Adjust vertical padding
         isCollapsed: true,
         border: OutlineInputBorder(
-            borderRadius: borderRadius ?? BorderRadius.circular(30.px),
-            borderSide: const BorderSide(color: CustomColor.textFieldColor)),
+            borderRadius: borderRadius ?? BorderRadius.circular(30.px), borderSide: const BorderSide(color: CustomColor.textFieldColor)),
         fillColor: CustomColor.textFieldColor,
         prefixIcon: prefixIcon,
         suffixIcon: sufixIcon,
@@ -66,14 +64,11 @@ Widget getHorizentalSpace(double width) {
   );
 }
 
-Widget customRadioButton(
-    {String? title, Color? borderColor, SvgPicture? assetsImage}) {
+Widget customRadioButton({String? title, Color? borderColor, SvgPicture? assetsImage}) {
   return Container(
     alignment: Alignment.center,
     height: 4.2.h,
-    decoration: BoxDecoration(
-        color: CustomColor.textFieldColor,
-        borderRadius: BorderRadius.circular(30.px)),
+    decoration: BoxDecoration(color: CustomColor.textFieldColor, borderRadius: BorderRadius.circular(30.px)),
     child: Row(
       children: [
         getHorizentalSpace(2.h),
@@ -96,14 +91,7 @@ Widget customRadioButton(
   );
 }
 
-Widget customButton(
-    {String? title,
-    Color? backgroundColor,
-    double? height,
-    Callback? onTap,
-    Color? borderColor,
-    double? width,
-    Color? titleColor}) {
+Widget customButton({String? title, Color? backgroundColor, double? height, Callback? onTap, Color? borderColor, double? width, Color? titleColor}) {
   return GestureDetector(
     onTap: onTap,
     child: Container(
@@ -123,19 +111,43 @@ Widget customButton(
   );
 }
 
-Widget customTextButton1(
+Widget customLoadingButton(
     {String? title,
-    double? horizentalPadding,
-    double? verticalPadding,
-    Color? bgColor}) {
+    Color? backgroundColor,
+    double? height,
+    Callback? onTap,
+    Color? borderColor,
+    double? width,
+    Color? titleColor,
+    required RxBool loading}) {
+  return Obx(() {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        alignment: Alignment.center,
+        height: height,
+        width: width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30.px),
+          color: backgroundColor,
+          border: Border.all(color: borderColor!),
+        ),
+        child: loading.value
+            ? LoadingAnimationWidget.waveDots(color: CustomColor.mainColorLogin, size: 35)
+            : Text(
+                title!,
+                style: CustomTextStyle.buttonText.copyWith(color: titleColor),
+              ),
+      ),
+    );
+  });
+}
+
+Widget customTextButton1({String? title, double? horizentalPadding, double? verticalPadding, Color? bgColor}) {
   return Container(
-    padding: EdgeInsets.symmetric(
-        horizontal: horizentalPadding ?? .7.h,
-        vertical: verticalPadding ?? .1.h),
+    padding: EdgeInsets.symmetric(horizontal: horizentalPadding ?? .7.h, vertical: verticalPadding ?? .1.h),
     decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20.px),
-        color: bgColor ?? CustomColor.mainColor,
-        border: Border.all(color: CustomColor.secondaryColor)),
+        borderRadius: BorderRadius.circular(20.px), color: bgColor ?? CustomColor.mainColor, border: Border.all(color: CustomColor.secondaryColor)),
     child: Row(
       children: [
         Icon(
@@ -146,36 +158,24 @@ Widget customTextButton1(
         getHorizentalSpace(.2.h),
         Text(
           title ?? 'Add',
-          style: CustomTextStyle.smallText
-              .copyWith(color: CustomColor.secondaryColor, fontSize: 12.px),
+          style: CustomTextStyle.smallText.copyWith(color: CustomColor.secondaryColor, fontSize: 12.px),
         )
       ],
     ),
   );
 }
 
-Widget customTextButton2(
-    {String? title,
-    Color? bgColor,
-    Color? btnTextColor,
-    double? horizentalPadding,
-    verticalPadding}) {
+Widget customTextButton2({String? title, Color? bgColor, Color? btnTextColor, double? horizentalPadding, verticalPadding}) {
   return Container(
-    padding: EdgeInsets.symmetric(
-        horizontal: horizentalPadding ?? .8.h,
-        vertical: verticalPadding ?? .1.h),
+    padding: EdgeInsets.symmetric(horizontal: horizentalPadding ?? .8.h, vertical: verticalPadding ?? .1.h),
     decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20.px),
-        color: bgColor ?? CustomColor.mainColor,
-        border: Border.all(color: CustomColor.secondaryColor)),
+        borderRadius: BorderRadius.circular(20.px), color: bgColor ?? CustomColor.mainColor, border: Border.all(color: CustomColor.secondaryColor)),
     child: Row(
       children: [
         getHorizentalSpace(.2.h),
         Text(
           title ?? "View Detail",
-          style: CustomTextStyle.smallText.copyWith(
-              color: btnTextColor ?? CustomColor.secondaryColor,
-              fontSize: 10.px),
+          style: CustomTextStyle.smallText.copyWith(color: btnTextColor ?? CustomColor.secondaryColor, fontSize: 10.px),
         )
       ],
     ),

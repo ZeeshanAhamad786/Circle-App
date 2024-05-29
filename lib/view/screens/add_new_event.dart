@@ -1,19 +1,34 @@
 import 'package:circleapp/controller/utils/color/custom_color.dart';
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
-import 'package:circleapp/custom_widget/customwidgets.dart';
 import 'package:circleapp/view/addNewPlanScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../custom_widget/customwidgets.dart';
 
-class AddNewEvent extends StatelessWidget {
-  const AddNewEvent({super.key});
+class Add_new_event extends StatelessWidget {
+  const Add_new_event({super.key});
 
   @override
   Widget build(BuildContext context) {
-    RxList<int> colorsList = <int>[0xffFFCC4D, 0xffEF3B3B, 0xffFF4DD8,0xff7B4DFF,0xff0BE9F8,0xff7BFF4D,0xff00B383,0xff735BF2,0xffFFCC4D,0xffBDA7FC,0xffEF3B3B,0xff0BE9F8,0xffFF4DD8,0xff7BFF4D].obs;
-    RxInt selectedColor=0.obs;
+    RxList<int> colorsList = <int>[
+      0xffFFCC4D,
+      0xffEF3B3B,
+      0xffFF4DD8,
+      0xff7B4DFF,
+      0xff0BE9F8,
+      0xff7BFF4D,
+      0xff00B383,
+      0xff735BF2,
+      0xffFFCC4D,
+      0xffBDA7FC,
+      0xffEF3B3B,
+      0xff0BE9F8,
+      0xffFF4DD8,
+      0xff7BFF4D
+    ].obs;
+    RxInt selectedColor = 0.obs;
 
     final TextEditingController eventNameController = TextEditingController();
 
@@ -59,48 +74,52 @@ class AddNewEvent extends StatelessWidget {
                 isObsecure: false,
               ),
               getVerticalSpace(3.h),
-              GestureDetector(onTap: (){
-
-              },
+              GestureDetector(
+                onTap: () {},
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 1.2.h, vertical: 1.h),
-                  decoration: BoxDecoration(
-                      color: CustomColor.textFieldColor,
-                      borderRadius: BorderRadius.circular(20.px)),
-                  child: Obx(()=>
-                      Column(crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Assign color',
-                                style: CustomTextStyle.buttonText,
-                              ),
-                              Icon(
-                               Icons.keyboard_arrow_up,
-                                size: 3.2.h,
-                                color: Colors.white,
-                              )
-                            ],
-                          ),
+                  decoration: BoxDecoration(color: CustomColor.textFieldColor, borderRadius: BorderRadius.circular(20.px)),
+                  child: Obx(
+                    () => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Assign color',
+                              style: CustomTextStyle.buttonText,
+                            ),
+                            Icon(
+                              Icons.keyboard_arrow_up,
+                              size: 3.2.h,
+                              color: Colors.white,
+                            )
+                          ],
+                        ),
                         getVerticalSpace(2.h),
-
-                        SizedBox(height: 2.h,
-                          child: ListView.builder(padding: EdgeInsets.zero,
+                        SizedBox(
+                          height: 2.h,
+                          child: ListView.builder(
+                            padding: EdgeInsets.zero,
                             shrinkWrap: true,
                             scrollDirection: Axis.horizontal,
                             itemCount: colorsList.length,
                             itemExtent: 23,
                             itemBuilder: (context, index) {
-                            return GestureDetector(onTap: (){
-                              selectedColor.value=colorsList[index];
+                              return GestureDetector(
+                                  onTap: () {
+                                    selectedColor.value = colorsList[index];
+                                  },
+                                  child: CircleAvatar(
+                                    radius: 2.h,
+                                    backgroundColor: Color(colorsList[index]),
+                                  ));
                             },
-                                child: CircleAvatar(radius: 2.h,backgroundColor:Color(colorsList[index]),));
-                          },),
+                          ),
                         ),
-                        ],
-                      ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -109,14 +128,16 @@ class AddNewEvent extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 2.3.h),
                 child: customButton(
                     onTap: () {
-                  if(eventNameController.text.isNotEmpty){
-                    Get.to(()=>const AddNewPlan(title: 'event',),arguments: [
-                      selectedColor.value,eventNameController.text
-                    ]);
-                  }else{
-                    Get.snackbar('Sorry', 'EventName Should not be Empty',backgroundColor:Colors.white.withOpacity(0.5),colorText:  CustomColor.mainColorBackground);
-                  }
-
+                      if (eventNameController.text.isNotEmpty) {
+                        Get.to(
+                            () => const AddNewPlan(
+                                  title: 'event',
+                                ),
+                            arguments: [selectedColor.value, eventNameController.text]);
+                      } else {
+                        Get.snackbar('Sorry', 'EventName Should not be Empty',
+                            backgroundColor: Colors.white.withOpacity(0.5), colorText: CustomColor.mainColorBackground);
+                      }
                     },
                     backgroundColor: CustomColor.secondaryColor,
                     borderColor: CustomColor.primaryColor,

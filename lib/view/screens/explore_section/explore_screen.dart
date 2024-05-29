@@ -1,19 +1,14 @@
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
-import 'package:circleapp/custom_widget/customwidgets.dart';
 import 'package:circleapp/view/screens/explore_section/early_bird_offer.dart';
 import 'package:circleapp/view/screens/explore_section/share_group.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../controller/explore-model.dart';
 import '../../../controller/utils/color/custom_color.dart';
+import '../../custom_widget/customwidgets.dart';
 
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen({Key? key}) : super(key: key);
@@ -23,10 +18,10 @@ class ExploreScreen extends StatefulWidget {
 }
 
 class _ExploreScreenState extends State<ExploreScreen> {
-RxBool musicLover=false.obs;
-RxBool hiking=false.obs;
-RxBool dinner=false.obs;
-RxBool hangout=false.obs;
+  RxBool musicLover = false.obs;
+  RxBool hiking = false.obs;
+  RxBool dinner = false.obs;
+  RxBool hangout = false.obs;
   final List<ExploreModel> data = [
     ExploreModel(
         birdOffer: "Early Bird Offer",
@@ -37,12 +32,7 @@ RxBool hangout=false.obs;
             "Lorem ipsum dolor sit amet consectetur. Eget aliquam suspendisse ultrices a mattis vitae. Adipiscing id vestibulum ultrices lorem. Nibh dignissim bibendum aAdipi.",
         offerFor: "5 people",
         interest: "Music",
-        images: [
-          "assets/png/png4.png",
-          "assets/png/png3.png",
-          "assets/png/png2.png",
-          "assets/png/png1.png"
-        ]),
+        images: ["assets/png/png4.png", "assets/png/png3.png", "assets/png/png2.png", "assets/png/png1.png"]),
     ExploreModel(
         birdOffer: "Early Bird Offer",
         totalPrice: "\$2500",
@@ -52,12 +42,7 @@ RxBool hangout=false.obs;
             "Lorem ipsum dolor sit amet consectetur. Eget aliquam suspendisse ultrices a mattis vitae. Adipiscing id vestibulum ultrices lorem. Nibh dignissim bibendum aAdipi.",
         offerFor: "5 people",
         interest: "Music",
-        images: [
-          "assets/png/png4.png",
-          "assets/png/png3.png",
-          "assets/png/png2.png",
-          "assets/png/png1.png"
-        ]),
+        images: ["assets/png/png4.png", "assets/png/png3.png", "assets/png/png2.png", "assets/png/png1.png"]),
     ExploreModel(
         birdOffer: "Early Bird Offer",
         totalPrice: "\$2500",
@@ -67,20 +52,10 @@ RxBool hangout=false.obs;
             "Lorem ipsum dolor sit amet consectetur. Eget aliquam suspendisse ultrices a mattis vitae. Adipiscing id vestibulum ultrices lorem. Nibh dignissim bibendum aAdipi.",
         offerFor: "5 people",
         interest: "Music",
-        images: [
-          "assets/png/png4.png",
-          "assets/png/png3.png",
-          "assets/png/png2.png",
-          "assets/png/png1.png"
-        ])
+        images: ["assets/png/png4.png", "assets/png/png3.png", "assets/png/png2.png", "assets/png/png1.png"])
   ];
 
-  final List<String> imageUrls = [
-    "assets/png/png4.png",
-    "assets/png/png3.png",
-    "assets/png/png2.png",
-    "assets/png/png1.png"
-  ];
+  final List<String> imageUrls = ["assets/png/png4.png", "assets/png/png3.png", "assets/png/png2.png", "assets/png/png1.png"];
 
   @override
   Widget build(BuildContext context) {
@@ -105,12 +80,8 @@ RxBool hangout=false.obs;
                     padding: EdgeInsets.only(left: 2.5.h, top: 1.2.h),
                     height: 40,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            bottomLeft: Radius.circular(20)),
-                        color: Color(0xff383838)),
-                    child: Text("Music Lovers",
-                        style: CustomTextStyle.mediumTextLight),
+                        borderRadius: BorderRadius.only(topLeft: Radius.circular(20), bottomLeft: Radius.circular(20)), color: Color(0xff383838)),
+                    child: Text("Music Lovers", style: CustomTextStyle.mediumTextLight),
                   ),
                 ),
                 Expanded(
@@ -150,131 +121,126 @@ RxBool hangout=false.obs;
                               ),
                             ),
                             actions: <Widget>[
-                             Obx(() =>  Column(
-                               children: [
-
-                                 GestureDetector(onTap:(){
-                                   musicLover.value=true;
-                                   hiking.value=false;
-                                   dinner.value=false;
-                                   hangout.value=false;
-                                 },
-                                   child: Container(
-                                     height: 5.h,
-                                     padding: EdgeInsets.symmetric(
-                                         horizontal: 2.h, vertical: 1.h),
-                                     width: MediaQuery.of(context).size.width,
-                                     decoration: BoxDecoration(
-                                         borderRadius: BorderRadius.circular(30),
-                                         color: CustomColor.mainColorBackground),
-                                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                       children: [
-                                         Text(
-                                           "Music Lovers",
-                                           style: CustomTextStyle.mediumTextM14,
-                                         ),
-                                         musicLover.value==true?
-                                         SvgPicture.asset("assets/svg/tick.svg"):SizedBox()
-                                       ],
-                                     ),
-                                   ),
-                                 ),
-                                 getVerticalSpace(1.h),
-                                 GestureDetector(onTap:(){
-                                   musicLover.value=false;
-                                   hiking.value=true;
-                                   dinner.value=false;
-                                   hangout.value=false;
-                                 },
-                                   child: Container(
-                                     height: 5.h,
-                                     padding: EdgeInsets.symmetric(
-                                         horizontal: 2.h, vertical: 1.h),
-                                     width: MediaQuery.of(context).size.width,
-                                     decoration: BoxDecoration(
-                                         borderRadius: BorderRadius.circular(30),
-                                         color: CustomColor.mainColorBackground),
-                                     child: Row(mainAxisAlignment:MainAxisAlignment.spaceBetween,
-                                       children: [
-                                         Text(
-                                           "Hiking",
-                                           style: CustomTextStyle.mediumTextM14,
-                                         ),
-                                         hiking.value==true?
-                                         SvgPicture.asset("assets/svg/tick.svg"):SizedBox()
-                                       ],
-                                     ),
-                                   ),
-                                 ),
-                                 getVerticalSpace(1.h),
-                                 GestureDetector(onTap:(){
-                                   musicLover.value=false;
-                                   hiking.value=false;
-                                   dinner.value=true;
-                                   hangout.value=false;
-                                 },
-                                   child: Container(
-                                     height: 5.h,
-                                     padding: EdgeInsets.symmetric(
-                                         horizontal: 2.h, vertical: 1.h),
-                                     width: MediaQuery.of(context).size.width,
-                                     decoration: BoxDecoration(
-                                         borderRadius: BorderRadius.circular(30),
-                                         color: CustomColor.mainColorBackground),
-                                     child: Row(mainAxisAlignment:MainAxisAlignment.spaceBetween,
-                                       children: [
-                                         Text(
-                                           "Dinner",
-                                           style: CustomTextStyle.mediumTextM14,
-                                         ),
-                                         dinner.value==true?
-                                         SvgPicture.asset("assets/svg/tick.svg"):SizedBox()
-                                       ],
-                                     ),
-                                   ),
-                                 ),
-                                 getVerticalSpace(1.h),
-                                 GestureDetector(onTap:(){
-                                   musicLover.value=false;
-                                   hiking.value=false;
-                                   dinner.value=false;
-                                   hangout.value=true;
-                                 },
-                                   child: Container(
-                                     height: 5.h,
-                                     padding: EdgeInsets.symmetric(
-                                         horizontal: 2.h, vertical: 1.h),
-                                     width: MediaQuery.of(context).size.width,
-                                     decoration: BoxDecoration(
-                                         borderRadius: BorderRadius.circular(30),
-                                         color: CustomColor.mainColorBackground),
-                                     child: Row(mainAxisAlignment:MainAxisAlignment.spaceBetween,
-                                       children: [
-                                         Text(
-                                           "Hangout",
-                                           style: CustomTextStyle.mediumTextM14,
-                                         ),
-                                         hangout.value==true?
-                                         SvgPicture.asset("assets/svg/tick.svg"):SizedBox()
-                                       ],
-                                     ),
-                                   ),
-                                 ),
-                                 getVerticalSpace(2.h),
-                                 GestureDetector(onTap:(){
-                                   Get.to(()=>ShareGroupScreen());
-                                 },
-                                   child: Container(
-                                     height: 4.h,
-                                     width:36.w,
-                                     decoration: BoxDecoration(
-                                       borderRadius:
-                                       BorderRadius.circular(30), color: CustomColor.mainColorYellow,),
-                                     child: Center(child: Text("Done")),
-                                   ),
-                                 )
-                               ],
-                             ),)
+                              Obx(
+                                () => Column(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        musicLover.value = true;
+                                        hiking.value = false;
+                                        dinner.value = false;
+                                        hangout.value = false;
+                                      },
+                                      child: Container(
+                                        height: 5.h,
+                                        padding: EdgeInsets.symmetric(horizontal: 2.h, vertical: 1.h),
+                                        width: MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: CustomColor.mainColorBackground),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              "Music Lovers",
+                                              style: CustomTextStyle.mediumTextM14,
+                                            ),
+                                            musicLover.value == true ? SvgPicture.asset("assets/svg/tick.svg") : SizedBox()
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    getVerticalSpace(1.h),
+                                    GestureDetector(
+                                      onTap: () {
+                                        musicLover.value = false;
+                                        hiking.value = true;
+                                        dinner.value = false;
+                                        hangout.value = false;
+                                      },
+                                      child: Container(
+                                        height: 5.h,
+                                        padding: EdgeInsets.symmetric(horizontal: 2.h, vertical: 1.h),
+                                        width: MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: CustomColor.mainColorBackground),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              "Hiking",
+                                              style: CustomTextStyle.mediumTextM14,
+                                            ),
+                                            hiking.value == true ? SvgPicture.asset("assets/svg/tick.svg") : SizedBox()
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    getVerticalSpace(1.h),
+                                    GestureDetector(
+                                      onTap: () {
+                                        musicLover.value = false;
+                                        hiking.value = false;
+                                        dinner.value = true;
+                                        hangout.value = false;
+                                      },
+                                      child: Container(
+                                        height: 5.h,
+                                        padding: EdgeInsets.symmetric(horizontal: 2.h, vertical: 1.h),
+                                        width: MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: CustomColor.mainColorBackground),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              "Dinner",
+                                              style: CustomTextStyle.mediumTextM14,
+                                            ),
+                                            dinner.value == true ? SvgPicture.asset("assets/svg/tick.svg") : SizedBox()
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    getVerticalSpace(1.h),
+                                    GestureDetector(
+                                      onTap: () {
+                                        musicLover.value = false;
+                                        hiking.value = false;
+                                        dinner.value = false;
+                                        hangout.value = true;
+                                      },
+                                      child: Container(
+                                        height: 5.h,
+                                        padding: EdgeInsets.symmetric(horizontal: 2.h, vertical: 1.h),
+                                        width: MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: CustomColor.mainColorBackground),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              "Hangout",
+                                              style: CustomTextStyle.mediumTextM14,
+                                            ),
+                                            hangout.value == true ? SvgPicture.asset("assets/svg/tick.svg") : SizedBox()
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    getVerticalSpace(2.h),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Get.to(() => ShareGroupScreen());
+                                      },
+                                      child: Container(
+                                        height: 4.h,
+                                        width: 36.w,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(30),
+                                          color: CustomColor.mainColorYellow,
+                                        ),
+                                        child: Center(child: Text("Done")),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
                             ],
                           );
                         },
@@ -283,9 +249,7 @@ RxBool hangout=false.obs;
                     child: Container(
                       height: 40,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(20),
-                              bottomRight: Radius.circular(20)),
+                          borderRadius: BorderRadius.only(topRight: Radius.circular(20), bottomRight: Radius.circular(20)),
                           color: CustomColor.mainColorYellow),
                       child: Transform.scale(
                           scale: 0.6,
@@ -299,20 +263,18 @@ RxBool hangout=false.obs;
               ],
             ),
             Expanded(
-              child: GestureDetector(onTap: () {
-                Get.to(()=>EarlyBirdOffer());
-              },
+              child: GestureDetector(
+                onTap: () {
+                  Get.to(() => EarlyBirdOffer());
+                },
                 child: ListView.builder(
                     itemCount: data.length,
                     itemBuilder: (BuildContext, index) {
                       return Container(
                         margin: EdgeInsets.all(10),
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 2.2.h, vertical: 2.h),
+                        padding: EdgeInsets.symmetric(horizontal: 2.2.h, vertical: 2.h),
                         width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: CustomColor.textFieldColor),
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: CustomColor.textFieldColor),
                         child: Column(
                           children: [
                             Row(
@@ -326,10 +288,7 @@ RxBool hangout=false.obs;
                                 Text(
                                   "Total Price:",
                                   style: TextStyle(
-                                      color: Colors.white.withOpacity(0.5),
-                                      fontSize: 11.px,
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: "medium"),
+                                      color: Colors.white.withOpacity(0.5), fontSize: 11.px, fontWeight: FontWeight.w400, fontFamily: "medium"),
                                 ),
                                 Text(
                                   data[index].totalPrice,
@@ -342,10 +301,7 @@ RxBool hangout=false.obs;
                               child: Text(
                                 data[index].date,
                                 style: TextStyle(
-                                    color: Colors.white.withOpacity(0.5),
-                                    fontSize: 11.px,
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: "medium"),
+                                    color: Colors.white.withOpacity(0.5), fontSize: 11.px, fontWeight: FontWeight.w400, fontFamily: "medium"),
                               ),
                             ),
                             Align(
@@ -360,10 +316,7 @@ RxBool hangout=false.obs;
                               child: Text(
                                 data[index].discription,
                                 style: TextStyle(
-                                    color: Colors.white.withOpacity(0.7),
-                                    fontSize: 10.px,
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: "medium"),
+                                    color: Colors.white.withOpacity(0.7), fontSize: 10.px, fontWeight: FontWeight.w400, fontFamily: "medium"),
                               ),
                             ),
                             getVerticalSpace(1.h),
@@ -373,10 +326,7 @@ RxBool hangout=false.obs;
                                 Text(
                                   "Offer for:",
                                   style: TextStyle(
-                                      color: Colors.white.withOpacity(0.5),
-                                      fontSize: 11.px,
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: "medium"),
+                                      color: Colors.white.withOpacity(0.5), fontSize: 11.px, fontWeight: FontWeight.w400, fontFamily: "medium"),
                                 ),
                                 getHorizentalSpace(1.w),
                                 Text(
@@ -392,10 +342,7 @@ RxBool hangout=false.obs;
                                 Text(
                                   "Interests:",
                                   style: TextStyle(
-                                      color: Colors.white.withOpacity(0.5),
-                                      fontSize: 11.px,
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: "medium"),
+                                      color: Colors.white.withOpacity(0.5), fontSize: 11.px, fontWeight: FontWeight.w400, fontFamily: "medium"),
                                 ),
                                 getHorizentalSpace(1.w),
                                 Text(
@@ -410,10 +357,7 @@ RxBool hangout=false.obs;
                               child: Text(
                                 "images",
                                 style: TextStyle(
-                                    color: Colors.white.withOpacity(0.7),
-                                    fontSize: 11.px,
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: "medium"),
+                                    color: Colors.white.withOpacity(0.7), fontSize: 11.px, fontWeight: FontWeight.w400, fontFamily: "medium"),
                               ),
                             ),
                             getVerticalSpace(1.h),
@@ -445,18 +389,13 @@ RxBool hangout=false.obs;
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     getHorizentalSpace(1.w),
-                                    SvgPicture.asset(
-                                        "assets/svg/shareButton.svg"),
+                                    SvgPicture.asset("assets/svg/shareButton.svg"),
                                     getHorizentalSpace(1.w),
                                     Container(
                                         height: 3.h,
                                         width: 22.w,
                                         decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(30),
-                                            border: Border.all(
-                                                color:
-                                                    CustomColor.mainColorYellow)),
+                                            borderRadius: BorderRadius.circular(30), border: Border.all(color: CustomColor.mainColorYellow)),
                                         child: Center(
                                             child: Text(
                                           "View Details",

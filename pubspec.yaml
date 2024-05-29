@@ -48,6 +48,9 @@ dependencies:
   contacts_service: ^0.6.3
   permission_handler: ^11.3.1
   shared_preferences: ^2.2.3
+  flutter_contacts: ^1.1.7+1
+  loading_animation_widget: ^1.2.1
+  shimmer: ^3.0.0
 
 
 dev_dependencies:
