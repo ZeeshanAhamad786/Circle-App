@@ -14,8 +14,8 @@ import '../story_screen.dart';
 import 'chatScreen.dart';
 
 class LoopTabBar extends StatelessWidget {
-  LoopTabBar({super.key, required this.selectedIndex});
-  int selectedIndex;
+  LoopTabBar({super.key, });
+
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class LoopTabBar extends StatelessWidget {
                     ),
                     getHorizentalSpace(1.5.h),
                     Text(
-                      'Loop',
+                      'Hiking',
                       style: CustomTextStyle.headingStyle,
                     ),
                     const Expanded(child: SizedBox()),

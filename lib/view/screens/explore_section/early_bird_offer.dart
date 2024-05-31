@@ -1,5 +1,7 @@
 import 'package:circleapp/controller/utils/color/custom_color.dart';
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/view/screens/createNewCircleScreens/loopTabBar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -117,7 +119,10 @@ class _EarlyBirdOfferState extends State<EarlyBirdOffer> {
                     "Imagine Dragon’s Concert",
                     style: CustomTextStyle.mediumTextImageConcert,
                   ),
-                  SvgPicture.asset("assets/svg/save.svg")
+                  GestureDetector(onTap: () {
+                    Get.to(()=>LoopTabBar());
+                  },
+                      child: SvgPicture.asset("assets/svg/save.svg"))
                 ],
               ),
               getVerticalSpace(0.5.h),

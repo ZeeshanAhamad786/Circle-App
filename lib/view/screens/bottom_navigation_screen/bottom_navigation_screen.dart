@@ -1,4 +1,5 @@
 import 'package:circleapp/controller/utils/color/custom_color.dart';
+import 'package:circleapp/view/screens/createNewCircleScreens/create_circle_screen.dart';
 import 'package:circleapp/view/screens/createNewCircleScreens/loopTabBar.dart';
 import 'package:circleapp/view/screens/createNewCircleScreens/main_chat_screen.dart';
 import 'package:circleapp/view/screens/explore_section/explore_screen.dart';
@@ -98,7 +99,7 @@ class BottomNavigationScreenState extends State<BottomNavigationScreen> {
           ),
         ),
         body: Obx(() => currentIndex.value == 0
-            ? LoopTabBar(selectedIndex: 0)
+            ? CreateCircleScreen(selectedIndex: 0)
             : currentIndex.value == 1
                 ? MainChatScreen()
                 // Obx(()=>

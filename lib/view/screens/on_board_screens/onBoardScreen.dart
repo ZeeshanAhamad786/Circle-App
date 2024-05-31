@@ -1,6 +1,6 @@
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
 import 'package:circleapp/view/screens/athentications/login_screen.dart';
-import 'package:circleapp/view/screens/createNewCircleScreens/group_edit_screen.dart';
+import 'package:circleapp/view/screens/createNewCircleScreens/circle_edit_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -69,7 +69,7 @@ class _OnBoardingScreen1State extends State<OnBoardingScreen1> {
                 right: 3.h,
                 child: GestureDetector(
                   onTap: () {
-                    Get.to(() => GroupEditScreen());
+                    Get.to(() => CircleEditScreen());
 
                     Get.to(() => ExploreScreen());
                   },

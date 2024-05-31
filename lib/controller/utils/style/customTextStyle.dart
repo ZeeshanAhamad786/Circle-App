@@ -138,4 +138,10 @@ class CustomTextStyle{
       fontFamily: 'medium',
       color: CustomColor.mainColorGroupMember
   );
+  static TextStyle mediumTextTimeOpacity= TextStyle(
+      fontSize: 12.px,
+      fontWeight: FontWeight.w600,
+      fontFamily: 'medium',
+      color: Colors.white.withOpacity(0.6)
+  );
 }

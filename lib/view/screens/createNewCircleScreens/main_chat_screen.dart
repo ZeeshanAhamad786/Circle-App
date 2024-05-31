@@ -2,6 +2,8 @@ import 'package:circleapp/controller/utils/color/custom_color.dart';
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
 import 'package:circleapp/models/main_chat_screen_model.dart';
 import 'package:circleapp/view/screens/createNewCircleScreens/chatScreen.dart';
+import 'package:circleapp/view/screens/createNewCircleScreens/choose_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -83,23 +85,27 @@ class _MainChatScreenState extends State<MainChatScreen> {
                       "Circles",
                       style: CustomTextStyle.mediumTextExplore,
                     ),
-                    Container(
-                      height: 30,
-                      padding: EdgeInsets.symmetric(horizontal: 2.h),
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), border: Border.all(color: CustomColor.mainColorYellow)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.person_add_sharp,
-                            color: CustomColor.mainColorYellow,
-                          ),
-                          getHorizentalSpace(0.5.w),
-                          Text(
-                            "New Group",
-                            style: CustomTextStyle.mediumTextYellow,
-                          )
-                        ],
+                    GestureDetector(onTap: () {
+                      Get.to(()=>ChooseImage());
+                    },
+                      child: Container(
+                        height: 30,
+                        padding: EdgeInsets.symmetric(horizontal: 2.h),
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), border: Border.all(color: CustomColor.mainColorYellow)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.person_add_sharp,
+                              color: CustomColor.mainColorYellow,
+                            ),
+                            getHorizentalSpace(0.5.w),
+                            Text(
+                              "New Group",
+                              style: CustomTextStyle.mediumTextYellow,
+                            )
+                          ],
+                        ),
                       ),
                     )
                   ],
