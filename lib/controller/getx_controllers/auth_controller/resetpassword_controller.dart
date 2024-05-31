@@ -6,10 +6,6 @@ import '../../api/auth_apis.dart';
 
 class ResetPasswordController extends GetxController {
   late final BuildContext context;
-
-  TextEditingController newPasswordTextController = TextEditingController();
-  TextEditingController confirmPasswordTextController = TextEditingController();
-  TextEditingController otpTextController = TextEditingController();
   RxBool isLoading = false.obs;
 
   ResetPasswordController(this.context);

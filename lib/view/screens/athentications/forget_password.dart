@@ -1,5 +1,4 @@
 import 'package:circleapp/controller/api/auth_apis.dart';
-import 'package:circleapp/view/custom_widget/custom-button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -8,6 +7,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../controller/getx_controllers/auth_controller/forgotpassword_controller.dart';
 import '../../../controller/utils/app_colors.dart';
 import '../../../controller/utils/customTextStyle.dart';
+import '../../custom_widget/custom_loading_button.dart';
 import '../../custom_widget/custom_text_field.dart';
 
 class ForgetScreen extends StatefulWidget {
@@ -81,19 +81,15 @@ class _ForgetScreenState extends State<ForgetScreen> {
               SizedBox(
                 height: 4.h,
               ),
-              Obx(() {
-                return forgotPasswordController.isLoading.value
-                    ? const CircularProgressIndicator(
-                        color: AppColors.mainColorYellow,
-                      )
-                    : CustomButton(
-                        buttonText: "Done",
-                        buttonColor: AppColors.mainColorYellow,
-                        onPressed: () {
-                          forgotPasswordController.forgotPasswordApi(forgotPasswordController.forgotPasswordTextController.text);
-                          // Get.to(() => VerifyMobileScreen());
-                        });
-              })
+              CustomLoadingButton(
+                buttonText: "Done",
+                buttonColor: AppColors.mainColorYellow,
+                onPressed: () {
+                  forgotPasswordController.forgotPasswordApi(forgotPasswordController.forgotPasswordTextController.text);
+                  // Get.to(() => VerifyMobileScreen());
+                },
+                loading: forgotPasswordController.isLoading,
+              ),
             ],
           ),
         ),

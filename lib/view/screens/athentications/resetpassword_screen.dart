@@ -11,7 +11,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../controller/getx_controllers/auth_controller/resetpassword_controller.dart';
 import '../../../controller/utils/app_colors.dart';
 import '../../../controller/utils/customTextStyle.dart';
-import '../../custom_widget/custom-button.dart';
+import '../../custom_widget/custom_loading_button.dart';
 import '../../custom_widget/custom_text_field.dart';
 import '../../custom_widget/customwidgets.dart';
 
@@ -25,6 +25,10 @@ class ResetPasswordScreen extends StatefulWidget {
 class _ForgetScreenState extends State<ResetPasswordScreen> {
   late ResetPasswordController resetPasswordController;
   late AuthApis authApis;
+  TextEditingController emailTextController = TextEditingController();
+  TextEditingController newPasswordTextController = TextEditingController();
+  TextEditingController confirmPasswordTextController = TextEditingController();
+  TextEditingController otpTextController = TextEditingController();
 
   @override
   void initState() {
@@ -82,7 +86,7 @@ class _ForgetScreenState extends State<ResetPasswordScreen> {
               ),
               PinCodeTextField(
                 onCompleted: (v) {
-                  resetPasswordController.otpTextController.text = v;
+                  otpTextController.text = v;
                 },
                 length: 6,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
@@ -124,7 +128,7 @@ class _ForgetScreenState extends State<ResetPasswordScreen> {
                 height: 0.4.h,
               ),
               CustomTextField(
-                controller: resetPasswordController.newPasswordTextController,
+                controller: newPasswordTextController,
                 hintText: "Litahan12@gmail.com",
                 prefixIcon: SvgPicture.asset("assets/svg/lock.svg"),
               ),
@@ -139,42 +143,40 @@ class _ForgetScreenState extends State<ResetPasswordScreen> {
                 height: 0.4.h,
               ),
               CustomTextField(
-                controller: resetPasswordController.confirmPasswordTextController,
+                controller: confirmPasswordTextController,
                 hintText: "Litahan12@gmail.com",
                 prefixIcon: SvgPicture.asset("assets/svg/lock.svg"),
               ),
               SizedBox(
                 height: 4.h,
               ),
-              Obx(() {
-                return resetPasswordController.isLoading.value
-                    ? CircularProgressIndicator(
-                        color: AppColors.mainColorYellow,
-                      )
-                    : CustomButton(
-                        buttonText: "Done",
-                        buttonColor: AppColors.mainColorYellow,
-                        onPressed: () {
-                          if (Validations.handleResetPasswordScreenError(
-                            password: resetPasswordController.newPasswordTextController,
-                            confirmPassword: resetPasswordController.confirmPasswordTextController,
-                          ).isNotEmpty) {
-                            customScaffoldMessenger(
-                                context,
-                                Validations.handleResetPasswordScreenError(
-                                  password: resetPasswordController.newPasswordTextController,
-                                  confirmPassword: resetPasswordController.confirmPasswordTextController,
-                                ));
-                          } else {
-                            resetPasswordController.resetPasswordApis(
-                              phoneNumber,
-                              resetPasswordController.otpTextController.text,
-                              resetPasswordController.confirmPasswordTextController.text,
-                            );
-                          }
-                          // Get.to(() => VerifyMobileScreen());
-                        });
-              }),
+              CustomLoadingButton(
+                buttonText: "Done",
+                buttonColor: AppColors.mainColorYellow,
+                onPressed: () {
+                  if (Validations.handleResetPasswordScreenError(
+                    otp: otpTextController,
+                    password: newPasswordTextController,
+                    confirmPassword: confirmPasswordTextController,
+                  ).isNotEmpty) {
+                    customScaffoldMessenger(
+                        context,
+                        Validations.handleResetPasswordScreenError(
+                          otp: otpTextController,
+                          password: newPasswordTextController,
+                          confirmPassword: confirmPasswordTextController,
+                        ));
+                  } else {
+                    resetPasswordController.resetPasswordApis(
+                      phoneNumber,
+                      otpTextController.text,
+                      confirmPasswordTextController.text,
+                    );
+                  }
+                  // Get.to(() => VerifyMobileScreen());
+                },
+                loading: resetPasswordController.isLoading,
+              ),
               SizedBox(
                 height: 4.h,
               ),

@@ -1,3 +1,4 @@
+import 'package:circleapp/controller/getx_controllers/circle_controller.dart';
 import 'package:circleapp/view/screens/createNewCircleScreens/circle_edit_screen.dart';
 import 'package:circleapp/view/screens/createNewCircleScreens/loopTabBar.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,14 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  late CircleController circleController;
+  @override
+  void initState() {
+    circleController = Get.put(CircleController(context));
+    // circleController.getMessages(load: true, circleId: circleId);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     RxList<String> chatList = <String>[].obs;
@@ -57,7 +66,7 @@ class _ChatScreenState extends State<ChatScreen> {
                               )
                             : GestureDetector(
                                 onTap: () {
-                                  Get.to(() => CircleEditScreen());
+                                  Get.to(() => const CircleEditScreen());
                                 },
                                 child: CircleAvatar(
                                   radius: 2.4.h,
@@ -74,7 +83,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                 children: [
                                   GestureDetector(
                                     onTap: () {
-                                      Get.to(() => CircleEditScreen());
+                                      Get.to(() => const CircleEditScreen());
                                     },
                                     child: Text(
                                       'Hiking',
@@ -83,7 +92,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      Get.to(() => CircleEditScreen());
+                                      Get.to(() => const CircleEditScreen());
                                     },
                                     child: Text('Adil Adnan, Jhon, Liya',
                                         style: CustomTextStyle.smallText.copyWith(color: const Color(0xff797C7B), fontSize: 10.px)),
@@ -200,7 +209,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       ),
                     ),
                     getVerticalSpace(3.8.h),
-                    Spacer(),
+                    const Spacer(),
                     Row(
                       children: [
                         Expanded(
