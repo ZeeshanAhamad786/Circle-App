@@ -1,4 +1,4 @@
-import 'package:circleapp/controller/getx_controllers/createcircle_controller.dart';
+import 'package:circleapp/controller/getx_controllers/circle_controller.dart';
 import 'package:circleapp/controller/utils/app_colors.dart';
 import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:flutter/material.dart';
@@ -19,12 +19,12 @@ class CircleInterest extends StatefulWidget {
 
 class _CircleInterestState extends State<CircleInterest> {
   RxList<ContactSelection> myContacts = <ContactSelection>[].obs;
-  late CreateCircleController createCircleController;
+  late CircleController createCircleController;
   late RxInt selectedIndex = (-1).obs;
 
   @override
   void initState() {
-    createCircleController = Get.put(CreateCircleController(context));
+    createCircleController = Get.put(CircleController(context));
     super.initState();
   }
 

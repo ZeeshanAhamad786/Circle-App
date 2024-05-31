@@ -39,4 +39,5 @@ class CustomTextStyle {
       TextStyle(fontSize: 12.px, fontWeight: FontWeight.w400, fontFamily: 'medium', color: AppColors.mainColorGroupMember);
   static TextStyle mediumTextTimeOpacity =
       TextStyle(fontSize: 12.px, fontWeight: FontWeight.w600, fontFamily: 'medium', color: Colors.white.withOpacity(0.6));
+
 }

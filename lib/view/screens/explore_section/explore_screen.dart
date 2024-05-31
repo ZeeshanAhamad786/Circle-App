@@ -32,7 +32,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
             "Lorem ipsum dolor sit amet consectetur. Eget aliquam suspendisse ultrices a mattis vitae. Adipiscing id vestibulum ultrices lorem. Nibh dignissim bibendum aAdipi.",
         offerFor: "5 people",
         interest: "Music",
-        images: ["assets/png/png4.png", "assets/png/png3.png", "assets/png/png2.png", "assets/png/png1.png"]),
+        images: ["assets/png/png4.png", "assets/png/png3.png", "assets/png/png2.png", "assets/png/png1.png"], location: '', ),
     ExploreModel(
         birdOffer: "Early Bird Offer",
         totalPrice: "\$2500",
@@ -42,7 +42,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
             "Lorem ipsum dolor sit amet consectetur. Eget aliquam suspendisse ultrices a mattis vitae. Adipiscing id vestibulum ultrices lorem. Nibh dignissim bibendum aAdipi.",
         offerFor: "5 people",
         interest: "Music",
-        images: ["assets/png/png4.png", "assets/png/png3.png", "assets/png/png2.png", "assets/png/png1.png"]),
+        images: ["assets/png/png4.png", "assets/png/png3.png", "assets/png/png2.png", "assets/png/png1.png"], location: '',),
     ExploreModel(
         birdOffer: "Early Bird Offer",
         totalPrice: "\$2500",
@@ -52,7 +52,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
             "Lorem ipsum dolor sit amet consectetur. Eget aliquam suspendisse ultrices a mattis vitae. Adipiscing id vestibulum ultrices lorem. Nibh dignissim bibendum aAdipi.",
         offerFor: "5 people",
         interest: "Music",
-        images: ["assets/png/png4.png", "assets/png/png3.png", "assets/png/png2.png", "assets/png/png1.png"])
+        images: ["assets/png/png4.png", "assets/png/png3.png", "assets/png/png2.png", "assets/png/png1.png"], location: '', )
   ];
 
   final List<String> imageUrls = ["assets/png/png4.png", "assets/png/png3.png", "assets/png/png2.png", "assets/png/png1.png"];
@@ -226,7 +226,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                     getVerticalSpace(2.h),
                                     GestureDetector(
                                       onTap: () {
-                                        Get.to(() => ShareGroupScreen());
+                                        Get.to(() => const ExploreScreen());
                                       },
                                       child: Container(
                                         height: 4.h,

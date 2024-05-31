@@ -7,13 +7,68 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../models/explore-model.dart';
 import '../custom_widget/customwidgets.dart';
+import 'explore_section/share_group.dart';
 
 class PlansDetails extends StatelessWidget {
   const PlansDetails({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final List<ExploreModel> data = [
+      ExploreModel(
+          birdOffer: "Imagine Dragon’s Concert",
+          totalPrice: "\$2500",
+          date: "1/2/2024",
+          concertName: "Imagine Dragon’s Concert",
+          discription:
+          "Lorem ipsum dolor sit amet consectetur. Eget aliquam suspendisse ultrices a mattis vitae. Adipiscing id vestibulum ultrices lorem. Nibh dignissim bibendum aAdipi.",
+          location: " 13th Street. 47 W 13th St, New York, NY 10011, USA. 20 Cooper Square.",
+          interest: "Music",
+          images: [
+            "assets/png/png4.png",
+            "assets/png/png3.png",
+            "assets/png/png2.png",
+            "assets/png/png1.png"
+          ], offerFor: ''),
+      ExploreModel(
+          birdOffer: "Art Gallery",
+          totalPrice: "\$2500",
+          date: "1/2/2024",
+          concertName: "Imagine Dragon’s Concert",
+          discription:
+          "Lorem ipsum dolor sit amet consectetur. Eget aliquam suspendisse ultrices a mattis vitae. Adipiscing id vestibulum ultrices lorem. Nibh dignissim bibendum aAdipi.",
+          location: " 13th Street. 47 W 13th St, New York, NY 10011, USA. 20 Cooper Square.",
+          interest: "Music",
+          images: [
+            "assets/png/png4.png",
+            "assets/png/png3.png",
+            "assets/png/png2.png",
+            "assets/png/png1.png"
+          ], offerFor: ''),
+      ExploreModel(
+          birdOffer: "Early Bird Offer",
+          totalPrice: "\$2500",
+          date: "1/2/2024",
+          concertName: "Imagine Dragon’s Concert",
+          discription:
+          "Lorem ipsum dolor sit amet consectetur. Eget aliquam suspendisse ultrices a mattis vitae. Adipiscing id vestibulum ultrices lorem. Nibh dignissim bibendum aAdipi.",
+          location: " 13th Street. 47 W 13th St, New York, NY 10011, USA. 20 Cooper Square.",
+          interest: "Music",
+          images: [
+            "assets/png/png4.png",
+            "assets/png/png3.png",
+            "assets/png/png2.png",
+            "assets/png/png1.png"
+          ], offerFor: '')
+    ];
+    final List<String> imageUrls = [
+      "assets/png/png4.png",
+      "assets/png/png3.png",
+      "assets/png/png2.png",
+      "assets/png/png1.png"
+    ];
     RxList<int> colorsList = <int>[0xff00B383, 0xffFFC491, 0xff0095FF].obs;
     RxList<String> eventsNameList = <String>['Meeting', 'Hangout', 'Trip Plan'].obs;
     return Scaffold(
@@ -88,78 +143,140 @@ class PlansDetails extends StatelessWidget {
               ),
             ),
             getVerticalSpace(2.5.h),
-            ListView.builder(
-              padding: EdgeInsets.zero,
-              shrinkWrap: true,
-              itemCount: colorsList.length,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return Dismissible(
-                  background: Container(
-                    padding: EdgeInsets.only(right: 4.h),
-                    alignment: Alignment.centerRight,
-                    decoration: BoxDecoration(
-                      color: AppColors.secondaryColor,
-                      borderRadius: BorderRadius.circular(10.px),
-                    ),
-                    child: SvgPicture.asset('assets/svg/deleteicon.svg'),
-                  ),
-                  key: Key(index.toString()),
-                  child: GestureDetector(
-                    onTap: () {
-                      Get.to(() => const WinterTripPlanDetails());
-                    },
-                    child: Container(
-                      margin: EdgeInsets.symmetric(
-                        vertical: 1.h,
-                      ),
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.all(1.h),
-                      decoration: BoxDecoration(
-                        color: AppColors.mainColor,
-                        borderRadius: BorderRadius.circular(10.px),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              CircleAvatar(
-                                radius: .5.h,
-                                backgroundColor: Color(colorsList[index]),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: data.length,
+                  padding: EdgeInsets.zero,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        // Handle onTap
+                      },
+                      child: Container(
+                        margin: EdgeInsets.all(10),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 2.2.h, vertical: 2.h),
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: AppColors.textFieldColor),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment:
+                              MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  data[index].birdOffer,
+                                  style: CustomTextStyle.mediumTextM14,
+                                ),
+                                Expanded(child: SizedBox()),
+                                Text(
+                                  data[index].date,
+                                  style: TextStyle(
+                                      color:
+                                      Colors.white.withOpacity(0.5),
+                                      fontSize: 11.px,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: "medium"),
+                                ),
+                              ],
+                            ),
+                            getVerticalSpace(.5.h),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                data[index].discription,
+                                style: TextStyle(
+                                    color:
+                                    Colors.white.withOpacity(0.5),
+                                    fontSize: 10.px,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: "medium"),
                               ),
-                              getHorizentalSpace(.8.h),
-                              Text(
-                                'Imagine Dragon’s Concert',
-                                style: CustomTextStyle.headingStyle,
-                              ),
-                              const Expanded(child: SizedBox()),
-                              Text(
-                                '10:00-13:00',
-                                style: CustomTextStyle.hintText,
-                              ),
-                              getVerticalSpace(1.h),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              getHorizentalSpace(2.h),
-                              Expanded(
+                            ),
+                            getVerticalSpace(1.h),
+                            Row(mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset("assets/svg/Location.svg"),
+                                getHorizentalSpace(1.w),
+                                Expanded(
                                   child: Text(
-                                ''' will be a sunny day''',
-                                style: CustomTextStyle.hintText,
-                              )),
-                              customTextButton2(title: 'Booked', bgColor: AppColors.secondaryColor, btnTextColor: Colors.black)
-                            ],
-                          ),
-                        ],
+                                    data[index].location,
+                                    style:  TextStyle(
+                                        color:
+                                        Colors.white.withOpacity(0.5),
+                                        fontSize: 8.px,
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: "medium"),
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            getVerticalSpace(1.2.h),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                "Added members",
+                                style: TextStyle(
+                                    color: Colors.white.withOpacity(0.7), fontSize: 11.px, fontWeight: FontWeight.w400, fontFamily: "medium"),
+                              ),
+                            ),
+                            getVerticalSpace(1.h),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: SizedBox(
+                                      height: 40,
+                                      child: ListView.builder(
+                                          shrinkWrap: true,
+                                          scrollDirection: Axis.horizontal,
+                                          itemCount: imageUrls.length,
+                                          itemBuilder: (BuildContext, index) {
+                                            return Padding(
+                                              padding: const EdgeInsets.all(2),
+                                              child: Image.asset(
+                                                imageUrls[index],
+                                                width: 27,
+                                                height: 27,
+                                              ),
+                                            );
+                                          }),
+                                    ),
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    getHorizentalSpace(1.w),
+                                    GestureDetector(onTap:() {
+                                      Get.to(()=>const ShareGroupScreen());
+                                    },
+                                        child: SvgPicture.asset("assets/svg/shareButton.svg")),
+                                    getHorizentalSpace(2.w),
+                                    Container(
+                                        height: 3.h,
+                                        width: 22.w,
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(30), border: Border.all(color: AppColors.mainColorYellow)),
+                                        child: Center(
+                                            child: Text(
+                                              "View Details",
+                                              style: CustomTextStyle.mediumTextYellow,
+                                            )))
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ),
-                );
-              },
+                    );
+                  }),
             ),
           ],
         ),

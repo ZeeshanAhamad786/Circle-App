@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../controller/getx_controllers/createcircle_controller.dart';
+import '../../../controller/getx_controllers/circle_controller.dart';
 import '../../../models/contact_model.dart';
 import '../../custom_widget/custom_loading_button.dart';
 import '../../custom_widget/customwidgets.dart';
@@ -22,11 +22,11 @@ class AddMembers extends StatefulWidget {
 
 class _AddMembersState extends State<AddMembers> {
   late RxList<ContactSelection> contactsSelection;
-  late CreateCircleController createCircleController;
+  late CircleController createCircleController;
 
   @override
   void initState() {
-    createCircleController = Get.put(CreateCircleController(context));
+    createCircleController = Get.put(CircleController(context));
     getContacts();
     super.initState();
   }

@@ -9,9 +9,9 @@ import 'package:permission_handler/permission_handler.dart';
 import '../../models/contact_model.dart';
 import '../../view/custom_widget/customwidgets.dart';
 
-class CreateCircleController extends GetxController {
+class CircleController extends GetxController {
   late final BuildContext context;
-  CreateCircleController(this.context);
+  CircleController(this.context);
 
   //Variables
   RxBool _contactsLoading = false.obs;

@@ -1,4 +1,10 @@
+import 'package:circleapp/view/screens/explore_section/share_group.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
@@ -23,7 +29,7 @@ class _ItineraryEventScreenState extends State<ItineraryEventScreen> {
           children: [
             SfCalendar(
               backgroundColor: Colors.white,
-              viewHeaderStyle: ViewHeaderStyle(backgroundColor: Colors.green),
+              viewHeaderStyle: ViewHeaderStyle(backgroundColor: Colors.grey),
               todayHighlightColor: AppColors.mainColorYellow,
               todayTextStyle: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -31,62 +37,62 @@ class _ItineraryEventScreenState extends State<ItineraryEventScreen> {
 
               view: CalendarView.month,
               dataSource: MeetingDataSource(_getDataSource()),
-
-              // by default the month appointment display mode set as Indicator, we can
-              // change the display mode as appointment using the appointment display
-              // mode property
-              // monthViewSettings: const MonthViewSettings(
-              //     showAgenda: true,
-              //     appointmentDisplayMode:
-              //     MonthAppointmentDisplayMode.appointment),
             ),
-            ListView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 2.h, vertical: 3.h),
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(vertical: 1.h),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          CircleAvatar(
-                            radius: .6.h,
-                            backgroundColor: Colors.white,
-                          ),
-                          getHorizentalSpace(.5.h),
-                          Text(
-                            'Start the day with a visit to the',
-                            style: CustomTextStyle.buttonText.copyWith(color: Colors.white),
-                          ),
-                          const Expanded(child: SizedBox()),
-                          Text(
-                            '09:00 AM',
-                            style: CustomTextStyle.buttonText.copyWith(color: Colors.white),
-                          )
-                        ],
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          getHorizentalSpace(2.h),
-                          Text(
-                            'British Museum.',
-                            style: CustomTextStyle.headingStyle.copyWith(color: AppColors.secondaryColor),
-                          ),
-                        ],
-                      ),
-                      getVerticalSpace(.6.h),
-                      Divider(
-                        color: AppColors.secondaryColor,
-                      )
-                    ],
-                  ),
-                );
-              },
+            GestureDetector(onTap: () {
+              Get.to(()=>const ShareGroupScreen());
+            },
+              child: ListView.builder(
+                padding: EdgeInsets.symmetric(horizontal: 2.h, vertical: 3.h),
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.symmetric(vertical: 1.h),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: .6.h,
+                              backgroundColor: Colors.white,
+                            ),
+                            getHorizentalSpace(.5.h),
+                            Text(
+                              'Start the day with a visit to the',
+                              style: CustomTextStyle.buttonText.copyWith(color: Colors.white),
+                            ),
+                            const Expanded(child: SizedBox()),
+                            Text(
+                              '09:00 AM',
+                              style: CustomTextStyle.buttonText.copyWith(color: Colors.white),
+                            )
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            getHorizentalSpace(2.h),
+                            Text(
+                              'British Museum.',
+                              style: CustomTextStyle.headingStyle.copyWith(color: AppColors.secondaryColor),
+                            ),
+                            const Expanded(child: SizedBox()),
+                            GestureDetector(onTap:(){
+                              Get.to(()=>const ShareGroupScreen());
+                            },
+                                child: SvgPicture.asset("assets/png/share.svg"))
+                          ],
+                        ),
+                        getVerticalSpace(.6.h),
+                        Divider(
+                          color: AppColors.secondaryColor,
+                        )
+                      ],
+                    ),
+                  );
+                },
+              ),
             )
           ],
         ),

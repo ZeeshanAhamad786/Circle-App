@@ -1,11 +1,16 @@
+import 'package:circleapp/view/screens/explore_section/share_group.dart';
 import 'package:circleapp/view/screens/planDetailScreen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../../../controller/utils/app_colors.dart';
 import '../../../controller/utils/customTextStyle.dart';
+import '../../../models/explore-model.dart';
 import '../../custom_widget/customwidgets.dart';
 
 class PlanEventScreen extends StatefulWidget {
@@ -16,57 +21,96 @@ class PlanEventScreen extends StatefulWidget {
 }
 
 class _PlanEventScreenState extends State<PlanEventScreen> {
-  List<Map<String, String>> data = [
-    {"name": "Imagine Dragon’s Concert", "date": "12/3/23", "subtitle": "will be a sunny day"},
-    {"name": "Art Gallery", "date": "12/7/23", "subtitle": "hello world"},
-    {"name": "Aroura Lights", "date": "12/1/23", "subtitle": "best time to visit Norway"},
-    {"name": "Imagine Dragon’s Concert", "date": "12/3/23", "subtitle": "hello world"},
-    {"name": "Imagine Dragon’s Concert", "date": "12/3/23", "subtitle": "hello world"}
+  final List<ExploreModel> data = [
+    ExploreModel(
+        birdOffer: "Imagine Dragon’s Concert",
+        totalPrice: "\$2500",
+        date: "1/2/2024",
+        concertName: "Imagine Dragon’s Concert",
+        discription:
+        "Lorem ipsum dolor sit amet consectetur. Eget aliquam suspendisse ultrices a mattis vitae. Adipiscing id vestibulum ultrices lorem. Nibh dignissim bibendum aAdipi.",
+        location: " 13th Street. 47 W 13th St, New York, NY 10011, USA. 20 Cooper Square.",
+        interest: "Music",
+        images: [
+          "assets/png/png4.png",
+          "assets/png/png3.png",
+          "assets/png/png2.png",
+          "assets/png/png1.png"
+        ], offerFor: ''),
+    ExploreModel(
+        birdOffer: "Art Gallery",
+        totalPrice: "\$2500",
+        date: "1/2/2024",
+        concertName: "Imagine Dragon’s Concert",
+        discription:
+        "Lorem ipsum dolor sit amet consectetur. Eget aliquam suspendisse ultrices a mattis vitae. Adipiscing id vestibulum ultrices lorem. Nibh dignissim bibendum aAdipi.",
+        location: " 13th Street. 47 W 13th St, New York, NY 10011, USA. 20 Cooper Square.",
+        interest: "Music",
+        images: [
+          "assets/png/png4.png",
+          "assets/png/png3.png",
+          "assets/png/png2.png",
+          "assets/png/png1.png"
+        ], offerFor: ''),
+    ExploreModel(
+        birdOffer: "Early Bird Offer",
+        totalPrice: "\$2500",
+        date: "1/2/2024",
+        concertName: "Imagine Dragon’s Concert",
+        discription:
+        "Lorem ipsum dolor sit amet consectetur. Eget aliquam suspendisse ultrices a mattis vitae. Adipiscing id vestibulum ultrices lorem. Nibh dignissim bibendum aAdipi.",
+        location: " 13th Street. 47 W 13th St, New York, NY 10011, USA. 20 Cooper Square.",
+        interest: "Music",
+        images: [
+          "assets/png/png4.png",
+          "assets/png/png3.png",
+          "assets/png/png2.png",
+          "assets/png/png1.png"
+        ], offerFor: '')
   ];
+  final List<String> imageUrls = [
+    "assets/png/png4.png",
+    "assets/png/png3.png",
+    "assets/png/png2.png",
+    "assets/png/png1.png"
+  ];
+  final List<Meeting> appointments = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SfCalendar(
-              backgroundColor: Colors.white,
-              viewHeaderStyle: ViewHeaderStyle(backgroundColor: Colors.green),
-              todayHighlightColor: AppColors.mainColorYellow,
-              todayTextStyle: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-
-              view: CalendarView.month,
-              dataSource: MeetingDataSource(_getDataSource()),
-
-              // by default the month appointment display mode set as Indicator, we can
-              // change the display mode as appointment using the appointment display
-              // mode property
-              // monthViewSettings: const MonthViewSettings(
-              //     showAgenda: true,
-              //     appointmentDisplayMode:
-              //     MonthAppointmentDisplayMode.appointment),
+      body: Column(
+        children: [
+          SfCalendar(
+            backgroundColor: Colors.white,
+            viewHeaderStyle: ViewHeaderStyle(backgroundColor: Colors.grey),
+            todayHighlightColor: AppColors.mainColorYellow,
+            todayTextStyle: TextStyle(
+              fontWeight: FontWeight.bold,
             ),
-            getVerticalSpace(1.5.h),
-            Container(
+            view: CalendarView.month,
+            dataSource: MeetingDataSource(appointments),
+          ),
+          getVerticalSpace(1.5.h),
+          Expanded(
+            child: Container(
               width: MediaQuery.of(context).size.width,
+              // height: MediaQuery.of(context).size.height,// Added height constraint
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Color(0xff343434),
                 ),
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
                 color: AppColors.mainColorBackground,
               ),
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: 5.h, right: 5.h, top: 4.h),
+                    padding: EdgeInsets.only(left: 5.h, right: 5.h, top: 2.5.h),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Events",
+                          "Plans",
                           style: CustomTextStyle.mediumTextM14,
                         ),
                         GestureDetector(
@@ -81,166 +125,188 @@ class _PlanEventScreenState extends State<PlanEventScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: 4.h,
-                  ),
-                  ListView.builder(
-                      physics: ScrollPhysics(),
-                      itemCount: data.length,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Dismissible(
-                            key: Key("$index"),
-                            onDismissed: (DismissDirection) {
-                              setState(() {
-                                data.removeAt(index);
-                              });
+                  getVerticalSpace(2.5.h),
+                  Expanded(
+                    child: ListView.builder(
+                        itemCount: data.length,
+                        padding: EdgeInsets.zero,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              // Handle onTap
                             },
-                            background: Container(
-                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Colors.red), // Background color when swiping
-                              child: Icon(Icons.delete, color: Colors.white),
-                              alignment: Alignment.centerRight,
-                              padding: EdgeInsets.only(right: 5.h),
-                            ),
                             child: Container(
-                                margin: EdgeInsets.symmetric(horizontal: 3.h),
-                                padding: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    boxShadow: [
-                                      BoxShadow(color: AppColors.mainColorBackground.withOpacity(0.01), blurRadius: 30, offset: Offset(0, 3))
+                              margin: EdgeInsets.all(10),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 2.2.h, vertical: 2.h),
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: AppColors.textFieldColor),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        data[index].birdOffer,
+                                        style: CustomTextStyle.mediumTextM14,
+                                      ),
+                                      Expanded(child: SizedBox()),
+                                      Text(
+                                        data[index].date,
+                                        style: TextStyle(
+                                            color:
+                                            Colors.white.withOpacity(0.5),
+                                            fontSize: 11.px,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: "medium"),
+                                      ),
                                     ],
-                                    color: AppColors.mainColorLowBlack),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        CircleAvatar(
-                                          radius: .5.h,
-                                          backgroundColor: Colors.green,
-                                        ),
-                                        SizedBox(
-                                          width: 2.w,
-                                        ),
-                                        Text(
-                                          data[index]["name"]!,
-                                          style: CustomTextStyle.mediumTextM,
-                                        ),
-                                        Expanded(child: SizedBox()),
-                                        Text(
-                                          data[index]["date"]!,
-                                          style: CustomTextStyle.mediumTextBold,
-                                        ),
-                                      ],
+                                  ),
+                                  getVerticalSpace(.5.h),
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      data[index].discription,
+                                      style: TextStyle(
+                                          color:
+                                          Colors.white.withOpacity(0.5),
+                                          fontSize: 10.px,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: "medium"),
                                     ),
-                                    Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                            child: Text(
-                                          data[index]["subtitle"]!,
-                                          style: CustomTextStyle.mediumTextGrey,
-                                        )),
-                                        ElevatedButton(
-                                            onPressed: () {},
-                                            style: ElevatedButton.styleFrom(backgroundColor: AppColors.mainColorYellow, minimumSize: Size(60, 30)),
-                                            child: Text(
-                                              "Booked",
-                                              style: CustomTextStyle.mediumTextBold,
-                                            )),
-                                      ],
-                                    )
-                                  ],
-                                )),
-                          ),
-                        );
-                      })
+                                  ),
+                                  getVerticalSpace(1.h),
+                                  Row(mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                    SvgPicture.asset("assets/svg/Location.svg"),
+                                      getHorizentalSpace(1.w),
+                                      Expanded(
+                                        child: Text(
+                                          data[index].location,
+                                          style:  TextStyle(
+                                              color:
+                                              Colors.white.withOpacity(0.5),
+                                              fontSize: 8.px,
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: "medium"),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+                                  getVerticalSpace(1.2.h),
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      "Added members",
+                                      style: TextStyle(
+                                          color: Colors.white.withOpacity(0.7), fontSize: 11.px, fontWeight: FontWeight.w400, fontFamily: "medium"),
+                                    ),
+                                  ),
+                                  getVerticalSpace(1.h),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: SizedBox(
+                                            height: 40,
+                                            child: ListView.builder(
+                                                shrinkWrap: true,
+                                                scrollDirection: Axis.horizontal,
+                                                itemCount: imageUrls.length,
+                                                itemBuilder: (BuildContext, index) {
+                                                  return Padding(
+                                                    padding: const EdgeInsets.all(2),
+                                                    child: Image.asset(
+                                                      imageUrls[index],
+                                                      width: 27,
+                                                      height: 27,
+                                                    ),
+                                                  );
+                                                }),
+                                          ),
+                                        ),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          getHorizentalSpace(1.w),
+                                          GestureDetector(onTap:() {
+                                            Get.to(()=>const ShareGroupScreen());
+                                          },
+                                              child: SvgPicture.asset("assets/svg/shareButton.svg")),
+                                          getHorizentalSpace(2.w),
+                                          Container(
+                                              height: 3.h,
+                                              width: 22.w,
+                                              decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(30), border: Border.all(color: AppColors.mainColorYellow)),
+                                              child: Center(
+                                                  child: Text(
+                                                    "View Details",
+                                                    style: CustomTextStyle.mediumTextYellow,
+                                                  )))
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                  ),
                 ],
               ),
-            )
-          ],
-        ),
+            ),
+          ),
+        ],
       ),
     );
   }
-
-  List<Meeting> _getDataSource() {
-    final List<Meeting> meetings = <Meeting>[];
-    final DateTime today = DateTime.now();
-    final DateTime startTime = DateTime(today.year, today.month, today.day, 9);
-    final DateTime endTime = startTime.add(const Duration(hours: 2));
-    meetings.add(Meeting('Conference', startTime, endTime, const Color(0xFF0F8644), false));
-    return meetings;
-  }
 }
 
-/// An object to set the appointment collection data source to calendar, which
-/// used to map the custom appointment data to the calendar appointment, and
-/// allows to add, remove or reset the appointment collection.
+class Meeting {
+  Meeting(this.eventName, this.from, this.to, this.background, this.isAllDay);
+  String eventName;
+  DateTime from;
+  DateTime to;
+  Color background;
+  bool isAllDay;
+}
+
 class MeetingDataSource extends CalendarDataSource {
-  /// Creates a meeting data source, which used to set the appointment
-  /// collection to the calendar
   MeetingDataSource(List<Meeting> source) {
     appointments = source;
   }
 
   @override
   DateTime getStartTime(int index) {
-    return _getMeetingData(index).from;
+    return appointments![index].from;
   }
 
   @override
   DateTime getEndTime(int index) {
-    return _getMeetingData(index).to;
+    return appointments![index].to;
   }
 
   @override
   String getSubject(int index) {
-    return _getMeetingData(index).eventName;
+    return appointments![index].eventName;
   }
 
   @override
   Color getColor(int index) {
-    return _getMeetingData(index).background;
+    return appointments![index].background;
   }
 
   @override
   bool isAllDay(int index) {
-    return _getMeetingData(index).isAllDay;
+    return appointments![index].isAllDay;
   }
-
-  Meeting _getMeetingData(int index) {
-    final dynamic meeting = appointments![index];
-    late final Meeting meetingData;
-    if (meeting is Meeting) {
-      meetingData = meeting;
-    }
-
-    return meetingData;
-  }
-}
-
-/// Custom business object class which contains properties to hold the detailed
-/// information about the event data which will be rendered in calendar.
-class Meeting {
-  /// Creates a meeting class with required details.
-  Meeting(this.eventName, this.from, this.to, this.background, this.isAllDay);
-
-  /// Event name which is equivalent to subject property of [Appointment].
-  String eventName;
-
-  /// From which is equivalent to start time property of [Appointment].
-  DateTime from;
-
-  /// To which is equivalent to end time property of [Appointment].
-  DateTime to;
-
-  /// Background which is equivalent to color property of [Appointment].
-  Color background;
-
-  /// IsAllDay which is equivalent to isAllDay property of [Appointment].
-  bool isAllDay;
 }

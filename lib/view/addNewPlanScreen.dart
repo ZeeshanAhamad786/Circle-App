@@ -1,5 +1,6 @@
 import 'package:circleapp/controller/getx_controllers/paymentController.dart';
 import 'package:circleapp/controller/utils/customTextStyle.dart';
+import 'package:circleapp/view/custom_widget/custom_text_field.dart';
 import 'package:circleapp/view/screens/add_new_event.dart';
 import 'package:circleapp/view/screens/bookTicketScreen.dart';
 import 'package:circleapp/view/screens/bottom_navigation_screen/bottom_navigation_screen.dart';
@@ -288,15 +289,17 @@ class _AddNewPlanState extends State<AddNewPlan> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Book Ticket ', style: CustomTextStyle.buttonText.copyWith(fontSize: 14.px)),
-                  GestureDetector(
-                    onTap: () {
-                      Get.to(() => const BookTicket());
-                    },
-                    child: customTextButton2(title: 'Book', horizentalPadding: 1.5.h, verticalPadding: .4.h, bgColor: Colors.transparent),
-                  )
+                  Text('Set Budget ', style: CustomTextStyle.buttonText.copyWith(fontSize: 14.px)),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     Get.to(() => const BookTicket());
+                  //   },
+                  //   child: customTextButton2(title: 'Book', horizentalPadding: 1.5.h, verticalPadding: .4.h, bgColor: Colors.transparent),
+                  // )
                 ],
               ),
+              getVerticalSpace(1.h),
+              CustomTextField1(hintText: " hintText"),
               getVerticalSpace(4.8.h),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 2.3.h),

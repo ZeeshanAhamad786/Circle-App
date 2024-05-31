@@ -164,10 +164,9 @@ Widget customTextButton1({String? title, double? horizentalPadding, double? vert
     ),
   );
 }
-
 Widget customTextButton2({String? title, Color? bgColor, Color? btnTextColor, double? horizentalPadding, verticalPadding}) {
   return Container(
-    padding: EdgeInsets.symmetric(horizontal: horizentalPadding ?? .8.h, vertical: verticalPadding ?? .1.h),
+    padding: EdgeInsets.symmetric(horizontal: horizentalPadding ?? .8.h, vertical: verticalPadding ?? .3.h),
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.px), color: bgColor ?? AppColors.mainColor, border: Border.all(color: AppColors.secondaryColor)),
     child: Row(

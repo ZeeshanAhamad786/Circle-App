@@ -6,9 +6,10 @@ class ExploreModel{
   final String discription;
   final String offerFor;
   final String interest;
+  final String location;
   final List<String> images;
 
-  ExploreModel({
+  ExploreModel( {
     required this.birdOffer,
     required this.totalPrice,
     required this.date,
@@ -17,5 +18,6 @@ class ExploreModel{
     required this.offerFor,
     required this.interest,
     required this.images,
+    required this.location,
   });
 }
