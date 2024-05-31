@@ -1,5 +1,5 @@
-import 'package:circleapp/controller/utils/color/custom_color.dart';
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/controller/utils/app_colors.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:circleapp/view/screens/addPaymentScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +14,7 @@ class BookTicket extends StatelessWidget {
   Widget build(BuildContext context) {
     RxInt number = 1.obs;
     return Scaffold(
-      backgroundColor: CustomColor.mainColorBackground,
+      backgroundColor: AppColors.mainColorBackground,
       body: Column(
         children: [
           Padding(
@@ -72,12 +72,12 @@ class BookTicket extends StatelessWidget {
                         RichText(
                             text: TextSpan(children: [
                           TextSpan(text: 'Single Ticket  ', style: CustomTextStyle.buttonText),
-                          TextSpan(text: '\$${number.value * 500}', style: CustomTextStyle.buttonText.copyWith(color: CustomColor.secondaryColor)),
+                          TextSpan(text: '\$${number.value * 500}', style: CustomTextStyle.buttonText.copyWith(color: AppColors.secondaryColor)),
                         ])),
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 2.h),
                           decoration: BoxDecoration(
-                            color: CustomColor.textFieldColor,
+                            color: AppColors.textFieldColor,
                             borderRadius: BorderRadius.circular(10.px),
                           ),
                           child: Row(
@@ -131,7 +131,7 @@ class BookTicket extends StatelessWidget {
                     'TOTAL',
                     style: CustomTextStyle.buttonText,
                   ),
-                  Text('\$${number.value * 500}', style: CustomTextStyle.buttonText.copyWith(color: CustomColor.secondaryColor)),
+                  Text('\$${number.value * 500}', style: CustomTextStyle.buttonText.copyWith(color: AppColors.secondaryColor)),
                 ],
               ),
             ),
@@ -145,8 +145,8 @@ class BookTicket extends StatelessWidget {
                         title: 'bookTicket',
                       ));
                 },
-                backgroundColor: CustomColor.secondaryColor,
-                borderColor: CustomColor.primaryColor,
+                backgroundColor: AppColors.secondaryColor,
+                borderColor: AppColors.primaryColor,
                 title: 'Pay',
                 titleColor: Colors.black,
                 height: 4.5.h),

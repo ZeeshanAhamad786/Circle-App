@@ -6,7 +6,7 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../api/user_services.dart';
+import '../../api/user_services.dart';
 
 class ProfileImageUploadNewController extends GetxController {
   var loading = false.obs;
@@ -39,19 +39,19 @@ class ProfileImageUploadNewController extends GetxController {
       Get.snackbar("Error", "Something went wrong! Please try again");
     }
   }
-  String token='';
-  Future<void> tokenStoreSharedPreference(String token)async{
+
+  String token = '';
+  Future<void> tokenStoreSharedPreference(String token) async {
     // Save token in shared preferences
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('token', token);
     log("this is token $token");
-
   }
-  Future<void> getTokenFromSharedPreference()async{
+
+  Future<void> getTokenFromSharedPreference() async {
     // Save token in shared preferences
     final prefs = await SharedPreferences.getInstance();
-    token= prefs.getString('token')!;
+    token = prefs.getString('token')!;
     log("this is token $token");
-
   }
 }

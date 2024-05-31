@@ -1,5 +1,5 @@
-import 'package:circleapp/controller/paymentController.dart';
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/controller/getx_controllers/paymentController.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:circleapp/view/screens/add_new_event.dart';
 import 'package:circleapp/view/screens/bookTicketScreen.dart';
 import 'package:circleapp/view/screens/bottom_navigation_screen/bottom_navigation_screen.dart';
@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../controller/utils/color/custom_color.dart';
+import '../controller/utils/app_colors.dart';
 import 'custom_widget/customwidgets.dart';
 
 class AddNewPlan extends StatefulWidget {
@@ -47,7 +47,7 @@ class _AddNewPlanState extends State<AddNewPlan> {
     final TextEditingController cardNumberController = TextEditingController();
     final PaymentController paymentController = Get.put(PaymentController());
     return Scaffold(
-      backgroundColor: CustomColor.mainColorBackground,
+      backgroundColor: AppColors.mainColorBackground,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 2.3.h),
         child: SingleChildScrollView(
@@ -111,14 +111,14 @@ class _AddNewPlanState extends State<AddNewPlan> {
                       ), // Adjust this value as needed
                       child: Icon(
                         Icons.date_range_rounded,
-                        color: CustomColor.secondaryColor,
+                        color: AppColors.secondaryColor,
                       ),
                     ),
                     contentPadding: EdgeInsets.only(left: 1.h, top: 2.h), // Adjust this value as needed
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.px),
                     ),
-                    fillColor: CustomColor.textFieldColor,
+                    fillColor: AppColors.textFieldColor,
                     filled: true,
                     hintStyle: CustomTextStyle.hintText,
                     hintText: '${paymentController.formatedDate}',
@@ -138,14 +138,14 @@ class _AddNewPlanState extends State<AddNewPlan> {
                     ), // Adjust this value as needed
                     child: Icon(
                       Icons.location_on,
-                      color: CustomColor.secondaryColor,
+                      color: AppColors.secondaryColor,
                     ),
                   ),
                   contentPadding: EdgeInsets.only(left: 1.h, top: 2.h), // Adjust this value as needed
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30.px),
                   ),
-                  fillColor: CustomColor.textFieldColor,
+                  fillColor: AppColors.textFieldColor,
                   filled: true,
                   hintStyle: CustomTextStyle.hintText,
                   hintText: 'Location',
@@ -163,7 +163,7 @@ class _AddNewPlanState extends State<AddNewPlan> {
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 1.2.h, vertical: 1.h),
-                  decoration: BoxDecoration(color: CustomColor.textFieldColor, borderRadius: BorderRadius.circular(20.px)),
+                  decoration: BoxDecoration(color: AppColors.textFieldColor, borderRadius: BorderRadius.circular(20.px)),
                   child: Obx(
                     () => Column(
                       children: [
@@ -224,10 +224,10 @@ class _AddNewPlanState extends State<AddNewPlan> {
                                       alignment: Alignment.center,
                                       padding: EdgeInsets.symmetric(horizontal: 1.h, vertical: .5.h),
                                       decoration: BoxDecoration(
-                                          border: Border.all(color: CustomColor.secondaryColor), borderRadius: BorderRadius.circular(50.px)),
+                                          border: Border.all(color: AppColors.secondaryColor), borderRadius: BorderRadius.circular(50.px)),
                                       child: Text(
                                         '+ Add new',
-                                        style: CustomTextStyle.hintText.copyWith(color: CustomColor.secondaryColor),
+                                        style: CustomTextStyle.hintText.copyWith(color: AppColors.secondaryColor),
                                       ),
                                     ),
                                   )
@@ -258,10 +258,10 @@ class _AddNewPlanState extends State<AddNewPlan> {
                       itemBuilder: (context, index) {
                         return Container(
                           padding: EdgeInsets.symmetric(horizontal: .3.h),
-                          decoration: BoxDecoration(border: Border.all(color: CustomColor.secondaryColor), shape: BoxShape.circle),
+                          decoration: BoxDecoration(border: Border.all(color: AppColors.secondaryColor), shape: BoxShape.circle),
                           child: CircleAvatar(
                             radius: 5.6.h,
-                            backgroundColor: CustomColor.mainColor,
+                            backgroundColor: AppColors.mainColor,
                             backgroundImage: const AssetImage('assets/png/story.png'),
                           ),
                         );
@@ -304,8 +304,8 @@ class _AddNewPlanState extends State<AddNewPlan> {
                     onTap: () {
                       Get.to(() => const BottomNavigationScreen());
                     },
-                    backgroundColor: CustomColor.secondaryColor,
-                    borderColor: CustomColor.primaryColor,
+                    backgroundColor: AppColors.secondaryColor,
+                    borderColor: AppColors.primaryColor,
                     title: 'Create Plan',
                     titleColor: Colors.black,
                     height: 4.5.h),

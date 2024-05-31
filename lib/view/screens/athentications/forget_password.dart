@@ -1,13 +1,13 @@
 import 'package:circleapp/controller/api/auth_apis.dart';
-import 'package:circleapp/controller/auth_controller/forgotpassword_controller.dart';
 import 'package:circleapp/view/custom_widget/custom-button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../../controller/utils/color/custom_color.dart';
-import '../../../controller/utils/style/customTextStyle.dart';
+import '../../../controller/getx_controllers/auth_controller/forgotpassword_controller.dart';
+import '../../../controller/utils/app_colors.dart';
+import '../../../controller/utils/customTextStyle.dart';
 import '../../custom_widget/custom_text_field.dart';
 
 class ForgetScreen extends StatefulWidget {
@@ -32,7 +32,7 @@ class _ForgetScreenState extends State<ForgetScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColor.mainColorBackground,
+      backgroundColor: AppColors.mainColorBackground,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 3.h),
         child: SingleChildScrollView(
@@ -83,12 +83,12 @@ class _ForgetScreenState extends State<ForgetScreen> {
               ),
               Obx(() {
                 return forgotPasswordController.isLoading.value
-                    ? CircularProgressIndicator(
-                        color: CustomColor.mainColorYellow,
+                    ? const CircularProgressIndicator(
+                        color: AppColors.mainColorYellow,
                       )
                     : CustomButton(
                         buttonText: "Done",
-                        buttonColor: CustomColor.mainColorYellow,
+                        buttonColor: AppColors.mainColorYellow,
                         onPressed: () {
                           forgotPasswordController.forgotPasswordApi(forgotPasswordController.forgotPasswordTextController.text);
                           // Get.to(() => VerifyMobileScreen());

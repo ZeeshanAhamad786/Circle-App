@@ -1,16 +1,16 @@
 import 'dart:developer';
 
 import 'package:circleapp/controller/api/auth_apis.dart';
-import 'package:circleapp/controller/utils/validations/validation.dart';
+import 'package:circleapp/controller/utils/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../../controller/auth_controller/resetpassword_controller.dart';
-import '../../../controller/utils/color/custom_color.dart';
-import '../../../controller/utils/style/customTextStyle.dart';
+import '../../../controller/getx_controllers/auth_controller/resetpassword_controller.dart';
+import '../../../controller/utils/app_colors.dart';
+import '../../../controller/utils/customTextStyle.dart';
 import '../../custom_widget/custom-button.dart';
 import '../../custom_widget/custom_text_field.dart';
 import '../../custom_widget/customwidgets.dart';
@@ -40,7 +40,7 @@ class _ForgetScreenState extends State<ResetPasswordScreen> {
     String phoneNumber = arguments['phoneNumber'];
     print('resetNumber: $phoneNumber');
     return Scaffold(
-      backgroundColor: CustomColor.mainColorBackground,
+      backgroundColor: AppColors.mainColorBackground,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 3.h),
         child: SingleChildScrollView(
@@ -92,9 +92,9 @@ class _ForgetScreenState extends State<ResetPasswordScreen> {
                   borderRadius: BorderRadius.circular(8),
                   fieldHeight: 52,
                   fieldWidth: 52,
-                  inactiveColor: CustomColor.mainColor,
-                  selectedColor: CustomColor.mainColor,
-                  activeColor: CustomColor.mainColor,
+                  inactiveColor: AppColors.mainColor,
+                  selectedColor: AppColors.mainColor,
+                  activeColor: AppColors.mainColor,
                   borderWidth: 0,
                   activeBorderWidth: 0,
                   disabledBorderWidth: 0,
@@ -149,11 +149,11 @@ class _ForgetScreenState extends State<ResetPasswordScreen> {
               Obx(() {
                 return resetPasswordController.isLoading.value
                     ? CircularProgressIndicator(
-                        color: CustomColor.mainColorYellow,
+                        color: AppColors.mainColorYellow,
                       )
                     : CustomButton(
                         buttonText: "Done",
-                        buttonColor: CustomColor.mainColorYellow,
+                        buttonColor: AppColors.mainColorYellow,
                         onPressed: () {
                           if (Validations.handleResetPasswordScreenError(
                             password: resetPasswordController.newPasswordTextController,

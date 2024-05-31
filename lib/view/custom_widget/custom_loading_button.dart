@@ -4,7 +4,7 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../controller/utils/color/custom_color.dart';
+import '../../controller/utils/app_colors.dart';
 
 class CustomLoadingButton extends StatelessWidget {
   final String buttonText;
@@ -27,17 +27,17 @@ class CustomLoadingButton extends StatelessWidget {
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           fixedSize: Size(MediaQuery.of(context).size.width, 6.h),
-          backgroundColor: CustomColor.secondaryColor,
+          backgroundColor: AppColors.secondaryColor,
 
           // Text color
         ),
         child: loading.value
-            ? LoadingAnimationWidget.waveDots(color: CustomColor.mainColorLogin, size: 35)
+            ? LoadingAnimationWidget.waveDots(color: AppColors.mainColorLogin, size: 35)
             : Text(buttonText,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 14.px,
-                  color: CustomColor.mainColorLogin,
+                  color: AppColors.mainColorLogin,
                   fontFamily: "medium",
                 )),
       );

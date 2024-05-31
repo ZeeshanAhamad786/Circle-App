@@ -1,6 +1,6 @@
-import 'package:circleapp/controller/group_member_model.dart';
-import 'package:circleapp/controller/utils/color/custom_color.dart';
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/controller/utils/app_colors.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
+import 'package:circleapp/models/group_member_model.dart';
 import 'package:circleapp/view/screens/createNewCircleScreens/change_circle_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -27,7 +27,7 @@ class _GroupEditScreenState extends State<GroupEditScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColor.mainColorBackground,
+      backgroundColor: AppColors.mainColorBackground,
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 3.h),
@@ -85,7 +85,7 @@ class _GroupEditScreenState extends State<GroupEditScreen> {
                           // Add more items if needed
                         ];
                       },
-                      color: CustomColor.textFieldColor,
+                      color: AppColors.textFieldColor,
                     ),
                   ),
                 ],

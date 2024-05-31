@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:circleapp/controller/paymentController.dart';
-import 'package:circleapp/controller/utils/color/custom_color.dart';
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/controller/getx_controllers/paymentController.dart';
+import 'package:circleapp/controller/utils/app_colors.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:circleapp/view/screens/createNew_To_DosScreen/create_New_To_Dos_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,7 +18,7 @@ class AddBills extends StatelessWidget {
     final PaymentController paymentController = Get.put(PaymentController());
     final TextEditingController titleTextController = TextEditingController();
     return Scaffold(
-      backgroundColor: CustomColor.primaryColor,
+      backgroundColor: AppColors.primaryColor,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -94,7 +94,7 @@ class AddBills extends StatelessWidget {
                               padding: EdgeInsets.symmetric(horizontal: .3.h),
                               child: Container(
                                   height: 8.2.h,
-                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.px), color: CustomColor.textFieldColor),
+                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.px), color: AppColors.textFieldColor),
                                   child: paymentController.pickedImage.value == null
                                       ? const Center(child: Text('No image selected'))
                                       : ClipRRect(
@@ -114,8 +114,8 @@ class AddBills extends StatelessWidget {
                         onTap: () {
                           showCustomDialog(context);
                         },
-                        backgroundColor: CustomColor.secondaryColor,
-                        borderColor: CustomColor.primaryColor,
+                        backgroundColor: AppColors.secondaryColor,
+                        borderColor: AppColors.primaryColor,
                         title: 'Done',
                         titleColor: Colors.black,
                         height: 4.5.h),
@@ -147,7 +147,7 @@ void showCustomDialog(BuildContext context) {
             margin: EdgeInsets.symmetric(horizontal: 2.3.h),
             padding: EdgeInsets.symmetric(horizontal: 1.9.h, vertical: 1.3.h),
             height: 35.h,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.px), color: CustomColor.textFieldColor),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.px), color: AppColors.textFieldColor),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -229,8 +229,8 @@ void showCustomDialog(BuildContext context) {
                             }
                             Get.back();
                           },
-                          backgroundColor: backButton.value == true ? CustomColor.secondaryColor : CustomColor.primaryColor,
-                          borderColor: backButton.value == true ? CustomColor.primaryColor : CustomColor.secondaryColor,
+                          backgroundColor: backButton.value == true ? AppColors.secondaryColor : AppColors.primaryColor,
+                          borderColor: backButton.value == true ? AppColors.primaryColor : AppColors.secondaryColor,
                           title: 'Back',
                           titleColor: backButton.value == true ? Colors.black : Colors.white,
                           width: 12.h,
@@ -249,8 +249,8 @@ void showCustomDialog(BuildContext context) {
                             }
                             Get.to(() => const CreateNewToDo());
                           },
-                          backgroundColor: nextButton.value == true ? CustomColor.secondaryColor : CustomColor.primaryColor,
-                          borderColor: nextButton.value == true ? CustomColor.primaryColor : CustomColor.secondaryColor,
+                          backgroundColor: nextButton.value == true ? AppColors.secondaryColor : AppColors.primaryColor,
+                          borderColor: nextButton.value == true ? AppColors.primaryColor : AppColors.secondaryColor,
                           title: 'Done',
                           titleColor: nextButton.value == true ? Colors.black : Colors.white,
                           width: 12.h,

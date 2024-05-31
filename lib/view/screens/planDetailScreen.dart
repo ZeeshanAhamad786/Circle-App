@@ -1,5 +1,5 @@
-import 'package:circleapp/controller/utils/color/custom_color.dart';
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/controller/utils/app_colors.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:circleapp/view/addNewPlanScreen.dart';
 import 'package:circleapp/view/screens/tripPlanScreens/winterTripPlanDetails.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ class PlansDetails extends StatelessWidget {
     RxList<int> colorsList = <int>[0xff00B383, 0xffFFC491, 0xff0095FF].obs;
     RxList<String> eventsNameList = <String>['Meeting', 'Hangout', 'Trip Plan'].obs;
     return Scaffold(
-      backgroundColor: CustomColor.mainColorBackground,
+      backgroundColor: AppColors.mainColorBackground,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 2.3.h),
         child: Column(
@@ -68,7 +68,7 @@ class PlansDetails extends StatelessWidget {
                   return Container(
                     padding: EdgeInsets.symmetric(horizontal: 1.5.h, vertical: .5.h),
                     margin: index == 0 ? EdgeInsets.zero : EdgeInsets.symmetric(horizontal: 1.h),
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(50.px), color: CustomColor.textFieldColor),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(50.px), color: AppColors.textFieldColor),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -99,7 +99,7 @@ class PlansDetails extends StatelessWidget {
                     padding: EdgeInsets.only(right: 4.h),
                     alignment: Alignment.centerRight,
                     decoration: BoxDecoration(
-                      color: CustomColor.secondaryColor,
+                      color: AppColors.secondaryColor,
                       borderRadius: BorderRadius.circular(10.px),
                     ),
                     child: SvgPicture.asset('assets/svg/deleteicon.svg'),
@@ -116,7 +116,7 @@ class PlansDetails extends StatelessWidget {
                       alignment: Alignment.center,
                       padding: EdgeInsets.all(1.h),
                       decoration: BoxDecoration(
-                        color: CustomColor.mainColor,
+                        color: AppColors.mainColor,
                         borderRadius: BorderRadius.circular(10.px),
                       ),
                       child: Column(
@@ -151,7 +151,7 @@ class PlansDetails extends StatelessWidget {
                                 ''' will be a sunny day''',
                                 style: CustomTextStyle.hintText,
                               )),
-                              customTextButton2(title: 'Booked', bgColor: CustomColor.secondaryColor, btnTextColor: Colors.black)
+                              customTextButton2(title: 'Booked', bgColor: AppColors.secondaryColor, btnTextColor: Colors.black)
                             ],
                           ),
                         ],

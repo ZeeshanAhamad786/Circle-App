@@ -1,4 +1,4 @@
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:circleapp/view/screens/athentications/login_screen.dart';
 import 'package:circleapp/view/screens/createNewCircleScreens/group_edit_screen.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../../controller/utils/color/custom_color.dart';
+import '../../../controller/utils/app_colors.dart';
 import '../../custom_widget/custom-button.dart';
 import '../explore_section/explore_screen.dart';
 
@@ -30,7 +30,7 @@ class _OnBoardingScreen1State extends State<OnBoardingScreen1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColor.mainColorBackground,
+      backgroundColor: AppColors.mainColorBackground,
       body: Obx(
         () => Stack(
           children: [
@@ -177,7 +177,7 @@ class OnboardingPage extends StatelessWidget {
                           activeDotDecoration: DotDecoration(
                             height: 0.8.h,
                             width: 2.2.h,
-                            color: CustomColor.mainColorYellow,
+                            color: AppColors.mainColorYellow,
                             borderRadius: BorderRadius.circular(32.px),
                           ),
                           dotDecoration: DotDecoration(height: 0.8.h, width: 0.8.h, color: Colors.white, borderRadius: BorderRadius.circular(32.px)),
@@ -190,7 +190,7 @@ class OnboardingPage extends StatelessWidget {
                       alignment: Alignment.centerRight,
                       child: CustomButton(
                           buttonText: "Get Started",
-                          buttonColor: CustomColor.mainColorYellow,
+                          buttonColor: AppColors.mainColorYellow,
                           onPressed: () {
                             if (controller.page == 3) {
                               Get.to(() => LoginScreen());

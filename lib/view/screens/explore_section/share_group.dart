@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:circleapp/controller/utils/color/custom_color.dart';
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/controller/utils/app_colors.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:circleapp/models/share_groups_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -71,7 +71,7 @@ class _ShareGroupScreenState extends State<ShareGroupScreen> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Scaffold(
-          backgroundColor: CustomColor.mainColorBackground,
+          backgroundColor: AppColors.mainColorBackground,
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 3.h),
             child: Column(
@@ -95,7 +95,7 @@ class _ShareGroupScreenState extends State<ShareGroupScreen> {
                   child: Text(
                     "Select groups you want to share in",
                     style: TextStyle(
-                        color: CustomColor.mainColorOffWhite.withOpacity(0.5), fontWeight: FontWeight.w400, fontSize: 12.px, fontFamily: "medium"),
+                        color: AppColors.mainColorOffWhite.withOpacity(0.5), fontWeight: FontWeight.w400, fontSize: 12.px, fontFamily: "medium"),
                   ),
                 ),
                 getVerticalSpace(3.h),
@@ -117,7 +117,7 @@ class _ShareGroupScreenState extends State<ShareGroupScreen> {
                             width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: CustomColor.textFieldColor,
+                              color: AppColors.textFieldColor,
                             ),
                             child: ListTile(
                               title: Text(
@@ -136,9 +136,9 @@ class _ShareGroupScreenState extends State<ShareGroupScreen> {
                                 height: 20,
                                 width: 20,
                                 decoration: BoxDecoration(
-                                    color: items[index].selected ? CustomColor.mainColorYellow : null,
+                                    color: items[index].selected ? AppColors.mainColorYellow : null,
                                     borderRadius: BorderRadius.circular(30),
-                                    border: Border.all(color: CustomColor.mainColorYellow)),
+                                    border: Border.all(color: AppColors.mainColorYellow)),
                                 child: items[index].selected
                                     ? Icon(
                                         Icons.check,

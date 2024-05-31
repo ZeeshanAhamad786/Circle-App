@@ -1,5 +1,6 @@
 import 'package:circleapp/controller/api/circle_apis.dart';
 import 'package:circleapp/models/circle_model.dart';
+import 'package:circleapp/models/messages_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:get/get.dart';
@@ -10,14 +11,18 @@ import '../../view/custom_widget/customwidgets.dart';
 
 class CreateCircleController extends GetxController {
   late final BuildContext context;
+  CreateCircleController(this.context);
+
+  //Variables
   RxBool _contactsLoading = false.obs;
   RxBool _createCircleLoading = false.obs;
+  RxBool _messagesLoading = false.obs;
   Rxn<CircleModel>? circleModel = Rxn<CircleModel>();
+  Rxn<MessagesModel>? messagesModel = Rxn<MessagesModel>();
   TextEditingController circleNameTextController = TextEditingController();
   TextEditingController circleDescriptionTextController = TextEditingController();
 
-  CreateCircleController(this.context);
-
+  //Getters and Setters
   RxBool get contactsLoading => _contactsLoading;
 
   set contactsLoading(RxBool value) {
@@ -30,6 +35,13 @@ class CreateCircleController extends GetxController {
     _createCircleLoading = value;
   }
 
+  RxBool get messagesLoading => _messagesLoading;
+
+  set messagesLoading(RxBool value) {
+    _messagesLoading = value;
+  }
+
+  //API Methods
   Future<void> createCircle({
     required bool load,
     required String circleName,
@@ -53,22 +65,27 @@ class CreateCircleController extends GetxController {
     createCircleLoading.value = false;
   }
 
+  Future<void> getMessages({required bool load, required String circleId}) async {
+    if (load) {
+      createCircleLoading.value = true;
+    }
+
+    messagesModel?.value = await CircleApis(context).getMessages(circleId: circleId);
+    createCircleLoading.value = false;
+  }
+
+  //Supporting Methods
   Future<RxList<ContactSelection>?> getContacts() async {
     contactsLoading.value = true;
-    debugPrint("Contacts loading set to true");
 
     final status = await Permission.contacts.request();
-    debugPrint("Permission request called");
 
     if (status.isDenied) {
       customScaffoldMessenger(context, "Plz allow contacts permission to proceed");
-      debugPrint("Permission denied");
       contactsLoading.value = false;
-      debugPrint("Contacts loading set to false");
       return null;
     } else if (status.isGranted) {
       final contactsFromPhone = await FlutterContacts.getContacts(withPhoto: true, withProperties: true);
-      debugPrint("Contacts fetched from phone");
 
       if (contactsFromPhone.isNotEmpty) {
         for (var contact in contactsFromPhone) {
@@ -78,43 +95,34 @@ class CreateCircleController extends GetxController {
             .where((contact) => contact.phones.isNotEmpty)
             .map((contact) => contact.phones.first.number.replaceAll(RegExp(r'[^\d+]'), ''))
             .toList();
-        debugPrint("Phone numbers extracted from contacts");
 
         if (numbers.isNotEmpty) {
-          final value = await CircleApis(context).getIsUser(numbers);
-          debugPrint("Circle API called");
+          final value = await CircleApis(context).getIsUser(numbers: numbers);
 
           if (value != null) {
             RxList<ContactSelection> myContacts = <ContactSelection>[].obs;
-            debugPrint("Creating myContacts list");
 
             for (int i = 0; i < value.length; i++) {
               contactsFromPhone[i].phones.first.number = numbers[i];
               myContacts.add(ContactSelection(contact: contactsFromPhone[i], isUser: value[i].isUser));
             }
-            debugPrint("myContacts list populated");
 
             contactsLoading.value = false;
-            debugPrint("Contacts loading set to false");
             return myContacts;
           } else {
             contactsLoading.value = false;
-            debugPrint("Value is null, contacts loading set to false");
             return null;
           }
         } else {
           contactsLoading.value = false;
-          debugPrint("Phone numbers list is empty, contacts loading set to false");
           return null;
         }
       } else {
         contactsLoading.value = false;
-        debugPrint("Contacts from phone is empty, contacts loading set to false");
         return null;
       }
     } else {
       contactsLoading.value = false;
-      debugPrint("Permission not granted, contacts loading set to false");
       return null;
     }
   }
@@ -124,7 +132,11 @@ class CreateCircleController extends GetxController {
     for (var contact in contactsSelection) {
       if (contact.isUser == areUser && contact.isSelected) {
         {
-          contactNumbers.add(contact.contact.phones.first.number);
+          if (areUser) {
+            contactNumbers.add(contact.contact.id);
+          } else {
+            contactNumbers.add(contact.contact.phones.first.number);
+          }
         }
       }
     }

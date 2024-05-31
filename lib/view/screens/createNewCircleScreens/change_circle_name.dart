@@ -1,8 +1,8 @@
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../../controller/utils/color/custom_color.dart';
+import '../../../controller/utils/app_colors.dart';
 import '../../custom_widget/customwidgets.dart';
 
 class ChangeCircleName extends StatelessWidget {
@@ -11,7 +11,7 @@ class ChangeCircleName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColor.mainColorBackground,
+      backgroundColor: AppColors.mainColorBackground,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 3.h),
         child: Column(
@@ -34,21 +34,21 @@ class ChangeCircleName extends StatelessWidget {
                   hintText: "Hiking Plan",
                   hintStyle: TextStyle(fontWeight: FontWeight.w400, fontFamily: "medium", fontSize: 10.px, color: Colors.white),
                   filled: true,
-                  fillColor: CustomColor.textFieldColor,
+                  fillColor: AppColors.textFieldColor,
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                       borderSide: BorderSide(
-                        color: CustomColor.textFieldColor,
+                        color: AppColors.textFieldColor,
                       )),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                       borderSide: BorderSide(
-                        color: CustomColor.textFieldColor,
+                        color: AppColors.textFieldColor,
                       )),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                       borderSide: BorderSide(
-                        color: CustomColor.textFieldColor,
+                        color: AppColors.textFieldColor,
                       ))),
             )
           ],

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-import '../models/is_user_model.dart';
-import 'api/user_services.dart';
+import '../../models/is_user_model.dart';
+import '../api/user_services.dart';
 
 class AddMemberController extends GetxController {
   RxList<IsUserModel> isUsers = <IsUserModel>[].obs;

@@ -1,5 +1,5 @@
-import 'package:circleapp/controller/utils/color/custom_color.dart';
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/controller/utils/app_colors.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:circleapp/view/screens/addPaymentScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,7 +15,7 @@ class DinnerPlanDetails extends StatelessWidget {
     RxList<String> statusList = <String>['Total bill', 'Paid', 'Pending'].obs;
     RxList<String> paymentList = <String>['2500\$', '500\$', '2000\$'].obs;
     return Scaffold(
-      backgroundColor: CustomColor.mainColorBackground,
+      backgroundColor: AppColors.mainColorBackground,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 2.3.h),
         child: Column(
@@ -53,7 +53,7 @@ class DinnerPlanDetails extends StatelessWidget {
                 return Container(
                   margin: EdgeInsets.symmetric(vertical: .5.h),
                   padding: EdgeInsets.symmetric(horizontal: 1.h, vertical: .6.h),
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.px), color: CustomColor.textFieldColor),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.px), color: AppColors.textFieldColor),
                   child: Row(
                     children: [
                       Text(
@@ -94,12 +94,12 @@ class DinnerPlanDetails extends StatelessWidget {
                   return Container(
                     margin: EdgeInsets.symmetric(vertical: .5.h),
                     padding: EdgeInsets.symmetric(horizontal: 1.h, vertical: .6.h),
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.px), color: CustomColor.textFieldColor),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.px), color: AppColors.textFieldColor),
                     child: Row(
                       children: [
                         CircleAvatar(
                           radius: 2.4.h,
-                          backgroundColor: CustomColor.mainColorBackground,
+                          backgroundColor: AppColors.mainColorBackground,
                           backgroundImage: const AssetImage('assets/png/postimage.jpeg'),
                         ),
                         getHorizentalSpace(.81.h),
@@ -140,12 +140,12 @@ class DinnerPlanDetails extends StatelessWidget {
                 return Container(
                   margin: EdgeInsets.symmetric(vertical: .5.h),
                   padding: EdgeInsets.symmetric(horizontal: 1.h, vertical: .6.h),
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.px), color: CustomColor.textFieldColor),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.px), color: AppColors.textFieldColor),
                   child: Row(
                     children: [
                       CircleAvatar(
                         radius: 2.4.h,
-                        backgroundColor: CustomColor.mainColorBackground,
+                        backgroundColor: AppColors.mainColorBackground,
                         backgroundImage: const AssetImage('assets/png/postimage.jpeg'),
                       ),
                       getHorizentalSpace(.81.h),
@@ -182,10 +182,10 @@ class DinnerPlanDetails extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Container(
                     margin: EdgeInsets.symmetric(horizontal: .3.h),
-                    decoration: BoxDecoration(border: Border.all(color: CustomColor.secondaryColor), shape: BoxShape.circle),
+                    decoration: BoxDecoration(border: Border.all(color: AppColors.secondaryColor), shape: BoxShape.circle),
                     child: CircleAvatar(
                       radius: 10.h,
-                      backgroundColor: CustomColor.mainColor,
+                      backgroundColor: AppColors.mainColor,
                       backgroundImage: const AssetImage('assets/png/story.png'),
                     ),
                   );
@@ -212,7 +212,7 @@ class DinnerPlanDetails extends StatelessWidget {
                       child: Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5.px),
-                            color: CustomColor.textFieldColor,
+                            color: AppColors.textFieldColor,
                             image: const DecorationImage(image: AssetImage('assets/png/postimage.jpeg'), fit: BoxFit.cover)),
                       ));
                 },

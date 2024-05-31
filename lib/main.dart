@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import 'controller/utils/constants/storage_keys.dart';
+import 'controller/utils/preference_keys.dart';
 import 'controller/utils/shared_preferences.dart';
 
 Future<void> main() async {

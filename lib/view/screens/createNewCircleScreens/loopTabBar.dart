@@ -1,5 +1,5 @@
-import 'package:circleapp/controller/utils/color/custom_color.dart';
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/controller/utils/app_colors.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:circleapp/view/addNewPlanScreen.dart';
 import 'package:circleapp/view/screens/createNew_To_DosScreen/create_New_To_Dos_Screen.dart';
 import 'package:circleapp/view/screens/dinnerPlanScreens/dinnerPlan_Details.dart';
@@ -22,7 +22,7 @@ class LoopTabBar extends StatelessWidget {
     RxList<String> name = <String>['     Canvas    ', '     To-Dos    ', 'Experiences'].obs;
     RxInt selectedIndex = 0.obs;
     return Scaffold(
-      backgroundColor: CustomColor.primaryColor,
+      backgroundColor: AppColors.primaryColor,
       body: SingleChildScrollView(
         child: Obx(
           () => Column(
@@ -100,7 +100,7 @@ class LoopTabBar extends StatelessWidget {
                                           : Radius.circular(20.px),
                                   topRight: index == 2 ? Radius.circular(20.px) : Radius.circular(0.px),
                                   bottomRight: index == 2 ? Radius.circular(20.px) : Radius.circular(0.px)),
-                              color: selectedIndex.value == index ? CustomColor.secondaryColor : CustomColor.textFieldColor),
+                              color: selectedIndex.value == index ? AppColors.secondaryColor : AppColors.textFieldColor),
                           child: Text(
                             name[index],
                             style: CustomTextStyle.smallText
@@ -132,10 +132,10 @@ class LoopTabBar extends StatelessWidget {
                                     Get.to(() => StoryScreen());
                                   },
                                   child: Container(
-                                    decoration: BoxDecoration(border: Border.all(color: CustomColor.secondaryColor), shape: BoxShape.circle),
+                                    decoration: BoxDecoration(border: Border.all(color: AppColors.secondaryColor), shape: BoxShape.circle),
                                     child: CircleAvatar(
                                       radius: 5.6.h,
-                                      backgroundColor: CustomColor.mainColor,
+                                      backgroundColor: AppColors.mainColor,
                                       backgroundImage: const AssetImage(
                                         'assets/png/story.png',
                                       ),
@@ -155,7 +155,7 @@ class LoopTabBar extends StatelessWidget {
                                 alignment: Alignment.center,
                                 height: 3.2.h,
                                 width: 6.3.h,
-                                decoration: BoxDecoration(color: CustomColor.textFieldColor, borderRadius: BorderRadius.circular(5.px)),
+                                decoration: BoxDecoration(color: AppColors.textFieldColor, borderRadius: BorderRadius.circular(5.px)),
                                 child: Text(
                                   'Today',
                                   style: CustomTextStyle.smallText.copyWith(fontSize: 9.px),
@@ -186,7 +186,7 @@ class LoopTabBar extends StatelessWidget {
                                                 alignment: Alignment.center,
                                                 padding: EdgeInsets.all(1.h),
                                                 decoration: BoxDecoration(
-                                                    color: CustomColor.mainColor,
+                                                    color: AppColors.mainColor,
                                                     borderRadius: BorderRadius.only(
                                                       bottomLeft: Radius.circular(10.px),
                                                       bottomRight: Radius.circular(10.px),
@@ -235,7 +235,7 @@ class LoopTabBar extends StatelessWidget {
                                               alignment: Alignment.center,
                                               padding: EdgeInsets.all(1.h),
                                               decoration: BoxDecoration(
-                                                  color: CustomColor.mainColor,
+                                                  color: AppColors.mainColor,
                                                   borderRadius: BorderRadius.only(
                                                     bottomLeft: Radius.circular(10.px),
                                                     bottomRight: Radius.circular(10.px),
@@ -255,7 +255,7 @@ class LoopTabBar extends StatelessWidget {
                                                         height: 7.h,
                                                         width: 7.h,
                                                         decoration: BoxDecoration(
-                                                            color: CustomColor.mainColorBackground,
+                                                            color: AppColors.mainColorBackground,
                                                             borderRadius: BorderRadius.circular(5.px),
                                                             image: const DecorationImage(
                                                                 image: AssetImage('assets/png/postimage.jpeg'), fit: BoxFit.cover)));
@@ -296,7 +296,7 @@ class LoopTabBar extends StatelessWidget {
                                                 alignment: Alignment.center,
                                                 padding: EdgeInsets.all(1.h),
                                                 decoration: BoxDecoration(
-                                                  color: CustomColor.mainColor,
+                                                  color: AppColors.mainColor,
                                                   borderRadius: BorderRadius.circular(20.px),
                                                 ),
                                                 child: Column(
@@ -327,10 +327,10 @@ class LoopTabBar extends StatelessWidget {
                                                                 padding: EdgeInsets.symmetric(horizontal: .3.h),
                                                                 child: Container(
                                                                   decoration: BoxDecoration(
-                                                                      border: Border.all(color: CustomColor.secondaryColor), shape: BoxShape.circle),
+                                                                      border: Border.all(color: AppColors.secondaryColor), shape: BoxShape.circle),
                                                                   child: CircleAvatar(
                                                                     radius: 5.6.h,
-                                                                    backgroundColor: CustomColor.mainColor,
+                                                                    backgroundColor: AppColors.mainColor,
                                                                     backgroundImage: const AssetImage('assets/png/story.png'),
                                                                   ),
                                                                 ),
@@ -388,7 +388,7 @@ class LoopTabBar extends StatelessWidget {
                                       alignment: Alignment.center,
                                       padding: EdgeInsets.symmetric(horizontal: 1.9.h, vertical: 1.4.h),
                                       decoration: BoxDecoration(
-                                        color: CustomColor.mainColor,
+                                        color: AppColors.mainColor,
                                         borderRadius: BorderRadius.circular(20.px),
                                       ),
                                       child: Column(
@@ -417,7 +417,7 @@ class LoopTabBar extends StatelessWidget {
                                             TextSpan(
                                                 text: 'Status: ',
                                                 style: CustomTextStyle.smallText.copyWith(color: const Color(0xffFFFFFF).withOpacity(0.48))),
-                                            TextSpan(text: 'Pending', style: CustomTextStyle.smallText.copyWith(color: CustomColor.secondaryColor)),
+                                            TextSpan(text: 'Pending', style: CustomTextStyle.smallText.copyWith(color: AppColors.secondaryColor)),
                                           ])),
                                           getVerticalSpace(.6.h),
                                           Text(
@@ -440,10 +440,10 @@ class LoopTabBar extends StatelessWidget {
                                                       padding: EdgeInsets.symmetric(horizontal: .3.h),
                                                       child: Container(
                                                         decoration: BoxDecoration(
-                                                            border: Border.all(color: CustomColor.secondaryColor), shape: BoxShape.circle),
+                                                            border: Border.all(color: AppColors.secondaryColor), shape: BoxShape.circle),
                                                         child: CircleAvatar(
                                                           radius: 5.6.h,
-                                                          backgroundColor: CustomColor.mainColor,
+                                                          backgroundColor: AppColors.mainColor,
                                                           backgroundImage: const AssetImage('assets/png/story.png'),
                                                         ),
                                                       ),
@@ -490,7 +490,7 @@ class LoopTabBar extends StatelessWidget {
                                         padding: EdgeInsets.only(right: 4.h),
                                         alignment: Alignment.centerRight,
                                         decoration: BoxDecoration(
-                                          color: CustomColor.secondaryColor,
+                                          color: AppColors.secondaryColor,
                                           borderRadius: BorderRadius.circular(10.px),
                                         ),
                                         child: SvgPicture.asset('assets/svg/deleteicon.svg'),
@@ -505,7 +505,7 @@ class LoopTabBar extends StatelessWidget {
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.all(1.h),
                                           decoration: BoxDecoration(
-                                            color: CustomColor.mainColor,
+                                            color: AppColors.mainColor,
                                             borderRadius: BorderRadius.circular(10.px),
                                           ),
                                           child: Column(
@@ -545,7 +545,7 @@ class LoopTabBar extends StatelessWidget {
                                                       Get.to(() => WinterTripPlanDetails());
                                                     },
                                                     child: customTextButton2(
-                                                        title: 'Booked', bgColor: CustomColor.secondaryColor, btnTextColor: Colors.black),
+                                                        title: 'Booked', bgColor: AppColors.secondaryColor, btnTextColor: Colors.black),
                                                   )
                                                 ],
                                               ),
@@ -577,7 +577,7 @@ class LoopTabBar extends StatelessWidget {
                                         padding: EdgeInsets.only(right: 4.h),
                                         alignment: Alignment.centerRight,
                                         decoration: BoxDecoration(
-                                          color: CustomColor.secondaryColor,
+                                          color: AppColors.secondaryColor,
                                           borderRadius: BorderRadius.circular(10.px),
                                         ),
                                         child: SvgPicture.asset('assets/svg/saveicon.svg'),
@@ -588,7 +588,7 @@ class LoopTabBar extends StatelessWidget {
                                         alignment: Alignment.center,
                                         padding: EdgeInsets.all(1.h),
                                         decoration: BoxDecoration(
-                                          color: CustomColor.mainColor,
+                                          color: AppColors.mainColor,
                                           borderRadius: BorderRadius.circular(10.px),
                                         ),
                                         child: Column(

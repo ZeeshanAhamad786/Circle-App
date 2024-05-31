@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../view/custom_widget/customwidgets.dart';
-import '../api/auth_apis.dart';
+import '../../../view/custom_widget/customwidgets.dart';
+import '../../api/auth_apis.dart';
 
 class ProfileUploadImageController extends GetxController {
   late final BuildContext context;

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-import '../../../controller/utils/color/custom_color.dart';
-import '../../../controller/utils/style/customTextStyle.dart';
+import '../../../controller/utils/app_colors.dart';
+import '../../../controller/utils/customTextStyle.dart';
 import '../../custom_widget/customwidgets.dart';
 
 class ItineraryEventScreen extends StatefulWidget {
@@ -17,14 +17,14 @@ class _ItineraryEventScreenState extends State<ItineraryEventScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColor.mainColorBackground,
+      backgroundColor: AppColors.mainColorBackground,
       body: SingleChildScrollView(
         child: Column(
           children: [
             SfCalendar(
               backgroundColor: Colors.white,
               viewHeaderStyle: ViewHeaderStyle(backgroundColor: Colors.green),
-              todayHighlightColor: CustomColor.mainColorYellow,
+              todayHighlightColor: AppColors.mainColorYellow,
               todayTextStyle: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
@@ -75,13 +75,13 @@ class _ItineraryEventScreenState extends State<ItineraryEventScreen> {
                           getHorizentalSpace(2.h),
                           Text(
                             'British Museum.',
-                            style: CustomTextStyle.headingStyle.copyWith(color: CustomColor.secondaryColor),
+                            style: CustomTextStyle.headingStyle.copyWith(color: AppColors.secondaryColor),
                           ),
                         ],
                       ),
                       getVerticalSpace(.6.h),
                       Divider(
-                        color: CustomColor.secondaryColor,
+                        color: AppColors.secondaryColor,
                       )
                     ],
                   ),

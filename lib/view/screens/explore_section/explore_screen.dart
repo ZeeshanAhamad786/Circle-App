@@ -1,4 +1,4 @@
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:circleapp/view/screens/explore_section/early_bird_offer.dart';
 import 'package:circleapp/view/screens/explore_section/share_group.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +6,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../../controller/explore-model.dart';
-import '../../../controller/utils/color/custom_color.dart';
+import '../../../controller/utils/app_colors.dart';
+import '../../../models/explore-model.dart';
 import '../../custom_widget/customwidgets.dart';
 
 class ExploreScreen extends StatefulWidget {
@@ -60,7 +60,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColor.mainColorBackground,
+      backgroundColor: AppColors.mainColorBackground,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 3.h),
         child: Column(
@@ -92,7 +92,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            backgroundColor: CustomColor.textFieldColor,
+                            backgroundColor: AppColors.textFieldColor,
                             title: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -135,7 +135,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                         height: 5.h,
                                         padding: EdgeInsets.symmetric(horizontal: 2.h, vertical: 1.h),
                                         width: MediaQuery.of(context).size.width,
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: CustomColor.mainColorBackground),
+                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: AppColors.mainColorBackground),
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
@@ -160,7 +160,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                         height: 5.h,
                                         padding: EdgeInsets.symmetric(horizontal: 2.h, vertical: 1.h),
                                         width: MediaQuery.of(context).size.width,
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: CustomColor.mainColorBackground),
+                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: AppColors.mainColorBackground),
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
@@ -185,7 +185,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                         height: 5.h,
                                         padding: EdgeInsets.symmetric(horizontal: 2.h, vertical: 1.h),
                                         width: MediaQuery.of(context).size.width,
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: CustomColor.mainColorBackground),
+                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: AppColors.mainColorBackground),
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
@@ -210,7 +210,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                         height: 5.h,
                                         padding: EdgeInsets.symmetric(horizontal: 2.h, vertical: 1.h),
                                         width: MediaQuery.of(context).size.width,
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: CustomColor.mainColorBackground),
+                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: AppColors.mainColorBackground),
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
@@ -233,7 +233,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                         width: 36.w,
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(30),
-                                          color: CustomColor.mainColorYellow,
+                                          color: AppColors.mainColorYellow,
                                         ),
                                         child: Center(child: Text("Done")),
                                       ),
@@ -250,7 +250,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       height: 40,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(topRight: Radius.circular(20), bottomRight: Radius.circular(20)),
-                          color: CustomColor.mainColorYellow),
+                          color: AppColors.mainColorYellow),
                       child: Transform.scale(
                           scale: 0.6,
                           child: SvgPicture.asset(
@@ -274,7 +274,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                         margin: EdgeInsets.all(10),
                         padding: EdgeInsets.symmetric(horizontal: 2.2.h, vertical: 2.h),
                         width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: CustomColor.textFieldColor),
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: AppColors.textFieldColor),
                         child: Column(
                           children: [
                             Row(
@@ -395,7 +395,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                         height: 3.h,
                                         width: 22.w,
                                         decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(30), border: Border.all(color: CustomColor.mainColorYellow)),
+                                            borderRadius: BorderRadius.circular(30), border: Border.all(color: AppColors.mainColorYellow)),
                                         child: Center(
                                             child: Text(
                                           "View Details",

@@ -1,5 +1,5 @@
-import 'package:circleapp/controller/utils/color/custom_color.dart';
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/controller/utils/app_colors.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:circleapp/view/addNewPlanScreen.dart';
 import 'package:circleapp/view/screens/createNew_To_DosScreen/create_New_To_Dos_Screen.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../controller/createcircle_controller/createcircle_controller.dart';
+import '../../../controller/getx_controllers/createcircle_controller.dart';
 import '../../../models/contact_model.dart';
 import '../../custom_widget/custom_loading_button.dart';
 import '../../custom_widget/customwidgets.dart';
@@ -47,7 +47,7 @@ class _AddMembersState extends State<AddMembers> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColor.primaryColor,
+      backgroundColor: AppColors.primaryColor,
       body: Obx(
         () {
           return SizedBox(
@@ -93,14 +93,14 @@ class _AddMembersState extends State<AddMembers> {
                             itemCount: 15,
                             itemBuilder: (BuildContext context, int index) {
                               return Shimmer.fromColors(
-                                baseColor: CustomColor.shimmerColor1,
-                                highlightColor: CustomColor.shimmerColor2,
+                                baseColor: AppColors.shimmerColor1,
+                                highlightColor: AppColors.shimmerColor2,
                                 child: Container(
                                   alignment: Alignment.bottomCenter,
                                   margin: const EdgeInsets.symmetric(vertical: 5),
                                   height: 5.h,
                                   decoration: BoxDecoration(
-                                    color: CustomColor.mainColor,
+                                    color: AppColors.mainColor,
                                     borderRadius: BorderRadius.circular(30.px),
                                   ),
                                 ),
@@ -131,7 +131,7 @@ class _AddMembersState extends State<AddMembers> {
                                             children: [
                                               CircleAvatar(
                                                 radius: 2.5.h,
-                                                backgroundColor: CustomColor.textFieldColor,
+                                                backgroundColor: AppColors.textFieldColor,
                                                 backgroundImage: const AssetImage('assets/png/members.png'),
                                               ),
                                               getHorizentalSpace(1.h),
@@ -164,8 +164,8 @@ class _AddMembersState extends State<AddMembers> {
                                                       shape: BoxShape.circle,
                                                       border: Border.all(
                                                           color: contactsSelection[index].isSelected
-                                                              ? CustomColor.textFieldColor
-                                                              : CustomColor.secondaryColor),
+                                                              ? AppColors.textFieldColor
+                                                              : AppColors.secondaryColor),
                                                     ),
                                                     child: contactsSelection[index].isSelected
                                                         ? SvgPicture.asset('assets/svg/selected.svg', fit: BoxFit.cover)

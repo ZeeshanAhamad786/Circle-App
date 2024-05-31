@@ -1,4 +1,5 @@
-import 'package:circleapp/controller/utils/validations/validation.dart';
+import 'package:circleapp/controller/utils/validation.dart';
+import 'package:circleapp/view/custom_widget/custom_loading_button.dart';
 import 'package:circleapp/view/screens/athentications/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -6,16 +7,15 @@ import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../controller/api/auth_apis.dart';
-import '../../../controller/auth_controller/login_controller.dart';
-import '../../../controller/utils/color/custom_color.dart';
-import '../../../controller/utils/style/customTextStyle.dart';
-import '../../custom_widget/custom-button.dart';
+import '../../../controller/getx_controllers/auth_controller/login_controller.dart';
+import '../../../controller/utils/app_colors.dart';
+import '../../../controller/utils/customTextStyle.dart';
 import '../../custom_widget/custom_text_field.dart';
 import '../../custom_widget/customwidgets.dart';
 import 'forget_password.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -37,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColor.mainColorBackground,
+      backgroundColor: AppColors.mainColorBackground,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 3.h),
         child: SingleChildScrollView(
@@ -115,35 +115,28 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 2.h,
               ),
               Center(
-                child: Obx(() {
-                  return loginController.loginLoading.value
-                      ? CircularProgressIndicator(
-                          color: CustomColor.mainColorYellow,
-                        )
-                      : CustomButton(
-                          buttonText: "Log In",
-                          buttonColor: CustomColor.mainColorYellow,
-                          onPressed: () {
-                            if (Validations.handleLoginScreenError(
-                                    emailTextController: loginController.emailTextController,
-                                    passwordTextController: loginController.passwordTextController)
-                                .isNotEmpty) {
-                              customScaffoldMessenger(
-                                context,
-                                Validations.handleLoginScreenError(
-                                    emailTextController: loginController.emailTextController,
-                                    passwordTextController: loginController.passwordTextController),
-                              );
-                            } else {
-                              loginController.loginApis(
-                                loginController.emailTextController.text,
-                                loginController.passwordTextController.text,
-                              );
-                              // Get.to(() => const ChooseImage());
-                            }
-                          },
-                        );
-                }),
+                child: CustomLoadingButton(
+                  buttonText: "Log In",
+                  buttonColor: AppColors.mainColorYellow,
+                  onPressed: () {
+                    if (Validations.handleLoginScreenError(
+                            emailTextController: loginController.emailTextController, passwordTextController: loginController.passwordTextController)
+                        .isNotEmpty) {
+                      customScaffoldMessenger(
+                        context,
+                        Validations.handleLoginScreenError(
+                            emailTextController: loginController.emailTextController, passwordTextController: loginController.passwordTextController),
+                      );
+                    } else {
+                      loginController.loginApis(
+                        loginController.emailTextController.text,
+                        loginController.passwordTextController.text,
+                      );
+                      // Get.to(() => const ChooseImage());
+                    }
+                  },
+                  loading: loginController.loginLoading,
+                ),
               ),
               SizedBox(
                 height: 1.4.h,

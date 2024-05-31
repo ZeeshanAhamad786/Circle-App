@@ -7,11 +7,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:http/http.dart';
 
+import '../../models/messages_model.dart';
 import '../../view/custom_widget/customwidgets.dart';
 import '../../view/screens/bottom_navigation_screen/bottom_navigation_screen.dart';
-import '../utils/constants/api_constants.dart';
-import '../utils/constants/global_variables.dart';
-import '../utils/constants/storage_keys.dart';
+import '../utils/api_constants.dart';
+import '../utils/global_variables.dart';
+import '../utils/preference_keys.dart';
 
 class CircleApis {
   final BuildContext context;
@@ -59,7 +60,7 @@ class CircleApis {
     return null;
   }
 
-  Future<List<IsUserModel>?> getIsUser(List<String> numbers) async {
+  Future<List<IsUserModel>?> getIsUser({required List<String> numbers}) async {
     String apiName = "Get is User";
     final url = Uri.parse("$baseURL/api/auth/check-users");
     final headers = {
@@ -73,6 +74,23 @@ class CircleApis {
     if (response.statusCode == 200) {
       print("API Success: $apiName\n${response.body}");
       return isUserModelFromJson(response.body);
+    }
+    print("API Failed: $apiName\n ${response.body}");
+    return null;
+  }
+
+  Future<MessagesModel?> getMessages({required String circleId}) async {
+    String apiName = "Get Messages";
+    final url = Uri.parse("$baseURL/$getMessagesEP/:$circleId");
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $userToken',
+    };
+
+    Response response = await get(url, headers: headers);
+    if (response.statusCode == 200) {
+      print("API Success: $apiName\n${response.body}");
+      return MessagesModel.fromJson(jsonDecode(response.body));
     }
     print("API Failed: $apiName\n ${response.body}");
     return null;

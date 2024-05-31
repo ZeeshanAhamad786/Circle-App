@@ -1,16 +1,16 @@
 import 'dart:developer';
 
-import 'package:circleapp/controller/auth_controller/signup_controller.dart';
+import 'package:circleapp/view/custom_widget/custom_loading_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../../controller/auth_controller/resendotp_controller.dart';
-import '../../../controller/auth_controller/verifyotp_controller.dart';
-import '../../../controller/utils/color/custom_color.dart';
-import '../../../controller/utils/style/customTextStyle.dart';
-import '../../custom_widget/custom-button.dart';
+import '../../../controller/getx_controllers/auth_controller/resendotp_controller.dart';
+import '../../../controller/getx_controllers/auth_controller/signup_controller.dart';
+import '../../../controller/getx_controllers/auth_controller/verifyotp_controller.dart';
+import '../../../controller/utils/app_colors.dart';
+import '../../../controller/utils/customTextStyle.dart';
 
 class VerifyMobileScreen extends StatefulWidget {
   VerifyMobileScreen({Key? key}) : super(key: key);
@@ -38,7 +38,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
     String phoneNumber = arguments['phoneNumber'];
     print('check pn: $phoneNumber');
     return Scaffold(
-      backgroundColor: CustomColor.mainColorBackground,
+      backgroundColor: AppColors.mainColorBackground,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 3.h),
         child: SingleChildScrollView(
@@ -73,9 +73,9 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
                   borderRadius: BorderRadius.circular(8),
                   fieldHeight: 52,
                   fieldWidth: 52,
-                  inactiveColor: CustomColor.mainColor,
-                  selectedColor: CustomColor.mainColor,
-                  activeColor: CustomColor.mainColor,
+                  inactiveColor: AppColors.mainColor,
+                  selectedColor: AppColors.mainColor,
+                  activeColor: AppColors.mainColor,
                   borderWidth: 0,
                   activeBorderWidth: 0,
                   disabledBorderWidth: 0,
@@ -103,19 +103,14 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
                 ),
               ),
               SizedBox(height: 5.h),
-              Obx(() {
-                return verifyOtpController.isLoading.value
-                    ? CircularProgressIndicator(
-                        color: CustomColor.mainColorYellow,
-                      )
-                    : CustomButton(
-                        buttonText: "Done",
-                        buttonColor: CustomColor.mainColorYellow,
-                        onPressed: () {
-                          verifyOtpController.verifyOtpApi(phoneNumber, verifyOtpController.otpCodeTextController.text);
-                        },
-                      );
-              }),
+              CustomLoadingButton(
+                buttonText: "Done",
+                buttonColor: AppColors.mainColorYellow,
+                onPressed: () {
+                  verifyOtpController.verifyOtpApi(phoneNumber, verifyOtpController.otpCodeTextController.text);
+                },
+                loading: verifyOtpController.isLoading,
+              ),
               SizedBox(height: 1.3.h),
               GestureDetector(
                   onTap: () {

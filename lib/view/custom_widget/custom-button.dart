@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../controller/utils/color/custom_color.dart';
+import '../../controller/utils/app_colors.dart';
 
 class CustomButton extends StatelessWidget {
   final String buttonText;
@@ -31,7 +31,7 @@ class CustomButton extends StatelessWidget {
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 14.px,
-            color: CustomColor.mainColorLogin,
+            color: AppColors.mainColorLogin,
             fontFamily: "medium",
           )),
     );

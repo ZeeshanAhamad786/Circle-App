@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../api/auth_apis.dart';
+
+import '../../api/auth_apis.dart';
 
 class ResendController extends GetxController {
   late final BuildContext context;
@@ -17,7 +18,7 @@ class ResendController extends GetxController {
       print('Error during signup: $e');
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('Login failed. Please try again.'),
           ),
         );

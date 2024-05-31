@@ -1,13 +1,13 @@
-import 'package:circleapp/controller/auth_controller/signup_controller.dart';
-import 'package:circleapp/controller/utils/color/custom_color.dart';
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/controller/utils/app_colors.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
+import 'package:circleapp/view/custom_widget/custom_loading_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../../controller/utils/validations/validation.dart';
-import '../../custom_widget/custom-button.dart';
+import '../../../controller/getx_controllers/auth_controller/signup_controller.dart';
+import '../../../controller/utils/validation.dart';
 import '../../custom_widget/custom_text_field.dart';
 import '../../custom_widget/customwidgets.dart';
 
@@ -30,7 +30,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColor.mainColorBackground,
+      backgroundColor: AppColors.mainColorBackground,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 3.h),
         child: SingleChildScrollView(
@@ -127,41 +127,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 suffixIcon: SvgPicture.asset("assets/svg/closeEye.svg"),
               ),
               SizedBox(height: 4.h),
-              Obx(() {
-                return _signupController.isLoading.value
-                    ? CircularProgressIndicator(
-                        color: CustomColor.mainColorYellow,
-                      )
-                    : CustomButton(
-                        buttonText: "Sign Up",
-                        buttonColor: CustomColor.mainColorYellow,
-                        onPressed: () {
-                          if (Validations.handleSingUpScreenError(
-                            userNameTextController: _signupController.userNameTextController,
-                            emailTextController: _signupController.emailTextController,
-                            passwordTextController: _signupController.passwordTextController,
-                            mobileNumberTextController: _signupController.phoneNumberController,
-                          ).isNotEmpty) {
-                            customScaffoldMessenger(
-                              context,
-                              Validations.handleSingUpScreenError(
-                                userNameTextController: _signupController.userNameTextController,
-                                emailTextController: _signupController.emailTextController,
-                                passwordTextController: _signupController.passwordTextController,
-                                mobileNumberTextController: _signupController.phoneNumberController,
-                              ),
-                            );
-                          } else {
-                            _signupController.signupApis(
-                              _signupController.userNameTextController.text,
-                              _signupController.emailTextController.text,
-                              _signupController.phoneNumberController.text,
-                              _signupController.passwordTextController.text,
-                            );
-                          }
-                        },
-                      );
-              }),
+              CustomLoadingButton(
+                buttonText: "Sign Up",
+                buttonColor: AppColors.mainColorYellow,
+                onPressed: () {
+                  if (Validations.handleSingUpScreenError(
+                    userNameTextController: _signupController.userNameTextController,
+                    emailTextController: _signupController.emailTextController,
+                    passwordTextController: _signupController.passwordTextController,
+                    mobileNumberTextController: _signupController.phoneNumberController,
+                  ).isNotEmpty) {
+                    customScaffoldMessenger(
+                      context,
+                      Validations.handleSingUpScreenError(
+                        userNameTextController: _signupController.userNameTextController,
+                        emailTextController: _signupController.emailTextController,
+                        passwordTextController: _signupController.passwordTextController,
+                        mobileNumberTextController: _signupController.phoneNumberController,
+                      ),
+                    );
+                  } else {
+                    _signupController.signupApis(
+                      _signupController.userNameTextController.text,
+                      _signupController.emailTextController.text,
+                      _signupController.phoneNumberController.text,
+                      _signupController.passwordTextController.text,
+                    );
+                  }
+                },
+                loading: _signupController.isLoading,
+              ),
               SizedBox(height: 4.h),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,

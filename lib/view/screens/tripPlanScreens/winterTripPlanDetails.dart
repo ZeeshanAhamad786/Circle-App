@@ -1,5 +1,5 @@
-import 'package:circleapp/controller/utils/color/custom_color.dart';
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/controller/utils/app_colors.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -12,7 +12,7 @@ class WinterTripPlanDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColor.mainColorBackground,
+      backgroundColor: AppColors.mainColorBackground,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 2.3.h),
         child: Column(
@@ -72,7 +72,7 @@ class WinterTripPlanDetails extends StatelessWidget {
                     margin: EdgeInsets.symmetric(horizontal: 1.h),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5.px),
-                        color: CustomColor.textFieldColor,
+                        color: AppColors.textFieldColor,
                         image: const DecorationImage(image: AssetImage('assets/png/postimage.jpeg'), fit: BoxFit.cover)),
                   );
                 },
@@ -95,10 +95,10 @@ class WinterTripPlanDetails extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Container(
                     margin: EdgeInsets.symmetric(horizontal: .3.h),
-                    decoration: BoxDecoration(border: Border.all(color: CustomColor.secondaryColor), shape: BoxShape.circle),
+                    decoration: BoxDecoration(border: Border.all(color: AppColors.secondaryColor), shape: BoxShape.circle),
                     child: CircleAvatar(
                       radius: 10.h,
-                      backgroundColor: CustomColor.mainColor,
+                      backgroundColor: AppColors.mainColor,
                       backgroundImage: const AssetImage('assets/png/story.png'),
                     ),
                   );

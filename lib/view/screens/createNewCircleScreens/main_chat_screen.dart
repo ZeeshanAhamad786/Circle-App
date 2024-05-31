@@ -1,5 +1,5 @@
-import 'package:circleapp/controller/utils/color/custom_color.dart';
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/controller/utils/app_colors.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:circleapp/models/main_chat_screen_model.dart';
 import 'package:circleapp/view/screens/createNewCircleScreens/chatScreen.dart';
 import 'package:flutter/material.dart';
@@ -70,7 +70,7 @@ class _MainChatScreenState extends State<MainChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Scaffold(
-          backgroundColor: CustomColor.mainColorBackground,
+          backgroundColor: AppColors.mainColorBackground,
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 3.h),
             child: Column(
@@ -86,13 +86,13 @@ class _MainChatScreenState extends State<MainChatScreen> {
                     Container(
                       height: 30,
                       padding: EdgeInsets.symmetric(horizontal: 2.h),
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), border: Border.all(color: CustomColor.mainColorYellow)),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), border: Border.all(color: AppColors.mainColorYellow)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
                             Icons.person_add_sharp,
-                            color: CustomColor.mainColorYellow,
+                            color: AppColors.mainColorYellow,
                           ),
                           getHorizentalSpace(0.5.w),
                           Text(
@@ -120,7 +120,7 @@ class _MainChatScreenState extends State<MainChatScreen> {
                             width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: CustomColor.textFieldColor,
+                              color: AppColors.textFieldColor,
                             ),
                             child: ListTile(
                               title: Text(
@@ -147,9 +147,9 @@ class _MainChatScreenState extends State<MainChatScreen> {
                                       height: 20,
                                       width: 20,
                                       decoration: BoxDecoration(
-                                          color: CustomColor.mainColorYellow,
+                                          color: AppColors.mainColorYellow,
                                           borderRadius: BorderRadius.circular(30),
-                                          border: Border.all(color: CustomColor.mainColorYellow)),
+                                          border: Border.all(color: AppColors.mainColorYellow)),
                                       child: Center(
                                           child: Text(
                                         "12",

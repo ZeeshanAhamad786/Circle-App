@@ -1,17 +1,17 @@
 import 'dart:io';
 
-import 'package:circleapp/controller/paymentController.dart';
+import 'package:circleapp/controller/getx_controllers/paymentController.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:circleapp/controller/utils/shared_preferences.dart';
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../controller/api/auth_apis.dart';
-import '../../../controller/auth_controller/profileimageupload_controller.dart';
-import '../../../controller/utils/color/custom_color.dart';
-import '../../../controller/utils/constants/global_variables.dart';
-import '../../../controller/utils/constants/storage_keys.dart';
+import '../../../controller/getx_controllers/auth_controller/profileimageupload_controller.dart';
+import '../../../controller/utils/app_colors.dart';
+import '../../../controller/utils/global_variables.dart';
+import '../../../controller/utils/preference_keys.dart';
 import '../../custom_widget/custom-button.dart';
 import '../../custom_widget/customwidgets.dart';
 
@@ -40,7 +40,7 @@ class _ChooseImageState extends State<ChooseImage> {
     RxBool backButton = false.obs;
     RxBool nextButton = true.obs;
     return Scaffold(
-      backgroundColor: CustomColor.mainColorBackground,
+      backgroundColor: AppColors.mainColorBackground,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 3.h),
         child: Obx(
@@ -61,7 +61,7 @@ class _ChooseImageState extends State<ChooseImage> {
                   ? Container(
                       height: 46.6.h,
                       decoration: BoxDecoration(
-                        color: CustomColor.textFieldColor,
+                        color: AppColors.textFieldColor,
                         borderRadius: BorderRadius.circular(
                           20.px,
                         ),
@@ -92,8 +92,8 @@ class _ChooseImageState extends State<ChooseImage> {
                                     paymentController.pickedImage.value = null;
                                   }
                                 },
-                                backgroundColor: backButton.value == true ? CustomColor.secondaryColor : CustomColor.primaryColor,
-                                borderColor: backButton.value == true ? CustomColor.primaryColor : CustomColor.secondaryColor,
+                                backgroundColor: backButton.value == true ? AppColors.secondaryColor : AppColors.primaryColor,
+                                borderColor: backButton.value == true ? AppColors.primaryColor : AppColors.secondaryColor,
                                 title: 'Back',
                                 titleColor: backButton.value == true ? Colors.black : Colors.white,
                                 width: 16.2.h,
@@ -108,8 +108,8 @@ class _ChooseImageState extends State<ChooseImage> {
                                     profileUploadImageController.uploadProfilePicture(File(paymentController.pickedImage.value!.path));
                                   }
                                 },
-                                backgroundColor: nextButton.value == true ? CustomColor.secondaryColor : CustomColor.primaryColor,
-                                borderColor: nextButton.value == true ? CustomColor.primaryColor : CustomColor.secondaryColor,
+                                backgroundColor: nextButton.value == true ? AppColors.secondaryColor : AppColors.primaryColor,
+                                borderColor: nextButton.value == true ? AppColors.primaryColor : AppColors.secondaryColor,
                                 title: 'Next',
                                 titleColor: nextButton.value == true ? Colors.black : Colors.white,
                                 width: 16.2.h,
@@ -121,7 +121,7 @@ class _ChooseImageState extends State<ChooseImage> {
                       ))
                   : CustomButton(
                       buttonText: "Choose Image",
-                      buttonColor: CustomColor.mainColorYellow,
+                      buttonColor: AppColors.mainColorYellow,
                       onPressed: () {
                         paymentController.pickImage();
                       }),

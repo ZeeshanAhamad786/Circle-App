@@ -1,12 +1,12 @@
-import 'package:circleapp/controller/utils/color/custom_color.dart';
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/controller/utils/app_colors.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:circleapp/view/addNewPlanScreen.dart';
 import 'package:circleapp/view/screens/dinnerPlanScreens/dinnerPlan_Details.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../controller/paymentController.dart';
+import '../../controller/getx_controllers/paymentController.dart';
 import '../custom_widget/customwidgets.dart';
 
 class PaymentScreen extends StatelessWidget {
@@ -21,7 +21,7 @@ class PaymentScreen extends StatelessWidget {
     final TextEditingController securityCodeController = TextEditingController();
     final PaymentController paymentController = Get.put(PaymentController());
     return Scaffold(
-      backgroundColor: CustomColor.mainColorBackground,
+      backgroundColor: AppColors.mainColorBackground,
       body: Obx(
         () => SingleChildScrollView(
           child: Padding(
@@ -174,8 +174,8 @@ class PaymentScreen extends StatelessWidget {
                                     ));
                               }
                             },
-                            backgroundColor: CustomColor.secondaryColor,
-                            borderColor: CustomColor.primaryColor,
+                            backgroundColor: AppColors.secondaryColor,
+                            borderColor: AppColors.primaryColor,
                             title: 'Done',
                             titleColor: Colors.black,
                             height: 4.5.h),
@@ -189,8 +189,8 @@ class PaymentScreen extends StatelessWidget {
                               //   Get.to(()=> const AddNewPlan(title: 'payment',));
                               // }
                             },
-                            backgroundColor: CustomColor.secondaryColor,
-                            borderColor: CustomColor.primaryColor,
+                            backgroundColor: AppColors.secondaryColor,
+                            borderColor: AppColors.primaryColor,
                             title: 'Done',
                             titleColor: Colors.black,
                             height: 4.5.h),

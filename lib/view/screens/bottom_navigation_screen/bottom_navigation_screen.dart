@@ -1,4 +1,4 @@
-import 'package:circleapp/controller/utils/color/custom_color.dart';
+import 'package:circleapp/controller/utils/app_colors.dart';
 import 'package:circleapp/view/screens/createNewCircleScreens/loopTabBar.dart';
 import 'package:circleapp/view/screens/createNewCircleScreens/main_chat_screen.dart';
 import 'package:circleapp/view/screens/explore_section/explore_screen.dart';
@@ -40,7 +40,7 @@ class BottomNavigationScreenState extends State<BottomNavigationScreen> {
               type: BottomNavigationBarType.fixed,
               currentIndex: currentIndex.value,
               backgroundColor: const Color(0xff2F2F2F),
-              selectedItemColor: CustomColor.mainColorYellow,
+              selectedItemColor: AppColors.mainColorYellow,
               unselectedItemColor: Colors.white,
               selectedLabelStyle: textTheme.bodySmall?.copyWith(fontSize: 13.sp),
               unselectedLabelStyle: textTheme.bodySmall?.copyWith(fontSize: 13.sp),
@@ -56,7 +56,7 @@ class BottomNavigationScreenState extends State<BottomNavigationScreen> {
                     icon: SvgPicture.asset(
                       "assets/svg/loop.svg",
                       colorFilter: ColorFilter.mode(
-                        colorIndex.value == 0 ? CustomColor.mainColorYellow : Colors.white,
+                        colorIndex.value == 0 ? AppColors.mainColorYellow : Colors.white,
                         BlendMode.srcIn,
                       ),
                       height: 16.5,
@@ -68,7 +68,7 @@ class BottomNavigationScreenState extends State<BottomNavigationScreen> {
                     icon: SvgPicture.asset(
                       "assets/svg/message.svg",
                       colorFilter: ColorFilter.mode(
-                        colorIndex.value == 1 ? CustomColor.mainColorYellow : Colors.white,
+                        colorIndex.value == 1 ? AppColors.mainColorYellow : Colors.white,
                         BlendMode.srcIn,
                       ),
                     )),
@@ -78,7 +78,7 @@ class BottomNavigationScreenState extends State<BottomNavigationScreen> {
                     icon: SvgPicture.asset(
                       "assets/svg/calender.svg",
                       colorFilter: ColorFilter.mode(
-                        colorIndex.value == 2 ? CustomColor.mainColorYellow : Colors.white,
+                        colorIndex.value == 2 ? AppColors.mainColorYellow : Colors.white,
                         BlendMode.srcIn,
                       ),
                       // color: colorIndex.value == 2 ? CustomColor.mainColorYellow : Colors.white,
@@ -89,7 +89,7 @@ class BottomNavigationScreenState extends State<BottomNavigationScreen> {
                     icon: SvgPicture.asset(
                       "assets/svg/Explore.svg",
                       colorFilter: ColorFilter.mode(
-                        colorIndex.value == 3 ? CustomColor.mainColorYellow : Colors.white,
+                        colorIndex.value == 3 ? AppColors.mainColorYellow : Colors.white,
                         BlendMode.srcIn,
                       ),
                     )),

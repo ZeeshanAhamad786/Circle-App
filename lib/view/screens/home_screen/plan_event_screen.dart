@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-import '../../../controller/utils/color/custom_color.dart';
-import '../../../controller/utils/style/customTextStyle.dart';
+import '../../../controller/utils/app_colors.dart';
+import '../../../controller/utils/customTextStyle.dart';
 import '../../custom_widget/customwidgets.dart';
 
 class PlanEventScreen extends StatefulWidget {
@@ -32,7 +32,7 @@ class _PlanEventScreenState extends State<PlanEventScreen> {
             SfCalendar(
               backgroundColor: Colors.white,
               viewHeaderStyle: ViewHeaderStyle(backgroundColor: Colors.green),
-              todayHighlightColor: CustomColor.mainColorYellow,
+              todayHighlightColor: AppColors.mainColorYellow,
               todayTextStyle: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
@@ -56,7 +56,7 @@ class _PlanEventScreenState extends State<PlanEventScreen> {
                   color: Color(0xff343434),
                 ),
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
-                color: CustomColor.mainColorBackground,
+                color: AppColors.mainColorBackground,
               ),
               child: Column(
                 children: [
@@ -110,9 +110,9 @@ class _PlanEventScreenState extends State<PlanEventScreen> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     boxShadow: [
-                                      BoxShadow(color: CustomColor.mainColorBackground.withOpacity(0.01), blurRadius: 30, offset: Offset(0, 3))
+                                      BoxShadow(color: AppColors.mainColorBackground.withOpacity(0.01), blurRadius: 30, offset: Offset(0, 3))
                                     ],
-                                    color: CustomColor.mainColorLowBlack),
+                                    color: AppColors.mainColorLowBlack),
                                 child: Column(
                                   children: [
                                     Row(
@@ -146,7 +146,7 @@ class _PlanEventScreenState extends State<PlanEventScreen> {
                                         )),
                                         ElevatedButton(
                                             onPressed: () {},
-                                            style: ElevatedButton.styleFrom(backgroundColor: CustomColor.mainColorYellow, minimumSize: Size(60, 30)),
+                                            style: ElevatedButton.styleFrom(backgroundColor: AppColors.mainColorYellow, minimumSize: Size(60, 30)),
                                             child: Text(
                                               "Booked",
                                               style: CustomTextStyle.mediumTextBold,

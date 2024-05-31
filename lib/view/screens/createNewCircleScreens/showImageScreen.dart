@@ -1,10 +1,10 @@
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:circleapp/view/screens/createNewCircleScreens/createCircleScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../../controller/utils/color/custom_color.dart';
+import '../../../controller/utils/app_colors.dart';
 import '../../custom_widget/customwidgets.dart';
 
 class ShowImage extends StatelessWidget {
@@ -15,7 +15,7 @@ class ShowImage extends StatelessWidget {
     RxBool backButton = false.obs;
     RxBool nextButton = true.obs;
     return Scaffold(
-      backgroundColor: CustomColor.mainColorBackground,
+      backgroundColor: AppColors.mainColorBackground,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 3.h),
         child: Column(
@@ -34,7 +34,7 @@ class ShowImage extends StatelessWidget {
             Container(
               height: 35.6.h,
               decoration: BoxDecoration(
-                  color: CustomColor.textFieldColor,
+                  color: AppColors.textFieldColor,
                   borderRadius: BorderRadius.circular(
                     10.px,
                   ),
@@ -64,8 +64,8 @@ class ShowImage extends StatelessWidget {
                           }
                           Get.back();
                         },
-                        backgroundColor: backButton.value == true ? CustomColor.secondaryColor : CustomColor.primaryColor,
-                        borderColor: backButton.value == true ? CustomColor.primaryColor : CustomColor.secondaryColor,
+                        backgroundColor: backButton.value == true ? AppColors.secondaryColor : AppColors.primaryColor,
+                        borderColor: backButton.value == true ? AppColors.primaryColor : AppColors.secondaryColor,
                         title: 'Back',
                         titleColor: backButton.value == true ? Colors.black : Colors.white,
                         width: 16.2.h,
@@ -84,8 +84,8 @@ class ShowImage extends StatelessWidget {
                           }
                           Get.to(const CreateCircle());
                         },
-                        backgroundColor: nextButton.value == true ? CustomColor.secondaryColor : CustomColor.primaryColor,
-                        borderColor: nextButton.value == true ? CustomColor.primaryColor : CustomColor.secondaryColor,
+                        backgroundColor: nextButton.value == true ? AppColors.secondaryColor : AppColors.primaryColor,
+                        borderColor: nextButton.value == true ? AppColors.primaryColor : AppColors.secondaryColor,
                         title: 'Next',
                         titleColor: nextButton.value == true ? Colors.black : Colors.white,
                         width: 16.2.h,

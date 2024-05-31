@@ -1,5 +1,5 @@
-import 'package:circleapp/controller/utils/color/custom_color.dart';
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/controller/utils/app_colors.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -36,13 +36,13 @@ Widget customTextFormField(TextEditingController? controller, String? hintText,
     onTap: isTap,
     decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
-            borderRadius: borderRadius ?? BorderRadius.circular(30.px), borderSide: const BorderSide(color: CustomColor.textFieldColor)),
+            borderRadius: borderRadius ?? BorderRadius.circular(30.px), borderSide: const BorderSide(color: AppColors.textFieldColor)),
         filled: true,
         contentPadding: contentPading ?? EdgeInsets.symmetric(horizontal: 2.h, vertical: 1.5.h), // Adjust vertical padding
         isCollapsed: true,
         border: OutlineInputBorder(
-            borderRadius: borderRadius ?? BorderRadius.circular(30.px), borderSide: const BorderSide(color: CustomColor.textFieldColor)),
-        fillColor: CustomColor.textFieldColor,
+            borderRadius: borderRadius ?? BorderRadius.circular(30.px), borderSide: const BorderSide(color: AppColors.textFieldColor)),
+        fillColor: AppColors.textFieldColor,
         prefixIcon: prefixIcon,
         suffixIcon: sufixIcon,
         hintText: hintText,
@@ -68,7 +68,7 @@ Widget customRadioButton({String? title, Color? borderColor, SvgPicture? assetsI
   return Container(
     alignment: Alignment.center,
     height: 4.2.h,
-    decoration: BoxDecoration(color: CustomColor.textFieldColor, borderRadius: BorderRadius.circular(30.px)),
+    decoration: BoxDecoration(color: AppColors.textFieldColor, borderRadius: BorderRadius.circular(30.px)),
     child: Row(
       children: [
         getHorizentalSpace(2.h),
@@ -133,7 +133,7 @@ Widget customLoadingButton(
           border: Border.all(color: borderColor!),
         ),
         child: loading.value
-            ? LoadingAnimationWidget.waveDots(color: CustomColor.mainColorLogin, size: 35)
+            ? LoadingAnimationWidget.waveDots(color: AppColors.mainColorLogin, size: 35)
             : Text(
                 title!,
                 style: CustomTextStyle.buttonText.copyWith(color: titleColor),
@@ -147,18 +147,18 @@ Widget customTextButton1({String? title, double? horizentalPadding, double? vert
   return Container(
     padding: EdgeInsets.symmetric(horizontal: horizentalPadding ?? .7.h, vertical: verticalPadding ?? .1.h),
     decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20.px), color: bgColor ?? CustomColor.mainColor, border: Border.all(color: CustomColor.secondaryColor)),
+        borderRadius: BorderRadius.circular(20.px), color: bgColor ?? AppColors.mainColor, border: Border.all(color: AppColors.secondaryColor)),
     child: Row(
       children: [
         Icon(
           Icons.add,
-          color: CustomColor.secondaryColor,
+          color: AppColors.secondaryColor,
           size: 2.h,
         ),
         getHorizentalSpace(.2.h),
         Text(
           title ?? 'Add',
-          style: CustomTextStyle.smallText.copyWith(color: CustomColor.secondaryColor, fontSize: 12.px),
+          style: CustomTextStyle.smallText.copyWith(color: AppColors.secondaryColor, fontSize: 12.px),
         )
       ],
     ),
@@ -169,13 +169,13 @@ Widget customTextButton2({String? title, Color? bgColor, Color? btnTextColor, do
   return Container(
     padding: EdgeInsets.symmetric(horizontal: horizentalPadding ?? .8.h, vertical: verticalPadding ?? .1.h),
     decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20.px), color: bgColor ?? CustomColor.mainColor, border: Border.all(color: CustomColor.secondaryColor)),
+        borderRadius: BorderRadius.circular(20.px), color: bgColor ?? AppColors.mainColor, border: Border.all(color: AppColors.secondaryColor)),
     child: Row(
       children: [
         getHorizentalSpace(.2.h),
         Text(
           title ?? "View Detail",
-          style: CustomTextStyle.smallText.copyWith(color: btnTextColor ?? CustomColor.secondaryColor, fontSize: 10.px),
+          style: CustomTextStyle.smallText.copyWith(color: btnTextColor ?? AppColors.secondaryColor, fontSize: 10.px),
         )
       ],
     ),
@@ -195,7 +195,7 @@ customScaffoldMessenger(
           fontSize: 14.sp,
         ),
       ),
-      backgroundColor: CustomColor.primaryColor,
+      backgroundColor: AppColors.primaryColor,
       duration: const Duration(seconds: 2),
     ),
   );

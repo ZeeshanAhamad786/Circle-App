@@ -1,11 +1,11 @@
-import 'package:circleapp/controller/utils/color/custom_color.dart';
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/controller/utils/app_colors.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../../controller/createcircle_controller/createcircle_controller.dart';
+import '../../../controller/getx_controllers/createcircle_controller.dart';
 import '../../custom_widget/customwidgets.dart';
 import 'circleInterestScreen.dart';
 
@@ -33,10 +33,10 @@ class _CreateCircleState extends State<CreateCircle> {
     RxBool nextButton = true.obs;
     RxList<String> circleName = <String>['Friend', 'Family', 'Organization', 'Mix'].obs;
     return Scaffold(
-      backgroundColor: CustomColor.primaryColor,
+      backgroundColor: AppColors.primaryColor,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: CustomColor.primaryColor,
+        backgroundColor: AppColors.primaryColor,
         title: Text(
           'Create Circle',
           style: CustomTextStyle.headingStyle,
@@ -85,7 +85,7 @@ class _CreateCircleState extends State<CreateCircle> {
                     },
                     child: customRadioButton(
                         title: circleName[index],
-                        borderColor: selectedIndex.value == index ? CustomColor.textFieldColor : CustomColor.secondaryColor,
+                        borderColor: selectedIndex.value == index ? AppColors.textFieldColor : AppColors.secondaryColor,
                         assetsImage: selectedIndex.value == index
                             ? SvgPicture.asset('assets/svg/selected.svg')
                             : SvgPicture.asset('assets/svg/unselected.svg')),
@@ -111,8 +111,8 @@ class _CreateCircleState extends State<CreateCircle> {
                           }
                           Get.back();
                         },
-                        backgroundColor: backButton.value == true ? CustomColor.secondaryColor : CustomColor.primaryColor,
-                        borderColor: backButton.value == true ? CustomColor.primaryColor : CustomColor.secondaryColor,
+                        backgroundColor: backButton.value == true ? AppColors.secondaryColor : AppColors.primaryColor,
+                        borderColor: backButton.value == true ? AppColors.primaryColor : AppColors.secondaryColor,
                         title: 'Back',
                         titleColor: backButton.value == true ? Colors.black : Colors.white,
                         width: 16.2.h,
@@ -142,8 +142,8 @@ class _CreateCircleState extends State<CreateCircle> {
                             });
                           }
                         },
-                        backgroundColor: nextButton.value == true ? CustomColor.secondaryColor : CustomColor.primaryColor,
-                        borderColor: nextButton.value == true ? CustomColor.primaryColor : CustomColor.secondaryColor,
+                        backgroundColor: nextButton.value == true ? AppColors.secondaryColor : AppColors.primaryColor,
+                        borderColor: nextButton.value == true ? AppColors.primaryColor : AppColors.secondaryColor,
                         title: 'Next',
                         titleColor: nextButton.value == true ? Colors.black : Colors.white,
                         width: 16.2.h,

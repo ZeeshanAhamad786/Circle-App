@@ -1,5 +1,5 @@
-import 'package:circleapp/controller/utils/color/custom_color.dart';
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/controller/utils/app_colors.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:circleapp/view/addNewPlanScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,7 +33,7 @@ class Add_new_event extends StatelessWidget {
     final TextEditingController eventNameController = TextEditingController();
 
     return Scaffold(
-      backgroundColor: CustomColor.mainColorBackground,
+      backgroundColor: AppColors.mainColorBackground,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 2.3.h),
         child: SingleChildScrollView(
@@ -78,7 +78,7 @@ class Add_new_event extends StatelessWidget {
                 onTap: () {},
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 1.2.h, vertical: 1.h),
-                  decoration: BoxDecoration(color: CustomColor.textFieldColor, borderRadius: BorderRadius.circular(20.px)),
+                  decoration: BoxDecoration(color: AppColors.textFieldColor, borderRadius: BorderRadius.circular(20.px)),
                   child: Obx(
                     () => Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,11 +136,11 @@ class Add_new_event extends StatelessWidget {
                             arguments: [selectedColor.value, eventNameController.text]);
                       } else {
                         Get.snackbar('Sorry', 'EventName Should not be Empty',
-                            backgroundColor: Colors.white.withOpacity(0.5), colorText: CustomColor.mainColorBackground);
+                            backgroundColor: Colors.white.withOpacity(0.5), colorText: AppColors.mainColorBackground);
                       }
                     },
-                    backgroundColor: CustomColor.secondaryColor,
-                    borderColor: CustomColor.primaryColor,
+                    backgroundColor: AppColors.secondaryColor,
+                    borderColor: AppColors.primaryColor,
                     title: 'Done',
                     titleColor: Colors.black,
                     height: 4.5.h),

@@ -5,16 +5,13 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
-import 'api/auth_apis.dart';
-
 class PaymentController extends GetxController {
   //Date picker
   DateTime currentDate = DateTime.now();
   Rx<DateTime> selectedDate = DateTime.now().obs;
   Rx<String> formatedDate = '2024-5-07'.obs;
   Future<void> pickedDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-        context: context, firstDate: DateTime(1990), lastDate: currentDate);
+    final DateTime? picked = await showDatePicker(context: context, firstDate: DateTime(1990), lastDate: currentDate);
     if (picked != null && picked != selectedDate.value) {
       selectedDate.value = picked;
       formatedDate.value = DateFormat("yyyy-MM-dd").format(selectedDate.value);

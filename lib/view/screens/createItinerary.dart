@@ -1,6 +1,6 @@
-import 'package:circleapp/controller/paymentController.dart';
-import 'package:circleapp/controller/utils/color/custom_color.dart';
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/controller/getx_controllers/paymentController.dart';
+import 'package:circleapp/controller/utils/app_colors.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -19,7 +19,7 @@ class CreateItinerary extends StatelessWidget {
     final TextEditingController aboutItineraryController = TextEditingController();
 
     return Scaffold(
-      backgroundColor: CustomColor.mainColorBackground,
+      backgroundColor: AppColors.mainColorBackground,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 2.3.h),
         child: SingleChildScrollView(
@@ -88,14 +88,14 @@ class CreateItinerary extends StatelessWidget {
                       ), // Adjust this value as needed
                       child: Icon(
                         Icons.date_range_rounded,
-                        color: CustomColor.secondaryColor,
+                        color: AppColors.secondaryColor,
                       ),
                     ),
                     contentPadding: EdgeInsets.only(left: 1.h, top: 2.h), // Adjust this value as needed
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.px),
                     ),
-                    fillColor: CustomColor.textFieldColor,
+                    fillColor: AppColors.textFieldColor,
                     filled: true,
                     hintStyle: CustomTextStyle.hintText,
                     hintText: '${paymentController.formatedDate}',
@@ -119,14 +119,14 @@ class CreateItinerary extends StatelessWidget {
                       ), // Adjust this value as needed
                       child: Icon(
                         Icons.date_range_rounded,
-                        color: CustomColor.secondaryColor,
+                        color: AppColors.secondaryColor,
                       ),
                     ),
                     contentPadding: EdgeInsets.only(left: 1.h, top: 2.h), // Adjust this value as needed
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.px),
                     ),
-                    fillColor: CustomColor.textFieldColor,
+                    fillColor: AppColors.textFieldColor,
                     filled: true,
                     hintStyle: CustomTextStyle.hintText,
                     hintText: '${paymentController.formatedTime}',
@@ -153,10 +153,10 @@ class CreateItinerary extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return Container(
                           padding: EdgeInsets.symmetric(horizontal: .3.h),
-                          decoration: BoxDecoration(border: Border.all(color: CustomColor.secondaryColor), shape: BoxShape.circle),
+                          decoration: BoxDecoration(border: Border.all(color: AppColors.secondaryColor), shape: BoxShape.circle),
                           child: CircleAvatar(
                             radius: 5.6.h,
-                            backgroundColor: CustomColor.mainColor,
+                            backgroundColor: AppColors.mainColor,
                             backgroundImage: const AssetImage('assets/png/story.png'),
                           ),
                         );
@@ -176,8 +176,8 @@ class CreateItinerary extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 2.3.h),
                 child: customButton(
                     onTap: () {},
-                    backgroundColor: CustomColor.secondaryColor,
-                    borderColor: CustomColor.primaryColor,
+                    backgroundColor: AppColors.secondaryColor,
+                    borderColor: AppColors.primaryColor,
                     title: 'Create Itinerary',
                     titleColor: Colors.black,
                     height: 4.5.h),
@@ -217,13 +217,13 @@ class CreateItinerary extends StatelessWidget {
                             getHorizentalSpace(2.h),
                             Text(
                               'British Museum.',
-                              style: CustomTextStyle.headingStyle.copyWith(color: CustomColor.secondaryColor),
+                              style: CustomTextStyle.headingStyle.copyWith(color: AppColors.secondaryColor),
                             ),
                           ],
                         ),
                         getVerticalSpace(.6.h),
                         Divider(
-                          color: CustomColor.secondaryColor,
+                          color: AppColors.secondaryColor,
                         )
                       ],
                     ),

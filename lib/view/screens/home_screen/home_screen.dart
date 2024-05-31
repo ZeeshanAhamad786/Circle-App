@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../../controller/utils/color/custom_color.dart';
-import '../../../controller/utils/style/customTextStyle.dart';
+import '../../../controller/utils/app_colors.dart';
+import '../../../controller/utils/customTextStyle.dart';
 import '../home_screen/plan_event_screen.dart';
 import 'itinerary_event_screen.dart';
 
@@ -28,13 +28,13 @@ class _HomeScreenState extends State<HomeScreen> {
               indicator: const UnderlineTabIndicator(
                 borderSide: BorderSide(
                   width: 2.0,
-                  color: CustomColor.mainColorYellow,
+                  color: AppColors.mainColorYellow,
                 ),
               ),
               indicatorSize: TabBarIndicatorSize.tab,
               labelStyle: CustomTextStyle.mediumTextTab,
-              unselectedLabelColor: CustomColor.mainColorOffWhite.withOpacity(0.5),
-              dividerColor: CustomColor.mainColorOffWhite.withOpacity(0.5),
+              unselectedLabelColor: AppColors.mainColorOffWhite.withOpacity(0.5),
+              dividerColor: AppColors.mainColorOffWhite.withOpacity(0.5),
               tabs: [
                 Tab(text: "Plans"),
                 Tab(text: "Itineraries"),

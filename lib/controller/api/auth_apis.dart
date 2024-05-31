@@ -11,9 +11,9 @@ import '../../view/custom_widget/customwidgets.dart';
 import '../../view/screens/athentications/resetpassword_screen.dart';
 import '../../view/screens/createNewCircleScreens/choose_image.dart';
 import '../../view/screens/createNewCircleScreens/createCircleScreen.dart';
-import '../utils/constants/api_constants.dart';
-import '../utils/constants/global_variables.dart';
-import '../utils/constants/storage_keys.dart';
+import '../utils/api_constants.dart';
+import '../utils/global_variables.dart';
+import '../utils/preference_keys.dart';
 
 class AuthApis {
   final BuildContext context;

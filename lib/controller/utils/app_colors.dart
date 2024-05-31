@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomColor {
+class AppColors {
   static const Color mainColor = Color(0xff414141);
   static const Color primaryColor = Color(0xff2C2C2C);
   static const Color textFieldColor = Color(0xff414141);

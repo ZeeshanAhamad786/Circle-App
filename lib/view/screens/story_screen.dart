@@ -1,6 +1,5 @@
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:story/story_page_view.dart';
 
@@ -27,8 +26,7 @@ class StoryScreen extends StatelessWidget {
 
   List<User> sampleUsers = [
     User(
-      imageUrl:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTndpMXY2SQWuBK08LPBKts44hrgyyH82paSWcAD4zw&s',
+      imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTndpMXY2SQWuBK08LPBKts44hrgyyH82paSWcAD4zw&s',
       userName: 'User 1',
       stories: [
         Story(

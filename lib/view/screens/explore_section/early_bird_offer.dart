@@ -1,5 +1,5 @@
-import 'package:circleapp/controller/utils/color/custom_color.dart';
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/controller/utils/app_colors.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -27,9 +27,9 @@ class _EarlyBirdOfferState extends State<EarlyBirdOffer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColor.mainColorBackground,
+      backgroundColor: AppColors.mainColorBackground,
       appBar: AppBar(
-        backgroundColor: CustomColor.mainColorBackground,
+        backgroundColor: AppColors.mainColorBackground,
         automaticallyImplyLeading: false,
         title: Row(
           children: [
@@ -57,7 +57,7 @@ class _EarlyBirdOfferState extends State<EarlyBirdOffer> {
           Container(
             height: 22.px,
             width: 20.w,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: CustomColor.mainColorYellow),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: AppColors.mainColorYellow),
             child: Center(child: Text("Book")),
           ),
           SizedBox(

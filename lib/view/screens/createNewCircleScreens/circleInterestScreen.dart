@@ -1,6 +1,6 @@
-import 'package:circleapp/controller/createcircle_controller/createcircle_controller.dart';
-import 'package:circleapp/controller/utils/color/custom_color.dart';
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/controller/getx_controllers/createcircle_controller.dart';
+import 'package:circleapp/controller/utils/app_colors.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -33,7 +33,7 @@ class _CircleInterestState extends State<CircleInterest> {
     RxList<String> interests =
         <String>['Photography', 'Shopping', 'Music', 'Movies', 'Fitness', 'Travelling', 'Sports', 'Video Games', 'Night Out', 'Art'].obs;
     return Scaffold(
-      backgroundColor: CustomColor.primaryColor,
+      backgroundColor: AppColors.primaryColor,
       body: Obx(() {
         return Column(
           children: [
@@ -85,7 +85,7 @@ class _CircleInterestState extends State<CircleInterest> {
                           },
                           child: customRadioButton(
                             title: interests[index],
-                            borderColor: selectedIndex.value == index ? CustomColor.textFieldColor : CustomColor.secondaryColor,
+                            borderColor: selectedIndex.value == index ? AppColors.textFieldColor : AppColors.secondaryColor,
                             assetsImage: selectedIndex.value == index
                                 ? SvgPicture.asset('assets/svg/selected.svg')
                                 : SvgPicture.asset('assets/svg/unselected.svg'),
@@ -116,8 +116,8 @@ class _CircleInterestState extends State<CircleInterest> {
                             customScaffoldMessenger(context, "Plz select at least one interest");
                           }
                         },
-                        backgroundColor: CustomColor.secondaryColor,
-                        borderColor: CustomColor.primaryColor,
+                        backgroundColor: AppColors.secondaryColor,
+                        borderColor: AppColors.primaryColor,
                         // title: '${circleName[selectedIndex.value]}',
                         title: 'Continue',
                         titleColor: Colors.black,

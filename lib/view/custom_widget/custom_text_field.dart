@@ -1,8 +1,8 @@
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../controller/utils/color/custom_color.dart';
+import '../../controller/utils/app_colors.dart';
 
 class CustomTextField extends StatelessWidget {
   final String hintText;
@@ -27,7 +27,7 @@ class CustomTextField extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(36),
-        color: CustomColor.mainColor,
+        color: AppColors.mainColor,
       ),
       child: TextFormField(
         keyboardType: phoneKeyboard == true ? TextInputType.phone : null,
@@ -52,14 +52,14 @@ class CustomTextField extends StatelessWidget {
 
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(36),
-            borderSide: BorderSide(color: CustomColor.mainColor),
+            borderSide: BorderSide(color: AppColors.mainColor),
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(36),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(36),
-            borderSide: BorderSide(color: CustomColor.mainColor),
+            borderSide: BorderSide(color: AppColors.mainColor),
           ),
         ),
       ),

@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:circleapp/controller/paymentController.dart';
-import 'package:circleapp/controller/utils/color/custom_color.dart';
-import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/controller/getx_controllers/paymentController.dart';
+import 'package:circleapp/controller/utils/app_colors.dart';
+import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:circleapp/view/screens/bottom_navigation_screen/bottom_navigation_screen.dart';
 import 'package:circleapp/view/screens/createNewCircleScreens/addMembersScreen.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,7 @@ class CreateNewToDo extends StatelessWidget {
     final TextEditingController titleTextController = TextEditingController();
     final TextEditingController descriptionController = TextEditingController();
     return Scaffold(
-        backgroundColor: CustomColor.primaryColor,
+        backgroundColor: AppColors.primaryColor,
         body: SingleChildScrollView(
             child: Column(
           children: [
@@ -104,7 +104,7 @@ class CreateNewToDo extends StatelessWidget {
                           () => Padding(
                               padding: EdgeInsets.symmetric(horizontal: .3.h),
                               child: Container(
-                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.px), color: CustomColor.textFieldColor),
+                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.px), color: AppColors.textFieldColor),
                                   child: paymentController.pickedImage.value == null
                                       ? const Center(child: Text('No image selected'))
                                       : ClipRRect(
@@ -134,10 +134,10 @@ class CreateNewToDo extends StatelessWidget {
                             return Padding(
                               padding: EdgeInsets.symmetric(horizontal: .3.h),
                               child: Container(
-                                decoration: BoxDecoration(border: Border.all(color: CustomColor.secondaryColor), shape: BoxShape.circle),
+                                decoration: BoxDecoration(border: Border.all(color: AppColors.secondaryColor), shape: BoxShape.circle),
                                 child: CircleAvatar(
                                   radius: 10.h,
-                                  backgroundColor: CustomColor.mainColor,
+                                  backgroundColor: AppColors.mainColor,
                                   backgroundImage: const AssetImage('assets/png/story.png'),
                                 ),
                               ),
@@ -162,8 +162,8 @@ class CreateNewToDo extends StatelessWidget {
                         onTap: () {
                           showCustomDialog(context, title: titleTextController.text, description: descriptionController.text);
                         },
-                        backgroundColor: CustomColor.secondaryColor,
-                        borderColor: CustomColor.primaryColor,
+                        backgroundColor: AppColors.secondaryColor,
+                        borderColor: AppColors.primaryColor,
                         title: 'Done',
                         titleColor: Colors.black,
                         height: 4.5.h),
@@ -193,7 +193,7 @@ void showCustomDialog(BuildContext context, {String? title, String? description}
             margin: EdgeInsets.symmetric(horizontal: 2.3.h),
             padding: EdgeInsets.symmetric(horizontal: 1.9.h, vertical: 1.3.h),
             height: 40.h,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.px), color: CustomColor.textFieldColor),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.px), color: AppColors.textFieldColor),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -268,10 +268,10 @@ void showCustomDialog(BuildContext context, {String? title, String? description}
                           return Padding(
                             padding: EdgeInsets.symmetric(horizontal: .3.h),
                             child: Container(
-                              decoration: BoxDecoration(border: Border.all(color: CustomColor.secondaryColor), shape: BoxShape.circle),
+                              decoration: BoxDecoration(border: Border.all(color: AppColors.secondaryColor), shape: BoxShape.circle),
                               child: CircleAvatar(
                                 radius: 10.h,
-                                backgroundColor: CustomColor.mainColor,
+                                backgroundColor: AppColors.mainColor,
                                 backgroundImage: const AssetImage('assets/png/story.png'),
                               ),
                             ),
@@ -319,8 +319,8 @@ void showCustomDialog(BuildContext context, {String? title, String? description}
                               }
                               Get.back();
                             },
-                            backgroundColor: backButton.value == true ? CustomColor.secondaryColor : CustomColor.primaryColor,
-                            borderColor: backButton.value == true ? CustomColor.primaryColor : CustomColor.secondaryColor,
+                            backgroundColor: backButton.value == true ? AppColors.secondaryColor : AppColors.primaryColor,
+                            borderColor: backButton.value == true ? AppColors.primaryColor : AppColors.secondaryColor,
                             title: 'Back',
                             titleColor: backButton.value == true ? Colors.black : Colors.white,
                             width: 12.h,
@@ -339,8 +339,8 @@ void showCustomDialog(BuildContext context, {String? title, String? description}
                               }
                               Get.to(() => const BottomNavigationScreen());
                             },
-                            backgroundColor: nextButton.value == true ? CustomColor.secondaryColor : CustomColor.primaryColor,
-                            borderColor: nextButton.value == true ? CustomColor.primaryColor : CustomColor.secondaryColor,
+                            backgroundColor: nextButton.value == true ? AppColors.secondaryColor : AppColors.primaryColor,
+                            borderColor: nextButton.value == true ? AppColors.primaryColor : AppColors.secondaryColor,
                             title: 'Done',
                             titleColor: nextButton.value == true ? Colors.black : Colors.white,
                             width: 12.h,
