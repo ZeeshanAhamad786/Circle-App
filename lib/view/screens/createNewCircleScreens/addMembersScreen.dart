@@ -87,7 +87,8 @@ class _AddMembersState extends State<AddMembers> {
                     ),
                   ),
                   createCircleController.contactsLoading.value
-                      ? Expanded(
+                      ?
+                  Expanded(
                           child: ListView.builder(
                             padding: EdgeInsets.zero,
                             itemCount: 15,

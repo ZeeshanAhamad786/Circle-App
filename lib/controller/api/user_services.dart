@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:http/http.dart'as http;
-
 import 'base_url.dart';
 class ApisServices {
   Future postApiDataWithToken(Map body,String endPoint,token)async{
@@ -59,18 +58,11 @@ class ApisServices {
     } on TimeoutException catch(error) {
       log('TimeOut Occurred $error');
       return null;
-
     }on SocketException catch (error){
       log('Socket Error $error');
       return null;
     }
   }
-
-
-
-
-
-
 
   Future<http.Response?> postApisDataWithToken(Map<String, dynamic> body, String endPoint, String token, File? file) async {
     final url = Uri.parse(BaseUrl.url + endPoint);

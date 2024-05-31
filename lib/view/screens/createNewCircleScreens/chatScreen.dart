@@ -1,10 +1,12 @@
+import 'package:circleapp/view/screens/createNewCircleScreens/circle_edit_screen.dart';
+import 'package:circleapp/view/screens/createNewCircleScreens/loopTabBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../controller/utils/app_colors.dart';
-import '../../../controller/utils/customTextStyle.dart';
+import '../../../controller/utils/style/customTextStyle.dart';
 import '../../custom_widget/customwidgets.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -53,10 +55,15 @@ class _ChatScreenState extends State<ChatScreen> {
                                 "${pinList.length}",
                                 style: CustomTextStyle.buttonText.copyWith(color: Colors.white),
                               )
-                            : CircleAvatar(
-                                radius: 2.4.h,
-                                backgroundColor: AppColors.textFieldColor,
-                                backgroundImage: const AssetImage('assets/png/members.png'),
+                            : GestureDetector(
+                                onTap: () {
+                                  Get.to(() => CircleEditScreen());
+                                },
+                                child: CircleAvatar(
+                                  radius: 2.4.h,
+                                  backgroundColor: AppColors.textFieldColor,
+                                  backgroundImage: const AssetImage('assets/png/members.png'),
+                                ),
                               ),
                         getHorizentalSpace(1.5.h),
                         pinList.isNotEmpty
@@ -65,24 +72,48 @@ class _ChatScreenState extends State<ChatScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    'Hiking',
-                                    style: CustomTextStyle.headingStyle.copyWith(fontSize: 12.px),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Get.to(() => CircleEditScreen());
+                                    },
+                                    child: Text(
+                                      'Hiking',
+                                      style: CustomTextStyle.headingStyle.copyWith(fontSize: 12.px),
+                                    ),
                                   ),
-                                  Text('Adil Adnan, Jhon, Liya',
-                                      style: CustomTextStyle.smallText.copyWith(color: const Color(0xff797C7B), fontSize: 10.px))
+                                  GestureDetector(
+                                    onTap: () {
+                                      Get.to(() => CircleEditScreen());
+                                    },
+                                    child: Text('Adil Adnan, Jhon, Liya',
+                                        style: CustomTextStyle.smallText.copyWith(color: const Color(0xff797C7B), fontSize: 10.px)),
+                                  )
                                 ],
                               ),
                       ],
                     ),
                     Row(
                       children: [
-                        pinList.isNotEmpty ? SvgPicture.asset('assets/svg/pinicon.svg') : SvgPicture.asset('assets/svg/audiocallicon.svg'),
+                        pinList.isNotEmpty ? SvgPicture.asset('assets/svg/pin.svg') : SvgPicture.asset('assets/svg/audiocallicon.svg'),
                         getHorizentalSpace(1.h),
                         pinList.isNotEmpty
-                            ? Text(
-                                'Pin',
-                                style: CustomTextStyle.headingStyle,
+                            ? Row(
+                                children: [
+                                  Text(
+                                    'Pin',
+                                    style: CustomTextStyle.headingStyle,
+                                  ),
+                                  getHorizentalSpace(2.h),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Get.to(() => LoopTabBar());
+                                    },
+                                    child: Text(
+                                      'Add to convos',
+                                      style: CustomTextStyle.mediumTextTab,
+                                    ),
+                                  ),
+                                ],
                               )
                             : SvgPicture.asset('assets/svg/videocallicon.svg'),
                         getHorizentalSpace(1.h),

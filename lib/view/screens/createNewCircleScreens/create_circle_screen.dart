@@ -1,7 +1,7 @@
 import 'package:circleapp/controller/utils/style/customTextStyle.dart';
 import 'package:circleapp/models/main_chat_screen_model.dart';
-import 'package:circleapp/view/screens/createNewCircleScreens/chatScreen.dart';
-import 'package:circleapp/view/screens/createNewCircleScreens/choose_image.dart';
+import 'package:circleapp/view/screens/createNewCircleScreens/loopTabBar.dart';
+import 'package:circleapp/view/screens/profile_screen/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -9,14 +9,15 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../controller/utils/app_colors.dart';
 import '../../custom_widget/customwidgets.dart';
 
-class MainChatScreen extends StatefulWidget {
-  const MainChatScreen({Key? key}) : super(key: key);
+class CreateCircleScreen extends StatefulWidget {
+  int selectedIndex;
+  CreateCircleScreen({super.key, required this.selectedIndex});
 
   @override
-  State<MainChatScreen> createState() => _MainChatScreenState();
+  State<CreateCircleScreen> createState() => _CreateCircleScreenState();
 }
 
-class _MainChatScreenState extends State<MainChatScreen> {
+class _CreateCircleScreenState extends State<CreateCircleScreen> {
   final RxList<MainChatScreenModel> items = [
     MainChatScreenModel(
       title: "Music Lovers",
@@ -81,33 +82,17 @@ class _MainChatScreenState extends State<MainChatScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Circles",
+                      "Welcome to Circle!",
                       style: CustomTextStyle.mediumTextExplore,
                     ),
                     GestureDetector(
-                      onTap: () {
-                        Get.to(() => ChooseImage());
-                      },
-                      child: Container(
-                        height: 30,
-                        padding: EdgeInsets.symmetric(horizontal: 2.h),
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), border: Border.all(color: AppColors.mainColorYellow)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              Icons.person_add_sharp,
-                              color: AppColors.mainColorYellow,
-                            ),
-                            getHorizentalSpace(0.5.w),
-                            Text(
-                              "New Group",
-                              style: CustomTextStyle.mediumTextYellow,
-                            )
-                          ],
-                        ),
-                      ),
-                    )
+                        onTap: () {
+                          Get.to(() => const ProfileScreen());
+                        },
+                        child: CircleAvatar(
+                          backgroundImage: AssetImage("assets/png/litaProfile.png"),
+                          radius: 20,
+                        ))
                   ],
                 ),
                 getVerticalSpace(2.h),
@@ -119,7 +104,7 @@ class _MainChatScreenState extends State<MainChatScreen> {
                       itemBuilder: (BuildContext, index) {
                         return GestureDetector(
                           onTap: () {
-                            Get.to(() => ChatScreen());
+                            Get.to(() => LoopTabBar());
                           },
                           child: Container(
                             margin: EdgeInsets.only(top: 1.5.h),
@@ -142,25 +127,13 @@ class _MainChatScreenState extends State<MainChatScreen> {
                                 backgroundImage: AssetImage(items[index].imageUrl),
                               ),
                               trailing: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
+                                  getVerticalSpace(1.h),
                                   Text(
                                     items[index].time,
-                                    style: CustomTextStyle.mediumTextTime,
+                                    style: CustomTextStyle.mediumTextTimeOpacity,
                                   ),
-                                  getVerticalSpace(1.w),
-                                  Container(
-                                      height: 20,
-                                      width: 20,
-                                      decoration: BoxDecoration(
-                                          color: AppColors.mainColorYellow,
-                                          borderRadius: BorderRadius.circular(30),
-                                          border: Border.all(color: AppColors.mainColorYellow)),
-                                      child: Center(
-                                          child: Text(
-                                        "12",
-                                        style: CustomTextStyle.mediumTextNumber,
-                                      ))),
                                 ],
                               ),
                             ),

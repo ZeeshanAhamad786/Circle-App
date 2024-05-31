@@ -1,4 +1,4 @@
-import 'package:circleapp/controller/utils/customTextStyle.dart';
+import 'package:circleapp/controller/utils/style/customTextStyle.dart';
 import 'package:circleapp/view/screens/explore_section/early_bird_offer.dart';
 import 'package:circleapp/view/screens/explore_section/share_group.dart';
 import 'package:flutter/material.dart';

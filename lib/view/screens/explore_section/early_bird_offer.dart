@@ -1,10 +1,11 @@
-import 'package:circleapp/controller/utils/app_colors.dart';
-import 'package:circleapp/controller/utils/customTextStyle.dart';
+import 'package:circleapp/controller/utils/style/customTextStyle.dart';
+import 'package:circleapp/view/screens/createNewCircleScreens/loopTabBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../../controller/utils/app_colors.dart';
 import '../../custom_widget/customwidgets.dart';
 
 class EarlyBirdOffer extends StatefulWidget {
@@ -117,7 +118,11 @@ class _EarlyBirdOfferState extends State<EarlyBirdOffer> {
                     "Imagine Dragon’s Concert",
                     style: CustomTextStyle.mediumTextImageConcert,
                   ),
-                  SvgPicture.asset("assets/svg/save.svg")
+                  GestureDetector(
+                      onTap: () {
+                        Get.to(() => LoopTabBar());
+                      },
+                      child: SvgPicture.asset("assets/svg/save.svg"))
                 ],
               ),
               getVerticalSpace(0.5.h),

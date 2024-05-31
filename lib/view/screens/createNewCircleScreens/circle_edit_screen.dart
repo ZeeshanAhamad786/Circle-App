@@ -9,14 +9,14 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../custom_widget/customwidgets.dart';
 
-class GroupEditScreen extends StatefulWidget {
-  const GroupEditScreen({Key? key}) : super(key: key);
+class CircleEditScreen extends StatefulWidget {
+  const CircleEditScreen({Key? key}) : super(key: key);
 
   @override
-  State<GroupEditScreen> createState() => _GroupEditScreenState();
+  State<CircleEditScreen> createState() => _CircleEditScreenState();
 }
 
-class _GroupEditScreenState extends State<GroupEditScreen> {
+class _CircleEditScreenState extends State<CircleEditScreen> {
   List<GroupMemberModel> group = [
     GroupMemberModel(name: 'Lita han', imagePath: 'assets/png/litaProfile.png'),
     GroupMemberModel(name: 'Lita han', imagePath: 'assets/png/litaProfile.png'),

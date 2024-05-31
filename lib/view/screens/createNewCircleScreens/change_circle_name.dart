@@ -1,4 +1,4 @@
-import 'package:circleapp/controller/utils/customTextStyle.dart';
+import 'package:circleapp/controller/utils/style/customTextStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -30,11 +30,11 @@ class ChangeCircleName extends StatelessWidget {
             getVerticalSpace(1.h),
             TextFormField(
               decoration: InputDecoration(
-                  isDense: true,
                   hintText: "Hiking Plan",
                   hintStyle: TextStyle(fontWeight: FontWeight.w400, fontFamily: "medium", fontSize: 10.px, color: Colors.white),
                   filled: true,
                   fillColor: AppColors.textFieldColor,
+                  contentPadding: EdgeInsets.all(10),
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                       borderSide: BorderSide(

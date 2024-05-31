@@ -35,7 +35,7 @@ class CustomTextField extends StatelessWidget {
         style: CustomTextStyle.hintText.copyWith(color: Colors.white),
         // controller: controller,
         obscureText: obscureText,
-        cursorColor: Colors.white, // Replace with your CustomColor.mainColor
+        cursorColor: Colors.white, // Replace with your AppColors.mainColor
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: TextStyle(fontSize: 10.px, fontFamily: "medium", color: Colors.white),

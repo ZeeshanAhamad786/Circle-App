@@ -1,5 +1,4 @@
-import 'package:circleapp/controller/utils/app_colors.dart';
-import 'package:circleapp/view/screens/createNewCircleScreens/loopTabBar.dart';
+import 'package:circleapp/view/screens/createNewCircleScreens/create_circle_screen.dart';
 import 'package:circleapp/view/screens/createNewCircleScreens/main_chat_screen.dart';
 import 'package:circleapp/view/screens/explore_section/explore_screen.dart';
 import 'package:circleapp/view/screens/home_screen/home_screen.dart';
@@ -7,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
+import '../../../controller/utils/app_colors.dart';
 
 class BottomNavigationScreen extends StatefulWidget {
   const BottomNavigationScreen({
@@ -81,7 +82,7 @@ class BottomNavigationScreenState extends State<BottomNavigationScreen> {
                         colorIndex.value == 2 ? AppColors.mainColorYellow : Colors.white,
                         BlendMode.srcIn,
                       ),
-                      // color: colorIndex.value == 2 ? CustomColor.mainColorYellow : Colors.white,
+                      // color: colorIndex.value == 2 ? AppColors.mainColorYellow : Colors.white,
                     )),
                 BottomNavigationBarItem(
                     label: "Explore",
@@ -98,7 +99,7 @@ class BottomNavigationScreenState extends State<BottomNavigationScreen> {
           ),
         ),
         body: Obx(() => currentIndex.value == 0
-            ? LoopTabBar(selectedIndex: 0)
+            ? CreateCircleScreen(selectedIndex: 0)
             : currentIndex.value == 1
                 ? MainChatScreen()
                 // Obx(()=>
@@ -125,7 +126,7 @@ class BottomNavigationScreenState extends State<BottomNavigationScreen> {
                 //                     getHorizentalSpace(2.h),
                 //                     pinList.isNotEmpty?Text("${pinList.length}",style: CustomTextStyle.buttonText.copyWith(color: Colors.white),): CircleAvatar(
                 //                       radius: 2.4.h,
-                //                       backgroundColor: CustomColor.textFieldColor,
+                //                       backgroundColor: AppColors.textFieldColor,
                 //                       backgroundImage:
                 //                       const AssetImage('assets/png/members.png'),
                 //                     ),
@@ -174,7 +175,7 @@ class BottomNavigationScreenState extends State<BottomNavigationScreen> {
                 //                   height: 3.2.h,
                 //                   width: 6.3.h,
                 //                   decoration: BoxDecoration(
-                //                       color: CustomColor.textFieldColor,
+                //                       color: AppColors.textFieldColor,
                 //                       borderRadius: BorderRadius.circular(5.px)),
                 //                   child: Text(
                 //                     'Today',
@@ -198,7 +199,7 @@ class BottomNavigationScreenState extends State<BottomNavigationScreen> {
                 //                           alignment: Alignment.centerRight,
                 //                           height:7.7.h ,width:MediaQuery.of(context).size.width,
                 //                           decoration: BoxDecoration(
-                //                               color: CustomColor.secondaryColor.withOpacity(0.1)
+                //                               color: AppColors.secondaryColor.withOpacity(0.1)
                 //                           ),child: SvgPicture.asset('assets/svg/selected.svg'),
                 //                         ):const SizedBox.shrink(),
                 //                         Row(
@@ -209,7 +210,7 @@ class BottomNavigationScreenState extends State<BottomNavigationScreen> {
                 //                               alignment: Alignment.center,
                 //
                 //                               padding: EdgeInsets.all(1.h),
-                //                               decoration: BoxDecoration(color: CustomColor.mainColor,
+                //                               decoration: BoxDecoration(color: AppColors.mainColor,
                 //                                   borderRadius: BorderRadius.only(
                 //                                     bottomLeft: Radius.circular(10.px),
                 //                                     bottomRight: Radius.circular(10.px),
@@ -232,7 +233,7 @@ class BottomNavigationScreenState extends State<BottomNavigationScreen> {
                 //                         padding: EdgeInsets.symmetric(horizontal: .8.h),
                 //                         decoration: BoxDecoration(
                 //                             borderRadius: BorderRadius.circular(10.px),
-                //                             color: CustomColor.mainColor),
+                //                             color: AppColors.mainColor),
                 //                         child: Row(
                 //                           children: [
                 //                             SvgPicture.asset('assets/svg/icons.svg'),
@@ -254,21 +255,21 @@ class BottomNavigationScreenState extends State<BottomNavigationScreen> {
                 //                                     borderRadius:
                 //                                     BorderRadius.circular(10.px),
                 //                                     borderSide: const BorderSide(
-                //                                       color: CustomColor.textFieldColor,
+                //                                       color: AppColors.textFieldColor,
                 //                                     ),
                 //                                   ),
                 //                                   focusedBorder: const OutlineInputBorder(
                 //                                       borderSide: BorderSide(
-                //                                           color: CustomColor.textFieldColor)),
+                //                                           color: AppColors.textFieldColor)),
                 //                                   border: OutlineInputBorder(
                 //                                       borderRadius:
                 //                                       BorderRadius.circular(10.px),
                 //                                       borderSide: const BorderSide(
-                //                                           color: CustomColor.textFieldColor)),
+                //                                           color: AppColors.textFieldColor)),
                 //                                   isCollapsed: true,
                 //                                   contentPadding:
                 //                                   EdgeInsets.symmetric(vertical: 1.6.h),
-                //                                   fillColor: CustomColor.textFieldColor,
+                //                                   fillColor: AppColors.textFieldColor,
                 //                                   hintText: 'Write your message',
                 //                                   hintStyle: CustomTextStyle.hintText,
                 //                                 ),
@@ -289,7 +290,7 @@ class BottomNavigationScreenState extends State<BottomNavigationScreen> {
                 //                       child: Container(height: 4.5.h,width: 4.h,
                 //                         decoration: BoxDecoration(
                 //                             shape: BoxShape.circle,
-                //                             color: CustomColor.secondaryColor
+                //                             color: AppColors.secondaryColor
                 //                         ),child: Icon(Icons.send,size: 2.h,),),
                 //                     ))
                 //                   ],
