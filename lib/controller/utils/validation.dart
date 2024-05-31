@@ -29,8 +29,7 @@ class Validations {
     //   return "Confirm password must be at least 8 characters in length.".tr;
     // }
     else if (!isValidPassword.hasMatch(passwordTextController.text)) {
-      return "Password should contain at least one upper case, lower case, one digit, Special character."
-          .tr;
+      return "Password should contain at least one upper case, lower case, one digit, Special character.".tr;
     }
     // else if (!isValidPassword.hasMatch(confirmPasswordTextController.text)) {
     //   return "Confirm password should contain at least one upper case, lower case, one digit, Special character."
@@ -102,13 +101,10 @@ class Validations {
     } else if (confirmPasswordTextController.text.length < 8) {
       return "Confirm password must be at least 8 characters in length.".tr;
     } else if (!isValidPassword.hasMatch(passwordTextController.text)) {
-      return "Password should contain at least one upper case, lower case, one digit, Special character."
-          .tr;
+      return "Password should contain at least one upper case, lower case, one digit, Special character.".tr;
     } else if (!isValidPassword.hasMatch(confirmPasswordTextController.text)) {
-      return "Confirm password should contain at least one upper case, lower case, one digit, Special character."
-          .tr;
-    } else if (confirmPasswordTextController.text !=
-            passwordTextController.text ||
+      return "Confirm password should contain at least one upper case, lower case, one digit, Special character.".tr;
+    } else if (confirmPasswordTextController.text != passwordTextController.text ||
         passwordTextController.text != confirmPasswordTextController.text) {
       return "Passwords do not match.".tr;
     } else {
@@ -155,13 +151,10 @@ class Validations {
     //       .tr;
     // }
     else if (!isValidPassword.hasMatch(newPasswordTextController.text)) {
-      return "New Password should contain at least one upper case, lower case, one digit, Special character."
-          .tr;
+      return "New Password should contain at least one upper case, lower case, one digit, Special character.".tr;
     } else if (!isValidPassword.hasMatch(confirmPasswordTextController.text)) {
-      return "Confirm password should contain at least one upper case, lower case, one digit, Special character."
-          .tr;
-    } else if (confirmPasswordTextController.text !=
-            newPasswordTextController.text ||
+      return "Confirm password should contain at least one upper case, lower case, one digit, Special character.".tr;
+    } else if (confirmPasswordTextController.text != newPasswordTextController.text ||
         newPasswordTextController.text != confirmPasswordTextController.text) {
       return "Passwords do not match.".tr;
     } else {
@@ -191,17 +184,20 @@ class Validations {
   static String handleResetPasswordScreenError({
     password,
     confirmPassword,
+    email,
+    otp,
   }) {
-    if (password.text.isEmpty) {
-      return "password not be empty".tr;
+    if (otp.text.isEmpty) {
+      return "Otp can not be empty".tr;
+    } else if (password.text.isEmpty) {
+      return "password can not not be empty".tr;
     } else if (confirmPassword.text.isEmpty) {
       return "confirm password is not be empty".tr;
     } else if (password.text.length < 8) {
       return "password is not be less then 8".tr;
     } else if (confirmPassword.text.length < 8) {
       return "password is not be less then 8".tr;
-    } else if (password.text != confirmPassword.text ||
-        confirmPassword.text != password.text) {
+    } else if (password.text != confirmPassword.text || confirmPassword.text != password.text) {
       return "password do not match please try again".tr;
     } else {
       return '';
@@ -212,5 +208,4 @@ class Validations {
 RegExp isValidEmail = RegExp(
     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
 
-RegExp isValidPassword =
-    RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+RegExp isValidPassword = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');

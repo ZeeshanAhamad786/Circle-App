@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:circleapp/controller/utils/shared_preferences.dart';
+import 'package:circleapp/view/screens/athentications/login_screen.dart';
 import 'package:circleapp/view/screens/bottom_navigation_screen/bottom_navigation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -237,7 +238,7 @@ class AuthApis {
   }
 
   Future<void> resetPasswordApi(String phoneNumber, String otpCode, String password) async {
-    final url = Uri.parse("$baseURL/api/auth/forgot-password");
+    final url = Uri.parse("$baseURL/api/auth/reset-password");
 
     try {
       final response = await http.post(
@@ -246,7 +247,7 @@ class AuthApis {
           'Content-Type': 'application/json',
         },
         body: jsonEncode({
-          'email': phoneNumber,
+          'phoneNumber': phoneNumber,
           'code': otpCode,
           'password': password,
         }),
@@ -256,10 +257,8 @@ class AuthApis {
 
       if (response.statusCode == 200) {
         print("API Success: Resend OTP");
-        customScaffoldMessenger(context, 'Verification code sent successfully');
-        Get.off(() => const ResetPasswordScreen(), arguments: {
-          'phoneNumber': phoneNumber,
-        });
+        customScaffoldMessenger(context, 'Password reset successfully');
+        Get.offAll(() => const LoginScreen());
       } else {
         print("API Failed: Resend OTP");
         print(response.body);

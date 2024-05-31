@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../../controller/getx_controllers/createcircle_controller.dart';
+import '../../../controller/getx_controllers/circle_controller.dart';
 import '../../custom_widget/customwidgets.dart';
 import 'circleInterestScreen.dart';
 
@@ -17,13 +17,13 @@ class CreateCircle extends StatefulWidget {
 }
 
 class _CreateCircleState extends State<CreateCircle> {
-  late CreateCircleController createCircleController;
+  late CircleController createCircleController;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    createCircleController = Get.put(CreateCircleController(context));
+    createCircleController = Get.put(CircleController(context));
   }
 
   @override

@@ -101,7 +101,7 @@ class BottomNavigationScreenState extends State<BottomNavigationScreen> {
         body: Obx(() => currentIndex.value == 0
             ? CreateCircleScreen(selectedIndex: 0)
             : currentIndex.value == 1
-                ? MainChatScreen()
+                ? const MainChatScreen()
                 // Obx(()=>
                 //     Column(
                 //       children: [
