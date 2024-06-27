@@ -95,7 +95,7 @@ class _PlanEventScreenState extends State<PlanEventScreen> {
           Expanded(
             child: Container(
               width: MediaQuery.of(context).size.width,
-              // height: MediaQuery.of(context).size.height,// Added height constraint
+              height: MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Color(0xff343434),

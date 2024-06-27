@@ -34,7 +34,6 @@ class _ItineraryEventScreenState extends State<ItineraryEventScreen> {
               todayTextStyle: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
-
               view: CalendarView.month,
               dataSource: MeetingDataSource(_getDataSource()),
             ),
@@ -99,7 +98,6 @@ class _ItineraryEventScreenState extends State<ItineraryEventScreen> {
       ),
     );
   }
-
   List<Meeting> _getDataSource() {
     final List<Meeting> meetings = <Meeting>[];
     final DateTime today = DateTime.now();

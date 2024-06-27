@@ -23,7 +23,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   late LoginController loginController;
-  late AuthApis authApis;
 
   @override
   void initState() {
@@ -31,7 +30,6 @@ class _LoginScreenState extends State<LoginScreen> {
     loginController = Get.put(
       LoginController(context),
     );
-    authApis = AuthApis(context);
   }
 
   @override
@@ -120,7 +118,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   buttonColor: AppColors.mainColorYellow,
                   onPressed: () {
                     if (Validations.handleLoginScreenError(
-                            emailTextController: loginController.emailTextController, passwordTextController: loginController.passwordTextController)
+                            emailTextController: loginController.emailTextController,
+                        passwordTextController: loginController.passwordTextController)
                         .isNotEmpty) {
                       customScaffoldMessenger(
                         context,

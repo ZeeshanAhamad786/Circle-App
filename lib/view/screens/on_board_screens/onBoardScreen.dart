@@ -32,7 +32,8 @@ class _OnBoardingScreen1State extends State<OnBoardingScreen1> {
     return Scaffold(
       backgroundColor: AppColors.mainColorBackground,
       body: Obx(
-        () => Stack(
+        () =>
+            Stack(
           children: [
             PageView(
               controller: _controller,

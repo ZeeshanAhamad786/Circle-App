@@ -3,7 +3,9 @@ import 'package:circleapp/controller/utils/customTextStyle.dart';
 import 'package:circleapp/view/addNewPlanScreen.dart';
 import 'package:circleapp/view/screens/createNew_To_DosScreen/create_New_To_Dos_Screen.dart';
 import 'package:circleapp/view/screens/dinnerPlanScreens/dinnerPlan_Details.dart';
+import 'package:circleapp/view/screens/explore_section/share_group.dart';
 import 'package:circleapp/view/screens/tripPlanScreens/winterTripPlanDetails.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -821,8 +823,11 @@ class LoopTabBar extends StatelessWidget {
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
                                         getHorizentalSpace(1.w),
-                                        SvgPicture.asset("assets/svg/shareButton.svg"),
-                                        getHorizentalSpace(1.w),
+                                        GestureDetector(onTap: () {
+                                          Get.to(()=>const ShareGroupScreen());
+                                        },
+                                            child: SvgPicture.asset("assets/svg/shareButton.svg")),
+                                        getHorizentalSpace(2.w),
                                         Container(
                                             height: 3.h,
                                             width: 22.w,
